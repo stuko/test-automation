@@ -1,0 +1,9 @@
+## 테스트 결과 확인 방법
+docker exec -it jenkins_jenkins_1 /bin/bash
+cd /var/jenkins_home/workspace/deploy/bank/safe2/stream/fds/logs
+tail -f safe-stream-fds_logback.log
+tail -f safe-stream-fds_error_logback.log
+
+cd /var/jenkins_home/workspace/deploy/bank/safe2/web/logs
+tail -f safe-web_logback.log
+tail -f safe-web_error_logback.log

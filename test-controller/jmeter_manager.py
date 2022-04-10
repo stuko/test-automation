@@ -1,0 +1,87 @@
+import json
+from pymongo import MongoClient
+from pymongo.cursor import CursorType
+import subprocess
+
+class JmeterManager:
+    
+    def __init__(self):
+        self.client = MongoClient('localhost', 27017)
+        self.db = self.client['kcb']
+        self.collection = self.db['test']
+        self.path = 'D:/install/apache-jmeter-5.4.1/bin/'
+        
+    def save_run_config(self, params):
+        find = self.collection.find({'jmx_file_name' : params['jmx_file_name']})
+        if find != None :
+            self.collection.update_many({'jmx_file_name' : params['jmx_file_name'] },{'$set' : {'run' : ''}})
+            self.collection.update_many({'jmx_file_name' : params['jmx_file_name'] },{'$set' : {'run' : params['run']}})
+        result = {}
+        if find == None:
+            result['error'] = 'can not find jmx_file_name'
+        else:
+            result['success'] = 'factors are updated'
+        return json.dumps(result)
+        
+    def save_factors(self, params):
+        find = self.collection.find({'jmx_file_name' : params['jmx_file_name']})
+        if find != None :
+            self.collection.update_many({'jmx_file_name' : params['jmx_file_name'] },{'$set' : {'factors' : ''}})
+            self.collection.update_many({'jmx_file_name' : params['jmx_file_name'] },{'$set' : {'factors' : params['factors']}})
+        
+        result = {}
+        if find == None:
+            result['error'] = 'can not find jmx_file_name'
+        else:
+            result['success'] = 'factors are updated'
+        return result
+    
+    def save_project_info(self, params):
+        find = self.collection.find_one({'project_id': params['project_id']})
+        result = {}
+        if find == None:
+            result['success'] = 'project info is created'
+            self.collection.insert_one(params)
+        else:
+            result['success'] = 'project info is updated'
+            find.update(params)
+            self.collection.update_many({'project_id': params['project_id']}
+                                       ,{'$set' : {'jmx_file_name': params['jmx_file_name']
+                                                  ,'jenkins_server_url': params['jenkins_server_url']
+                                                  ,'jenkins_project_name': params['jenkins_project_name']
+                                                  ,'jenkins_token': params['jenkins_token']
+                                                  ,'mattermost_webhook_id': params['mattermost_webhook_id']}})
+        return json.dumps(result)
+    
+    def get_project_detail(self, project_id):
+        project_detail = self.collection.find_one({'project_id' : project_id})
+        del project_detail['_id']
+        return project_detail
+
+    def get_project_detail_by_jmx(self, jmx_file_name):
+        project_detail = self.collection.find({'jmx_file_name' : jmx_file_name})
+        if project_detail != None :
+            l = list()
+            for p in project_detail: 
+                del p['_id']
+                l.append(p)
+            return l
+        else: 
+            return None
+        
+    def get_jmx_file_name(self, project_id):
+        find = self.collection.find_one({'project_id' : project_id})
+        if find == None :
+            return None
+        return find['jmx_file_name']
+    
+    def get_shell_command(self, jmx_file_name):
+        cmd = self.path + 'jmeter -n -t ' + jmx_file_name + ' -r'
+        return cmd
+
+    def execute_shell_command(self, shell):
+        proc = subprocess.Popen(shell.split()
+                                ,shell=True
+                                ,stdout=subprocess.PIPE
+                                ,stderr=subprocess.PIPE)       
+

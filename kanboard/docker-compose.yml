@@ -1,0 +1,15 @@
+version: '2'
+services:
+  kanboard:
+    image: kanboard/kanboard:latest
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./app/data:/var/www/app/data
+      - ./app/plugins:/var/www/app/plugins
+      - ./nginx/ssl:/etc/nginx/ssl
+volumes:
+  kanboard_data:
+  kanboard_plugins:
+  kanboard_ssl:
