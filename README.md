@@ -43,21 +43,35 @@ https://user-images.githubusercontent.com/1683771/162646669-ad08a926-0593-4d1e-9
 
 2. 테스트 데이터 정의 문서 설명
     > 엑셀에 작성하는 테스트 데이터의 규칙을 정의 하는 방법을 설명한 문서입니다.
+![image](https://user-images.githubusercontent.com/1683771/163735668-6b039d54-0eb7-4e62-86cc-45e08b7dac9f.png)
 
 3. 테스트 데이터 범위와 규칙 문자열
     > 테스트 데이터에서 문자열로 표현되는 부분을 만들어 내는 규칙을 설명한 문서입니다. 
+![image](https://user-images.githubusercontent.com/1683771/163735686-d088e819-3f8b-4707-b60c-95234d9fa899.png)
 
 4. 테스트 데이터 범위와 규칙 숫자형
     > 테스트 데이터에서 숫자형으로 표현되는 부분을 만들어 내는 규칙을 설명한 문서입니다. 주로 특정 숫자의 범위 안에서 만들어 내는 방법입니다.
+![image](https://user-images.githubusercontent.com/1683771/163735698-52f670df-d524-4ebc-9a8b-e0a9441583cc.png)
 
 5. 테스트 데이터 범위와 규칙 날짜형
     > 테스트 데이터에서 날짜형식을 만들어 내는 규칙을 설명한 문서입니다.
+![image](https://user-images.githubusercontent.com/1683771/163735706-79296f53-a32e-461d-a3a2-2c213bb25205.png)
 
 6. 테스트 데이터 범위와 규칙 랜덤키
     > 테스트 데이터에서 랜덤하게 유일한 키 값을 만들어 내는 규칙을 설명한 문서입니다.
+![image](https://user-images.githubusercontent.com/1683771/163735719-c19859a3-9ada-4e64-a4e1-ddc2d57ab2e0.png)
 
 7. 테스트 데이터 범위와 규칙 참조형
     > 이미 사용되고 있는 테스트 데이터 변수를 참조해서 같은 값을 만들어 내는 규칙을 설명한 문서입니다.
+![image](https://user-images.githubusercontent.com/1683771/163735727-a27f197b-3d80-417e-90c2-516ce8fa2610.png)
 
 8. JMeter에 Plugin 추가 방법
-
+> JMeter 5.4.1 버전 사용함.
+  1. JMeter 설치폴더/lib/ 아래에 3개 jar 파일 복사
+     gson-2.8.6.jar
+     groovy-all-2.3.11.jar
+     kafka-clients-3.0.0.jar
+  2. JMeter 설치폴더/lib/ext/ 아래에 1개 jar 파일 복사
+     safe-test-jmeter-plugin-1.0-SNAPSHOT.jar
+  3. JMeter 설치폴더/bin/ 아래에 fds/data 폴더 생성
+  위 3가지를 준비 하시고, JMeter를 실행 하시면, 됩니다.
