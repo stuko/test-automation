@@ -13,6 +13,21 @@
 ![Test Automation Project System Context](https://user-images.githubusercontent.com/1683771/162646776-23a210b5-a5b8-45fa-aebd-8cf3a5fb2915.png)
 
 
+## Guide
+```
+1. kanboard : run kanboard with mariadb (check the volume in docker-compose-with-mariadb.yml)
+docker-compose -f docker-compose-with-mariadb.yml up
+```
+```
+2. test-controller(python) : run test-controler.py
+python ./test-controller.py
+```
+```
+3. Jmeter(Server) : run jmeter-server.bat or jmeter-server in ./jmeter-XXX/bin/ , You can download directly from https://jmeter.apache.org/download_jmeter.cgi
+./jmeter-server
+```
+That's all :)
+
 ## JMeter 테스트 플러그인 데모
 https://user-images.githubusercontent.com/1683771/162646281-827b8de7-b1f9-487e-b6fa-bcdf8fd75246.mp4
 
