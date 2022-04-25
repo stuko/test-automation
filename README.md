@@ -26,6 +26,12 @@ python ./test-controller.py
 3. Jmeter(Server) : run jmeter-server.bat or jmeter-server in ./jmeter-XXX/bin/ , You can download directly from https://jmeter.apache.org/download_jmeter.cgi
 ./jmeter-server
 ```
+```
+4. Mongo DB : run docker 
+docker run --name mongo-test-automation -e "TZ=Asia/Seoul" -p ${MONGO_PORT}:${MONGO_PORT} --mount type=bind,source=${BASEDIR}/volume/mongo/data,target=/data/db 
+-d  --restart always mongo:4.4.10
+```
+
 That's all :)
 
 ## JMeter 테스트 플러그인 데모
