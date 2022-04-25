@@ -7,7 +7,7 @@ class JmeterManager:
     
     def __init__(self):
         self.client = MongoClient('localhost', 27017)
-        self.db = self.client['kcb']
+        self.db = self.client['auto']
         self.collection = self.db['test']
         self.path = 'D:/install/apache-jmeter-5.4.1/bin/'
         
