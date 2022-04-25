@@ -13,7 +13,7 @@
 ![Test Automation Project System Context](https://user-images.githubusercontent.com/1683771/162646776-23a210b5-a5b8-45fa-aebd-8cf3a5fb2915.png)
 
 
-## Guide
+## 설치 방법
 ```
 1. kanboard : run kanboard with mariadb (check the volume in docker-compose-with-mariadb.yml)
 docker-compose -f docker-compose-with-mariadb.yml up
@@ -25,6 +25,8 @@ python ./test-controller.py
 ```
 3. Jmeter(Server) : run jmeter-server.bat or jmeter-server in ./jmeter-XXX/bin/ , You can download directly from https://jmeter.apache.org/download_jmeter.cgi
 ./jmeter-server
+
+* Jmeter에는 빌드된 plugin이 포함되어 있습니다.
 ```
 ```
 4. Mongo DB : run docker 
