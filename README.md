@@ -12,13 +12,17 @@
   * 솔루션의 생명주기에는 외부 고객(사용자)에게 인도 되는 과정을 거쳐야 한다.
   * 솔루션의 인도(Delivery)는 솔루션이 제공하는 Service의 Level을 준수해야 하는 계약이 포함되어 있다.
   * 테스트를 통해, 솔루션의 Service Level을 보증하는 품질 보증 절차는 솔루션의 브랜드 품질과 고객만족도를 좌우 한다
-
+ #### 테스트 실행에 시간과 비용이 왜 많이 발생 하는가?
+  * 솔루션의 변경 범위에 해당하지 않는 기능을 테스트 해야 하는 과정이 필요함.(Regression Test)
+  * 솔루션을 지속적으로 유지보수하기 위해서는 지속적인 테스트가 필요하고, 테스트 과정에서 발생하는 테스트 비용을 줄이기 위한 노력이 필요함.
+  * 테스트 비용을 일정 수준으로 유지 될 수 있도록 관리 될 필요가 있음.
 ## 시스템 개요
  > 테스트 자동화 시스템에 참여하는 오픈소스와 개발 시스템의 개요입니다.
 ![Test Automation Project System Context](https://user-images.githubusercontent.com/1683771/162646776-23a210b5-a5b8-45fa-aebd-8cf3a5fb2915.png)
 
 
 ## 설치 방법
+>
 ```
 1. kanboard : run kanboard with mariadb (check the volume in docker-compose-with-mariadb.yml)
 docker-compose -f docker-compose-with-mariadb.yml up
@@ -40,6 +44,7 @@ docker run --name mongo-test-automation -e "TZ=Asia/Seoul" -p ${MONGO_PORT}:${MO
 ```
 
 That's all :)
+
 
 ## JMeter 테스트 플러그인 데모
 https://user-images.githubusercontent.com/1683771/162646281-827b8de7-b1f9-487e-b6fa-bcdf8fd75246.mp4
