@@ -32,8 +32,9 @@ docker-compose -f docker-compose-with-mariadb.yml up
 python ./test-controller.py
 ```
 ```
-3. Jmeter(Server) : run jmeter-server.bat or jmeter-server in ./jmeter-XXX/bin/ , You can download directly from https://jmeter.apache.org/download_jmeter.cgi
-./jmeter-server
+3. Jmeter(Server) : run jmeter-server.bat or jmeter-server in ./jmeter-XXX/bin/    
+  You can download directly from https://jmeter.apache.org/download_jmeter.cgi
+  ./jmeter-server
 
 * Jmeter에는 빌드된 plugin이 포함되어 있습니다.
 ```
@@ -47,16 +48,17 @@ That's all :)
 
 
 ## JMeter 테스트 플러그인 데모
+***
 https://user-images.githubusercontent.com/1683771/162646281-827b8de7-b1f9-487e-b6fa-bcdf8fd75246.mp4
 
-
+***
 https://user-images.githubusercontent.com/1683771/162646260-fe71ea1e-1fc4-4e53-9f7f-f3af942f94e8.mp4
 
-
-
+***
 https://user-images.githubusercontent.com/1683771/162646669-ad08a926-0593-4d1e-9a73-199fb1cf06b4.mp4
 
 # JMeter 테스트 데이터 관리 프로그램 #
+***
 
  > 솔루션의 내부에서 테스트 하기 위해, 필요한 것들은 **'테스트 시나리오' , '테스트 데이터', '테스트 프로그램', '테스트 결과서'** 가 필요합니다. 
 
@@ -71,6 +73,7 @@ https://user-images.githubusercontent.com/1683771/162646669-ad08a926-0593-4d1e-9
  > 테스트 결과서는 현재 추가 개발 중에 있으며, 테스트의 실제 결과와 예상 결과를 비교하고, 테스트 결과 예외를 확인하고 찾아 낼 수 있는 기능을 추가 개발하고 있습니다.
 
 ## JMeter Plugin 테스트 프로그램
+***
 
 1. 엑셀로 테스트 데이터의 규칙과 범위를 작성하고, JMeter를 사용하여, 시스템에 테스트 데이터를 보낸 후, 데이터베이스에 시스템의 룰 조건에 맞는 정보가 들어오는지 확인
 
