@@ -42,7 +42,7 @@ public class KafkaExecutor extends AbstractPluginExecutor {
 
     @Override
     public void init(TestPluginTestData data , TestPluginCallBack callBack) {
-        // ì´ˆê¸° ì„¤ì •
+        // ÃÊ±â ¼³Á¤
         try {
             message = new TestMessageByCombination();
             message.setStop(false);
@@ -56,7 +56,7 @@ public class KafkaExecutor extends AbstractPluginExecutor {
                 topicName = this.getConfigMap().get("topic") + "";
             }
 
-            // í…ŒìŠ¤íŠ¸ ë°ì´í„° ìƒì„±
+            // Å×½ºÆ® µ¥ÀÌÅÍ »ı¼º
             message.build(testData.getData());
             try {
                 executors.submit(new Thread(){

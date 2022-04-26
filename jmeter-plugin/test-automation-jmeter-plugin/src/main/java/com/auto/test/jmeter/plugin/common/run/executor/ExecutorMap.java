@@ -2,7 +2,7 @@ package com.auto.test.jmeter.plugin.common.run.executor;
 
 import java.util.HashMap;
 import java.util.Map;
-
+ 
 public class ExecutorMap {
     public static enum ExecutorType {KAFKA,HTTP}
     public static ExecutorMap map;
