@@ -37,7 +37,7 @@ public class HttpExecutor extends AbstractPluginExecutor  {
 
     @Override
     public void init(TestPluginTestData data , TestPluginCallBack callBack) {
-        // ì´ˆê¸° ì„¤ì •
+        // ÃÊ±â ¼³Á¤
         try {
             message = new TestMessageByCombination();
             message.setStop(false);
@@ -46,7 +46,7 @@ public class HttpExecutor extends AbstractPluginExecutor  {
                url = this.getConfigMap().get("url") + "";
             }
 
-            // í…ŒìŠ¤íŠ¸ ë°ì´í„° ìƒì„±
+            // Å×½ºÆ® µ¥ÀÌÅÍ »ý¼º
             message.build(testData.getData());
             try {
                 executors.submit(new Thread(){
@@ -88,7 +88,7 @@ public class HttpExecutor extends AbstractPluginExecutor  {
             // ---------------------------------------
             // Change to okHttp3
             // 20211204
-            // ì˜¤í”ˆì†ŒìŠ¤ë¡œ ë³€ê²½
+            // ¿ÀÇÂ¼Ò½º·Î º¯°æ
             // 20211209
             // Change to Jmeter's Apache Http Common
             // ---------------------------------------
@@ -96,7 +96,7 @@ public class HttpExecutor extends AbstractPluginExecutor  {
             // ---------------------------------------
             // Change to Jmeter's Apache Http Common
             // 20211209
-            // Jmeterì— ì˜¤í”ˆì†ŒìŠ¤ ì¶”ê°€ ì–´ë ¤ì›€.
+            // Jmeter¿¡ ¿ÀÇÂ¼Ò½º Ãß°¡ ¾î·Á¿ò.
             // ---------------------------------------
 
             HttpUtil.call(url,data,(body)->{

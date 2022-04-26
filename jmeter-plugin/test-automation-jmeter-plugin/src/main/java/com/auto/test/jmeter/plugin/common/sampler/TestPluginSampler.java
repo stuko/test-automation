@@ -1,18 +1,23 @@
 package com.auto.test.jmeter.plugin.common.sampler;
 
-import com.google.gson.Gson;
+import java.util.Map;
+
 import org.apache.jmeter.samplers.AbstractSampler;
 import org.apache.jmeter.samplers.Entry;
 import org.apache.jmeter.samplers.SampleResult;
+import org.apache.jmeter.threads.JMeterContextService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.auto.test.jmeter.plugin.common.run.executor.TestPluginExecutor;
+import com.google.gson.Gson;
 
 public class TestPluginSampler extends AbstractSampler {
 
     static Logger logger = LoggerFactory.getLogger(TestPluginSampler.class);
     public TestPluginExecutor executor;
-
+    Gson gson = new Gson();
+    
     @Override
     public SampleResult sample(Entry e) {
         if(e != null) logger.warn("Entry is {}", e.toString());
@@ -26,10 +31,19 @@ public class TestPluginSampler extends AbstractSampler {
         long start = sr.currentTimeInMillis();
         TestPluginResponse response = null;
         try {
-            logger.info("Sampler is Same ? {}" , this.hashCode());
+        	
+        	logger.info("Sampler is Same ? {}" , this.hashCode());
             response = getExecutor().execute();
             if(response == null) logger.info("Execute result is null");
             else  logger.info("Execute result is Not null");
+        	
+            try {
+            	Map<String,Object> map = gson.fromJson(response.getRequest(), Map.class);
+            	map.forEach((k,v)->{
+            		JMeterContextService.getContext().getVariables().put(k, v.toString());
+            	});
+            }catch(Exception ee) {logger.error(ee.toString());}
+        	
             sr.setSamplerData(response.getRequest());
             sr.setBytes(response.getSize());
             sr.setResponseData(response.getRequest().getBytes());
