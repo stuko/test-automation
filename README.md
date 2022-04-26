@@ -1,13 +1,13 @@
 # test-automation
 
 ## 테스트 프로세스
-
-![image](https://user-images.githubusercontent.com/1683771/162643529-43372ceb-e1b5-4ea1-854b-2f655e190802.png)
-
-![image](https://user-images.githubusercontent.com/1683771/162643557-51ed7ee2-e921-42ab-b49d-87c199ca694a.png)
-
-![image](https://user-images.githubusercontent.com/1683771/162643581-ecac3970-0c5c-4a0f-9f4b-0b2e6fd22f8e.png)
-
+### 배경
+ #### 체계적인 테스트 프로세스와 시스템이 왜 필요한가?
+  * 솔루션의 개발 이후 검증은 최소 이 기간과 비슷하거나 더 많은 시간과 리소스가 투입되어야 한다. 
+  * 하나의 문제를 해결하기 위해, 하나의 기능을 만들었다면, 이 기능이 문제를 일으킬 수 있는 경우의 수는 하나 이상이다.
+  * 솔루션의 기능 개발과 솔루션의 오류 가능성에 대한 신뢰도는 서로 상반된 기대치를 가지고 있다.
+  * 더 많은 기능을 개발을 한다면, 솔루션은 더 믿을 수 없는 품질을 기대하게 된다.(솔루션의 신뢰도 문제점)
+  * 믿을 수 있는 체계적인 솔루션의 테스트 프로세스는 솔루션의 오류 가능성을 낮추는 품질 관리 중 하나이다.
 
 ## 시스템 개요
 ![Test Automation Project System Context](https://user-images.githubusercontent.com/1683771/162646776-23a210b5-a5b8-45fa-aebd-8cf3a5fb2915.png)
