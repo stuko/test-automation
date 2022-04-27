@@ -1,47 +1,58 @@
 # test-automation
 
 ## 테스트 프로세스
-
-![image](https://user-images.githubusercontent.com/1683771/162643529-43372ceb-e1b5-4ea1-854b-2f655e190802.png)
-
-![image](https://user-images.githubusercontent.com/1683771/162643557-51ed7ee2-e921-42ab-b49d-87c199ca694a.png)
-
-![image](https://user-images.githubusercontent.com/1683771/162643581-ecac3970-0c5c-4a0f-9f4b-0b2e6fd22f8e.png)
-
-
+### 배경
+ #### 체계적인 테스트 프로세스와 시스템이 왜 필요한가?
+  * 솔루션의 개발 이후 검증은 최소 이 기간과 비슷하거나 더 많은 시간과 리소스가 투입되어야 한다. 
+  * 하나의 문제를 해결하기 위해, 하나의 기능을 만들었다면, 이 기능이 문제를 일으킬 수 있는 경우의 수는 하나 이상이다.
+  * 솔루션의 기능 개발과 솔루션의 오류 가능성에 대한 신뢰도는 서로 상반된 기대치를 가지고 있다.
+  * 더 많은 기능을 개발을 한다면, 솔루션은 더 믿을 수 없는 품질을 기대하게 된다.(솔루션의 신뢰도 문제점)
+  * 믿을 수 있는 체계적인 솔루션의 테스트 프로세스는 솔루션의 오류 가능성을 낮추는 품질 관리 중 하나이다.
+ #### 최소한의 품질 보증이 왜 필요한가? 
+  * 솔루션의 생명주기에는 외부 고객(사용자)에게 인도 되는 과정을 거쳐야 한다.
+  * 솔루션의 인도(Delivery)는 솔루션이 제공하는 Service의 Level을 준수해야 하는 계약이 포함되어 있다.
+  * 테스트를 통해, 솔루션의 Service Level을 보증하는 품질 보증 절차는 솔루션의 브랜드 품질과 고객만족도를 좌우 한다
+ #### 테스트 실행에 시간과 비용이 왜 많이 발생 하는가?
+  * 솔루션의 변경 범위에 해당하지 않는 기능을 테스트 해야 하는 과정이 필요함.(Regression Test)
+  * 솔루션을 지속적으로 유지보수하기 위해서는 지속적인 테스트가 필요하고, 테스트 과정에서 발생하는 테스트 비용을 줄이기 위한 노력이 필요함.
+  * 테스트 비용을 일정 수준으로 유지 될 수 있도록 관리 될 필요가 있음.
 ## 시스템 개요
+ > 테스트 자동화 시스템에 참여하는 오픈소스와 개발 시스템의 개요입니다.
 ![Test Automation Project System Context](https://user-images.githubusercontent.com/1683771/162646776-23a210b5-a5b8-45fa-aebd-8cf3a5fb2915.png)
 
 
 ## 설치 방법
+>
 ```
 1. kanboard : run kanboard with mariadb (check the volume in docker-compose-with-mariadb.yml)
-docker-compose -f docker-compose-with-mariadb.yml up
+  docker-compose -f docker-compose-with-mariadb.yml up
 ```
 ```
 2. test-controller(python) : run test-controler.py
-python ./test-controller.py
+  python ./test-controller.py
 ```
 ```
-3. Jmeter(Server) : run jmeter-server.bat or jmeter-server in ./jmeter-XXX/bin/ , You can download directly from https://jmeter.apache.org/download_jmeter.cgi
-./jmeter-server
+3. Jmeter(Server) : run jmeter-server.bat or jmeter-server in ./jmeter-XXX/bin/    
+  You can download directly from https://jmeter.apache.org/download_jmeter.cgi
+  ./jmeter-server
 
 * Jmeter에는 빌드된 plugin이 포함되어 있습니다.
 ```
 ```
 4. Mongo DB : run docker 
-docker run --name mongo-test-automation -e "TZ=Asia/Seoul" -p ${MONGO_PORT}:${MONGO_PORT} --mount type=bind,source=${BASEDIR}/volume/mongo/data,target=/data/db 
+  docker run --name mongo-test-automation -e "TZ=Asia/Seoul" -p ${MONGO_PORT}:${MONGO_PORT} --mount type=bind,source=${BASEDIR}/volume/mongo/data,target=/data/db 
 -d  --restart always mongo:4.4.10
 ```
 
 That's all :)
 
+
 ## JMeter 테스트 플러그인 데모
+
 https://user-images.githubusercontent.com/1683771/162646281-827b8de7-b1f9-487e-b6fa-bcdf8fd75246.mp4
 
 
 https://user-images.githubusercontent.com/1683771/162646260-fe71ea1e-1fc4-4e53-9f7f-f3af942f94e8.mp4
-
 
 
 https://user-images.githubusercontent.com/1683771/162646669-ad08a926-0593-4d1e-9a73-199fb1cf06b4.mp4
