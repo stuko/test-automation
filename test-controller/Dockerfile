@@ -13,7 +13,7 @@ WORKDIR /app/server
 RUN pip3 install -r requirements.txt
 
 # 환경 설정 세팅
-RUN python setup.py install
+# RUN python setup.py install
 
 # container가 구동되면 실행
-ENTRYPOINT ["python", "Server.py"]
+ENTRYPOINT ["python", "test-controller.py"]
