@@ -107,5 +107,7 @@ https://user-images.githubusercontent.com/1683771/162646669-ad08a926-0593-4d1e-9
 
 
 
+## Kanboard Webhook 연결 설정
+> 아래 Webhook 토큰정보를 Jmeter Plugin에서 설정 해 줌.
 ![image](https://user-images.githubusercontent.com/1683771/165467651-f8d658f1-c8b1-45cd-ae66-abe4d585ccbc.png)
 
