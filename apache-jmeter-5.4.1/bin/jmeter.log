@@ -1,0 +1,22 @@
+2022-04-27 15:25:02,344 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2022-04-27 15:25:02,372 INFO o.a.j.JMeter: Loading user properties from: user.properties
+2022-04-27 15:25:02,374 INFO o.a.j.JMeter: Loading system properties from: system.properties
+2022-04-27 15:25:02,378 INFO o.a.j.JMeter: Copyright (c) 1998-2021 The Apache Software Foundation
+2022-04-27 15:25:02,378 INFO o.a.j.JMeter: Version 5.4.1
+2022-04-27 15:25:02,379 INFO o.a.j.JMeter: java.version=15.0.2
+2022-04-27 15:25:02,379 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2022-04-27 15:25:02,379 INFO o.a.j.JMeter: os.name=Windows 10
+2022-04-27 15:25:02,379 INFO o.a.j.JMeter: os.arch=amd64
+2022-04-27 15:25:02,379 INFO o.a.j.JMeter: os.version=10.0
+2022-04-27 15:25:02,379 INFO o.a.j.JMeter: file.encoding=MS949
+2022-04-27 15:25:02,379 INFO o.a.j.JMeter: java.awt.headless=null
+2022-04-27 15:25:02,379 INFO o.a.j.JMeter: Max memory     =8589934592
+2022-04-27 15:25:02,379 INFO o.a.j.JMeter: Available Processors =8
+2022-04-27 15:25:02,385 INFO o.a.j.JMeter: Default Locale=English (EN)
+2022-04-27 15:25:02,385 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2022-04-27 15:25:02,385 INFO o.a.j.JMeter: JMeterHome=D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1
+2022-04-27 15:25:02,385 INFO o.a.j.JMeter: user.dir  =D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin
+2022-04-27 15:25:02,386 INFO o.a.j.JMeter: PWD       =D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin
+2022-04-27 15:25:02,387 INFO o.a.j.JMeter: IP: 192.168.57.243 Name: DESKTOP-0Q4LOBV FullName: host.docker.internal
+2022-04-27 15:25:02,505 INFO o.a.j.JMeter: Setting LAF to: laf:javax.swing.plaf.metal.MetalLookAndFeel
+2022-04-27 15:25:02,603 INFO o.a.j.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties
