@@ -95,7 +95,6 @@ public class TestMessageByCombination extends TestMessage {
     }
 
     public List<int[]> getCombinationArray(List<TestPluginMessageFactorImplFactory> lists){
-        // 2차원 배열 만들기
         List<int[]> combination_source = new ArrayList<>();
         lists.forEach(f->{
             int[] combination_int = new int[f.getFactorRange().getValues().size()];
@@ -107,24 +106,19 @@ public class TestMessageByCombination extends TestMessage {
         return combination_source;
     }
 
-    // combination_source = 2차원 배열, 1차원은 항목의 수, 2차원은 각 항목별 인덱스
     public int combination(List<int[]> combination_source,int[] combination_result, int x, int count, CombinationCall combinationCall) {
         if(combination_result == null) combination_result = new int[combination_source.size()];
         if(x < combination_source.size()-1) {
             for (int y = 0; y < combination_source.get(x).length && !this.isStop(); y++) {
                 combination_result[x] = combination_source.get(x)[y];
                 if (combination_source.size() == 1) {
-                    // 아래 한가지 케이스 밖에 없음.
                     if (x == 0) {
                         count++;
                         if(this.isStop()) break;
                         combinationCall.call(combination_source, combination_result, x, count);
                     }
                 } else {
-                    // 항목의 갯수가 2개 이상이면서,
-                    // 스캔 인덱스가 마지막 인덱스가 아닌 경우
                     if (x < combination_source.size() - 1) {
-                        // 초기화
                         for(int i = 0; i < combination_result.length; i++){
                             if(i >= x+1) combination_result[i] = -1;
                         }

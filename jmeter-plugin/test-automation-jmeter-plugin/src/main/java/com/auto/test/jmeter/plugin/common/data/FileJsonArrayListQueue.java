@@ -107,9 +107,11 @@ public class FileJsonArrayListQueue extends FileJsonArrayListPlus{
             if(peek){
                 current_queue = this.getReadable_queue().peek();
             }else{
-                while((current_queue = this.getReadable_queue().poll()) == null){
+            	int tryCnt = 0;
+                while(((current_queue = this.getReadable_queue().poll()) == null) && tryCnt++ < 10){
                     try{logger.info("poll wait....");Thread.sleep(200);}catch(Exception e){logger.error(e.toString());}
                 }
+                if(current_queue == null) return null;
             }
         }
         current = current_queue.next();
@@ -117,9 +119,11 @@ public class FileJsonArrayListQueue extends FileJsonArrayListPlus{
             if(peek){
                 current_queue = this.getReadable_queue().peek();
             }else{
-               while((current_queue = this.getReadable_queue().poll()) == null){
+            	int tryCnt = 0;
+            	while(((current_queue = this.getReadable_queue().poll()) == null) && tryCnt++ < 10){
                     try{logger.info("poll re-wait....");Thread.sleep(200);}catch(Exception e){logger.error(e.toString());}
-                } 
+                }
+            	if(current_queue == null) return null;
             }
             current = current_queue.next();
             // System.out.println("["+this.getTestDataFilePath().getAbsolutePath()+"]current: " + current);

@@ -30,8 +30,6 @@ public class TestPluginMessageFactorImplFactory extends SubstringMessageFactorIm
             range = this.getNumberRange(range);
             return range;
         }else if(this.getType().trim().equalsIgnoreCase("datetime")){
-            // 1형식:  20210301~20210405,yyyymmdd
-            // 2형식: -20,day,yyyymmdd
             range = this.getDateTimeRange(range);
             return range;
         }else if(this.getType().trim().equalsIgnoreCase("key")) {
@@ -135,13 +133,6 @@ public class TestPluginMessageFactorImplFactory extends SubstringMessageFactorIm
         int i = 0;
         for(String d : data){
             i++;
-            // addr|addr2|addr3 --> map.get("addr"),map.get("addr2"),map.get("addr3") 와 같은 의미
-            // @SUBSTR(addr) FROM(0) TO(20) 이면 addr에서 substring(0,20)을 해줘야 함.
-            // 아직 map의 값이 생성되기 전이면, 해당 값을 가져 올 수가 없게됨.
-            // TestMessage 클래스에서 데이터를 Executor에 넘겨 줄 때, Write Line을 하기 전에 값을 읽어와서, 저장 해 주어야 함.
-            // reference 타입인 정보를 넣기 위해서는 reference 타입인 변수들을 ReferenceMap에 넣고, ReferenceMap에 target 값을 넣고,
-            // ReferenceMap을 Write Line 할 Map에 putAll 해줘야 함.
-            // 만약 SUBSTRING이 적용 되어야 하면, putAll 하기 전에 substring을 해줘야 함.
             TestPluginMessageFactorReferenceValue f = new TestPluginMessageFactorReferenceValue(d);
             f.setTaPluginMessageFactor(this);
             range.getRanges().put(this.getName() + "-" + i, f);

@@ -4,27 +4,25 @@
  */
 package com.auto.test.jmeter.plugin.common.gui;
 
-import com.google.gson.Gson;
-import com.auto.test.jmeter.plugin.common.data.FileJsonArrayListQueue;
-import com.auto.test.jmeter.plugin.common.data.TestPluginTestData;
-import com.auto.test.jmeter.plugin.common.data.TestPluginTestDataQueueImpl;
-import com.auto.test.jmeter.plugin.common.util.TestPluginConstants;
-
-import java.util.concurrent.atomic.AtomicBoolean;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import com.auto.test.jmeter.plugin.common.function.TestPluginCallBack;
-import com.auto.test.jmeter.plugin.common.run.executor.AbstractPluginExecutor;
-import com.auto.test.jmeter.plugin.common.run.executor.ExecutorMap;
-import com.auto.test.jmeter.plugin.common.run.executor.TestPluginExecutor;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.auto.test.jmeter.plugin.common.function.TestPluginCallBack;
+import com.google.gson.Gson;
 
 /**
 *
@@ -39,7 +37,7 @@ public class TestRunConfigPanel extends PluginGridPanel{
    TestDataConfigPanel testDataConfigPanel;
    JComboBox<String> combo;
    JButton save;
-   String[] method = {"KAFKA","REST"};
+   String[] method = {"DEFAULT","KAFKA","REST"};
    
    public TestRunConfigPanel(TestDataConfigPanel panel, TestPluginCallBack callback){
        this.testDataConfigPanel = panel;
@@ -81,7 +79,7 @@ public class TestRunConfigPanel extends PluginGridPanel{
        textArea.setRows(5);
        textArea.setBounds(50, 50, 300, 300); //JTeatArea 크기 및 위치 지정
        textArea.setEditable(true); //실행시 JtextArea edit 금지 (글을 쓸 수 없음) true면 가능
-       textArea.setText(this.getDefaultText());
+       textArea.setText(TestAutomationGuiController.getDefaultText());
 
        javax.swing.JScrollPane scroll = new JScrollPane(textArea);
        scroll.setPreferredSize(new java.awt.Dimension(750,300));
@@ -95,11 +93,15 @@ public class TestRunConfigPanel extends PluginGridPanel{
            //
            String type = (String)combo.getSelectedItem();
            String connection = textArea.getText();
-           Map<String,Object> m = gson.fromJson(connection, Map.class);
-           if("KAFKA".equals(type)) m.put("type",type);
+           Map<String,Object> m = new HashMap<>();
+           if(connection != null && connection.trim().length() > 0) {
+        	   m = gson.fromJson(connection, Map.class);
+        	   //if("KAFKA".equals(type)) m.put("type",type);
+           }
+           m.put("type",type);
            Map<String,Object> params = new HashMap<>();
            params.put("run",m);
-           params.put("jmx_file_name",TestAutomationGuiController.get_jmx_file_name());
+           params.put("jmx_file_name",TestAutomationGuiController.get_jmx_file_name().getName());
            TestAutomationGuiController.save_run_config(params);
            
            JOptionPane.showMessageDialog(null, "테스트 데이터 실행 설정 정보가 정상적으로 저장 되었습니다.");
@@ -122,57 +124,9 @@ public class TestRunConfigPanel extends PluginGridPanel{
    
    public void attach(){
        if(testDataConfigPanel != null){
-           testDataConfigPanel.getSampler().setExecutor(this.attachFdsPluginTestExecutor(this.getConnectionText()));
-           testDataConfigPanel.getSampler().getExecutor().setTestData(this.attachFdsPluginTestData(this.toString()));
+           testDataConfigPanel.getSampler().setExecutor(TestAutomationGuiController.get_test_executor((String)combo.getSelectedItem(), this.getConnectionText()));
+           testDataConfigPanel.getSampler().getExecutor().setTestData(TestAutomationGuiController.get_test_data(this.toString(), this.getConnectionText()));
            // this.getFdsPluginPanel().getSampler().getExecutor().init(getFdsPluginPanel().getSampler().getExecutor().getTestData(),callback);
        }
    }    
-   
-   public TestPluginTestData attachFdsPluginTestData(String samplerKey) {
-       TestPluginTestData testData = new TestPluginTestDataQueueImpl(samplerKey);
-       testData.setConnectionInfo(this.getConnectionText());
-       return testData;
-   }    
-   
-   public TestPluginExecutor attachFdsPluginTestExecutor(String json) {
-       try {
-           logger.info("Executor's config map string : {}", json);
-           if(json != null && json.length() != 0) {
-               if (json.contains("\"url\"")) {
-                   AbstractPluginExecutor http = ExecutorMap.getInstance().getExecutor(ExecutorMap.ExecutorType.HTTP);
-                   http.setConfigMap(gson.fromJson(json, Map.class));
-                   return http;
-               }
-               else {
-                   AbstractPluginExecutor kafka = ExecutorMap.getInstance().getExecutor(ExecutorMap.ExecutorType.KAFKA);
-                   kafka.setConfigMap(gson.fromJson(json, Map.class));
-                   return kafka;
-               }
-           }else{
-               AbstractPluginExecutor kafka = ExecutorMap.getInstance().getExecutor(ExecutorMap.ExecutorType.KAFKA);
-               kafka.setConfigMap(gson.fromJson(getDefaultText(), Map.class));
-               return kafka;
-           }
-       }catch(Exception e){
-           logger.error(e.toString());
-           return ExecutorMap.getInstance().getExecutor(ExecutorMap.ExecutorType.KAFKA);
-       }
-       
-   }    
-   
-     public String getDefaultText() {
-       String kafka = "{\n" +
-               "\"server\":\"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092\"\n" +
-               ",\"topic\":\"fds-bank.t\"\n" +
-               "}";
-       String http = "{\n" +
-               "\"url\":\"http://1.1.1.1:3000\"\n"+
-               "}";
-       String tcp = "{\n" +
-               "\"ip\":\"1.1.1.1\"\n"+
-               ",\"port\":\"3000\"\n" +
-               "}";
-       return kafka;
-   }
-
 }

@@ -9,6 +9,7 @@ import org.apache.jmeter.threads.JMeterContextService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.auto.test.jmeter.plugin.common.gui.TestAutomationGuiController;
 import com.auto.test.jmeter.plugin.common.run.executor.TestPluginExecutor;
 import com.google.gson.Gson;
 
@@ -21,8 +22,12 @@ public class TestPluginSampler extends AbstractSampler {
     @Override
     public SampleResult sample(Entry e) {
         if(e != null) logger.warn("Entry is {}", e.toString());
-        logger.warn("Sampler in Sampler is {}", this.toString());
-        if(this.getExecutor() == null)logger.info("##### TEST EXECUTOR IS NULL");
+        if(this.getExecutor() == null) {
+        	logger.info("##### TEST EXECUTOR IS NULL, so Refer Default Executor");
+        	this.executor = TestAutomationGuiController.get_test_executor("DEFAULT", null);
+        }else {
+        	logger.info("##### TEST EXECUTOR IS NOT NULL");
+        }
 
         SampleResult sr = new SampleResult();
         sr.setSampleLabel(executor.getTestData().getName());
@@ -38,10 +43,12 @@ public class TestPluginSampler extends AbstractSampler {
             else  logger.info("Execute result is Not null");
         	
             try {
-            	Map<String,Object> map = gson.fromJson(response.getRequest(), Map.class);
-            	map.forEach((k,v)->{
-            		JMeterContextService.getContext().getVariables().put(k, v.toString());
-            	});
+            	if(response.getRequest() != null) {
+	            	Map<String,Object> map = gson.fromJson(response.getRequest(), Map.class);
+	            	map.forEach((k,v)->{
+	            		JMeterContextService.getContext().getVariables().put(k, v.toString());
+	            	});
+            	}
             }catch(Exception ee) {logger.error(ee.toString());}
         	
             sr.setSamplerData(response.getRequest());
