@@ -41,18 +41,10 @@ public class TestMessage extends TestPluginMessageBuilder {
         List<Map<String,String>> result = new ArrayList<>();
         logger.info("start getStringMessage......");
         int varIdx = 1;
-        // 미리 해당 항목수 만큼은 Map을 입력해 놓는다.
-        // for(int i = 0; i < this.message.getBodys().size(); i++) result.add(new HashMap<>());
-        // 3개
         for(TestPluginMessageFactorImplFactory factor: this.message.getBodys()){
             logger.info("loop bodys {}" , varIdx);
             List<String> rangeValueList = factor.getFactorRange().getValues();
             List<Map<String,String>>  tmp = new ArrayList<>();
-            // Range 범위 만큼 Map 을 복제 해서 넣어 준다.
-
-            //result.forEach(m->{
-            //    logger.info("before factorName : {} , {}",factor.getName(), m );
-            //});
 
             if(result.size() == 0){
                 logger.info("Result size is Zero , so add {}" , rangeValueList.size());
@@ -116,18 +108,6 @@ public class TestMessage extends TestPluginMessageBuilder {
     }
     
 
-    /*
-    < Init >
-    1. 항목의 갯수 만큼 Queue를 만든다.
-    2. Queue들에는 순서가 존재 함 Queue들을 Array 에 넣는다.
-    3. Queue 탐색 인덱스를 0으로 정한다.
-    4. 탐색 인덱스보다 작거나 같은 Queue들은 탐색 / 추출 대상 Queue이다,
-    5. 나머지 Queue들은 계속 같은
-    < Execute >
-    1. 최초에 각 Queue에서 값을 하나씩 Poll 한다
-    2. 가
-     */
-
     @Override
     public FileJsonArrayList getFileMessage(TestPluginCallBack callBack) {
         // List<Map<String,String>> result = new ArrayList<>();
@@ -144,7 +124,6 @@ public class TestMessage extends TestPluginMessageBuilder {
         }).start();
 
         total = 1;
-        // 메시지의 각 항목들의 조합으로 만들어 낼 수 있는 테스트 데이터 갯수를 찾아 낸다.
         for(TestPluginMessageFactorImplFactory factor: this.message.getBodys()){
             logger.info("count calculate -> total : {} , values.size : {}", total, factor.getFactorRange().getValues().size());
             total = total * factor.getFactorRange().getValues().size();
@@ -153,18 +132,15 @@ public class TestMessage extends TestPluginMessageBuilder {
 
 
         int varIdx = 0;
-        // 메시지의 각 항목들을 Loop
         for(TestPluginMessageFactorImplFactory factor: this.message.getBodys()){
             logger.info("total test data count : {}" , varIdx);
             List<String> rangeValueList = factor.getFactorRange().getValues();
             FileJsonArrayListPlus tmp = new FileJsonArrayListPlus(TestPluginConstants.ta_data_path);
-            // 이미 생성한 결과가 없으면, 신규 생성
             if(result.size() == 0){
                 logger.info("Result size is Zero , so add {}" , rangeValueList.size());
                 for(int x = 0; x < rangeValueList.size(); x++) {
                     tmp.add(new HashMap<>());
                 }
-            // 이미 생성한 결과가 있으면 결과를 tmp 리스트 맵에 복사해 줌.
             } else{
                 logger.info("Result size is not Zero , so add {}" , rangeValueList.size()*result.size());
                 logger.info("Result size : {} ,  Range size: {}" , result.size() , rangeValueList.size());
@@ -176,9 +152,7 @@ public class TestMessage extends TestPluginMessageBuilder {
             }
             //int start = 1;
             FileJsonArrayListPlus tmp2 = new FileJsonArrayListPlus(TestPluginConstants.ta_data_path);
-            // 기존에 생성한 결과를 Loop
             tmp.forEach(s->{
-                // 항목의 범위 만큼 Loop
                 for (int rIdx = 0; rIdx < rangeValueList.size() ; rIdx++) {
                     // logger.info("########## range value : {} " , rangeValueList.get(rIdx));
                     // logger.info("########## find in tmp , idx : {} in {}" , start, tmp.size());
@@ -192,15 +166,12 @@ public class TestMessage extends TestPluginMessageBuilder {
                         m.put(factor.getName(), rangeValueList.get(rIdx));
                         // System.out.println("NOT RAND : " + rangeValueList.get(rIdx));
                     }
-                    // 기존의 결과와 항목의 범위 만큼 조합을 만들어 새로운 tmp2에 저장함.
                     tmp2.add(m);
                     // start++;
                 }
             });
-            // 결과 리스트를 신규 생성함.
             result.clear();
             result = new FileJsonArrayListPlus(TestPluginConstants.ta_data_path);
-            // 결과 리스트에 tmp2의 정보를 모두 복사함.
             result.writeAll(tmp2);
             tmp2.clear();
             tmp.clear();

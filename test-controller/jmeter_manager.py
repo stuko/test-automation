@@ -20,7 +20,7 @@ class JmeterManager:
         if find == None:
             result['error'] = 'can not find jmx_file_name'
         else:
-            result['success'] = 'factors are updated'
+            result['success'] = 'run configs are updated'
         return json.dumps(result)
         
     def save_factors(self, params):

@@ -32,6 +32,7 @@ public class HttpUtil {
                 ResponseBody body = response.body();
                 if (body != null) {
                     callBack.response(body.string());
+                    body.close();
                 }else{
                     logger.error("No response...");
                 }

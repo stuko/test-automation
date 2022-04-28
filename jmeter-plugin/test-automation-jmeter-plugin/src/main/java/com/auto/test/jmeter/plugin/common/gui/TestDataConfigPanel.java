@@ -103,7 +103,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
         JButton save = new JButton("테스트 데이터 설정 저장");
         save.addActionListener((event)->{
             
-            if(TestAutomationGuiController.get_jmx_file_name() == null || "".equals(TestAutomationGuiController.get_jmx_file_name())){
+            if(TestAutomationGuiController.get_jmx_file_name() == null || "".equals(TestAutomationGuiController.get_jmx_file_name().getName())){
                 JOptionPane.showMessageDialog(null, "JMeter 파일을 저장하신 후, 저장 버튼을 클릭해 주세요.");
                 return;
             }
@@ -124,7 +124,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
             }
             Map<String,Object> params = new HashMap<>();
             params.put("factors",test_data_list_map);
-            params.put("jmx_file_name",TestAutomationGuiController.get_jmx_file_name());
+            params.put("jmx_file_name",TestAutomationGuiController.get_jmx_file_name().getName());
             
             TestAutomationGuiController.save_factors(params);
             

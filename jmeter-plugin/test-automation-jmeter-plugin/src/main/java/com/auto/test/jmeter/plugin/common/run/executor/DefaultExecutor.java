@@ -1,30 +1,27 @@
 package com.auto.test.jmeter.plugin.common.run.executor;
 
-import com.google.gson.Gson;
-import com.auto.test.jmeter.plugin.common.sampler.TestPluginResponseImpl;
-import com.auto.test.jmeter.plugin.common.data.TestMessageByCombination;
-import com.auto.test.jmeter.plugin.common.data.FileJsonArrayListQueue;
-import com.auto.test.jmeter.plugin.common.util.TestPluginConstants;
-import com.auto.test.jmeter.plugin.common.util.HttpUtil;
-import com.auto.test.jmeter.plugin.common.util.SecurityUtil;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import com.auto.test.jmeter.plugin.common.function.TestPluginCallBack;
+import com.auto.test.jmeter.plugin.common.data.FileJsonArrayListQueue;
+import com.auto.test.jmeter.plugin.common.data.TestMessageByCombination;
 import com.auto.test.jmeter.plugin.common.data.TestPluginTestData;
+import com.auto.test.jmeter.plugin.common.function.TestPluginCallBack;
 import com.auto.test.jmeter.plugin.common.sampler.TestPluginResponse;
+import com.auto.test.jmeter.plugin.common.sampler.TestPluginResponseImpl;
+import com.auto.test.jmeter.plugin.common.util.TestPluginConstants;
 
-public class HttpExecutor extends AbstractPluginExecutor  {
+public class DefaultExecutor  extends AbstractPluginExecutor {
 
-    Logger logger = LoggerFactory.getLogger(HttpExecutor.class);
+    Logger logger = LoggerFactory.getLogger(DefaultExecutor.class);
 
     TestMessageByCombination message = new TestMessageByCombination();
-    ExecutorService executors = Executors.newFixedThreadPool(2);
+    ExecutorService executors = Executors.newFixedThreadPool(10);
     TestPluginTestData testData;
-    String url;
+
     @Override
     public void stop(){
         message.setStop(true);
@@ -42,10 +39,7 @@ public class HttpExecutor extends AbstractPluginExecutor  {
             message = new TestMessageByCombination();
             message.setStop(false);
             this.testData = data;
-            if(this.getConfigMap() != null) {
-               url = this.getConfigMap().get("url") + "";
-            }
-
+            
             // 테스트 데이터 생성
             message.build(testData.getData());
             try {
@@ -64,15 +58,15 @@ public class HttpExecutor extends AbstractPluginExecutor  {
 
     @Override
     public TestPluginResponse execute() {
-        TestPluginResponseImpl response = new TestPluginResponseImpl();
         String data = FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).next();
-        logger.info("HTTP #################");
+        logger.info("Default #################");
         logger.info("Message : {} " , data);
-        logger.info("HTTP #################");
-        if(this.url == null || data == null){
-            logger.info("No more teat data !!!!!!!!!!!!!!! : url = {} , data = {}" , this.url, data);
+        logger.info("Default #################");
+        if(data == null){
+            logger.info("No more teat data !!!!!!!!!!!!!!!");
+            TestPluginResponseImpl response = new TestPluginResponseImpl();
             try {
-                response.setRequest("No more data or No Url : " + url);
+                response.setRequest("No more data");
                 response.setSize("No more data".getBytes().length);
                 response.setResponse("Success");
             } catch (Exception e) {
@@ -81,29 +75,12 @@ public class HttpExecutor extends AbstractPluginExecutor  {
             }
             return response;
         }
+        
+        TestPluginResponseImpl response = new TestPluginResponseImpl();
         try {
             response.setRequest(data);
             response.setSize(data.getBytes().length);
-            response.setResponse(data);
-            // ---------------------------------------
-            // Change to okHttp3
-            // 20211204
-            // 오픈소스로 변경
-            // 20211209
-            // Change to Jmeter's Apache Http Common
-            // ---------------------------------------
-            // response.setResponse(SecurityUtil.callRest(url, data));
-            // ---------------------------------------
-            // Change to Jmeter's Apache Http Common
-            // 20211209
-            // Jmeter에 오픈소스 추가 어려움.
-            // ---------------------------------------
-
-            HttpUtil.call(url,data,(body)->{
-                logger.info("Success : {}" , body);
-                // response.setResponse(body.toString());
-            });
-
+            response.setResponse("Success");
         } catch (Exception e) {
             // exception
             logger.error(e.toString(), e);

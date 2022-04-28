@@ -361,6 +361,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
        // TODO add your handling code here:
        TestAutomationGuiController.show_project_detail(jList1,jTextField1,jTextField4,jTextField2,jTextField5,jTextField3,jTextArea1);
+       // TestAutomationGuiController.show_project_detail_by_jmx(this, testDataConfigPanel, testRunConfigPanel);
    }//GEN-LAST:event_jList1ValueChanged
 
    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
@@ -382,7 +383,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        // TODO add your handling code here:
        
-      if(TestAutomationGuiController.save_project_connection_info(jList1, TestAutomationGuiController.get_jmx_file_name(),jTextField4.getText(), jTextField2.getText(), jTextField5.getText(), jTextField3.getText())){
+      if(TestAutomationGuiController.save_project_connection_info(jList1, TestAutomationGuiController.get_jmx_file_name().getName(),jTextField4.getText(), jTextField2.getText(), jTextField5.getText(), jTextField3.getText())){
            JOptionPane.showMessageDialog(null, "프로젝트 연결 정보를 저장 하였습니다.");
       }else{
            JOptionPane.showMessageDialog(null, "프로젝트 연결 정보를 저장할 수 없습니다. 젠킨스 연결 정보와 프로젝트 연결정보를 확인해 주세요");

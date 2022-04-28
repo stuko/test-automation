@@ -79,7 +79,7 @@ public class KafkaExecutor extends AbstractPluginExecutor {
         logger.info("Message : {} " , data);
         logger.info("KAFKA #################");
         if(data == null){
-            logger.error("No more teat data !!!!!!!!!!!!!!!");
+            logger.info("No more teat data !!!!!!!!!!!!!!!");
             TestPluginResponseImpl response = new TestPluginResponseImpl();
             try {
                 response.setRequest("No more data");

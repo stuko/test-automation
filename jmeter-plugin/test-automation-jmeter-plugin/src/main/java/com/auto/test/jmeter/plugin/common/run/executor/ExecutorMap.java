@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
  
 public class ExecutorMap {
-    public static enum ExecutorType {KAFKA,HTTP}
+    public static enum ExecutorType {KAFKA,HTTP,DEFAULT}
     public static ExecutorMap map;
     static{map = new ExecutorMap();}
     private Map<ExecutorType,AbstractPluginExecutor> cache = new HashMap<>();
@@ -16,6 +16,8 @@ public class ExecutorMap {
                 this.cache.put(type,new KafkaExecutor());
             }else if(type == ExecutorType.HTTP){
                 this.cache.put(type,new HttpExecutor());
+            }else {
+            	this.cache.put(type,new DefaultExecutor());
             }
         }
         return this.cache.get(type);

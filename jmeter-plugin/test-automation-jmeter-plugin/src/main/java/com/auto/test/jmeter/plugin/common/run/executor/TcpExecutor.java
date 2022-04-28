@@ -73,7 +73,7 @@ public class TcpExecutor  extends AbstractPluginExecutor  {
         logger.info("Message : {} " , data);
         logger.info("HTTP #################");
         if(this.ip == null || this.port == null || data == null){
-            logger.error("No more teat data !!!!!!!!!!!!!!!");
+            logger.info("No more teat data !!!!!!!!!!!!!!!");
             TestPluginResponseImpl response = new TestPluginResponseImpl();
             try {
                 response.setRequest("No more data or No ip or No port : " + ip + "," + port);

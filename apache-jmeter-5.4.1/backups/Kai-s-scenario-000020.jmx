@@ -26,8 +26,6 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <com.auto.test.jmeter.plugin.common.sampler.TestPluginSampler guiclass="com.auto.test.jmeter.plugin.common.gui.TestAutomationMainGui" testclass="com.auto.test.jmeter.plugin.common.sampler.TestPluginSampler" testname="[res_key=Test Automation Plugin :) - Main]" enabled="true"/>
-        <hashTree/>
         <RecordingController guiclass="RecordController" testclass="RecordingController" testname="Login Management" enabled="true"/>
         <hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Login Management-0" enabled="true">
@@ -708,24 +706,6 @@ where id = 12
             </ResponseAssertion>
             <hashTree/>
           </hashTree>
-          <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="Java Request" enabled="true">
-            <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="SleepTime" elementType="Argument">
-                  <stringProp name="Argument.name">SleepTime</stringProp>
-                  <stringProp name="Argument.value">1000</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                </elementProp>
-                <elementProp name="SleepMask" elementType="Argument">
-                  <stringProp name="Argument.name">SleepMask</stringProp>
-                  <stringProp name="Argument.value">0x3FF</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-            <stringProp name="classname">org.apache.jmeter.protocol.java.test.SleepTest</stringProp>
-          </JavaSampler>
-          <hashTree/>
         </hashTree>
         <RandomController guiclass="RandomControlGui" testclass="RandomController" testname="MetaData Management" enabled="true">
           <intProp name="InterleaveControl.style">1</intProp>
