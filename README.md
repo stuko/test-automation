@@ -104,3 +104,10 @@ https://user-images.githubusercontent.com/1683771/162646669-ad08a926-0593-4d1e-9
   1. JMeter 설치폴더/lib/ 아래에 3개 jar 파일 복사 (gson-2.8.6.jar,groovy-all-2.3.11.jar,kafka-clients-3.0.0.jar)
   2. JMeter 설치폴더/lib/ext/ 아래에 1개 jar 파일 복사 (safe-test-jmeter-plugin-1.0-SNAPSHOT.jar)
   3. JMeter 설치폴더/bin/ 아래에 fds/data 폴더 생성 (위 3가지를 준비 하시고, JMeter를 실행 하시면 됩니다.)
+
+
+
+## Kanboard Webhook 연결 설정
+> 아래 Webhook 토큰정보를 Jmeter Plugin에서 설정 해 줌.
+![image](https://user-images.githubusercontent.com/1683771/165467651-f8d658f1-c8b1-45cd-ae66-abe4d585ccbc.png)
+
