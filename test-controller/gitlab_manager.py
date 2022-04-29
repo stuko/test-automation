@@ -10,7 +10,7 @@ class GitLabManager:
     
     def __init__(self):
         self.git_lab_api_url = "https://gitlab.com/api/v4/"
-        self.git_lab_api_token = "glpat-sscjjb-3huYDsbhugatb"
+        self.git_lab_api_token = ""
         print('init')
     
     def get_project_list(self, params):

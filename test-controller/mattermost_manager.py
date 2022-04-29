@@ -7,9 +7,7 @@ from jmeter_manager import JmeterManager
 
 class MatterMostManager:
     
-    # http://192.168.57.237:8065/hooks/yhow7cnaqtyxpdc4kxckhf4nco
-    
-    def __init__(self):
+    def __init__(self , url , jm):
         self.message = {
             'channel' : 'test-automation',
             # 'channel' : 'off-topic',
@@ -17,8 +15,8 @@ class MatterMostManager:
             'icon_url': 'https://bit.ly/2nQZ6vg',
             'text'    : ''
         }
-        self.url = 'http://192.168.57.237:8065/hooks/' # 'http://192.168.57.237:8065/hooks/at81feos4ibniemnxjhmduwpka'
-        self.jm = JmeterManager()
+        self.url = url
+        self.jm = jm # JmeterManager()
     
     def send(self, mattermost_webhook_id, subject, detail):
         self.message['text'] = '## ' + subject  + '\n----\n' + '> ' + detail

@@ -1,0 +1,10 @@
+db.config.remove({})
+db.config.insert(
+    {
+        flask : { port : NumberInt(5000)},
+        kanboard : { ip : '192.168.57.243' , port : NumberInt(8080), token : '7f888ec470709090eb52f11de8f731f7c937c9b7d84d662575c42c494baa' , id : 'kanboard', pw : 'kanboard-secret', db : 'kanboard'},
+        mattermost : { url : 'http://192.168.57.237:8065/hooks/u5ztbrjboidxmx3cf34hbcwkdc' },
+        jmeter : { path : '../apache-jmeter-5.4.1/bin/'}
+    }
+)
+
