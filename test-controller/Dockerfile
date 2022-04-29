@@ -16,4 +16,4 @@ RUN pip3 install -r requirements.txt
 # RUN python setup.py install
 
 # container가 구동되면 실행
-ENTRYPOINT ["python", "test-controller.py"]
+ENTRYPOINT ["python", "test-controller.py" ]
