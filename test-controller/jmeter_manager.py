@@ -5,11 +5,11 @@ import subprocess
 
 class JmeterManager:
     
-    def __init__(self):
-        self.client = MongoClient('localhost', 27017)
+    def __init__(self, ip, port, jmeter_path):
+        self.client = MongoClient(ip,port)
         self.db = self.client['auto']
         self.collection = self.db['test']
-        self.path = 'D:/install/apache-jmeter-5.4.1/bin/'
+        self.path = jmeter_path
         
     def save_run_config(self, params):
         find = self.collection.find({'jmx_file_name' : params['jmx_file_name']})
@@ -55,7 +55,8 @@ class JmeterManager:
     
     def get_project_detail(self, project_id):
         project_detail = self.collection.find_one({'project_id' : project_id})
-        del project_detail['_id']
+        if project_detail != None :
+            del project_detail['_id']
         return project_detail
 
     def get_project_detail_by_jmx(self, jmx_file_name):

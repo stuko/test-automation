@@ -8,13 +8,12 @@ import asyncio
 
 class KanboardManager:
     
-    def __init__(self):
-        self.kb = kanboard.Client('http://192.168.57.243:8080/jsonrpc.php', 'jsonrpc', '7f888ec470709090eb52f11de8f731f7c937c9b7d84d662575c42c494baa')        
-        # self.mysql = mysql.connector.connect(host='192.168.57.243',user='kanboard',password='kanboard-secret',db='kanboard',charset='utf8')
-        self.ip = '192.168.57.243'
-        self.user = 'kanboard'
-        self.pwd = 'kanboard-secret'
-        self.db = 'kanboard'
+    def __init__(self , ip, port, token , id, pw, db):
+        self.kb = kanboard.Client(f'http://{ip}:{port}/jsonrpc.php', 'jsonrpc', token)        
+        self.ip = ip
+        self.user = id
+        self.pwd = pw
+        self.db = db
         self.charset = 'utf8'
         self.column_titles = ['프러덕트 백로그','스프린트 백로그','개발','테스트 자동화','테스트 리뷰','테스트 완료','릴리즈']
 

@@ -6,11 +6,9 @@ from jmeter_manager import JmeterManager
 
 class JenkinsManager:
     
-    def __init__(self):
+    def __init__(self , jm):
         self.building = False
-        # self.url = 'http://192.168.57.254:8088'
-        # self.token = '118ee24a6adf47050567e1a326d4096051' # '118ee24a6adf47050567e1a326d4096051' # '11de52d0d8f0e10f725d0e47b1d44e152d'
-        self.jm = JmeterManager()
+        self.jm = jm # JmeterManager()
         
     def build(self, project_id):
         job = self.jm.get_project_detail(project_id)
