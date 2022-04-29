@@ -6,7 +6,8 @@ from jenkins_manager import JenkinsManager
 import time
 import json
 import datetime
-import os, sys
+import os, sys, socket
+
 from pymongo import MongoClient
 from pymongo.cursor import CursorType
 
@@ -211,32 +212,36 @@ if __name__ == '__main__':
         # JMeter (Mongo ip, Mongo port, jmeter_path)
         mongo_ip = sys.argv[1]
         mongo_port = int(sys.argv[2])
-        mongo = MongoClient(mongo_ip, mongo_port)
-        db = mongo['auto']
-        config = db['config']
-        collection = config.find()[0]
-        print(collection)
-        
-        if collection != None :
-            
-            flask_port = collection['flask']['port']
-            kanboard_ip = collection['kanboard']['ip']
-            kanboard_port = collection['kanboard']['port']
-            kanboard_token = collection['kanboard']['token']
-            kanboard_id = collection['kanboard']['id']
-            kanboard_pw = collection['kanboard']['pw']
-            kanboard_db = collection['kanboard']['db']
-            mattermost_url = collection['mattermost']['url']
-            jmeter_path = collection['jmeter']['path']
-            
-            global km , mm, jm, jkm
-            km = KanboardManager(kanboard_ip,str(kanboard_port),kanboard_token,kanboard_id,kanboard_pw,kanboard_db)
-            jm = JmeterManager(mongo_ip,mongo_port,jmeter_path)
-            mm = MatterMostManager(mattermost_url, jm)
-            jkm = JenkinsManager(jm)
-        
-            app.run(host="0.0.0.0",debug=True, port=flask_port)
-        else :
-            print("Please input config info to MongoDB")
     else:
-        print("Please input {MongoDB IP} {MongoDB Port}")
+        mongo_ip = socket.gethostbyname(socket.gethostname())
+        mongo_port = 27017
+    
+    print(f'Mongo ip is {mongo_ip} , port is {str(mongo_port)}')
+        
+    mongo = MongoClient(mongo_ip, mongo_port)
+    db = mongo['auto']
+    config = db['config']
+    collection = config.find()[0]
+    print(collection)
+    
+    if collection != None :
+        
+        flask_port = collection['flask']['port']
+        kanboard_ip = collection['kanboard']['ip']
+        kanboard_port = collection['kanboard']['port']
+        kanboard_token = collection['kanboard']['token']
+        kanboard_id = collection['kanboard']['id']
+        kanboard_pw = collection['kanboard']['pw']
+        kanboard_db = collection['kanboard']['db']
+        mattermost_url = collection['mattermost']['url']
+        jmeter_path = collection['jmeter']['path']
+        
+        global km , mm, jm, jkm
+        km = KanboardManager(kanboard_ip,str(kanboard_port),kanboard_token,kanboard_id,kanboard_pw,kanboard_db)
+        jm = JmeterManager(mongo_ip,mongo_port,jmeter_path)
+        mm = MatterMostManager(mattermost_url, jm)
+        jkm = JenkinsManager(jm)
+    
+        app.run(host="0.0.0.0",debug=True, port=flask_port)
+    else :
+        print("Please input config info to MongoDB")
