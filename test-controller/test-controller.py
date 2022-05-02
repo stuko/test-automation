@@ -3,6 +3,7 @@ from mattermost_manager import MatterMostManager
 from jmeter_manager import JmeterManager
 from kanboard_manager import KanboardManager
 from jenkins_manager import JenkinsManager
+from os.path import exists
 import time
 import json
 import datetime
@@ -12,7 +13,8 @@ from pymongo import MongoClient
 from pymongo.cursor import CursorType
 
 app = Flask(__name__) 
-upload_folder = "./upload/"
+config_file = "./volume/config/config.json"
+upload_folder = "./volume/upload/"
 
 @app.route('/controller', methods=['POST','GET']) 
 def controller(): 
@@ -192,30 +194,37 @@ def upload():
     
 if __name__ == '__main__': 
     
-    if len(sys.argv) == 3:
-        # 몽고 DB에 접속한다.
-        # 입력받은 IP와 PORT로 접속한다.
-        # Config 정보를 읽어 온다.
-        # 없으면, Default를 생성한다.
-        '''
-        config :
-            flask { port : },
-            kanboard { ip :  , port : , token : , id : , pw : , db : },
-            mattermost { url :  },
-            jmeter { path : }
-        '''
-        # X : Flask Port
-        # Mongodb IP, Port 
-        # Upload Path
-        # kanboard (ip, port, token , id, pw, db)
-        # mattermost (url)
-        # JMeter (Mongo ip, Mongo port, jmeter_path)
-        mongo_ip = sys.argv[1]
-        mongo_port = int(sys.argv[2])
-    else:
-        mongo_ip = socket.gethostbyname(socket.gethostname())
-        mongo_port = 27017
+    mongo_ip = socket.gethostbyname(socket.gethostname())
+    mongo_port = 27017
     
+    file_exists = exists(config_file)
+    
+    if file_exists : 
+        
+        f = open(config_file,'r')
+        config_json = json.load(f)
+        
+        if config_json['mongo_ip'] != None and config_json['mongo_port'] != None :
+            # 몽고 DB에 접속한다.
+            # 입력받은 IP와 PORT로 접속한다.
+            # Config 정보를 읽어 온다.
+            # 없으면, Default를 생성한다.
+            '''
+            config :
+                flask { port : },
+                kanboard { ip :  , port : , token : , id : , pw : , db : },
+                mattermost { url :  },
+                jmeter { path : }
+            '''
+            # X : Flask Port
+            # Mongodb IP, Port 
+            # Upload Path
+            # kanboard (ip, port, token , id, pw, db)
+            # mattermost (url)
+            # JMeter (Mongo ip, Mongo port, jmeter_path)
+            mongo_ip = config_json['mongo_ip']
+            mongo_port = config_json['mongo_port']
+        
     print(f'Mongo ip is {mongo_ip} , port is {str(mongo_port)}')
         
     mongo = MongoClient(mongo_ip, mongo_port)
