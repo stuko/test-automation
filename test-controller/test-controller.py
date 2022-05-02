@@ -30,6 +30,8 @@ def controller():
     # km.check_project_is_scrum(params)
     # km.make_project_to_scrum(params)
     
+    print(params)
+    
     km.check_project_is_scrum(params["event_data"]["task"]["project_id"])
     
     if(params["event_name"] == "task.create"):
