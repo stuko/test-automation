@@ -17,7 +17,10 @@ config_file = "./volume/config/config.json"
 upload_folder = "./volume/upload/"
 
 @app.route('/controller', methods=['POST','GET']) 
-def controller(): 
+def controller():
+    print('--------------------')
+    print(request.data) 
+    print('--------------------')
     params = request.get_json()
     
     # ----------------------------------------------
