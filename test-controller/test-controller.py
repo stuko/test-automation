@@ -65,6 +65,7 @@ def controller():
         if(column_title.find(km.get_column(2)) >= 0):            
             mm.send_start_dev(project_id,project_name, task_title,description)      
         if(column_title.find(km.get_column(3)) >= 0):            
+            print(f"let's start test of {km.get_column(3)}")
             mm.send_execute_test_automation(project_id,project_name, task_title,description)      
             forward = km.get_next_position(project_id, task_id , 1)
             backward = km.get_next_position(project_id, task_id , -1)
