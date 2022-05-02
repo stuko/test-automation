@@ -18,9 +18,9 @@ upload_folder = "./volume/upload/"
 
 @app.route('/controller', methods=['POST','GET']) 
 def controller():
-    print('--------------------')
+    print('------ start parameter ---------')
     print(request.data) 
-    print('--------------------')
+    print('------ end parameter -----')
     params = request.get_json()
     
     # ----------------------------------------------
@@ -33,7 +33,7 @@ def controller():
     # km.check_project_is_scrum(params)
     # km.make_project_to_scrum(params)
     
-    print(params)
+    # print(params)
     
     km.check_project_is_scrum(params["event_data"]["task"]["project_id"])
     
