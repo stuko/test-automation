@@ -12,6 +12,7 @@ sudo docker container rm mongo-test-automation
 sudo docker run -d --name mongo-test-automation -e "TZ=Asia/Seoul" -p 27017:27017 --mount type=bind,source=${PWD}/volume/mongo/data,target=/data/db -d  --restart always mongo:4.4.10
 cd ./test-controller/
 chmod a+x *.sh
+./docker-build.sh
 ./docker-run.sh
 cd ../
 
