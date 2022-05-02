@@ -14,7 +14,7 @@ from pymongo.cursor import CursorType
 app = Flask(__name__) 
 upload_folder = "./upload/"
 
-@app.route('/controller', methods=['POST']) 
+@app.route('/controller', methods=['POST','GET']) 
 def controller(): 
     params = request.get_json()
     
