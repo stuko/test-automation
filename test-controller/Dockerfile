@@ -1,5 +1,12 @@
 # python:3.9의 이미지로 부터
 FROM python:3.9
+
+ARG MONGO_IP
+ARG MONGO_PORT
+
+ENV MONGO_IP=$MONGO_IP
+ENV MONGO_PORT=$MONGO_PORT
+
 # 제작자 및 author 기입
 LABEL maintainer="tu.ko@koreacb.com"
 
@@ -16,4 +23,4 @@ RUN pip3 install -r requirements.txt
 # RUN python setup.py install
 
 # container가 구동되면 실행
-ENTRYPOINT ["python", "test-controller.py" ]
+ENTRYPOINT ["python", "test-controller.py" , "${MONGO_IP}" , "${MONGO_PORT}" ]
