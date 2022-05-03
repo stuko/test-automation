@@ -23,4 +23,5 @@ RUN pip3 install -r requirements.txt
 # RUN python setup.py install
 
 # container가 구동되면 실행
-ENTRYPOINT ["python", "test-controller.py" , "${MONGO_IP}" , "${MONGO_PORT}" ]
+# ENTRYPOINT ["python", "test-controller.py" , "${MONGO_IP}" , "${MONGO_PORT}" ]
+ENTRYPOINT ["python", "test-controller.py"]
