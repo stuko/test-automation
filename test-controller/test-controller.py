@@ -57,8 +57,10 @@ def controller():
         description = task["description"]
         
         if(column_title.find(km.get_column(0)) >= 0):
+            print("you moved to {}", km.get_column(0))
             mm.send_create_requirement(project_id,project_name, task_title,description)
-        if(column_title.find(km.get_column(1)) >= 0):            
+        if(column_title.find(km.get_column(1)) >= 0): 
+            print("you moved to {}", km.get_column(1))           
             contents = f"""
 ### 😁😁😁 스프린트 백로그에 요구사항({task_title})이 생성 되었습니다.
 |title|contents|
@@ -68,6 +70,7 @@ def controller():
             mm.send_create_sprint_backlog(project_id,project_name, task_title,contents)      
             
         if(column_title.find(km.get_column(2)) >= 0):            
+            print("you moved to {}", km.get_column(2))
             mm.send_start_dev(project_id,project_name, task_title,description)      
         if(column_title.find(km.get_column(3)) >= 0):            
             print(f"let's start test of {km.get_column(3)}")
@@ -122,12 +125,15 @@ def controller():
             km.move(project_id, task_id, swimlane_id, forward, position)
 
         if(column_title.find(km.get_column(4)) >= 0):            
+            print("you moved to {}", km.get_column(4))
             mm.send_execute_test_review(project_id,project_name, task_title,description)  
 
         if(column_title.find(km.get_column(5)) >= 0):            
+            print("you moved to {}", km.get_column(5))
             mm.send_test_complete(project_id,project_name, task_title,description)  
 
         if(column_title.find(km.get_column(6)) >= 0):            
+            print("you moved to {}", km.get_column(6))
             mm.send_release(project_id,project_name, task_title,description)  
 
     return 'controller!' 
