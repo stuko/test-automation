@@ -16,7 +16,7 @@ app = Flask(__name__)
 config_file = "./volume/config/config.json"
 upload_folder = "./volume/upload/"
 
-@app.route('/controller', methods=['POST']) 
+@app.route('/controller', methods=['POST','GET']) 
 def controller():
     print('------ start parameter !!! ---------')
     print(request.data) 
@@ -132,28 +132,28 @@ def controller():
 
     return 'controller!' 
 
-@app.route('/backlog') 
+@app.route('/backlog', methods=['POST','GET']) 
 def backlog(): 
     return 'backlog!' 
 
-@app.route('/sprintlog') 
+@app.route('/sprintlog', methods=['POST','GET']) 
 def sprintlog(): 
     return 'spring log!!!!!' 
 
-@app.route('/develop') 
+@app.route('/develop', methods=['POST','GET']) 
 def develop(): 
     return 'develop!!!!' 
 
-@app.route('/testing') 
+@app.route('/testing', methods=['POST','GET']) 
 def testing(): 
     return 'testing..!' 
 
-@app.route('/review') 
+@app.route('/review', methods=['POST','GET']) 
 def review(): 
     params = request.get_json()
     return km.move_to_forward(params)
 
-@app.route('/release') 
+@app.route('/release', methods=['POST','GET']) 
 def release(): 
     return 'release.....!' 
 
