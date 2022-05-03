@@ -16,7 +16,7 @@ app = Flask(__name__)
 config_file = "./volume/config/config.json"
 upload_folder = "./volume/upload/"
 
-@app.route('/controller', methods=['POST','GET']) 
+@app.route('/controller') 
 def controller():
     print('------ start parameter !!! ---------')
     print(request.data) 
