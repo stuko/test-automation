@@ -9,10 +9,7 @@ class MatterMostManager:
     
     def __init__(self , url , jm):
         self.message = {
-            'channel' : 'test-automation',
-            # 'channel' : 'off-topic',
             'username': 'automation-bot',
-            'icon_url': 'https://bit.ly/2nQZ6vg',
             'text'    : ''
         }
         self.url = url
