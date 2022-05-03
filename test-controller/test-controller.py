@@ -18,9 +18,9 @@ upload_folder = "./volume/upload/"
 
 @app.route('/controller', methods=['POST','GET']) 
 def controller():
-    print('------ start parameter ---------')
+    print('------ start parameter !!! ---------')
     print(request.data) 
-    print('------ end parameter -----')
+    print('------ end parameter !!! -----')
     params = request.get_json()
     
     # ----------------------------------------------
