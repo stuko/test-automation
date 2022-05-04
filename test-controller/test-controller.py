@@ -249,10 +249,10 @@ if __name__ == '__main__':
     if config == None:
         print("##### auto DB does not have config collection")
         exit() 
-        
+
     config_collection = config.find()
     
-    if config_collection == None or config_collection.count() == 0:
+    if config_collection == None:
         print("##### You have to insert config collection")
         config_collection.insert(
             {
