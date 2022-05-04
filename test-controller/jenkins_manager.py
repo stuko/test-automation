@@ -18,6 +18,7 @@ class JenkinsManager:
         job_url = job["jenkins_server_url"]
         job_token = job["jenkins_token"]
         # /view/KAI-S/job/3003.Kai-s-packaging-pipeline/build?
+        print(f'{job_url}/job/{job_name}/buildWithParameters?token={job_token}')
         res = requests.get(f'{job_url}/job/{job_name}/buildWithParameters?token={job_token}')
         print(res.text)
         return 1
