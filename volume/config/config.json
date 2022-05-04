@@ -1,4 +1,13 @@
 {
     "mongo_ip":"192.168.57.224",
-    "mongo_port":27017
+    "mongo_port":27017,
+    "flask_port":5000,
+    "kanboard_ip":"192.168.57.224",
+    "kanboard_port":8080,
+    "kanboard_token":"6924abf4f501bc242e466218edf8a1af67c5f6b68efc034df6e4ff8e8777",
+    "kanboard_id":"kanboard",
+    "kanboard_pw":"kanboard-secret",
+    "kanboard_db":"kanboard",
+    "mattermost_url":"http://192.168.57.237:8065/hooks/",
+    "jmeter_path":"../apache-jmeter-5.4.1/bin/"
 }
