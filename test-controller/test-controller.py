@@ -268,9 +268,7 @@ if __name__ == '__main__':
                 'jmeter' : { 'path' : config_json['jmeter_path']}
             }
         )
-        config_collection = config.find()
-        
-    collection = config_collection[0]
+    collection = config.find()[0]
     print(collection)
     
     if collection != None :
