@@ -65,7 +65,7 @@ class MatterMostManager:
         self.notify( project_id,project_name, task_title, f'😁😁😁 {project_name}의 젠킨스 빌드가 실행 되었습니다.',task_desc)
 
     def send_execute_jenkins_build_success(self,project_id, project_name, task_title, task_desc):
-        self.notify( project_id,project_name,  f'😁😁😁 {project_name}의 젠킨스 빌드를 성공하였습니다.',task_desc)
+        self.notify( project_id,project_name, task_title,  f'😁😁😁 {project_name}의 젠킨스 빌드를 성공하였습니다.',task_desc)
 
     def send_execute_jenkins_build_fail(self,project_id, project_name, task_title, task_desc):
         self.notify( project_id,project_name, task_title, f'😁😁😁 {project_name}의 젠킨스 빌드가 실패 하였습니다.',task_desc)
