@@ -1,4 +1,6 @@
 use auto
+db.createCollection('config')
+db.config.remove({})
 db.config.insert(
     {
         flask : { port : NumberInt(5000)},
