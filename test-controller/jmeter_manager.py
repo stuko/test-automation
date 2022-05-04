@@ -21,7 +21,7 @@ class JmeterManager:
             result['error'] = 'can not find jmx_file_name'
         else:
             result['success'] = 'run configs are updated'
-        return json.dumps(result)
+        return result
         
     def save_factors(self, params):
         find = self.collection.find({'jmx_file_name' : params['jmx_file_name']})
@@ -51,7 +51,7 @@ class JmeterManager:
                                                   ,'jenkins_project_name': params['jenkins_project_name']
                                                   ,'jenkins_token': params['jenkins_token']
                                                   ,'mattermost_webhook_id': params['mattermost_webhook_id']}})
-        return json.dumps(result)
+        return result
     
     def get_project_detail(self, project_id):
         project_detail = self.collection.find_one({'project_id' : project_id})
