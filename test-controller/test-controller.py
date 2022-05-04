@@ -255,7 +255,7 @@ if __name__ == '__main__':
     
     if l == None or len(l) == 0:
         print("##### You have to insert config collection")
-        config.insert(
+        config.insert_one(
             {
                 'flask' : { 'port' : config_json['flask_port']},
                 'kanboard' : { 'ip' : config_json['kanboard_ip'] , 
