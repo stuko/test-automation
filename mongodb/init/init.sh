@@ -1,7 +1,7 @@
 sudo docker exec -it mongo-test-automation /bin/bash
 mongo
 use auto
-db.createCollection(config)
+db.createCollection("config")
 db.config.remove({})
 db.config.insert(
     {
