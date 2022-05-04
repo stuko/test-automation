@@ -13,4 +13,3 @@ db.config.insert(
 )
 exit
 exit
-
