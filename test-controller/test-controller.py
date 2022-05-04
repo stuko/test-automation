@@ -254,7 +254,19 @@ if __name__ == '__main__':
     
     if config_collection == None or len(config_collection) == 0:
         print("##### You have to insert config collection")
-        exit()
+        config_collection.insert(
+            {
+                'flask' : { 'port' : config_json['flask_port']},
+                'kanboard' : { 'ip' : config_json['kanboard_ip'] , 
+                              'port' : config_json['kanboard_port'], 
+                              'token' : config_json['kanboard_token'] , 
+                              'id' : config_json['kanboard_id'], 
+                              'pw' : config_json['kanboard_pw'], 
+                              'db' : config_json['kanboard_db']},
+                'mattermost' : { 'url' : config_json['mattermost_url'] },
+                'jmeter' : { 'path' : config_json['jmeter_path']}
+            }
+        )
         
     collection = config_collection[0]
     print(collection)
