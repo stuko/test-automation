@@ -165,12 +165,12 @@ def release():
 
 @app.route('/get_project_list', methods=['POST','GET']) 
 def get_project_list(): 
-    return km.get_project_lists()
+    return json.dumps(km.get_project_lists())
 
 @app.route('/get_project_detail', methods=['POST','GET']) 
 def get_project_detail():
     params = request.get_json() 
-    return jm.get_project_detail(params['project_id'])
+    return json.dumps(jm.get_project_detail(params['project_id']))
 
 @app.route('/get_project_detail_by_jmx', methods=['POST','GET']) 
 def get_project_detail_by_jmx():
@@ -182,18 +182,18 @@ def get_project_detail_by_jmx():
 @app.route('/save_project_info', methods=['POST','GET']) 
 def save_project_info(): 
     params = request.get_json()
-    return jm.save_project_info(params)
+    return json.dumps(jm.save_project_info(params))
 
 
 @app.route('/save_factors', methods=['POST','GET']) 
 def save_factors(): 
     params = request.get_json()
-    return jm.save_factors(params)
+    return json.dumps(jm.save_factors(params))
 
 @app.route('/save_run_config', methods=['POST','GET']) 
 def save_run_config(): 
     params = request.get_json()
-    return jm.save_run_config(params)
+    return json.dumps(jm.save_run_config(params))
 
     
 @app.route("/upload", methods=["POST"])

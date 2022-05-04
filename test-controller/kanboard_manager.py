@@ -40,7 +40,7 @@ class KanboardManager:
 
     def get_project_lists(self):
         project_list = self.kb.get_all_projects()
-        return json.dumps(project_list)  
+        return project_list  
 
     def get_column(self, id):
         return self.column_titles[id]
