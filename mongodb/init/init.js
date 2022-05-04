@@ -1,3 +1,4 @@
+use auto
 db.config.insert(
     {
         flask : { port : NumberInt(5000)},
