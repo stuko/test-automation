@@ -1,3 +1,4 @@
+sudo docker container prune
 cd ./apache-jmeter-5.4.1/bin
 chmod a+x *.sh jmeter*
 pkill -9 -ef jmeter
