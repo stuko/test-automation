@@ -250,9 +250,10 @@ if __name__ == '__main__':
         print("##### auto DB does not have config collection")
         exit() 
 
-    config_collection = config.find({})
+    config_collection = config.find()
+    l = list(config_collection)
     
-    if config_collection == None or config_collection.size() == 0:
+    if l == None or len(l) == 0:
         print("##### You have to insert config collection")
         config_collection.insert(
             {
@@ -267,7 +268,7 @@ if __name__ == '__main__':
                 'jmeter' : { 'path' : config_json['jmeter_path']}
             }
         )
-        config_collection = config.find({})
+        config_collection = config.find()
         
     collection = config_collection[0]
     print(collection)
