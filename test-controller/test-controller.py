@@ -252,7 +252,7 @@ if __name__ == '__main__':
         
     config_collection = config.find()
     
-    if config_collection == None or len(config_collection) == 0:
+    if config_collection == None or config_collection.count() == 0:
         print("##### You have to insert config collection")
         config_collection.insert(
             {
