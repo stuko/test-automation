@@ -241,7 +241,15 @@ if __name__ == '__main__':
         
     mongo = MongoClient(mongo_ip, mongo_port)
     db = mongo['auto']
+    if db == None:
+        print("##### Mongo DB does not have auto DataBase")
+        exit() 
+    
     config = db['config']
+    if config == None:
+        print("##### auto DB does not have config collection")
+        exit() 
+    
     collection = config.find()[0]
     print(collection)
     
