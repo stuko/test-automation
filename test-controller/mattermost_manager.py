@@ -16,6 +16,7 @@ class MatterMostManager:
         self.jm = jm # JmeterManager()
     
     def send(self, mattermost_webhook_id, subject, detail):
+        print(f'send url is {self.url + mattermost_webhook_id}')
         self.message['text'] = '## ' + subject  + '\n----\n' + '> ' + detail
         r = requests.post(
             self.url + mattermost_webhook_id ,
@@ -36,6 +37,7 @@ class MatterMostManager:
         print(f'project id is {project_id} and project info is {project}')
         if(project != None) :
             mattermost_webhook_id = project['mattermost_webhook_id']
+            print(f'mattermost_webhook_id is {mattermost_webhook_id}')
             self.send(mattermost_webhook_id,message,detail)
             
     def notify_no_markdown(self, project_id,project_name, task_title, message, detail) :
