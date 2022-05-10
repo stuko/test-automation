@@ -265,7 +265,10 @@ if __name__ == '__main__':
                               'pw' : config_json['kanboard_pw'], 
                               'db' : config_json['kanboard_db']},
                 'mattermost' : { 'url' : config_json['mattermost_url'] },
-                'jmeter' : { 'path' : config_json['jmeter_path']}
+                'jmeter' : { 
+                    'jmeter_ip' : config_json['jmeter_ip'],
+                    'jmeter_port' : config_json['jmeter_port'],
+                    'path' : config_json['jmeter_path']}
             }
         )
     collection = config.find()[0]
@@ -281,11 +284,13 @@ if __name__ == '__main__':
         kanboard_pw = collection['kanboard']['pw']
         kanboard_db = collection['kanboard']['db']
         mattermost_url = collection['mattermost']['url']
+        jmeter_ip = collection['jmeter']['jmeter_ip']
+        jmeter_port = collection['jmeter']['jmeter_port']
         jmeter_path = collection['jmeter']['path']
         
         global km , mm, jm, jkm
         km = KanboardManager(kanboard_ip,str(kanboard_port),kanboard_token,kanboard_id,kanboard_pw,kanboard_db)
-        jm = JmeterManager(mongo_ip,mongo_port,jmeter_path)
+        jm = JmeterManager(mongo_ip,mongo_port,jmeter_ip,jmeter_port,jmeter_path)
         mm = MatterMostManager(mattermost_url, jm)
         jkm = JenkinsManager(jm)
     
