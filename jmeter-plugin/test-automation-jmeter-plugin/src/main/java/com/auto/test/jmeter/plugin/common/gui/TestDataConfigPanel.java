@@ -39,8 +39,8 @@ public class TestDataConfigPanel extends PluginGridPanel {
     JLabel jlabel;
     private int currentRow = 1;
     private TestPluginSampler sampler = null;
-    String OK = "Å×½ºÆ® µ¥ÀÌÅÍ »ı¼º ÇÏ±â";
-    String NO = "Å×½ºÆ® µ¥ÀÌÅÍ »ı¼º ÁßÁö";
+    String OK = "í…ŒìŠ¤íŠ¸ ë°ì´í„° ìƒì„± í•˜ê¸°";
+    String NO = "í…ŒìŠ¤íŠ¸ ë°ì´í„° ìƒì„± ì¤‘ì§€";
     AtomicBoolean is_start = new AtomicBoolean(false);
     JButton ok;
     JLabel status = new JLabel();
@@ -65,11 +65,11 @@ public class TestDataConfigPanel extends PluginGridPanel {
         editConstraints.insets = new Insets(10, 10, 2, 4);
 
         JLabel header =  new JLabel(title, JLabel.LEFT);
-        header.setFont(new java.awt.Font("¸¼Àº °íµñ", 1, 18));
+        header.setFont(new java.awt.Font("ë§‘ì€ ê³ ë”•", 1, 18));
         this.add(0,0,10,1, GridBagConstraints.NORTH, editConstraints, header);
                 
         this.setBackground(Color.WHITE);
-        defaultTableModel = new DefaultTableModel(new String[] { "Ç×¸ñ ÀÌ¸§(¿µ¹®)", "À¯Çü", "°ª" , "°¹¼ö", "±æÀÌ", "¾ÏÈ£È­" }, 0) {
+        defaultTableModel = new DefaultTableModel(new String[] { "í•­ëª© ì´ë¦„(ì˜ë¬¸)", "ìœ í˜•", "ê°’" , "ê°¯ìˆ˜", "ê¸¸ì´", "ì•”í˜¸í™”" }, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return true;
@@ -86,7 +86,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
 
         jScrollPane = new JScrollPane(jTable);
         jScrollPane.setMinimumSize(new Dimension(400,300));
-        JButton open = new JButton("Å×½ºÆ® µ¥ÀÌÅÍ Á¤º¸ ºÒ·¯¿À±â");
+        JButton open = new JButton("í…ŒìŠ¤íŠ¸ ë°ì´í„° ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸°");
         open.addActionListener((event)->{
             open();
         });
@@ -100,11 +100,11 @@ public class TestDataConfigPanel extends PluginGridPanel {
         add.setBackground(new Color(0,133,252));
         add.setForeground(Color.WHITE);
         add.setBorderPainted(false);
-        JButton save = new JButton("Å×½ºÆ® µ¥ÀÌÅÍ ¼³Á¤ ÀúÀå");
+        JButton save = new JButton("í…ŒìŠ¤íŠ¸ ë°ì´í„° ì„¤ì • ì €ì¥");
         save.addActionListener((event)->{
             
             if(TestAutomationGuiController.get_jmx_file_name() == null || "".equals(TestAutomationGuiController.get_jmx_file_name().getName())){
-                JOptionPane.showMessageDialog(null, "JMeter ÆÄÀÏÀ» ÀúÀåÇÏ½Å ÈÄ, ÀúÀå ¹öÆ°À» Å¬¸¯ÇØ ÁÖ¼¼¿ä.");
+                JOptionPane.showMessageDialog(null, "JMeter íŒŒì¼ì„ ì €ì¥í•˜ì‹  í›„, ì €ì¥ ë²„íŠ¼ì„ í´ë¦­í•´ ì£¼ì„¸ìš”.");
                 return;
             }
             
@@ -112,7 +112,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
             this.getSampler().getExecutor().getTestData().setData(test_data);
             List<Map<String,Object>> test_data_list_map = new ArrayList<>();
             for(String[] data : test_data){
-                // "Ç×¸ñ ÀÌ¸§(¿µ¹®)", "À¯Çü", "°ª" , "°¹¼ö", "±æÀÌ", "¾ÏÈ£È­"
+                // "í•­ëª© ì´ë¦„(ì˜ë¬¸)", "ìœ í˜•", "ê°’" , "ê°¯ìˆ˜", "ê¸¸ì´", "ì•”í˜¸í™”"
                 Map<String,Object> m = new HashMap<>();
                 m.put("name", data[0]);
                 m.put("type", data[1]);
@@ -128,7 +128,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
             
             TestAutomationGuiController.save_factors(params);
             
-            JOptionPane.showMessageDialog(null, "Å×½ºÆ® µ¥ÀÌÅÍ ¼³Á¤ Á¤º¸°¡ Á¤»óÀûÀ¸·Î ÀúÀå µÇ¾ú½À´Ï´Ù.");
+            JOptionPane.showMessageDialog(null, "í…ŒìŠ¤íŠ¸ ë°ì´í„° ì„¤ì • ì •ë³´ê°€ ì •ìƒì ìœ¼ë¡œ ì €ì¥ ë˜ì—ˆìŠµë‹ˆë‹¤.");
         });
         save.setBackground(new Color(0,133,252));
         save.setForeground(Color.WHITE);
@@ -144,7 +144,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
                 for(String colName : delColumns){
                     deleteRow(colName);
                 }
-                JOptionPane.showMessageDialog(null, "¼±ÅÃÇÏ½Å ¶óÀÎÀÇ µ¥ÀÌÅÍ°¡ »èÁ¦ µÇ¾ú½À´Ï´Ù.");
+                JOptionPane.showMessageDialog(null, "ì„ íƒí•˜ì‹  ë¼ì¸ì˜ ë°ì´í„°ê°€ ì‚­ì œ ë˜ì—ˆìŠµë‹ˆë‹¤.");
             }
         });
         remove.setBackground(new Color(0,133,252));
@@ -156,7 +156,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
             ta.setVisible(true);
         });
 
-        status.setText("Å×½ºÆ® µ¥ÀÌÅÍ °Ç¼ö : 0");
+        status.setText("í…ŒìŠ¤íŠ¸ ë°ì´í„° ê±´ìˆ˜ : 0");
         status.setPreferredSize(new java.awt.Dimension(100,40));
         ok = new JButton(OK);
         ok.setBackground(new Color(0,133,252));
@@ -197,7 +197,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
        this.add(b_panel,3,0,1,1,GridBagConstraints.EAST,GridBagConstraints.NONE, editConstraints,remove);
         // b_panel.add(open);
         // b_panel.add(add);
-        // SAVE ±â´ÉÀÌ ºÒÇÊ¿äÇÏ¿©, Disabled µÊ.
+        // SAVE ê¸°ëŠ¥ì´ ë¶ˆí•„ìš”í•˜ì—¬, Disabled ë¨.
         // b_panel.add(save);
         // b_panel.add(remove);
         // b_panel.add(report);
@@ -238,7 +238,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
             if(file.exists()) {
                 addTestData(file);
             }else{
-                jlabel.setText("ÆÄÀÏÀÌ Á¸Àç ÇÏÁö ¾Ê½À´Ï´Ù : " + file.getName());
+                jlabel.setText("íŒŒì¼ì´ ì¡´ì¬ í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤ : " + file.getName());
             }
 
         }
@@ -290,8 +290,8 @@ public class TestDataConfigPanel extends PluginGridPanel {
         String[] row1 = {"name","string","john,mike,selly|tod,mac,april|jorge,hanse,mom","10","10","N"};
         String[] row2 = {"age","number","20~30|30~40|40~50|60~70|1~10","6","10","N"};
         String[] row3 = {"gender","string","F,M","10","10","N"};
-        // 1Çü½Ä:  20210301~20210405,yyyymmdd
-        // 2Çü½Ä: -20,day,yyyymmdd
+        // 1í˜•ì‹:  20210301~20210405,yyyymmdd
+        // 2í˜•ì‹: -20,day,yyyymmdd
         String[] row4 = {"applyDate","datetime","20210301000000~20210331000000,yyyymmddhhmmss|20200301000000~20200331000000,yyyymmddhhmmss","10","10","N"};
         String[] row5 = {"cancelDate","datetime","-10,day,yyyymmddhhmmss|-20,day,yyyymmddhhmmss","10","10","N"};
         String[] row6 = {"id","key","X,40,Y|prefix,6,postfix","10","10","N"};
@@ -306,7 +306,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
             while ((line = br.readLine()) != null) {
                 this.defaultTableModel.addRow(line.split("\t"));
             }
-            jlabel.setText("ÆÄÀÏ¸í : " + f.getName());
+            jlabel.setText("íŒŒì¼ëª… : " + f.getName());
         } catch (Exception e) {
             logger.error("File {} does not exist", f.getAbsolutePath());
             logger.error(e.toString(),e);
@@ -382,6 +382,6 @@ public class TestDataConfigPanel extends PluginGridPanel {
     }
     
     public void setTestCount(long cnt){
-         this.status.setText(cnt + " °Ç");
+         this.status.setText(cnt + " ê±´");
     }    
 }

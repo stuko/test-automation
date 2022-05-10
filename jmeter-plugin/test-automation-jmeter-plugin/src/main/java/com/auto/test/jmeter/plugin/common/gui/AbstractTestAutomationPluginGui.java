@@ -27,8 +27,8 @@ public abstract class AbstractTestAutomationPluginGui  extends AbstractSamplerGu
         }
     }
 
-    // JMETERÀÇ Sampler Ç×¸ñ ¸Ş´º¿¡ º¸¿©Áö´Â ÀÌ¸§ÀÔ´Ï´Ù.
-    // ¿©±â¿¡ ÀÌ¸§´ë·Î,  JMETER¿¡¼­ º¸¿©Áö°Ô µË´Ï´Ù.
+    // JMETERì˜ Sampler í•­ëª© ë©”ë‰´ì— ë³´ì—¬ì§€ëŠ” ì´ë¦„ì…ë‹ˆë‹¤.
+    // ì—¬ê¸°ì— ì´ë¦„ëŒ€ë¡œ,  JMETERì—ì„œ ë³´ì—¬ì§€ê²Œ ë©ë‹ˆë‹¤.
     @Override
     public String getStaticLabel() {
         return getLabelResource();
@@ -66,13 +66,13 @@ public abstract class AbstractTestAutomationPluginGui  extends AbstractSamplerGu
         add(container, BorderLayout.PAGE_START);
     }
 
-    // Å×½ºÆ® ¿ä¼Ò(µ¥ÀÌÅÍ)¸¦ ÃÖÃÊ ¸¸µé¾î ÁÖ´Â ¸Ş¼­µå ÀÔ´Ï´Ù.
-    // Sampler °´Ã¼¸¦ ¸®ÅÏ¿¡ Áà¾ß ÇÕ´Ï´Ù.
-    // SamplerÀº Å×½ºÆ® µ¥ÀÌÅÍ¿Í Å×½ºÆ® ½ÇÇà °´Ã¼¸¦ °ü¸®ÇÕ´Ï´Ù.
-    // FdsPluginSampler´Â FdsPluginPanel °´Ã¼ ¾È¿¡ Á¸Àç ÇÕ´Ï´Ù.
-    // FdsPluginPanelÀº Fds Å×½ºÆ® µ¥ÀÌÅÍ¸¦ »ı¼ºÇØ ÁÖ´Â ¿ªÇÒÀ» ÇÏ¹Ç·Î,
-    // FdsPluginSampler¿Í ¿¬°áµÇ¾î¾ß ÇÕ´Ï´Ù.
-    // Plugin GUI °¡ ÃÖÃÊ »ı¼ºµÉ ¶§, Sampler ¸¦ »ı¼ºÇØ¼­ ¸®ÅÏÇØÁÖ´Â ¿ªÇÒÀ» ÇÕ´Ï´Ù.
+    // í…ŒìŠ¤íŠ¸ ìš”ì†Œ(ë°ì´í„°)ë¥¼ ìµœì´ˆ ë§Œë“¤ì–´ ì£¼ëŠ” ë©”ì„œë“œ ì…ë‹ˆë‹¤.
+    // Sampler ê°ì²´ë¥¼ ë¦¬í„´ì— ì¤˜ì•¼ í•©ë‹ˆë‹¤.
+    // Samplerì€ í…ŒìŠ¤íŠ¸ ë°ì´í„°ì™€ í…ŒìŠ¤íŠ¸ ì‹¤í–‰ ê°ì²´ë¥¼ ê´€ë¦¬í•©ë‹ˆë‹¤.
+    // FdsPluginSamplerëŠ” FdsPluginPanel ê°ì²´ ì•ˆì— ì¡´ì¬ í•©ë‹ˆë‹¤.
+    // FdsPluginPanelì€ Fds í…ŒìŠ¤íŠ¸ ë°ì´í„°ë¥¼ ìƒì„±í•´ ì£¼ëŠ” ì—­í• ì„ í•˜ë¯€ë¡œ,
+    // FdsPluginSamplerì™€ ì—°ê²°ë˜ì–´ì•¼ í•©ë‹ˆë‹¤.
+    // Plugin GUI ê°€ ìµœì´ˆ ìƒì„±ë  ë•Œ, Sampler ë¥¼ ìƒì„±í•´ì„œ ë¦¬í„´í•´ì£¼ëŠ” ì—­í• ì„ í•©ë‹ˆë‹¤.
     @Override
     public TestElement createTestElement() {
         logger.info("##### createTestElement #####");
@@ -81,16 +81,16 @@ public abstract class AbstractTestAutomationPluginGui  extends AbstractSamplerGu
         return getTestDataConfigPanel().getSampler();
     }
 
-    // Plugin GUI ¿¡¼­ º¯°æµÈ ³»¿ëÀ», Sampler¿¡ Àü´ŞÇØ ÁÖ´Â ¿ªÇÒÀ» ÇÕ´Ï´Ù.
+    // Plugin GUI ì—ì„œ ë³€ê²½ëœ ë‚´ìš©ì„, Samplerì— ì „ë‹¬í•´ ì£¼ëŠ” ì—­í• ì„ í•©ë‹ˆë‹¤.
     @Override
     public void modifyTestElement(TestElement element) {
         logger.info("##### modifyTestElement #####");
         super.configureTestElement(element);
         if(element instanceof TestPluginSampler) {
-            // Sampler°¡ º¹Á¦µÇ¾î »õ·Î¿î °´Ã¼ Å×½ºÆ® ¿ä¼Ò¸¦
-            // FdsPluginPanel¿¡ Àü´ŞÇØ ÁØ´Ù.
-            // GUI¿¡¼­ º¯°æµÈ ³»¿ëÀÌ Sampler¿¡ ¿µÇâÀÌ ÀÖ´Â °æ¿ì
-            // FdsPluginPanelÀº Ç×»ó »õ·Î¿î ÃÖ±ÙÀÇ Sampler¸¦ ÂüÁ¶ÇÏ°Ô µÈ´Ù.
+            // Samplerê°€ ë³µì œë˜ì–´ ìƒˆë¡œìš´ ê°ì²´ í…ŒìŠ¤íŠ¸ ìš”ì†Œë¥¼
+            // FdsPluginPanelì— ì „ë‹¬í•´ ì¤€ë‹¤.
+            // GUIì—ì„œ ë³€ê²½ëœ ë‚´ìš©ì´ Samplerì— ì˜í–¥ì´ ìˆëŠ” ê²½ìš°
+            // FdsPluginPanelì€ í•­ìƒ ìƒˆë¡œìš´ ìµœê·¼ì˜ Samplerë¥¼ ì°¸ì¡°í•˜ê²Œ ëœë‹¤.
             getTestDataConfigPanel().setSampler((TestPluginSampler) element);
             testRunConfigPanel.attach();
         }

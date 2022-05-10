@@ -81,6 +81,7 @@ class JmeterManager:
         return cmd
 
     def execute_shell_command(self, shell):
+        print(f'execute jemter shell : {shell}')
         proc = subprocess.Popen(shell.split()
                                 ,shell=True
                                 ,stdout=subprocess.PIPE

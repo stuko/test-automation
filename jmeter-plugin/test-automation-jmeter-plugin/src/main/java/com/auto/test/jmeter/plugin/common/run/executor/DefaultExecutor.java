@@ -34,13 +34,11 @@ public class DefaultExecutor  extends AbstractPluginExecutor {
 
     @Override
     public void init(TestPluginTestData data , TestPluginCallBack callBack) {
-        // 초기 설정
         try {
             message = new TestMessageByCombination();
             message.setStop(false);
             this.testData = data;
             
-            // 테스트 데이터 생성
             message.build(testData.getData());
             try {
                 executors.submit(new Thread(){

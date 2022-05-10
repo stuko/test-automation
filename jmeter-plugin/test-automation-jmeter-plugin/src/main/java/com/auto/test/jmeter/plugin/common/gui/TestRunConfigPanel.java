@@ -68,17 +68,17 @@ public class TestRunConfigPanel extends PluginGridPanel{
        labelConstraints.insets = new Insets(10, 10, 2, 4);
        editConstraints.insets = new Insets(10, 10, 2, 4);
        
-       JLabel header =  new JLabel("Å×½ºÆ® ½ÇÇà ¼³Á¤", JLabel.LEFT);
-       header.setFont(new java.awt.Font("¸¼Àº °íµñ", 1, 18));
+       JLabel header =  new JLabel("í…ŒìŠ¤íŠ¸ ì‹¤í–‰ ì„¤ì •", JLabel.LEFT);
+       header.setFont(new java.awt.Font("ë§‘ì€ ê³ ë”•", 1, 18));
        this.add(this,0,0,1,1, GridBagConstraints.WEST,GridBagConstraints.NONE, editConstraints, header);
        
        combo = new JComboBox<String>(method);
        this.add(this,0,1,1,1, GridBagConstraints.WEST,GridBagConstraints.NONE, editConstraints, combo);
        
-       textArea = new JTextArea();  //JTextArea »ı¼º
+       textArea = new JTextArea();  //JTextArea ìƒì„±
        textArea.setRows(5);
-       textArea.setBounds(50, 50, 300, 300); //JTeatArea Å©±â ¹× À§Ä¡ ÁöÁ¤
-       textArea.setEditable(true); //½ÇÇà½Ã JtextArea edit ±İÁö (±ÛÀ» ¾µ ¼ö ¾øÀ½) true¸é °¡´É
+       textArea.setBounds(50, 50, 300, 300); //JTeatArea í¬ê¸° ë° ìœ„ì¹˜ ì§€ì •
+       textArea.setEditable(true); //ì‹¤í–‰ì‹œ JtextArea edit ê¸ˆì§€ (ê¸€ì„ ì“¸ ìˆ˜ ì—†ìŒ) trueë©´ ê°€ëŠ¥
        textArea.setText(TestAutomationGuiController.getDefaultText());
 
        javax.swing.JScrollPane scroll = new JScrollPane(textArea);
@@ -88,7 +88,7 @@ public class TestRunConfigPanel extends PluginGridPanel{
        this.add(0,2,1,1, editConstraints, scroll);
        
        
-       save = new JButton("Å×½ºÆ® ½ÇÇà Á¤º¸ ÀúÀå");
+       save = new JButton("í…ŒìŠ¤íŠ¸ ì‹¤í–‰ ì •ë³´ ì €ì¥");
        save.addActionListener((event)->{
            //
            String type = (String)combo.getSelectedItem();
@@ -104,7 +104,7 @@ public class TestRunConfigPanel extends PluginGridPanel{
            params.put("jmx_file_name",TestAutomationGuiController.get_jmx_file_name().getName());
            TestAutomationGuiController.save_run_config(params);
            
-           JOptionPane.showMessageDialog(null, "Å×½ºÆ® µ¥ÀÌÅÍ ½ÇÇà ¼³Á¤ Á¤º¸°¡ Á¤»óÀûÀ¸·Î ÀúÀå µÇ¾ú½À´Ï´Ù.");
+           JOptionPane.showMessageDialog(null, "í…ŒìŠ¤íŠ¸ ë°ì´í„° ì‹¤í–‰ ì„¤ì • ì •ë³´ê°€ ì •ìƒì ìœ¼ë¡œ ì €ì¥ ë˜ì—ˆìŠµë‹ˆë‹¤.");
        });
        save.setBackground(new Color(0,133,252));
        save.setForeground(Color.WHITE);

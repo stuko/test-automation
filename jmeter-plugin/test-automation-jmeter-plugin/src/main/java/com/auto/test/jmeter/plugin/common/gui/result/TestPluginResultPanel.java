@@ -26,9 +26,8 @@ public class TestPluginResultPanel extends PluginGridPanel {
     JTextArea expect_query = new JTextArea();
     TestPluginTablePanel expect_table_panel;
 
-    // 항목 이름들을 나열한 정보
     JTextField column_names = new JTextField();
-    JLabel column_label = new JLabel("항목명");
+    JLabel column_label = new JLabel("寃곌낵");
     JPanel column_panel = new JPanel();
 
 

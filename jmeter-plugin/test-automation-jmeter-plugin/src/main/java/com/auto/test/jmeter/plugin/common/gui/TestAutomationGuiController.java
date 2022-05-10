@@ -33,12 +33,12 @@ import com.google.gson.Gson;
 public class TestAutomationGuiController {
     
     static Logger logger = LoggerFactory.getLogger(TestAutomationGuiController.class);
-    static String KANBOARD_URL = "http://localhost:5000/";
+    static String TEST_URL = "http://localhost:5000/";
     static Gson gson = new Gson();
     static List<Map> project_list;
     
     static {
-    	if(System.getProperty("KANBOARD_URL") != null)KANBOARD_URL=System.getProperty("KANBOARD_URL");
+    	if(System.getProperty("TEST_URL") != null)TEST_URL=System.getProperty("TEST_URL");
     }
     
     public static TestPluginTestData get_test_data(String samplerKey, String connectionText) {
@@ -117,7 +117,7 @@ public class TestAutomationGuiController {
             , TestRunConfigPanel testRunConfigPanel){
         try{
             if(list != null){
-                HttpUtil.call(KANBOARD_URL+"get_project_list","",(body)->{
+                HttpUtil.call(TEST_URL+"get_project_list","",(body)->{
                    project_list = gson.fromJson(body, List.class);
                    String[] list_data = new String[project_list.size()];
                    int i = 0;
@@ -145,7 +145,7 @@ public class TestAutomationGuiController {
                 project_name.setText(project.get("name"));
                 project_desc.setText(project.get("description"));
                 param.put("project_id", data);
-                HttpUtil.call(KANBOARD_URL+"get_project_detail",gson.toJson(param),(body)->{
+                HttpUtil.call(TEST_URL+"get_project_detail",gson.toJson(param),(body)->{
                    Map<String,String> project_detail = gson.fromJson(body, Map.class);
                    jenkins_url.setText(project_detail.get("jenkins_server_url"));
                    jenkins_project_name.setText(project_detail.get("jenkins_project_name"));
@@ -176,7 +176,7 @@ public class TestAutomationGuiController {
             
             project.put("jmx_file_name", jmx_file_name);
             logger.info("parameter is  {}",gson.toJson(project));
-            HttpUtil.call(KANBOARD_URL+"get_project_detail_by_jmx",gson.toJson(project),(body)->{
+            HttpUtil.call(TEST_URL+"get_project_detail_by_jmx",gson.toJson(project),(body)->{
                 logger.info(body);
                 List list = gson.fromJson(body, List.class);
                 if(list != null && list.size() > 0) {
@@ -215,7 +215,7 @@ public class TestAutomationGuiController {
           
           project.put("jmx_file_name", jmx_file_name);
           logger.info("parameter is  {}",gson.toJson(project));
-          HttpUtil.call(KANBOARD_URL+"get_project_detail_by_jmx",gson.toJson(project),(body)->{
+          HttpUtil.call(TEST_URL+"get_project_detail_by_jmx",gson.toJson(project),(body)->{
               logger.info(body);
               List list = gson.fromJson(body, List.class);
               if(list != null && list.size() > 0) {
@@ -264,7 +264,7 @@ public class TestAutomationGuiController {
                 param.put("jenkins_project_name", jenkins_project_name);
                 param.put("jenkins_token", jenkins_token);
                 param.put("mattermost_webhook_id", mattermost_webhook_id);
-                HttpUtil.call(KANBOARD_URL+"save_project_info",gson.toJson(param),(body)->{
+                HttpUtil.call(TEST_URL+"save_project_info",gson.toJson(param),(body)->{
                     logger.info("jmx_file_name is {}", TestAutomationGuiController.get_jmx_file_name().getName());
                    logger.info(body);
                 });
@@ -278,13 +278,13 @@ public class TestAutomationGuiController {
     }
     
     public static void save_factors(Map<String,Object> param){
-        HttpUtil.call(KANBOARD_URL+"save_factors",gson.toJson(param),(body)->{
+        HttpUtil.call(TEST_URL+"save_factors",gson.toJson(param),(body)->{
                logger.info(body);
         });
     }
     
     public static void save_run_config(Map<String,Object> param){
-        HttpUtil.call(KANBOARD_URL+"save_run_config",gson.toJson(param),(body)->{
+        HttpUtil.call(TEST_URL+"save_run_config",gson.toJson(param),(body)->{
                logger.info(body);
         });
     }
@@ -296,8 +296,8 @@ public class TestAutomationGuiController {
 
     public static void save_test_scenario(){
         try{
-            logger.info("save url is : {}",KANBOARD_URL+"upload" );
-            HttpUtil.uploadFileFromOkhttp(KANBOARD_URL+"upload", get_jmx_file_name().getName());
+            logger.info("save url is : {}",TEST_URL+"upload" );
+            HttpUtil.uploadFileFromOkhttp(TEST_URL+"upload", get_jmx_file_name().getName());
         }catch(Exception e){
             logger.error(e.toString(), e);
         }finally{

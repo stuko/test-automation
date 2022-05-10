@@ -39,11 +39,6 @@ public class FakeData {
 				int start = 0;
 				int end = 0;
 				for(String s: list) {
-					logger.debug("-------["+val+"]-------");
-					logger.debug("( 위치 : " + val.indexOf("("));
-					logger.debug(") 위치 : " + (val.indexOf(")")+1));
-					logger.debug("길이  : " + val.length());
-					logger.debug("---------------------");
 					if(val.indexOf("(") == 0 && val.indexOf(")", start)+1 == val.length()) {
 						prefix[i]= "";
 						postfix[i] = "";
@@ -144,7 +139,6 @@ public class FakeData {
 	public List<String> findRegPattern(String pattern, String value){
 		List<String> list = new ArrayList<>();
 		try {
-			// 숫자 ~ 숫자 : \\d+~\\d+
 			Pattern p = Pattern.compile("\\(("+pattern+")\\)");
 			Matcher m = p.matcher(value);
 			while (m.find()) {//Finds Matching Pattern in String

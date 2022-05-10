@@ -99,7 +99,6 @@ public class TestPluginMessageFactorDatetimeValue  extends AbstractTestPluginMes
             SimpleDateFormat sdf = new SimpleDateFormat(this.format());
             try {
                 try{
-                    // -100~0,yyyyMMdd 인경우
                     if(this.getFrom().length() != this.format().length() && this.getTo().length() != this.format().length()){
                         Calendar cal = Calendar.getInstance();
                         cal.setTimeInMillis(System.currentTimeMillis());
@@ -118,7 +117,6 @@ public class TestPluginMessageFactorDatetimeValue  extends AbstractTestPluginMes
                 Calendar cal = Calendar.getInstance();
                 for(int i = 0; i < count; i++) {
                     cal.setTime(df);
-                    // 0 ~ diff 사이의 숫자를 구한다.
                     int r = (int) (Math.random() * (diff/(1000)));
                     if(this.getTaPluginMessageFactor().isEncode()){
                         result.add(SecurityUtil.encode(this.getDateTime(cal, r, Unit.Second, this.format())));
@@ -145,7 +143,6 @@ public class TestPluginMessageFactorDatetimeValue  extends AbstractTestPluginMes
             SimpleDateFormat sdf = new SimpleDateFormat(this.format());
             try {
                 try {
-                    // -100~0,yyyyMMdd 인경우
                     if (this.getFrom().length() != this.format().length() && this.getTo().length() != this.format().length()) {
                         Calendar cal = Calendar.getInstance();
                         cal.setTimeInMillis(System.currentTimeMillis());
@@ -163,7 +160,6 @@ public class TestPluginMessageFactorDatetimeValue  extends AbstractTestPluginMes
                 long diff = dt.getTime() - df.getTime();
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(df);
-                // 0 ~ diff 사이의 숫자를 구한다.
                 int r = (int) (Math.random() * (diff / (1000)));
                 if (this.getTaPluginMessageFactor().isEncode())
                     return SecurityUtil.encode(this.getDateTime(cal, r, Unit.Second, this.format()));

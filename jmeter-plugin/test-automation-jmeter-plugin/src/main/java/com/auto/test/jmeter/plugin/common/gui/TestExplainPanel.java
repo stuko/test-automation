@@ -17,13 +17,13 @@ public class TestExplainPanel  extends PluginGridPanel{
 	        this.setPreferredSize(new Dimension(600,170));
 	        this.setLayout(new GridBagLayout());
 
-	        addLabelInGridBack(0,0,"»ç¿ë ¿¹½Ã : ", this);
+	        addLabelInGridBack(0,0,"ì‚¬ìš© ì˜ˆì‹œ : ", this);
 	        addLabelInGridBack(0,1,"XXXXX,YYYYY,ZZZZZ  or  @SUBSTR(XXXXX) FROM(0) TO(3)", this);
 	        addLabelInGridBack(0,2,"111111~22222,33333~44444", this);
 	        addLabelInGridBack(0,3,"0,day,yyyymmddhhmmss or -100~0,day,yyyyMMdd", this);
 	        addLabelInGridBack(0,4,"20211010~20211231,day,yyyyMMdd or @SUBSTR(0,day,yyyymmddhhmmss) FROM(0) TO(4)", this);
 	        addLabelInGridBack(0,5,"{XXXX(1~2)YYYY|XXXX(1~2)YYYY|XXXX(1~2)YYYY|XXXX(1~2)YYYY}", this);
 	        addLabelInGridBack(0,6,"{(20200101~20200330)}", this);
-	        addLabelInGridBack(0,7,"reference Å¸ÀÔ : ´ë»ó nameÀ» Àû¾îÁÜ.", this);
+	        addLabelInGridBack(0,7,"reference íƒ€ì… : ëŒ€ìƒ nameì„ ì ì–´ì¤Œ.", this);
 	    }
 }

@@ -30,7 +30,6 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_java
     
-    // Jmeter의 Java Client Sample를 상속받기 위해서, 설치된 JMeter jar파일을 참조함.
 	implementation 'org.apache.jmeter:ApacheJMeter_java:5.0'
 	// implementation fileTree(dir: '../../apache-jmeter-5.4.1/bin/', include: ['ApacheJMeter.jar'])
 	// implementation name :'ApacheJMeter'

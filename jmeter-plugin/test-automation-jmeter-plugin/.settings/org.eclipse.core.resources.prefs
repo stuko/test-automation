@@ -1,2 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/auto/test/jmeter/plugin/common/data=UTF-8
+encoding//src/main/java/com/auto/test/jmeter/plugin/common/factor/value/TestPluginMessageFactorDatetimeValue.java=UTF-8
+encoding//src/main/java/com/auto/test/jmeter/plugin/common/factor/value/fake/FakeData.java=UTF-8
+encoding//src/main/java/com/auto/test/jmeter/plugin/common/gui/TestAutomationMainGui.form=UTF-8
+encoding//src/main/java/com/auto/test/plugin/test/result/TaPluginTestResultForm.java=UTF-8
+encoding//src/main/java/resources/test-define.txt=UTF-8
+encoding/<project>=UTF-8
