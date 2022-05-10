@@ -147,10 +147,12 @@ public class TestAutomationGuiController {
                 param.put("project_id", data);
                 HttpUtil.call(TEST_URL+"get_project_detail",gson.toJson(param),(body)->{
                    Map<String,String> project_detail = gson.fromJson(body, Map.class);
-                   jenkins_url.setText(project_detail.get("jenkins_server_url"));
-                   jenkins_project_name.setText(project_detail.get("jenkins_project_name"));
-                   jenkins_token.setText(project_detail.get("jenkins_token"));
-                   mattermost_webhook_id.setText(project_detail.get("mattermost_webhook_id"));
+                   if (project_detail != null) {
+                       jenkins_url.setText(project_detail.get("jenkins_server_url"));
+                       jenkins_project_name.setText(project_detail.get("jenkins_project_name"));
+                       jenkins_token.setText(project_detail.get("jenkins_token"));
+                       mattermost_webhook_id.setText(project_detail.get("mattermost_webhook_id"));
+                   }
                 });
                 
             }
