@@ -90,7 +90,6 @@ public class TestAutomationGuiController {
                         return null;
                 	});
                 });
-                ShellServer.getInstance().start(Integer.parseInt(SHELL_PORT));
 
                 return default_executor;
             }

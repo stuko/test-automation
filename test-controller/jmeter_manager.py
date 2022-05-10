@@ -86,7 +86,7 @@ class JmeterManager:
     def execute_shell_command(self, shell):
         print(f'execute jemter shell : {shell}')
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client_socket.connect((self.jmeter_ip, self.jmeter.port))
+        client_socket.connect((self.jmeter_ip, self.jmeter_port))
         client_socket.sendall(shell.encode())
         client_socket.close()
         

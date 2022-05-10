@@ -1,212 +1,23 @@
-2022-05-10 09:39:08,626 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
-2022-05-10 09:39:08,641 INFO o.a.j.JMeter: Loading user properties from: user.properties
-2022-05-10 09:39:08,641 INFO o.a.j.JMeter: Loading system properties from: system.properties
-2022-05-10 09:39:08,642 INFO o.a.j.JMeter: Setting System property: TEST_URL=http://192.168.57.224:5000/
-2022-05-10 09:39:08,646 INFO o.a.j.JMeter: Copyright (c) 1998-2021 The Apache Software Foundation
-2022-05-10 09:39:08,646 INFO o.a.j.JMeter: Version 5.4.1
-2022-05-10 09:39:08,646 INFO o.a.j.JMeter: java.version=15.0.2
-2022-05-10 09:39:08,647 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
-2022-05-10 09:39:08,647 INFO o.a.j.JMeter: os.name=Windows 10
-2022-05-10 09:39:08,647 INFO o.a.j.JMeter: os.arch=amd64
-2022-05-10 09:39:08,647 INFO o.a.j.JMeter: os.version=10.0
-2022-05-10 09:39:08,647 INFO o.a.j.JMeter: file.encoding=MS949
-2022-05-10 09:39:08,647 INFO o.a.j.JMeter: java.awt.headless=null
-2022-05-10 09:39:08,647 INFO o.a.j.JMeter: Max memory     =8589934592
-2022-05-10 09:39:08,647 INFO o.a.j.JMeter: Available Processors =8
-2022-05-10 09:39:08,652 INFO o.a.j.JMeter: Default Locale=English (EN)
-2022-05-10 09:39:08,653 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
-2022-05-10 09:39:08,653 INFO o.a.j.JMeter: JMeterHome=D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1
-2022-05-10 09:39:08,653 INFO o.a.j.JMeter: user.dir  =D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin
-2022-05-10 09:39:08,654 INFO o.a.j.JMeter: PWD       =D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin
-2022-05-10 09:39:08,655 INFO o.a.j.JMeter: IP: 192.168.57.243 Name: DESKTOP-0Q4LOBV FullName: host.docker.internal
-2022-05-10 09:39:08,742 INFO o.a.j.JMeter: Setting LAF to: laf:javax.swing.plaf.metal.MetalLookAndFeel
-2022-05-10 09:39:08,815 INFO o.a.j.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties
-2022-05-10 09:39:10,528 INFO c.a.t.j.p.c.u.TestPluginUtil: Detected encoding = EUC-KR
-2022-05-10 09:39:10,544 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-10 09:39:10,544 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-10 09:39:16,694 INFO o.a.j.s.FileServer: Default base='D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin'
-2022-05-10 09:39:16,697 INFO o.a.j.g.a.Load: Loading file: D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin\Kai-s-scenario.jmx
-2022-05-10 09:39:16,697 INFO o.a.j.s.FileServer: Set new base='D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin'
-2022-05-10 09:39:16,789 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
-2022-05-10 09:39:16,794 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
-2022-05-10 09:39:16,795 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
-2022-05-10 09:39:16,795 INFO o.a.j.s.SaveService: Loading file: D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin\Kai-s-scenario.jmx
-2022-05-10 09:39:16,811 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2022-05-10 09:39:16,811 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2022-05-10 09:39:16,811 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2022-05-10 09:39:16,811 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2022-05-10 09:39:16,811 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
-2022-05-10 09:39:16,811 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
-2022-05-10 09:39:16,870 INFO o.a.j.p.h.c.CookieManager: Settings: Delete null: true Check: true Allow variable: true Save: false Prefix: COOKIE_
-2022-05-10 09:39:17,092 INFO o.a.j.e.KeyToolUtils: keytool found at 'keytool'
-2022-05-10 09:39:17,092 INFO o.a.j.p.h.p.ProxyControl: HTTP(S) Test Script Recorder SSL Proxy will use keys that support embedded 3rd party resources in file D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin\proxyserver.jks
-2022-05-10 09:39:17,111 INFO c.a.t.j.p.c.u.TestPluginUtil: Detected encoding = EUC-KR
-2022-05-10 09:39:17,115 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-10 09:39:17,115 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-10 09:39:17,116 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
-2022-05-10 09:39:17,116 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-10 09:39:17,116 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-10 09:39:17,358 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
-2022-05-10 09:39:17,358 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to UTF-8
-2022-05-10 09:39:17,358 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
-2022-05-10 09:39:17,358 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
-2022-05-10 09:39:17,450 INFO o.a.j.v.ViewResultsFullVisualizer: Add JavaFX to your Java installation if you want to use renderer: org.apache.jmeter.visualizers.RenderInBrowser
-2022-05-10 09:39:17,524 INFO o.a.j.s.FileServer: Set new base='D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin'
-2022-05-10 09:39:19,991 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
-2022-05-10 09:39:19,991 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-10 09:39:19,991 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-10 09:39:19,993 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-10 09:39:20,002 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-10 09:39:20,002 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-10 09:39:20,010 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-10 09:39:20,011 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-10 09:39:20,018 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-10 09:39:20,022 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
-2022-05-10 09:39:20,022 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-10 09:39:20,022 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-10 09:39:20,023 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-10 09:39:20,030 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-10 09:40:29,673 INFO c.a.t.j.p.c.g.TestAutomationGuiController: jmx_file_name is Kai-s-scenario.jmx
-2022-05-10 09:40:29,673 INFO c.a.t.j.p.c.g.TestAutomationGuiController: {"success": "project info is created"}
-2022-05-10 09:45:34,130 INFO c.a.t.j.p.c.g.TestAutomationGuiController: save url is : http://192.168.57.224:5000/upload
-2022-05-10 09:57:15,257 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
-2022-05-10 09:57:15,257 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-10 09:57:15,257 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-10 09:57:15,257 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-10 09:57:15,265 INFO c.a.t.j.p.c.g.TestAutomationGuiController: [{"jenkins_token": "b5a9878ecb5ddc9ee1556a57134c3fa0", "jenkins_server_url": "http://192.168.57.237:8084", "project_id": "1", "jmx_file_name": "Kai-s-scenario.jmx", "jenkins_project_name": "test-automation-3", "mattermost_webhook_id": "u5ztbrjboidxmx3cf34hbcwkdc"}]
-2022-05-10 10:19:50,788 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
-2022-05-10 10:19:50,789 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-10 10:19:50,789 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-10 10:19:50,789 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-10 10:19:52,802 ERROR c.a.t.j.p.c.u.HttpUtil: java.net.ConnectException: Failed to connect to /192.168.57.224:5000
-java.net.ConnectException: Failed to connect to /192.168.57.224:5000
-	at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:297) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.RealConnection.connect(RealConnection.kt:207) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:226) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.RealCall.execute(RealCall.kt:154) ~[okhttp-4.9.3.jar:?]
-	at com.auto.test.jmeter.plugin.common.util.HttpUtil.call(HttpUtil.java:25) ~[test-automation-jmeter-plugin.jar:?]
-	at com.auto.test.jmeter.plugin.common.gui.TestAutomationGuiController.get_test_data_by_jmx(TestAutomationGuiController.java:220) ~[test-automation-jmeter-plugin.jar:?]
-	at com.auto.test.jmeter.plugin.common.gui.TestAutomationGuiController.get_test_executor(TestAutomationGuiController.java:70) ~[test-automation-jmeter-plugin.jar:?]
-	at com.auto.test.jmeter.plugin.common.gui.TestRunConfigPanel.attach(TestRunConfigPanel.java:127) ~[test-automation-jmeter-plugin.jar:?]
-	at com.auto.test.jmeter.plugin.common.gui.TestAutomationMainGui.modifyTestElement(TestAutomationMainGui.java:460) ~[test-automation-jmeter-plugin.jar:?]
-	at org.apache.jmeter.gui.GuiPackage.updateCurrentNode(GuiPackage.java:493) ~[ApacheJMeter_core.jar:5.4.1]
-	at org.apache.jmeter.gui.GuiPackage.updateCurrentGui(GuiPackage.java:451) ~[ApacheJMeter_core.jar:5.4.1]
-	at org.apache.jmeter.gui.action.ActionRouter.performAction(ActionRouter.java:79) ~[ApacheJMeter_core.jar:5.4.1]
-	at org.apache.jmeter.gui.action.ActionRouter.lambda$actionPerformed$0(ActionRouter.java:69) ~[ApacheJMeter_core.jar:5.4.1]
-	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:316) ~[?:?]
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:770) ~[?:?]
-	at java.awt.EventQueue$4.run(EventQueue.java:721) ~[?:?]
-	at java.awt.EventQueue$4.run(EventQueue.java:715) ~[?:?]
-	at java.security.AccessController.doPrivileged(AccessController.java:391) [?:?]
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85) [?:?]
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:740) [?:?]
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203) [?:?]
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124) [?:?]
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113) [?:?]
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109) [?:?]
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101) [?:?]
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:90) [?:?]
-Caused by: java.net.ConnectException: Connection refused: no further information
-	at sun.nio.ch.Net.pollConnect(Native Method) ~[?:?]
-	at sun.nio.ch.Net.pollConnectNow(Net.java:660) ~[?:?]
-	at sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:549) ~[?:?]
-	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:597) ~[?:?]
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
-	at java.net.Socket.connect(Socket.java:648) ~[?:?]
-	at okhttp3.internal.platform.Platform.connectSocket(Platform.kt:128) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:295) ~[okhttp-4.9.3.jar:?]
-	... 37 more
-2022-05-10 10:19:52,810 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
-2022-05-10 10:19:52,810 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-10 10:19:52,810 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-10 10:19:52,810 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-10 10:19:54,848 ERROR c.a.t.j.p.c.u.HttpUtil: java.net.ConnectException: Failed to connect to /192.168.57.224:5000
-java.net.ConnectException: Failed to connect to /192.168.57.224:5000
-	at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:297) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.RealConnection.connect(RealConnection.kt:207) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.ExchangeFinder.findConnection(ExchangeFinder.kt:226) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.ExchangeFinder.findHealthyConnection(ExchangeFinder.kt:106) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.ExchangeFinder.find(ExchangeFinder.kt:74) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.RealCall.initExchange$okhttp(RealCall.kt:255) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.ConnectInterceptor.intercept(ConnectInterceptor.kt:32) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.cache.CacheInterceptor.intercept(CacheInterceptor.kt:95) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.http.BridgeInterceptor.intercept(BridgeInterceptor.kt:83) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.http.RetryAndFollowUpInterceptor.intercept(RetryAndFollowUpInterceptor.kt:76) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.RealCall.execute(RealCall.kt:154) ~[okhttp-4.9.3.jar:?]
-	at com.auto.test.jmeter.plugin.common.util.HttpUtil.call(HttpUtil.java:25) ~[test-automation-jmeter-plugin.jar:?]
-	at com.auto.test.jmeter.plugin.common.gui.TestAutomationGuiController.get_test_data_by_jmx(TestAutomationGuiController.java:220) ~[test-automation-jmeter-plugin.jar:?]
-	at com.auto.test.jmeter.plugin.common.gui.TestAutomationGuiController.get_test_executor(TestAutomationGuiController.java:70) ~[test-automation-jmeter-plugin.jar:?]
-	at com.auto.test.jmeter.plugin.common.gui.TestRunConfigPanel.attach(TestRunConfigPanel.java:127) ~[test-automation-jmeter-plugin.jar:?]
-	at com.auto.test.jmeter.plugin.common.gui.TestAutomationMainGui.modifyTestElement(TestAutomationMainGui.java:460) ~[test-automation-jmeter-plugin.jar:?]
-	at org.apache.jmeter.gui.GuiPackage.updateCurrentNode(GuiPackage.java:493) ~[ApacheJMeter_core.jar:5.4.1]
-	at org.apache.jmeter.gui.GuiPackage.updateCurrentGui(GuiPackage.java:451) ~[ApacheJMeter_core.jar:5.4.1]
-	at org.apache.jmeter.gui.action.ActionRouter.performAction(ActionRouter.java:79) ~[ApacheJMeter_core.jar:5.4.1]
-	at org.apache.jmeter.gui.action.ActionRouter.doActionNow(ActionRouter.java:124) ~[ApacheJMeter_core.jar:5.4.1]
-	at org.apache.jmeter.gui.action.ExitCommand.doActionAfterCheck(ExitCommand.java:61) ~[ApacheJMeter_core.jar:5.4.1]
-	at org.apache.jmeter.gui.action.AbstractActionWithNoRunningTest.doAction(AbstractActionWithNoRunningTest.java:44) ~[ApacheJMeter_core.jar:5.4.1]
-	at org.apache.jmeter.gui.action.ActionRouter.performAction(ActionRouter.java:87) ~[ApacheJMeter_core.jar:5.4.1]
-	at org.apache.jmeter.gui.action.ActionRouter.lambda$actionPerformed$0(ActionRouter.java:69) ~[ApacheJMeter_core.jar:5.4.1]
-	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:316) ~[?:?]
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:770) ~[?:?]
-	at java.awt.EventQueue$4.run(EventQueue.java:721) ~[?:?]
-	at java.awt.EventQueue$4.run(EventQueue.java:715) ~[?:?]
-	at java.security.AccessController.doPrivileged(AccessController.java:391) [?:?]
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85) [?:?]
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:740) [?:?]
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203) [?:?]
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124) [?:?]
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113) [?:?]
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109) [?:?]
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101) [?:?]
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:90) [?:?]
-Caused by: java.net.ConnectException: Connection refused: no further information
-	at sun.nio.ch.Net.pollConnect(Native Method) ~[?:?]
-	at sun.nio.ch.Net.pollConnectNow(Net.java:660) ~[?:?]
-	at sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:549) ~[?:?]
-	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:597) ~[?:?]
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
-	at java.net.Socket.connect(Socket.java:648) ~[?:?]
-	at okhttp3.internal.platform.Platform.connectSocket(Platform.kt:128) ~[okhttp-4.9.3.jar:?]
-	at okhttp3.internal.connection.RealConnection.connectSocket(RealConnection.kt:295) ~[okhttp-4.9.3.jar:?]
-	... 41 more
+2022-05-10 15:25:48,092 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2022-05-10 15:25:48,108 INFO o.a.j.JMeter: Loading user properties from: user.properties
+2022-05-10 15:25:48,108 INFO o.a.j.JMeter: Loading system properties from: system.properties
+2022-05-10 15:25:48,109 INFO o.a.j.JMeter: Setting System property: TEST_URL=http://192.168.57.224:5000/
+2022-05-10 15:25:48,114 INFO o.a.j.JMeter: Copyright (c) 1998-2021 The Apache Software Foundation
+2022-05-10 15:25:48,114 INFO o.a.j.JMeter: Version 5.4.1
+2022-05-10 15:25:48,114 INFO o.a.j.JMeter: java.version=15.0.2
+2022-05-10 15:25:48,114 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2022-05-10 15:25:48,114 INFO o.a.j.JMeter: os.name=Windows 10
+2022-05-10 15:25:48,115 INFO o.a.j.JMeter: os.arch=amd64
+2022-05-10 15:25:48,115 INFO o.a.j.JMeter: os.version=10.0
+2022-05-10 15:25:48,115 INFO o.a.j.JMeter: file.encoding=MS949
+2022-05-10 15:25:48,115 INFO o.a.j.JMeter: java.awt.headless=null
+2022-05-10 15:25:48,115 INFO o.a.j.JMeter: Max memory     =8589934592
+2022-05-10 15:25:48,115 INFO o.a.j.JMeter: Available Processors =8
+2022-05-10 15:25:48,123 INFO o.a.j.JMeter: Default Locale=English (EN)
+2022-05-10 15:25:48,123 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2022-05-10 15:25:48,123 INFO o.a.j.JMeter: JMeterHome=D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1
+2022-05-10 15:25:48,123 INFO o.a.j.JMeter: user.dir  =D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin
+2022-05-10 15:25:48,124 INFO o.a.j.JMeter: PWD       =D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin
+2022-05-10 15:25:48,125 INFO o.a.j.JMeter: IP: 192.168.57.243 Name: DESKTOP-0Q4LOBV FullName: host.docker.internal
+2022-05-10 15:25:48,212 INFO o.a.j.JMeter: Setting LAF to: laf:javax.swing.plaf.metal.MetalLookAndFeel
+2022-05-10 15:25:48,285 INFO o.a.j.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties
