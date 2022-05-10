@@ -17,11 +17,6 @@ public class ShellServer {
 
     static{
         shellServer = new ShellServer();
-        if(System.getProperty("SHELL_PORT") != null){
-            shellServer.start(Integer.parseInt(System.getProperty("SHELL_PORT")));
-        }else{
-            shellServer.start(9999);
-        }
     }
 
     private ShellServer(){}
@@ -33,7 +28,21 @@ public class ShellServer {
         return shellServer;
     }
 
+    public void start(){
+        if(System.getProperty("SHELL_PORT") != null){
+            shellServer.start(Integer.parseInt(System.getProperty("SHELL_PORT")));
+        }else{
+            shellServer.start(9999);
+        }
+    }
+
     public void start(int port){
+        new Thread(()-> {
+            listen(port);
+        }).start();
+    }
+
+    public void listen(int port){
         try {
             if(serverSocket == null) {
                 serverSocket = new ServerSocket(port);
@@ -161,6 +170,6 @@ public class ShellServer {
     }
 
     public static void main(String[] args){
-        ShellServer.getInstance();
+        ShellServer.getInstance().start();
     }
 }
