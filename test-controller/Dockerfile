@@ -2,16 +2,22 @@
 FROM python:3.9
 # FROM rappdw/docker-java-python:openjdk1.8.0_171-python3.6.6
 
-RUN apt-get update && \
-apt-get install -y openjdk-11-jdk && \
-apt-get install -y ant && \
-apt-get clean;
+###################################################
+# Install Java 
+###################################################
+# RUN apt-get update && \
+# apt-get install -y openjdk-11-jdk && \
+# apt-get install -y ant && \
+# apt-get clean;
 
 # Fix certificate issues
-RUN apt-get update && \
-apt-get install ca-certificates-java && \
-apt-get clean && \
-update-ca-certificates -f;
+# RUN apt-get update && \
+# apt-get install ca-certificates-java && \
+# apt-get clean && \
+# update-ca-certificates -f;
+###################################################
+
+
 # Setup JAVA_HOME -- useful for docker commandline
 # ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 # RUN export JAVA_HOME
@@ -32,10 +38,14 @@ COPY . /app/server
 # image의 directory로 이동하고
 WORKDIR /app/server
 
+###################################################
+# Run JMeter
+###################################################
 # RUN cd ./apache-jmeter-5.4.1/bin && chmod a+x *.sh jmeter* && ./jmeter-server -Djava.rmi.server.hostname=$MY_LOCAL_IP > jmeter-server.out &
 # RUN chmod a+x /app/server/apache-jmeter-5.4.1/bin/*.sh /app/server/apache-jmeter-5.4.1/bin/jmeter* && /app/server/apache-jmeter-5.4.1/bin/jmeter-server -Djava.rmi.server.hostname=$MY_LOCAL_IP > jmeter-server.out &
-RUN /app/server/apache-jmeter-5.4.1/bin/jmeter-server -Djava.rmi.server.hostname=$MY_LOCAL_IP > jmeter-server.out &
+# RUN /app/server/apache-jmeter-5.4.1/bin/jmeter-server -Djava.rmi.server.hostname=$MY_LOCAL_IP > jmeter-server.out &
 # RUN cd ../../
+###################################################
 # 필요한 의존성 file들 설치
 RUN pip3 install -r requirements.txt
 

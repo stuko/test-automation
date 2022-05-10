@@ -2,6 +2,7 @@ package com.auto.test.jmeter.plugin.common.sampler;
 
 import java.util.Map;
 
+import com.auto.test.jmeter.plugin.common.server.ShellServer;
 import org.apache.jmeter.samplers.AbstractSampler;
 import org.apache.jmeter.samplers.Entry;
 import org.apache.jmeter.samplers.SampleResult;
@@ -18,7 +19,7 @@ public class TestPluginSampler extends AbstractSampler {
     static Logger logger = LoggerFactory.getLogger(TestPluginSampler.class);
     public TestPluginExecutor executor;
     Gson gson = new Gson();
-    
+
     @Override
     public SampleResult sample(Entry e) {
         if(e != null) logger.warn("Entry is {}", e.toString());
