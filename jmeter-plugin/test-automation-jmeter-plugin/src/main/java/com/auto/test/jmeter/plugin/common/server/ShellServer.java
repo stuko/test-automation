@@ -17,6 +17,11 @@ public class ShellServer {
 
     static{
         shellServer = new ShellServer();
+        if(System.getProperty("SHELL_PORT") != null){
+            shellServer.start(Integer.parseInt(System.getProperty("SHELL_PORT")));
+        }else{
+            shellServer.start(9999);
+        }
     }
 
     private ShellServer(){}
