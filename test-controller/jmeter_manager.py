@@ -2,10 +2,13 @@ import json
 from pymongo import MongoClient
 from pymongo.cursor import CursorType
 import subprocess
+import socket
 
 class JmeterManager:
     
-    def __init__(self, ip, port, jmeter_path):
+    def __init__(self, ip, port, jmeter_ip, jmeter_port, jmeter_path):
+        self.jmeter_ip = jmeter_ip
+        self.jmeter_port = jmeter_port
         self.client = MongoClient(ip,port)
         self.db = self.client['auto']
         self.collection = self.db['test']
@@ -82,8 +85,13 @@ class JmeterManager:
 
     def execute_shell_command(self, shell):
         print(f'execute jemter shell : {shell}')
-        proc = subprocess.Popen(shell.split()
-                                ,shell=True
-                                ,stdout=subprocess.PIPE
-                                ,stderr=subprocess.PIPE)       
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client_socket.connect((self.jmeter_ip, self.jmeter.port))
+        client_socket.sendall(shell.encode())
+        client_socket.close()
+        
+        # proc = subprocess.Popen(shell.split()
+        #                        ,shell=True
+        #                        ,stdout=subprocess.PIPE
+        #                        ,stderr=subprocess.PIPE)       
 
