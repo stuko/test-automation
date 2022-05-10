@@ -37,7 +37,8 @@ public class ShellServer {
         try {
             if(serverSocket == null) {
                 serverSocket = new ServerSocket(port);
-                serverSocket.setSoTimeout(10000);
+                // serverSocket.setSoTimeout(10000);
+                System.out.println("Listening... " + port);
                 Socket socket = serverSocket.accept();
                 // socket.setSoTimeout(10000);
                 InputStream input = null;
@@ -157,5 +158,9 @@ public class ShellServer {
                 e1.printStackTrace();
             }
         }
+    }
+
+    public static void main(String[] args){
+        ShellServer.getInstance();
     }
 }
