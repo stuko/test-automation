@@ -33,10 +33,9 @@ COPY . /app/server
 WORKDIR /app/server
 
 # RUN cd ./apache-jmeter-5.4.1/bin && chmod a+x *.sh jmeter* && ./jmeter-server -Djava.rmi.server.hostname=$MY_LOCAL_IP > jmeter-server.out &
-RUN cd ./apache-jmeter-5.4.1/bin 
-RUN chmod a+x *.sh jmeter* 
-RUN ./jmeter-server -Djava.rmi.server.hostname=$MY_LOCAL_IP > jmeter-server.out &
-RUN cd ../../
+RUN chmod a+x ./apache-jmeter-5.4.1/bin/*.sh ./apache-jmeter-5.4.1/bin/jmeter* 
+RUN cd ./apache-jmeter-5.4.1/bin && ./jmeter-server -Djava.rmi.server.hostname=$MY_LOCAL_IP > jmeter-server.out &
+# RUN cd ../../
 # 필요한 의존성 file들 설치
 RUN pip3 install -r requirements.txt
 
