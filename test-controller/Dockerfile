@@ -32,7 +32,8 @@ COPY . /app/server
 # image의 directory로 이동하고
 WORKDIR /app/server
 
-RUN cd ./apache-jmeter-5.4.1/bin && chmod a+x *.sh jmeter* && ./jmeter-server -Djava.rmi.server.hostname=$MY_LOCAL_IP > jmeter-server.out &
+# RUN cd ./apache-jmeter-5.4.1/bin && chmod a+x *.sh jmeter* && ./jmeter-server -Djava.rmi.server.hostname=$MY_LOCAL_IP > jmeter-server.out &
+RUN cd ./apache-jmeter-5.4.1/bin && chmod a+x *.sh jmeter* && ./jmeter-server &
 # 필요한 의존성 file들 설치
 RUN pip3 install -r requirements.txt
 
