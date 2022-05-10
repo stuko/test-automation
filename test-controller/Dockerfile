@@ -28,8 +28,6 @@ LABEL maintainer="tu.ko@koreacb.com"
 # 해당 디렉토리에 있는 모든 하위항목들을 '/app/server`로 복사한다
 # COPY . /app/server
 COPY . /app/server 
-# COPY ../apache-jmeter-5.4.1 /app/
-COPY ../apache-jmeter-5.4.1 /app/
 
 # image의 directory로 이동하고
 WORKDIR /app/server

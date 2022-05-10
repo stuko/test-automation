@@ -9,5 +9,5 @@
     "kanboard_pw":"kanboard-secret",
     "kanboard_db":"kanboard",
     "mattermost_url":"http://192.168.57.237:8065/hooks/",
-    "jmeter_path":"../apache-jmeter-5.4.1/bin/"
+    "jmeter_path":"./apache-jmeter-5.4.1/bin/"
 }
