@@ -84,3 +84,11 @@
 2022-05-10 09:40:29,673 INFO c.a.t.j.p.c.g.TestAutomationGuiController: jmx_file_name is Kai-s-scenario.jmx
 2022-05-10 09:40:29,673 INFO c.a.t.j.p.c.g.TestAutomationGuiController: {"success": "project info is created"}
 2022-05-10 09:45:34,130 INFO c.a.t.j.p.c.g.TestAutomationGuiController: save url is : http://192.168.57.224:5000/upload
+2022-05-10 09:57:15,257 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
+2022-05-10 09:57:15,257 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
+2022-05-10 09:57:15,257 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
+"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
+,"topic":"fds-bank.t"
+}
+2022-05-10 09:57:15,257 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
+2022-05-10 09:57:15,265 INFO c.a.t.j.p.c.g.TestAutomationGuiController: [{"jenkins_token": "b5a9878ecb5ddc9ee1556a57134c3fa0", "jenkins_server_url": "http://192.168.57.237:8084", "project_id": "1", "jmx_file_name": "Kai-s-scenario.jmx", "jenkins_project_name": "test-automation-3", "mattermost_webhook_id": "u5ztbrjboidxmx3cf34hbcwkdc"}]
