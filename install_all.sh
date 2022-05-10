@@ -6,7 +6,7 @@ chmod a+x *.sh jmeter*
 pkill -9 -ef jmeter
 ./jmeter-server -Djava.rmi.server.hostname=${MY_LOCAL_IP} > jmeter-server.out &
 cd ../../
-java -jar ./apache-jmeter-5.4.1/lib/ext/test-automation-jmeter-plugin.jar ShellServer &
+java -cp .:./apache-jmeter-5.4.1/lib/ext/test-automation-jmeter-plugin.jar com.auto.test.jmeter.plugin.common.server.ShellServer &
 cd ./kanboard/
 sudo docker-compose -f docker-compose-with-mariadb.yml down
 sudo docker-compose -f docker-compose-with-mariadb.yml up -d
