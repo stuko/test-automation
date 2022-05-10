@@ -1,12 +1,6 @@
 # python:3.9의 이미지로 부터
-FROM python:3.9
-
-RUN apt update \
-&& apt upgrade \
-&& apt add --no-cache bash \
-&& apt add --no-cache --virtual=build-dependencies unzip \
-&& apt add --no-cache curl \
-&& apt add --no-cache openjdk8-jre
+# FROM python:3.9
+FROM rappdw/docker-java-python:openjdk1.8.0_171-python3.6.6
 
 ARG MONGO_IP
 ARG MONGO_PORT
