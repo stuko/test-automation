@@ -51,6 +51,7 @@ public class ShellServer {
                 while(true) {
                     Socket socket = serverSocket.accept();
                     // socket.setSoTimeout(10000);
+                    System.out.println("current path is " + new java.io.File(".").getAbsolutePath());
                     InputStream input = null;
                     BufferedReader reader = null;
                     try {
