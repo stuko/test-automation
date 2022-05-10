@@ -48,31 +48,33 @@ public class ShellServer {
                 serverSocket = new ServerSocket(port);
                 // serverSocket.setSoTimeout(10000);
                 System.out.println("Listening... " + port);
-                Socket socket = serverSocket.accept();
-                // socket.setSoTimeout(10000);
-                InputStream input = null;
-                BufferedReader reader = null;
-                try {
-                    input = socket.getInputStream();
-                    reader = new BufferedReader(new InputStreamReader(input));
-                    String line = reader.readLine();
-                    System.out.println(line);
-                    executeShell(line);
-                    socket.close();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                } finally {
+                while(true) {
+                    Socket socket = serverSocket.accept();
+                    // socket.setSoTimeout(10000);
+                    InputStream input = null;
+                    BufferedReader reader = null;
                     try {
-                        if (reader != null) reader.close();
-                    } catch (Exception ee) {
-                    }
-                    try {
-                        if (input != null) input.close();
-                    } catch (Exception ee) {
-                    }
-                    try {
-                        if (socket != null) socket.close();
-                    } catch (Exception ee) {
+                        input = socket.getInputStream();
+                        reader = new BufferedReader(new InputStreamReader(input));
+                        String line = reader.readLine();
+                        System.out.println(line);
+                        executeShell(line);
+                        socket.close();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    } finally {
+                        try {
+                            if (reader != null) reader.close();
+                        } catch (Exception ee) {
+                        }
+                        try {
+                            if (input != null) input.close();
+                        } catch (Exception ee) {
+                        }
+                        try {
+                            if (socket != null) socket.close();
+                        } catch (Exception ee) {
+                        }
                     }
                 }
             }
