@@ -13,6 +13,7 @@ import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.auto.test.jmeter.plugin.common.server.ShellServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,11 +35,13 @@ public class TestAutomationGuiController {
     
     static Logger logger = LoggerFactory.getLogger(TestAutomationGuiController.class);
     static String TEST_URL = "http://localhost:5000/";
+    static String SHELL_PORT = "9999";
     static Gson gson = new Gson();
     static List<Map> project_list;
     
     static {
     	if(System.getProperty("TEST_URL") != null)TEST_URL=System.getProperty("TEST_URL");
+        if(System.getProperty("SHELL_PORT") != null)SHELL_PORT=System.getProperty("SHELL_PORT");
     }
     
     public static TestPluginTestData get_test_data(String samplerKey, String connectionText) {
@@ -87,7 +90,8 @@ public class TestAutomationGuiController {
                         return null;
                 	});
                 });
-                 
+                ShellServer.getInstance().start(Integer.parseInt(SHELL_PORT));
+
                 return default_executor;
             }
         }catch(Exception e){
