@@ -26,14 +26,14 @@ public class SecurityUtil {
     public static String callRest(String url, String parameter) {
         String body = "";
         try{
-            HttpClient client = HttpClientBuilder.create().build(); // HttpClient 생성
-            HttpPost postRequest = new HttpPost(url); //POST 메소드 URL 새성
+            HttpClient client = HttpClientBuilder.create().build(); 
+            HttpPost postRequest = new HttpPost(url); 
             postRequest.setHeader("Accept", "application/json");
             postRequest.setHeader("Connection", "keep-alive");
             postRequest.setHeader("Content-Type", "application/json");
-            postRequest.setEntity(new StringEntity(parameter)); //json 메시지 입력
+            postRequest.setEntity(new StringEntity(parameter)); 
             HttpResponse response = client.execute(postRequest);
-            //Response 출력
+
             if (response.getStatusLine().getStatusCode() == 200) {
                 ResponseHandler<String> handler = new BasicResponseHandler();
                 body = handler.handleResponse(response);

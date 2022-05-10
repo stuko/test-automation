@@ -59,32 +59,15 @@ public class TestMessage extends TestPluginMessageBuilder {
                     });
                 }
             }
-            //logger.info("Range Value List is {}" , rangeValueList);
-
 
             int start = 0;
 
-            //tmp.forEach(m->{
-            //    logger.info("before factorName : {} , {}",factor.getName(), m );
-            //});
-
             for(; start < tmp.size(); ) {
                 for (int rIdx = 0; rIdx < rangeValueList.size() ; rIdx++) {
-                    // logger.info("before factorName : {} , {} : {}",factor.getName(), start, tmp.get(start));
-                    //logger.info("########## Factor({}) value[{}] : {} " , factor.getName(),start, tmp.get(start).get(factor.getName()));
                     tmp.get(start).put(factor.getName(), rangeValueList.get(rIdx));
-                    //logger.info("########## range value : {} " , rangeValueList.get(rIdx));
-                    // logger.info("after factorName : {} , {} : {}",factor.getName(), start, tmp.get(start));
                     start++;
                 }
             }
-            //logger.info("Current tmp message count is {}",tmp.size());
-            //for(int i = 0; i < tmp.size() && i < 10 ; i++){
-            //    logger.info("Forward tmp Sample["+i+"] message is {}",tmp.get(i));
-            //}
-            //for(int i = tmp.size()-1 ; i >= 0 && i > (tmp.size()-10) ; i--){
-            //    logger.info("Backward tmp Sample["+i+"] message is {}",tmp.get(i));
-            //}
 
             result = new ArrayList<>();
             result.addAll(tmp);
@@ -110,7 +93,6 @@ public class TestMessage extends TestPluginMessageBuilder {
 
     @Override
     public FileJsonArrayList getFileMessage(TestPluginCallBack callBack) {
-        // List<Map<String,String>> result = new ArrayList<>();
         FileJsonArrayListPlus result = new FileJsonArrayListPlus(TestPluginConstants.ta_data_path);
         System.out.println("GetFileMessage ..............");
         logger.info("start getFileMessage......");
@@ -154,20 +136,13 @@ public class TestMessage extends TestPluginMessageBuilder {
             FileJsonArrayListPlus tmp2 = new FileJsonArrayListPlus(TestPluginConstants.ta_data_path);
             tmp.forEach(s->{
                 for (int rIdx = 0; rIdx < rangeValueList.size() ; rIdx++) {
-                    // logger.info("########## range value : {} " , rangeValueList.get(rIdx));
-                    // logger.info("########## find in tmp , idx : {} in {}" , start, tmp.size());
-                    // Map<String,String> m = tmp.get(start);
-                    // logger.info("########## tmp value : {} " , m);
                     Map<String,String> m = gson.fromJson(s,Map.class);
                     if(TestPluginConstants.ta_random_key_data.equals(rangeValueList.get(rIdx))) {
                         m.put(factor.getName(), TestPluginMessageFactorImplFactory.getRandomCharacter(rangeValueList.get(rIdx).length()).toString());
-                        // System.out.println("RAND : " + rangeValueList.get(rIdx));
                     }else{
                         m.put(factor.getName(), rangeValueList.get(rIdx));
-                        // System.out.println("NOT RAND : " + rangeValueList.get(rIdx));
                     }
                     tmp2.add(m);
-                    // start++;
                 }
             });
             result.clear();

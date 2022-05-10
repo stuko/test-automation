@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
 
-public class TestCombination {
+public class TestCombination { 
 
     static Logger logger = LoggerFactory.getLogger(TestCombination.class);
     long combination_max = 200;
@@ -24,8 +24,6 @@ public class TestCombination {
     void testCombination(){
         boolean result = false;
         try {
-            // 항목의 범위는 평균 4가지 값
-            // 전체 항목의 갯수는 약 200여개
             List<int[]> lists = new ArrayList<>();
             //lists.add(new int[]{1});
             //lists.add(new int[]{1});
@@ -71,8 +69,6 @@ public class TestCombination {
     void testCombinationWithQueue(){
         boolean result = false;
         try {
-            // 항목의 범위는 평균 4가지 값
-            // 전체 항목의 갯수는 약 200여개
             List<int[]> lists = new ArrayList<>();
             //lists.add(new int[]{1});
             //lists.add(new int[]{1});

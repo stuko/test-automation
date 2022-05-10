@@ -22,11 +22,6 @@ public class HttpUtil {
                 requestBody = RequestBody.Companion.create(json,MediaType.parse("application/x-www-form-urlencoded; charset=utf-8"));
             }
             Request request = new Request.Builder().url(url).post(requestBody).build();
-            /*
-            Deprecated....
-            RequestBody requestBody = RequestBody.create(
-                    MediaType.parse("application/json; charset=utf-8"), json);
-             */
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
                 ResponseBody body = response.body();

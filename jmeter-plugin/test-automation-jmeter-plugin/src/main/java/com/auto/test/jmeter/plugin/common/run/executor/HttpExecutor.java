@@ -37,7 +37,6 @@ public class HttpExecutor extends AbstractPluginExecutor  {
 
     @Override
     public void init(TestPluginTestData data , TestPluginCallBack callBack) {
-        // 초기 설정
         try {
             message = new TestMessageByCombination();
             message.setStop(false);
@@ -46,7 +45,6 @@ public class HttpExecutor extends AbstractPluginExecutor  {
                url = this.getConfigMap().get("url") + "";
             }
 
-            // 테스트 데이터 생성
             message.build(testData.getData());
             try {
                 executors.submit(new Thread(){
@@ -88,7 +86,6 @@ public class HttpExecutor extends AbstractPluginExecutor  {
             // ---------------------------------------
             // Change to okHttp3
             // 20211204
-            // 오픈소스로 변경
             // 20211209
             // Change to Jmeter's Apache Http Common
             // ---------------------------------------
@@ -96,7 +93,6 @@ public class HttpExecutor extends AbstractPluginExecutor  {
             // ---------------------------------------
             // Change to Jmeter's Apache Http Common
             // 20211209
-            // Jmeter에 오픈소스 추가 어려움.
             // ---------------------------------------
 
             HttpUtil.call(url,data,(body)->{

@@ -10,7 +10,7 @@ import com.auto.test.jmeter.plugin.common.function.TestPluginProgressBarCallBack
 public class PluginProgressBar extends JFrame {
     static Logger logger = LoggerFactory.getLogger(PluginProgressBar.class);
     int MAX = 100;
-    int INCREASE = 1;
+    int INCREASE = 1; 
     long SLEEP = 1000L;
     JProgressBar current;
     int num = 0;
