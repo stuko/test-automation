@@ -28,6 +28,7 @@ out/
 
 ### node ###
 !**/node_modules/
+!**/test/data/
 
 **/nohup.out
 **/*.log

@@ -32,6 +32,7 @@ public class HttpUtil {
                     logger.error("No response...");
                 }
             }
+            response.close();
         } catch (IOException e) {
             logger.error(e.toString(),e);
         }
