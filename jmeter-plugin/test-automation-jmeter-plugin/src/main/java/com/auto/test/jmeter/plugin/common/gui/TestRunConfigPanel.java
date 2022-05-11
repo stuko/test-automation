@@ -101,7 +101,7 @@ public class TestRunConfigPanel extends PluginGridPanel{
            m.put("type",type);
            Map<String,Object> params = new HashMap<>();
            params.put("run",m);
-           params.put("jmx_file_name",TestAutomationGuiController.get_jmx_file_name().getName());
+           params.put("jmx_file_name",TestAutomationGuiController.get_jmx_file_name());
            TestAutomationGuiController.save_run_config(params);
            
            JOptionPane.showMessageDialog(null, "테스트 데이터 실행 설정 정보가 정상적으로 저장 되었습니다.");

@@ -14,6 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.auto.test.jmeter.plugin.common.server.ShellServer;
+import org.apache.jmeter.services.FileServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +27,8 @@ import com.auto.test.jmeter.plugin.common.run.executor.TestPluginExecutor;
 import com.auto.test.jmeter.plugin.common.util.HttpUtil;
 import com.auto.test.jmeter.plugin.common.util.TestPluginConstants;
 import com.google.gson.Gson;
+
+import static org.apache.jmeter.services.FileServer.*;
 
 /**
  *
@@ -56,7 +59,7 @@ public class TestAutomationGuiController {
     	try {
     		logger.info("Executor's type is : {}", type);
     		logger.info("Executor's config map string : {}", json);
-            logger.info("Executor's current jmx file name is : {}", get_jmx_file_name().getName());
+            logger.info("Executor's current jmx file name is : {}", get_jmx_file_name());
             if(type != null && !type.equals("DEFAULT") && json != null && json.length() != 0) {
                 if (json.contains("\"url\"")) {
                     AbstractPluginExecutor http = ExecutorMap.getInstance().getExecutor(ExecutorMap.ExecutorType.HTTP);
@@ -71,7 +74,7 @@ public class TestAutomationGuiController {
                 logger.info("Executor's type is DEFAULT");
                 AbstractPluginExecutor default_executor = ExecutorMap.getInstance().getExecutor(ExecutorMap.ExecutorType.DEFAULT);
                 default_executor.setConfigMap(gson.fromJson(getDefaultText(), Map.class));
-                
+
                 // TEST
                 default_executor.setTestData(get_test_data("DEFAULT", null));
                 get_test_data_by_jmx(list -> {
@@ -184,7 +187,7 @@ public class TestAutomationGuiController {
             Map<String,String> project = new HashMap<>();
             // project.put("jmx_file_name", get_jmx_file_name().replaceAll("\\","/"));
             if(get_jmx_file_name() == null) return false;
-            String jmx_file_name = get_jmx_file_name().getName();
+            String jmx_file_name = get_jmx_file_name();
             if(jmx_file_name == null || "".equals(jmx_file_name)) return false;
             
             project.put("jmx_file_name", jmx_file_name);
@@ -223,7 +226,7 @@ public class TestAutomationGuiController {
       try{
           Map<String,String> project = new HashMap<>();
           if(get_jmx_file_name() == null) return false;
-          String jmx_file_name = get_jmx_file_name().getName();
+          String jmx_file_name = get_jmx_file_name();
           if(jmx_file_name == null || "".equals(jmx_file_name)) return false;
           
           project.put("jmx_file_name", jmx_file_name);
@@ -269,16 +272,15 @@ public class TestAutomationGuiController {
                     return false;
                 }
                 String data = selected_data.split(",")[0];
-                File f = TestAutomationGuiController.get_jmx_file_name();
-                
+
                 param.put("project_id", data);
-                param.put("jmx_file_name", f.getName());
+                param.put("jmx_file_name", TestAutomationGuiController.get_jmx_file_name());
                 param.put("jenkins_server_url", jenkins_server_url);
                 param.put("jenkins_project_name", jenkins_project_name);
                 param.put("jenkins_token", jenkins_token);
                 param.put("mattermost_webhook_id", mattermost_webhook_id);
                 HttpUtil.call(TEST_URL+"save_project_info",gson.toJson(param),(body)->{
-                    logger.info("jmx_file_name is {}", TestAutomationGuiController.get_jmx_file_name().getName());
+                    logger.info("jmx_file_name is {}", TestAutomationGuiController.get_jmx_file_name());
                    logger.info(body);
                 });
             }
@@ -301,16 +303,27 @@ public class TestAutomationGuiController {
                logger.info(body);
         });
     }
-     
-    public static File get_jmx_file_name(){
-    	try {return new File(org.apache.jmeter.gui.GuiPackage.getInstance().getTestPlanFile());
+
+    public static String get_jmx_file_name(){
+        try {
+            if("true".equals(TEST_AUTO)){
+                return getFileServer().getScriptName();
+            }else {
+                return get_jmx_file().getName();
+            }
+        }catch(Exception e) {return null;}
+    }
+
+    public static File get_jmx_file(){
+    	try {
+            return new File(org.apache.jmeter.gui.GuiPackage.getInstance().getTestPlanFile());
     	}catch(Exception e) {return null;}
     }
 
     public static void save_test_scenario(){
         try{
             logger.info("save url is : {}",TEST_URL+"upload" );
-            HttpUtil.uploadFileFromOkhttp(TEST_URL+"upload", get_jmx_file_name().getName());
+            HttpUtil.uploadFileFromOkhttp(TEST_URL+"upload", get_jmx_file_name());
         }catch(Exception e){
             logger.error(e.toString(), e);
         }finally{
