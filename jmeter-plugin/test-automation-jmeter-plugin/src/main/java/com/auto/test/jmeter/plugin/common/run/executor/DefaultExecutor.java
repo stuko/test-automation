@@ -41,11 +41,7 @@ public class DefaultExecutor  extends AbstractPluginExecutor {
             
             message.build(testData.getData());
             try {
-                executors.submit(new Thread(){
-                    public void run(){
-                        message.getFileMessage(callBack);
-                    }
-                });
+                executors.submit(new Thread(() -> message.getFileMessage(callBack)));
             }catch(Exception e){
                 callBack.call("Exception : " + e.toString(), 0);
             }

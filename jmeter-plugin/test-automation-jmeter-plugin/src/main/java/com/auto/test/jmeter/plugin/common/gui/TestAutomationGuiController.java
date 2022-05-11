@@ -36,12 +36,14 @@ public class TestAutomationGuiController {
     static Logger logger = LoggerFactory.getLogger(TestAutomationGuiController.class);
     static String TEST_URL = "http://localhost:5000/";
     static String SHELL_PORT = "9999";
+    static String TEST_AUTO = "false";
     static Gson gson = new Gson();
     static List<Map> project_list;
     
     static {
     	if(System.getProperty("TEST_URL") != null)TEST_URL=System.getProperty("TEST_URL");
         if(System.getProperty("SHELL_PORT") != null)SHELL_PORT=System.getProperty("SHELL_PORT");
+        if(System.getProperty("TEST_AUTO") != null)TEST_AUTO=System.getProperty("TEST_AUTO");
     }
     
     public static TestPluginTestData get_test_data(String samplerKey, String connectionText) {
@@ -68,29 +70,30 @@ public class TestAutomationGuiController {
                 AbstractPluginExecutor default_executor = ExecutorMap.getInstance().getExecutor(ExecutorMap.ExecutorType.DEFAULT);
                 default_executor.setConfigMap(gson.fromJson(getDefaultText(), Map.class));
                 // TEST
-                default_executor.start();
-                default_executor.setTestData(get_test_data("DEFAULT",null));
-                get_test_data_by_jmx(list->{
-                	String[][] test_data_factors = new String[list.size()][];
-                	for(int i = 0; i < list.size() ; i++) {
-                	    Map<String,Object> factor = (Map<String,Object>)list.get(i);
+                default_executor.setTestData(get_test_data("DEFAULT", null));
+                get_test_data_by_jmx(list -> {
+                    String[][] test_data_factors = new String[list.size()][];
+                    for (int i = 0; i < list.size(); i++) {
+                        Map<String, Object> factor = (Map<String, Object>) list.get(i);
                         String[] row = new String[factor.size()];
-                        
-                        row[0] = (String)factor.get("name");
-                        row[1] = (String)factor.get("type");
-                        row[2] = (String)factor.get("value");
-                        row[3] = (String)factor.get("count");
-                        row[4] = (String)factor.get("length");
-                        row[5] = (String)factor.get("encode");
-                        test_data_factors[i] = row;
-                	}
-                	default_executor.getTestData().setData(test_data_factors);
-                	default_executor.init(default_executor.getTestData(), (d,cnt)->{
-                		FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).write(d);
-                        return null;
-                	});
-                });
 
+                        row[0] = (String) factor.get("name");
+                        row[1] = (String) factor.get("type");
+                        row[2] = (String) factor.get("value");
+                        row[3] = (String) factor.get("count");
+                        row[4] = (String) factor.get("length");
+                        row[5] = (String) factor.get("encode");
+                        test_data_factors[i] = row;
+                    }
+                    default_executor.getTestData().setData(test_data_factors);
+                    if("true".equals(TEST_AUTO)) {
+                        default_executor.start();
+                        default_executor.init(default_executor.getTestData(), (d, cnt) -> {
+                            FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).write(d);
+                            return null;
+                        });
+                    }
+                });
                 return default_executor;
             }
         }catch(Exception e){
