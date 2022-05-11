@@ -2,7 +2,6 @@ package com.auto.test.jmeter.plugin.common.sampler;
 
 import java.util.Map;
 
-import com.auto.test.jmeter.plugin.common.server.ShellServer;
 import org.apache.jmeter.samplers.AbstractSampler;
 import org.apache.jmeter.samplers.Entry;
 import org.apache.jmeter.samplers.SampleResult;
@@ -18,7 +17,6 @@ public class TestPluginSampler extends AbstractSampler {
 
     static Logger logger = LoggerFactory.getLogger(TestPluginSampler.class);
     public TestPluginExecutor executor;
-    Gson gson = new Gson();
 
     @Override
     public SampleResult sample(Entry e) {
@@ -45,10 +43,7 @@ public class TestPluginSampler extends AbstractSampler {
         	
             try {
             	if(response.getRequest() != null) {
-	            	Map<String,Object> map = gson.fromJson(response.getRequest(), Map.class);
-	            	map.forEach((k,v)->{
-	            		JMeterContextService.getContext().getVariables().put(k, v.toString());
-	            	});
+                    getExecutor().writeRequestToJMeterContext(response.getRequest());
             	}
             }catch(Exception ee) {logger.error(ee.toString());}
         	
@@ -58,7 +53,7 @@ public class TestPluginSampler extends AbstractSampler {
             sr.setSuccessful(true);
             sr.setResponseCodeOK();
             sr.setResponseHeaders(response.getRequest());
-            sr.setResponseMessage(new Gson().toJson(response.getExecuteTime()));
+            sr.setResponseMessage(response.getExecuteTime()+"");
         } catch (Exception ex) {
             logger.error(ex.toString(),ex);
             sr.setSuccessful(false);

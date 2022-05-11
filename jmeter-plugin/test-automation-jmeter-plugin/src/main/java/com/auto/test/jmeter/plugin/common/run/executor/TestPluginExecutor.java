@@ -15,4 +15,6 @@ public interface TestPluginExecutor {
     void setTestData(TestPluginTestData testData);
     void stop();
     void start();
+    Map<String,Object> writeRequestToJMeterContext(String json);
+    String toResponseJson(Map<String,Object> map);
 }
