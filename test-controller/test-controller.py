@@ -102,17 +102,14 @@ def controller():
             jkm.complete(project_id)
             
             if complete != 1:
-                contents = f"""
-# 테스트가 시작 되었습니다. 잠시 기다려 주세요.
-> {task_title}
-> {description}
-                  """
+                contents = ""
                 mm.send_execute_jenkins_build_error(project_id,project_name, task_title,contents)  
                 km.move(project_id, task_id, swimlane_id, backward , position)
                 return 'error of building'    
-            
+                
             mm.send_execute_jenkins_build_complete(project_id,project_name, task_title,description)  
             jmx_file_name = jm.get_jmx_file_name(project_id)
+
             if jmx_file_name == None:
                 mm.send_jmeter_jenkins_relation_error(project_id,project_name, task_title,description)  
                 km.move(project_id, task_id, swimlane_id, backward, position)
