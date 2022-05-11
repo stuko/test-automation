@@ -391,7 +391,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         
-       if(TestAutomationGuiController.save_project_connection_info(jList1, TestAutomationGuiController.get_jmx_file_name().getName(),jTextField4.getText(), jTextField2.getText(), jTextField5.getText(), jTextField3.getText())){
+       if(TestAutomationGuiController.save_project_connection_info(jList1, TestAutomationGuiController.get_jmx_file_name(),jTextField4.getText(), jTextField2.getText(), jTextField5.getText(), jTextField3.getText())){
             JOptionPane.showMessageDialog(null, "프로젝트 연결 정보를 저장 하였습니다.");
        }else{
             JOptionPane.showMessageDialog(null, "프로젝트 연결 정보를 저장할 수 없습니다. 젠킨스 연결 정보와 프로젝트 연결정보를 확인해 주세요");
