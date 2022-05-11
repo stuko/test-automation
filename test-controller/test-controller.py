@@ -63,9 +63,8 @@ def controller():
             print("you moved to {}", km.get_column(1))           
             contents = f"""
 # 스프린트 백로그에 요구사항이 등록 되었습니다.
-|title|contents|
-|---|---|
-|{task_title}|{description}|
+> {task_title}
+> {description}
                   """
             mm.send_create_sprint_backlog(project_id,project_name, task_title,contents)      
             
@@ -105,9 +104,8 @@ def controller():
             if complete != 1:
                 contents = f"""
 # 테스트가 시작 되었습니다. 잠시 기다려 주세요.
-|title|contents|
-|---|---|
-|{task_title}|{description}|
+> {task_title}
+> {description}
                   """
                 mm.send_execute_jenkins_build_error(project_id,project_name, task_title,contents)  
                 km.move(project_id, task_id, swimlane_id, backward , position)
