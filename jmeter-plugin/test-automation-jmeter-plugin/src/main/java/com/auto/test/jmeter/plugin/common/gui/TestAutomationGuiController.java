@@ -56,6 +56,7 @@ public class TestAutomationGuiController {
     	try {
     		logger.info("Executor's type is : {}", type);
     		logger.info("Executor's config map string : {}", json);
+            logger.info("Executor's current jmx file name is : {}", get_jmx_file_name().getName());
             if(type != null && !type.equals("DEFAULT") && json != null && json.length() != 0) {
                 if (json.contains("\"url\"")) {
                     AbstractPluginExecutor http = ExecutorMap.getInstance().getExecutor(ExecutorMap.ExecutorType.HTTP);
@@ -67,8 +68,10 @@ public class TestAutomationGuiController {
                     return kafka;
                 }
             }else{
+                logger.info("Executor's type is DEFAULT");
                 AbstractPluginExecutor default_executor = ExecutorMap.getInstance().getExecutor(ExecutorMap.ExecutorType.DEFAULT);
                 default_executor.setConfigMap(gson.fromJson(getDefaultText(), Map.class));
+                logger.info("Executor's config is {}" , getDefaultText());
                 // TEST
                 default_executor.setTestData(get_test_data("DEFAULT", null));
                 get_test_data_by_jmx(list -> {
@@ -86,6 +89,8 @@ public class TestAutomationGuiController {
                         test_data_factors[i] = row;
                     }
                     default_executor.getTestData().setData(test_data_factors);
+                    logger.info("Executor's mode is AUTO : {}", TEST_AUTO);
+
                     if("true".equals(TEST_AUTO)) {
                         default_executor.start();
                         default_executor.init(default_executor.getTestData(), (d, cnt) -> {
