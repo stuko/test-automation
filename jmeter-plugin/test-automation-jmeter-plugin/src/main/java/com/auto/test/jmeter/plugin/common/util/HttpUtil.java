@@ -32,7 +32,10 @@ public class HttpUtil {
                     logger.error("No response...");
                 }
             }
-            response.close();
+            try {
+                if (response.body() != null) response.body().close();
+                if (response != null) response.close();
+            }catch(Exception ee){}
         } catch (IOException e) {
             logger.error(e.toString(),e);
         }
@@ -49,7 +52,11 @@ public class HttpUtil {
                 .url(url)
                 .post(requestBody)
                 .build();
-                client.newCall(request).execute();
+            Response response = client.newCall(request).execute();
+            try {
+                if (response.body() != null) response.body().close();
+                if (response != null) response.close();
+            }catch(Exception ee){}
         }catch(Exception e){
             logger.error(e.toString(),e);
         }

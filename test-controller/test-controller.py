@@ -62,7 +62,7 @@ def controller():
         if(column_title.find(km.get_column(1)) >= 0): 
             print("you moved to {}", km.get_column(1))           
             contents = f"""
-### 😁😁😁 스프린트 백로그에 요구사항({task_title})이 생성 되었습니다.
+# 스프린트 백로그에 요구사항이 등록 되었습니다.
 |title|contents|
 |---|---|
 |{task_title}|{description}|
@@ -104,7 +104,7 @@ def controller():
             
             if complete != 1:
                 contents = f"""
-### 😨😨😨 젠킨스 빌드가 완료되었으나, 테스트가 가능한 상태가 아닙니다.
+# 테스트가 시작 되었습니다. 잠시 기다려 주세요.
 |title|contents|
 |---|---|
 |{task_title}|{description}|
