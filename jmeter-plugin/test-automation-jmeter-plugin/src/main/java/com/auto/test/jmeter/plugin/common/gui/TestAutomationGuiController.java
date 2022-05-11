@@ -71,7 +71,7 @@ public class TestAutomationGuiController {
                 logger.info("Executor's type is DEFAULT");
                 AbstractPluginExecutor default_executor = ExecutorMap.getInstance().getExecutor(ExecutorMap.ExecutorType.DEFAULT);
                 default_executor.setConfigMap(gson.fromJson(getDefaultText(), Map.class));
-                logger.info("Executor's config is {}" , getDefaultText());
+                
                 // TEST
                 default_executor.setTestData(get_test_data("DEFAULT", null));
                 get_test_data_by_jmx(list -> {
