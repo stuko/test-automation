@@ -4,7 +4,7 @@ export MY_LOCAL_IP=`hostname -I | cut -d' ' -f1`
 cd ./apache-jmeter-5.4.1/bin
 chmod a+x *.sh jmeter*
 pkill -9 -ef jmeter
-./jmeter-server -Djava.rmi.server.hostname=${MY_LOCAL_IP} > jmeter-server.out &
+./jmeter-server -DTEST_AUTO=true -Djava.rmi.server.hostname=${MY_LOCAL_IP} > jmeter-server.out &
 cd ../../
 java -cp .:./apache-jmeter-5.4.1/lib/ext/test-automation-jmeter-plugin.jar com.auto.test.jmeter.plugin.common.server.ShellServer &
 cd ./kanboard/
