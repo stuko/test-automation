@@ -30,8 +30,8 @@ out/
 !**/node_modules/
 !**/test/data/
 
-**/nohup.out
-**/*.log
+!**/nohup.out
+!**/*.log
 
 test-automation-jmeter-plugin/data/target.txt
 test-automation-jmeter-plugin/data/source.txt
