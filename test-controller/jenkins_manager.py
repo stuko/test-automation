@@ -57,6 +57,11 @@ class JenkinsManager:
             print(f'building elapsed time exceeds over 30 seconds [{time_gap.total_seconds()}]')
             self.building = True
             return 0
+        
+        if self.building == True and j.get("result") == 'ABORTED' :
+            print(f'building is Aborted')
+            self.building = True
+            return 0
 
         msg = f'---> [{job_name}] build status: {j.get("result")}'
         print(msg)
