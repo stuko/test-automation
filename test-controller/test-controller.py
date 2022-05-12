@@ -15,6 +15,7 @@ from pymongo.cursor import CursorType
 app = Flask(__name__) 
 config_file = "./volume/config/config.json"
 upload_folder = "./volume/upload/"
+result_folder = "./volume/result/"
 
 @app.route('/controller', methods=['POST','GET']) 
 def controller():
@@ -116,10 +117,10 @@ def controller():
                 return "error"
             
             nowDatetime = datetime.datetime.now()
-            result_file_name = "result-" + project_id + "-" + nowDatetime.strftime("%Y%m%d%H%M%S")
+            result_file_name = result_folder + "result-" + project_id + "-" + nowDatetime.strftime("%Y%m%d%H%M%S")
             jm.execute_shell_command(jm.get_shell_command(upload_folder + jmx_file_name , result_file_name))
             result_string = open(result_file_name, 'r').read()
-            
+
             mm.send_test_automation_complete(project_id,project_name, task_title,result_string)              
             km.move(project_id, task_id, swimlane_id, forward, position)
 
