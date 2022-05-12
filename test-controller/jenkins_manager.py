@@ -61,7 +61,7 @@ class JenkinsManager:
         if self.building == True and j.get("result") == 'ABORTED' :
             print(f'building is Aborted')
             self.building = True
-            return 0
+            return 2
 
         msg = f'---> [{job_name}] build status: {j.get("result")}'
         print(msg)
