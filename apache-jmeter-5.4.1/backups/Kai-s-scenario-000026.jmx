@@ -16,7 +16,7 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">20</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
@@ -26,6 +26,8 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
+        <com.auto.test.jmeter.plugin.common.sampler.TestPluginSampler guiclass="com.auto.test.jmeter.plugin.common.gui.TestAutomationMainGui" testclass="com.auto.test.jmeter.plugin.common.sampler.TestPluginSampler" testname="[res_key=Test Automation Plugin :) - Main]" enabled="true"/>
+        <hashTree/>
         <RecordingController guiclass="RecordController" testclass="RecordingController" testname="Login Management" enabled="true"/>
         <hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Login Management-0" enabled="true">
@@ -706,6 +708,24 @@ where id = 12
             </ResponseAssertion>
             <hashTree/>
           </hashTree>
+          <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="Java Request" enabled="true">
+            <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="SleepTime" elementType="Argument">
+                  <stringProp name="Argument.name">SleepTime</stringProp>
+                  <stringProp name="Argument.value">1000</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="SleepMask" elementType="Argument">
+                  <stringProp name="Argument.name">SleepMask</stringProp>
+                  <stringProp name="Argument.value">0x3FF</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="classname">org.apache.jmeter.protocol.java.test.SleepTest</stringProp>
+          </JavaSampler>
+          <hashTree/>
         </hashTree>
         <RandomController guiclass="RandomControlGui" testclass="RandomController" testname="MetaData Management" enabled="true">
           <intProp name="InterleaveControl.style">1</intProp>
@@ -3557,6 +3577,361 @@ where id = 12
             <hashTree/>
           </hashTree>
         </hashTree>
+        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="Scord Card 건별 테스트" enabled="true"/>
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="스코어카드 데이터 입력" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">import java.io.UnsupportedEncodingException; 
+import java.security.InvalidKeyException; 
+import java.security.KeyPair; 
+import java.security.KeyPairGenerator; 
+import java.security.NoSuchAlgorithmException; 
+import java.security.PrivateKey; 
+import java.security.PublicKey; 
+import java.security.KeyFactory;
+import java.security.spec.X509EncodedKeySpec;
+import java.security.SecureRandom; 
+import java.util.Base64; 
+import javax.crypto.BadPaddingException; 
+import javax.crypto.Cipher; 
+import javax.crypto.IllegalBlockSizeException; 
+import javax.crypto.NoSuchPaddingException;
+import java.security.spec.RSAPublicKeySpec;
+import java.math.BigInteger;
+
+String keyString = vars.get(&quot;rsa_key&quot;);
+try{
+	String id = &quot;kais_admin01&quot;;
+	String pw = &quot;!Q@W3e4r&quot;;
+	vars.put(&quot;id&quot;,id);
+	vars.put(&quot;pwd&quot;,pw);
+	byte[] publicBytes = org.apache.commons.codec.binary.Hex.decodeHex(keyString.toCharArray());
+	BigInteger modulus = new BigInteger(1, publicBytes);
+     BigInteger publicExponent = BigInteger.valueOf(65537L);
+     RSAPublicKeySpec keySpec = new RSAPublicKeySpec(modulus, publicExponent);
+     
+	// final String publicKeyString = keyString.replaceAll(&quot;\\n&quot;, &quot;&quot;).replaceAll(&quot;-{5}[ a-zA-Z]*-{5}&quot;, &quot;&quot;);
+	KeyFactory keyFactory = KeyFactory.getInstance(&quot;RSA&quot;); 
+	// X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(publicKeyString)); 
+	// PublicKey pub_key = keyFactory.generatePublic(keySpecX509);
+	PublicKey pub_key = keyFactory.generatePublic(keySpec);
+	
+	Cipher cipher = Cipher.getInstance(&quot;RSA&quot;); 
+	cipher.init(Cipher.ENCRYPT_MODE, pub_key); 
+	byte[] bytePlain = cipher.doFinal(id.getBytes()); 
+	String encrypted = org.apache.commons.codec.binary.Hex.encodeHexString(bytePlain);
+	// String encrypted = Base64.getEncoder().encodeToString(bytePlain); 
+	vars.put(&quot;enc_id&quot;,encrypted);
+	
+	bytePlain = cipher.doFinal(pw.getBytes()); 
+	encrypted = org.apache.commons.codec.binary.Hex.encodeHexString(bytePlain);
+	// encrypted = Base64.getEncoder().encodeToString(bytePlain); 
+	vars.put(&quot;enc_pw&quot;,encrypted);
+
+}catch(Exception e){
+	e.printStackTrace();
+}
+</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/api/v4/users/status/ids-1" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">[&quot;pu7q6u5naifhiki13j3j831smr&quot;,&quot;7aj3yc68abdh8bdse4xpgxfo5a&quot;,&quot;aspkq8urefrffxyex4cmc4k7hr&quot;,&quot;zc5hmko6h7b6ubz3ygi9orgufa&quot;]</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">192.168.57.237</stringProp>
+            <stringProp name="HTTPSampler.port">8065</stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+            <stringProp name="HTTPSampler.path">/api/v4/users/status/ids</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Accept-Language" elementType="Header">
+                  <stringProp name="Header.name">Accept-Language</stringProp>
+                  <stringProp name="Header.value">ko</stringProp>
+                </elementProp>
+                <elementProp name="Origin" elementType="Header">
+                  <stringProp name="Header.name">Origin</stringProp>
+                  <stringProp name="Header.value">http://192.168.57.237:8065</stringProp>
+                </elementProp>
+                <elementProp name="X-Requested-With" elementType="Header">
+                  <stringProp name="Header.name">X-Requested-With</stringProp>
+                  <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                </elementProp>
+                <elementProp name="X-CSRF-Token" elementType="Header">
+                  <stringProp name="Header.name">X-CSRF-Token</stringProp>
+                  <stringProp name="Header.value">rsh7rusgnfnkpp3f4hub8kxf6o</stringProp>
+                </elementProp>
+                <elementProp name="Content-Type" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">text/plain;charset=UTF-8</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Encoding" elementType="Header">
+                  <stringProp name="Header.name">Accept-Encoding</stringProp>
+                  <stringProp name="Header.value">gzip, deflate</stringProp>
+                </elementProp>
+                <elementProp name="User-Agent" elementType="Header">
+                  <stringProp name="Header.name">User-Agent</stringProp>
+                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36</stringProp>
+                </elementProp>
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/scoreCard/updateTestDebugRunning.do-2" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="SCOR_CRD_ID" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">SCOR_CRD_ID</stringProp>
+                  <stringProp name="Argument.value">SC00000017</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+                <elementProp name="gridData" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                  <stringProp name="Argument.name">gridData</stringProp>
+                  <stringProp name="Argument.value">[{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;ID001&quot;,&quot;REF_ITM_NM&quot;:&quot;개인직업직위코드&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;STR&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;ID001&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;PF002&quot;,&quot;REF_ITM_NM&quot;:&quot;고객구분(개인:6210/개인사업자:6110)&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;STR&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;4&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;6210&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;PF002&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;JOB_CD&quot;,&quot;REF_ITM_NM&quot;:&quot;직업군&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;STR&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;999&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;JOB_CD&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;IC001&quot;,&quot;REF_ITM_NM&quot;:&quot;영업년수&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;ITG&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;5&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;IC001&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;PF020&quot;,&quot;REF_ITM_NM&quot;:&quot;근속월수&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;ITG&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;5&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;0&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;PF020&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;NRU252&quot;,&quot;REF_ITM_NM&quot;:&quot;최근6개월내고객주요평잔1평균&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;NUM&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;0&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;NRU252&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;C00000080&quot;,&quot;REF_ITM_NM&quot;:&quot;최초미해지신용개설일로부터의기간&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;ITG&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;0&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;C00000080&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;C11061000&quot;,&quot;REF_ITM_NM&quot;:&quot;최초미해지신용카드발급일로부터의기간&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;ITG&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;0&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;C11061000&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;CF0642112&quot;,&quot;REF_ITM_NM&quot;:&quot;최근6개월 신용카드 최고 현금서비스이용기관수(15일기준)(광주은행(카드)제외)&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;ITG&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;0&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;CF0642112&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;CF0600903&quot;,&quot;REF_ITM_NM&quot;:&quot;최근6개월신용카드평균일시불이용률(15일기준)&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;NUM&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;0&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;CF0600903&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;CF1200903&quot;,&quot;REF_ITM_NM&quot;:&quot;최근12개월신용카드평균일시불이용률(15일기준)&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;NUM&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;0&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;CF1200903&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;CF1200612&quot;,&quot;REF_ITM_NM&quot;:&quot;최근12개월신용카드현금서비스이용월로부터경과개월수(15일기준)&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;ITG&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;0&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;CF1200612&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;LC0099284&quot;,&quot;REF_ITM_NM&quot;:&quot;전은연미상환계좌별카드캐피탈저축은행대출총금액(신차할부,예적금담보,주택담보,유가증권담보제외)&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;NUM&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;0&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;LC0099284&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;LC1299101&quot;,&quot;REF_ITM_NM&quot;:&quot;전은연 계좌별 12개월 내 발생한 은행조합업권제외 대출 총 기관수(예적금담보/유가증권담보/주택담보/신차제외)&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;ITG&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;0&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;LC1299101&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;KC1000033&quot;,&quot;REF_ITM_NM&quot;:&quot;최근3개월내비은행업권기업신용공여평균과목수(KFB기업신용)&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;ITG&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;0&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;KC1000033&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;LC0025201&quot;,&quot;REF_ITM_NM&quot;:&quot;전은연미상환계좌별은행업권대출총금액&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;NUM&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;0&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;LC0025201&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;TCBDLYS07&quot;,&quot;REF_ITM_NM&quot;:&quot;[TCB파생](통합연체)최근3개월총연체건수&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;ITG&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;0&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;TCBDLYS07&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;TCBDLYS12&quot;,&quot;REF_ITM_NM&quot;:&quot;[TCB파생](통합연체)최근12개월최장연체일수&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;ITG&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;0&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;TCBDLYS12&quot;},{&quot;OPR_FLAG&quot;:&quot;U&quot;,&quot;REF_ITM_ID&quot;:&quot;BASE00&quot;,&quot;REF_ITM_NM&quot;:&quot;스코어카드기본점수&quot;,&quot;REF_ITM_DAT_TP&quot;:&quot;NUM&quot;,&quot;REF_ITM_DAT_LEN&quot;:&quot;10&quot;,&quot;ITM_INOUT_TP&quot;:&quot;INP&quot;,&quot;ITM_DEF_BSC_VL&quot;:&quot;&quot;,&quot;NULL_CK&quot;:&quot;N&quot;,&quot;ORG_ID_CHECKED&quot;:true,&quot;ORG_ID&quot;:&quot;BASE00&quot;}]</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">192.168.57.224</stringProp>
+            <stringProp name="HTTPSampler.port">8180</stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+            <stringProp name="HTTPSampler.path">/kais/scoreCard/updateTestDebugRunning.do</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">http://192.168.57.224:8180/kais/scoreCard/readScoreCardMain.do</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Language" elementType="Header">
+                  <stringProp name="Header.name">Accept-Language</stringProp>
+                  <stringProp name="Header.value">ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7</stringProp>
+                </elementProp>
+                <elementProp name="Origin" elementType="Header">
+                  <stringProp name="Header.name">Origin</stringProp>
+                  <stringProp name="Header.value">http://192.168.57.224:8180</stringProp>
+                </elementProp>
+                <elementProp name="X-Requested-With" elementType="Header">
+                  <stringProp name="Header.name">X-Requested-With</stringProp>
+                  <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                </elementProp>
+                <elementProp name="Content-Type" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/x-www-form-urlencoded; charset=UTF-8</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Encoding" elementType="Header">
+                  <stringProp name="Header.name">Accept-Encoding</stringProp>
+                  <stringProp name="Header.value">gzip, deflate</stringProp>
+                </elementProp>
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                </elementProp>
+                <elementProp name="User-Agent" elementType="Header">
+                  <stringProp name="Header.name">User-Agent</stringProp>
+                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/msdownload/update/v3/static/trustedr/en/disallowedcertstl.cab-3" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="712cd7b973920d69" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">712cd7b973920d69</stringProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata"></stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">ctldl.windowsupdate.com</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/msdownload/update/v3/static/trustedr/en/disallowedcertstl.cab</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+                <elementProp name="User-Agent" elementType="Header">
+                  <stringProp name="Header.name">User-Agent</stringProp>
+                  <stringProp name="Header.value">Microsoft-CryptoAPI/10.0</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/msdownload/update/v3/static/trustedr/en/pinrulesstl.cab-4" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="752f02f05a1fa4af" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">752f02f05a1fa4af</stringProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata"></stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">ctldl.windowsupdate.com</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/msdownload/update/v3/static/trustedr/en/pinrulesstl.cab</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+                <elementProp name="User-Agent" elementType="Header">
+                  <stringProp name="Header.name">User-Agent</stringProp>
+                  <stringProp name="Header.value">Microsoft-CryptoAPI/10.0</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/-5" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">x1.c.lencr.org</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Cache-Control" elementType="Header">
+                  <stringProp name="Header.name">Cache-Control</stringProp>
+                  <stringProp name="Header.value">max-age = 3600</stringProp>
+                </elementProp>
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+                <elementProp name="User-Agent" elementType="Header">
+                  <stringProp name="Header.name">User-Agent</stringProp>
+                  <stringProp name="Header.value">Microsoft-CryptoAPI/10.0</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/msdownload/update/v3/static/trustedr/en/authrootstl.cab-6" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="fb7b17c51fd8f018" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.name">fb7b17c51fd8f018</stringProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata"></stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">ctldl.windowsupdate.com</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/msdownload/update/v3/static/trustedr/en/authrootstl.cab</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+                <elementProp name="User-Agent" elementType="Header">
+                  <stringProp name="Header.name">User-Agent</stringProp>
+                  <stringProp name="Header.value">Microsoft-CryptoAPI/10.0</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="Score Card 삭제" enabled="true"/>
+        <hashTree/>
       </hashTree>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments"/>

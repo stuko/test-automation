@@ -79,9 +79,9 @@ class JmeterManager:
             return None
         return find['jmx_file_name']
     
-    def get_shell_command(self, jmx_file_name):
+    def get_shell_command(self, jmx_file_name , result_file_name ):
         # REMOTE
-        cmd = self.path + 'jmeter -DTEST_AUTO=true -Djava.rmi.server.hostname='+ self.jmeter_ip +' -n -t ' + jmx_file_name + ' -r'
+        cmd = self.path + 'jmeter -DTEST_AUTO=true -Djava.rmi.server.hostname='+ self.jmeter_ip +' -n -t ' + jmx_file_name + ' -r -l ' + result_file_name
         # LOCAL
         # cmd = self.path + 'jmeter -DTEST_AUTO=true -Djava.rmi.server.hostname='+ self.jmeter_ip +' -n -t ' + jmx_file_name 
         return cmd

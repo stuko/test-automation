@@ -114,9 +114,13 @@ def controller():
                 mm.send_jmeter_jenkins_relation_error(project_id,project_name, task_title,description)  
                 km.move(project_id, task_id, swimlane_id, backward, position)
                 return "error"
-            jm.execute_shell_command(jm.get_shell_command(upload_folder + jmx_file_name))
-
-            mm.send_test_automation_complete(project_id,project_name, task_title,description)              
+            
+            nowDatetime = datetime.datetime.now()
+            result_file_name = "result-" + project_id + "-" + nowDatetime.strftime("%Y%m%d%H%M%S")
+            jm.execute_shell_command(jm.get_shell_command(upload_folder + jmx_file_name , result_file_name))
+            result_string = open(result_file_name, 'r').read()
+            
+            mm.send_test_automation_complete(project_id,project_name, task_title,result_string)              
             km.move(project_id, task_id, swimlane_id, forward, position)
 
         if(column_title.find(km.get_column(4)) >= 0):            
