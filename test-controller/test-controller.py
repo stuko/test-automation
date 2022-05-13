@@ -117,9 +117,10 @@ def controller():
                 return "error"
             
             nowDatetime = datetime.datetime.now()
+            os.makedirs(result_folder, exist_ok=True)
             result_file_name = result_folder + "result-" + project_id + "-" + nowDatetime.strftime("%Y%m%d%H%M%S")
             jm.execute_shell_command(jm.get_shell_command(upload_folder + jmx_file_name , result_file_name))
-            result_string = open(result_file_name, 'r').read()
+            result_string = open("/app/server/" + result_file_name, 'r').read()
 
             mm.send_test_automation_complete(project_id,project_name, task_title,result_string)              
             km.move(project_id, task_id, swimlane_id, forward, position)

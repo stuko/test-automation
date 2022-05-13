@@ -1,145 +1,23 @@
-2022-05-13 07:36:04,431 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
-2022-05-13 07:36:04,524 INFO o.a.j.JMeter: Loading user properties from: user.properties
-2022-05-13 07:36:04,535 INFO o.a.j.JMeter: Loading system properties from: system.properties
-2022-05-13 07:36:04,536 INFO o.a.j.JMeter: Setting System property: TEST_URL=http://192.168.57.224:5000/
-2022-05-13 07:36:04,552 INFO o.a.j.JMeter: Copyright (c) 1998-2021 The Apache Software Foundation
-2022-05-13 07:36:04,552 INFO o.a.j.JMeter: Version 5.4.1
-2022-05-13 07:36:04,552 INFO o.a.j.JMeter: java.version=15.0.2
-2022-05-13 07:36:04,552 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
-2022-05-13 07:36:04,552 INFO o.a.j.JMeter: os.name=Windows 10
-2022-05-13 07:36:04,552 INFO o.a.j.JMeter: os.arch=amd64
-2022-05-13 07:36:04,552 INFO o.a.j.JMeter: os.version=10.0
-2022-05-13 07:36:04,553 INFO o.a.j.JMeter: file.encoding=MS949
-2022-05-13 07:36:04,553 INFO o.a.j.JMeter: java.awt.headless=null
-2022-05-13 07:36:04,553 INFO o.a.j.JMeter: Max memory     =8589934592
-2022-05-13 07:36:04,553 INFO o.a.j.JMeter: Available Processors =8
-2022-05-13 07:36:04,569 INFO o.a.j.JMeter: Default Locale=English (EN)
-2022-05-13 07:36:04,569 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
-2022-05-13 07:36:04,569 INFO o.a.j.JMeter: JMeterHome=D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1
-2022-05-13 07:36:04,570 INFO o.a.j.JMeter: user.dir  =D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin
-2022-05-13 07:36:04,571 INFO o.a.j.JMeter: PWD       =D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin
-2022-05-13 07:36:04,572 INFO o.a.j.JMeter: IP: 192.168.57.243 Name: DESKTOP-0Q4LOBV FullName: host.docker.internal
-2022-05-13 07:36:04,725 INFO o.a.j.JMeter: Setting LAF to: laf:javax.swing.plaf.metal.MetalLookAndFeel
-2022-05-13 07:36:04,865 INFO o.a.j.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties
-2022-05-13 07:36:08,257 INFO c.a.t.j.p.c.u.TestPluginUtil: Detected encoding = EUC-KR
-2022-05-13 07:36:08,344 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-13 07:36:08,345 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-13 07:36:08,345 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : null
-2022-05-13 07:36:08,345 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
-2022-05-13 07:37:03,396 INFO o.a.j.s.FileServer: Default base='D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin'
-2022-05-13 07:37:03,397 INFO o.a.j.g.a.Load: Loading file: D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin\Kai-s-scenario.jmx
-2022-05-13 07:37:03,397 INFO o.a.j.s.FileServer: Set new base='D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin'
-2022-05-13 07:37:03,569 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
-2022-05-13 07:37:03,594 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
-2022-05-13 07:37:03,595 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
-2022-05-13 07:37:03,596 INFO o.a.j.s.SaveService: Loading file: D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin\Kai-s-scenario.jmx
-2022-05-13 07:37:03,675 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2022-05-13 07:37:03,675 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2022-05-13 07:37:03,675 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2022-05-13 07:37:03,675 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2022-05-13 07:37:03,675 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
-2022-05-13 07:37:03,675 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
-2022-05-13 07:37:03,764 INFO o.a.j.p.h.c.CookieManager: Settings: Delete null: true Check: true Allow variable: true Save: false Prefix: COOKIE_
-2022-05-13 07:37:04,036 INFO o.a.j.e.KeyToolUtils: keytool found at 'keytool'
-2022-05-13 07:37:04,036 INFO o.a.j.p.h.p.ProxyControl: HTTP(S) Test Script Recorder SSL Proxy will use keys that support embedded 3rd party resources in file D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin\proxyserver.jks
-2022-05-13 07:37:04,085 INFO c.a.t.j.p.c.u.TestPluginUtil: Detected encoding = EUC-KR
-2022-05-13 07:37:04,089 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-13 07:37:04,089 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-13 07:37:04,089 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : null
-2022-05-13 07:37:04,090 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
-2022-05-13 07:37:04,091 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
-2022-05-13 07:37:04,091 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-13 07:37:04,091 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-13 07:37:04,091 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : null
-2022-05-13 07:37:04,091 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
-2022-05-13 07:37:04,431 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
-2022-05-13 07:37:04,431 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to UTF-8
-2022-05-13 07:37:04,431 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
-2022-05-13 07:37:04,431 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
-2022-05-13 07:37:04,529 INFO o.a.j.v.ViewResultsFullVisualizer: Add JavaFX to your Java installation if you want to use renderer: org.apache.jmeter.visualizers.RenderInBrowser
-2022-05-13 07:37:04,628 INFO o.a.j.s.FileServer: Set new base='D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin'
-2022-05-13 07:37:38,946 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
-2022-05-13 07:37:38,946 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-13 07:37:38,946 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-13 07:37:38,946 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : Kai-s-scenario.jmx
-2022-05-13 07:37:38,946 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
-2022-05-13 07:37:38,948 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 07:37:38,957 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-13 07:37:38,958 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 07:37:38,965 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-13 07:37:38,966 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 07:37:38,971 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-13 07:37:38,975 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
-2022-05-13 07:37:38,975 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-13 07:37:38,975 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-13 07:37:38,975 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : Kai-s-scenario.jmx
-2022-05-13 07:37:38,975 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
-2022-05-13 07:37:38,976 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 07:37:38,981 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-13 07:39:23,389 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 07:39:23,396 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-13 07:39:49,237 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 07:39:49,245 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-13 07:40:33,086 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
-2022-05-13 07:40:33,086 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-13 07:40:33,086 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-13 07:40:33,086 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : Kai-s-scenario.jmx
-2022-05-13 07:40:33,086 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
-2022-05-13 07:40:33,087 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 07:40:33,093 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-13 07:40:33,096 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 07:40:33,101 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-13 07:40:33,101 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 07:40:33,107 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-13 07:41:39,742 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
-2022-05-13 07:41:39,742 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-13 07:41:39,742 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-13 07:41:39,742 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : Kai-s-scenario.jmx
-2022-05-13 07:41:39,743 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
-2022-05-13 07:41:39,743 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 07:41:39,751 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-13 07:41:39,753 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 07:41:39,760 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-13 07:41:39,760 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 07:41:39,766 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-13 07:41:39,769 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
-2022-05-13 07:41:39,769 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-05-13 07:41:39,769 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
-"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
-,"topic":"fds-bank.t"
-}
-2022-05-13 07:41:39,769 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : Kai-s-scenario.jmx
-2022-05-13 07:41:39,769 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
-2022-05-13 07:41:39,769 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 07:41:39,775 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-13 07:42:05,227 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 07:42:05,236 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-13 07:44:13,995 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 07:44:14,002 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
-2022-05-13 07:45:47,878 INFO c.a.t.j.p.c.g.TestAutomationGuiController: jmx_file_name is Kai-s-scenario.jmx
-2022-05-13 07:45:47,878 INFO c.a.t.j.p.c.g.TestAutomationGuiController: {"success": "project info is created"}
-2022-05-13 07:46:50,050 INFO c.a.t.j.p.c.g.TestAutomationGuiController: jmx_file_name is Kai-s-scenario.jmx
-2022-05-13 07:46:50,050 INFO c.a.t.j.p.c.g.TestAutomationGuiController: {"success": "project info is updated"}
-2022-05-13 09:11:03,230 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
-2022-05-13 09:11:03,239 INFO c.a.t.j.p.c.g.TestAutomationGuiController: [{"jenkins_token": "b5a9878ecb5ddc9ee1556a57134c3fa0", "jenkins_server_url": "http://192.168.57.237:8084/", "project_id": "3", "jmx_file_name": "Kai-s-scenario.jmx", "jenkins_project_name": "test-automation-3", "mattermost_webhook_id": "u5ztbrjboidxmx3cf34hbcwkdc"}]
+2022-05-13 09:51:16,011 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2022-05-13 09:51:16,026 INFO o.a.j.JMeter: Loading user properties from: user.properties
+2022-05-13 09:51:16,026 INFO o.a.j.JMeter: Loading system properties from: system.properties
+2022-05-13 09:51:16,027 INFO o.a.j.JMeter: Setting System property: TEST_URL=http://192.168.57.224:5000/
+2022-05-13 09:51:16,031 INFO o.a.j.JMeter: Copyright (c) 1998-2021 The Apache Software Foundation
+2022-05-13 09:51:16,031 INFO o.a.j.JMeter: Version 5.4.1
+2022-05-13 09:51:16,031 INFO o.a.j.JMeter: java.version=15.0.2
+2022-05-13 09:51:16,031 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2022-05-13 09:51:16,031 INFO o.a.j.JMeter: os.name=Windows 10
+2022-05-13 09:51:16,031 INFO o.a.j.JMeter: os.arch=amd64
+2022-05-13 09:51:16,031 INFO o.a.j.JMeter: os.version=10.0
+2022-05-13 09:51:16,031 INFO o.a.j.JMeter: file.encoding=MS949
+2022-05-13 09:51:16,031 INFO o.a.j.JMeter: java.awt.headless=null
+2022-05-13 09:51:16,032 INFO o.a.j.JMeter: Max memory     =8589934592
+2022-05-13 09:51:16,032 INFO o.a.j.JMeter: Available Processors =8
+2022-05-13 09:51:16,037 INFO o.a.j.JMeter: Default Locale=English (EN)
+2022-05-13 09:51:16,037 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2022-05-13 09:51:16,037 INFO o.a.j.JMeter: JMeterHome=D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1
+2022-05-13 09:51:16,037 INFO o.a.j.JMeter: user.dir  =D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin
+2022-05-13 09:51:16,038 INFO o.a.j.JMeter: PWD       =D:\workspace\eclipse-workspace-01\test-automation\apache-jmeter-5.4.1\bin
+2022-05-13 09:51:16,039 INFO o.a.j.JMeter: IP: 192.168.57.243 Name: DESKTOP-0Q4LOBV FullName: host.docker.internal
+2022-05-13 09:51:16,129 INFO o.a.j.JMeter: Setting LAF to: laf:javax.swing.plaf.metal.MetalLookAndFeel
+2022-05-13 09:51:16,197 INFO o.a.j.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties
