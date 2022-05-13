@@ -11,6 +11,8 @@ chmod a+x *.sh jmeter*
 pkill -9 -ef jmeter
 ./jmeter-server -DTEST_AUTO=true -Djava.rmi.server.hostname=${MY_LOCAL_IP} > jmeter-server.out &
 cd ../../
+
+pkill -9 -ef com.auto.test.jmeter.plugin.common.server.ShellServer
 java -cp .:./apache-jmeter-5.4.1/lib/ext/test-automation-jmeter-plugin.jar com.auto.test.jmeter.plugin.common.server.ShellServer &
 sudo docker container stop mongo-test-automation
 sudo docker container rm mongo-test-automation
