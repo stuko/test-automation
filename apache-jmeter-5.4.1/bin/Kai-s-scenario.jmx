@@ -727,7 +727,7 @@ where id = 12
           </JavaSampler>
           <hashTree/>
         </hashTree>
-        <RandomController guiclass="RandomControlGui" testclass="RandomController" testname="MetaData Management" enabled="false">
+        <RandomController guiclass="RandomControlGui" testclass="RandomController" testname="MetaData Management" enabled="true">
           <intProp name="InterleaveControl.style">1</intProp>
         </RandomController>
         <hashTree>
@@ -2789,7 +2789,7 @@ where id = 12
             <hashTree/>
           </hashTree>
         </hashTree>
-        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="Score Card Item Management" enabled="false"/>
+        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="Score Card Item Management" enabled="true"/>
         <hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Score Card Item Management-00" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -5051,6 +5051,8 @@ where id = 12
             <hashTree/>
           </hashTree>
         </hashTree>
+        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="전략 실행" enabled="true"/>
+        <hashTree/>
       </hashTree>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments"/>
