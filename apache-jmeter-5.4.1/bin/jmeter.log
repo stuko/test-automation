@@ -141,3 +141,5 @@
 2022-05-13 07:45:47,878 INFO c.a.t.j.p.c.g.TestAutomationGuiController: {"success": "project info is created"}
 2022-05-13 07:46:50,050 INFO c.a.t.j.p.c.g.TestAutomationGuiController: jmx_file_name is Kai-s-scenario.jmx
 2022-05-13 07:46:50,050 INFO c.a.t.j.p.c.g.TestAutomationGuiController: {"success": "project info is updated"}
+2022-05-13 09:11:03,230 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"Kai-s-scenario.jmx"}
+2022-05-13 09:11:03,239 INFO c.a.t.j.p.c.g.TestAutomationGuiController: [{"jenkins_token": "b5a9878ecb5ddc9ee1556a57134c3fa0", "jenkins_server_url": "http://192.168.57.237:8084/", "project_id": "3", "jmx_file_name": "Kai-s-scenario.jmx", "jenkins_project_name": "test-automation-3", "mattermost_webhook_id": "u5ztbrjboidxmx3cf34hbcwkdc"}]
