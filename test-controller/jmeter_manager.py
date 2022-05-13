@@ -86,6 +86,10 @@ class JmeterManager:
         # cmd = self.path + 'jmeter -DTEST_AUTO=true -Djava.rmi.server.hostname='+ self.jmeter_ip +' -n -t ' + jmx_file_name 
         return cmd
 
+    def stop_test(self):
+        self.execute_shell_command(self, self.path + 'shutdown.sh')
+        self.execute_shell_command(self, self.path + 'stoptest.sh')
+
     def execute_shell_command(self, shell):
         print(f'execute jemter shell : {shell}')
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
