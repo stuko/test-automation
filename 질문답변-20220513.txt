@@ -6,4 +6,21 @@
 6) A 변수 in 룰, 
 7) 테스트 계정 별도로 필요
 8) 테스트 데이터 생성 과정 ???
-9) 
+9) 데이터 테스트
+  datasource:
+    pylon-datasource:
+      url: jdbc:h2:${kais.home}/data/pylon/pylon;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      driver-class-name: org.h2.Driver
+      username: ENC(oFQUpVq50PrBDiiRVhIdZA==)
+      password: ENC(wJ1ybpLNsaSOiqzw81XTEg==)
+    kais-web-datasource:
+      url: jdbc:h2:${kais.home}/data/web/KAIS-WEB;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      driver-class-name: org.h2.Driver
+      username: ENC(oFQUpVq50PrBDiiRVhIdZA==)
+      password: ENC(wJ1ybpLNsaSOiqzw81XTEg==)
+      data: classpath:data-h2.sql
+    kais-log-datasource:
+      url: jdbc:h2:${kais.home}/data/web/KAIS-LOG;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      driver-class-name: org.h2.Driver
+      username: ENC(oFQUpVq50PrBDiiRVhIdZA==)
+      password: ENC(wJ1ybpLNsaSOiqzw81XTEg==)

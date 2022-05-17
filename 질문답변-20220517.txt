@@ -1,0 +1,20 @@
+테스트 자동화 
+--> 결함 발견 
+--> 알림 
+--> 의도적으로 ex)Debugging.. 
+--> 넘어감. 
+--->다음에 또 돌면 
+--> 결함 발견 : 기계적 
+--> 
+
+# 태깅 : Skip --> 소스에...
+  - 작업자 관여 
+# 패턴 매칭 : Ignore --> 정보를 기록 --> 
+  - 검사자 관여 
+  정보를 기록 --> 
+    - DB  --> 명확하게 내용을 가져옴 
+            --> K-Mariadb , JMeter ->MDB --> JMeter에서 판단
+            --> MongoDB Collection IgnoreCollection
+    - File --> JSON
+    - 소스에 박아 넣음
+

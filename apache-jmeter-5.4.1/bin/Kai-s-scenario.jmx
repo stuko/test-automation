@@ -16,7 +16,7 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">100</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
@@ -4757,7 +4757,7 @@ where id = 12
         </hashTree>
         <RecordingController guiclass="RecordController" testclass="RecordingController" testname="Scord Card 건별 테스트" enabled="true"/>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/api/v4/users/status/ids-1" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Scord Card 건별 테스트-0" enabled="true">
             <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
               <collectionProp name="Arguments.arguments">
@@ -4821,7 +4821,7 @@ where id = 12
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/scoreCard/updateTestDebugRunning.do-2" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Scord Card 건별 테스트-1" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="SCOR_CRD_ID" elementType="HTTPArgument">
@@ -4892,8 +4892,17 @@ where id = 12
               </collectionProp>
             </HeaderManager>
             <hashTree/>
+            <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="스코어점수여부 확인" enabled="true">
+              <stringProp name="JSON_PATH">$.fullResultOutData.KOUT_RESULT.RESULT_OUTPUT.SCORE_POINT</stringProp>
+              <stringProp name="EXPECTED_VALUE"></stringProp>
+              <boolProp name="JSONVALIDATION">true</boolProp>
+              <boolProp name="EXPECT_NULL">true</boolProp>
+              <boolProp name="INVERT">true</boolProp>
+              <boolProp name="ISREGEX">false</boolProp>
+            </JSONPathAssertion>
+            <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/msdownload/update/v3/static/trustedr/en/disallowedcertstl.cab-3" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Scord Card 건별 테스트-2" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="712cd7b973920d69" elementType="HTTPArgument">
@@ -4933,7 +4942,7 @@ where id = 12
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/msdownload/update/v3/static/trustedr/en/pinrulesstl.cab-4" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Scord Card 건별 테스트-3" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="752f02f05a1fa4af" elementType="HTTPArgument">
@@ -4973,7 +4982,7 @@ where id = 12
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/-5" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Scord Card 건별 테스트-4" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
@@ -5010,7 +5019,7 @@ where id = 12
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/msdownload/update/v3/static/trustedr/en/authrootstl.cab-6" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Scord Card 건별 테스트-5" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="fb7b17c51fd8f018" elementType="HTTPArgument">
@@ -5051,7 +5060,195 @@ where id = 12
             <hashTree/>
           </hashTree>
         </hashTree>
-        <RecordingController guiclass="RecordController" testclass="RecordingController" testname="전략 실행" enabled="true"/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedMetaItem" enabled="true">
+          <stringProp name="dataSource">kaiswebdb</stringProp>
+          <stringProp name="query">SELECT REF_ID , REF_ITM_ID , REF_ITM_NM  
+FROM KAIS52_REF_ITM
+WHERE REF_ITM_ID  NOT IN (SELECT MET_DAT_SET_ITM_ID FROM KAIS21_MET_DAT_SET_ITM_DTL)
+ORDER BY REF_ID </stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+          <stringProp name="resultSetMaxRows"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SameItemNameButTypeIsNot" enabled="true">
+          <stringProp name="dataSource">kaiswebdb</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">SELECT A.REF_ID ,A.REF_ITM_ID ,A.REF_ITM_DAT_TP, B.REF_ID ,B.REF_ITM_DAT_TP
+FROM (SELECT REF_ID , REF_ITM_ID , ref_itm_dat_tp FROM KAIS52_REF_ITM) A,
+	 (SELECT REF_ID , REF_ITM_ID , ref_itm_dat_tp FROM KAIS52_REF_ITM) B 
+WHERE A.REF_ITM_ID = B.REF_ITM_ID
+AND   A.REF_ITM_DAT_TP != B.REF_ITM_DAT_TP 
+AND (
+		(
+			A.ref_itm_dat_tp IN (&apos;NUM&apos;,&apos;ITG&apos;) 
+			AND 
+			B.ref_itm_dat_tp IN (&apos;STR&apos;)
+		)    
+		OR 
+		(
+			A.ref_itm_dat_tp IN (&apos;STR&apos;) 
+			AND 
+			B.ref_itm_dat_tp IN (&apos;NUM&apos;,&apos;ITG&apos;)
+		)    
+	)
+GROUP BY A.REF_ID ,A.REF_ITM_ID ,A.REF_ITM_DAT_TP, B.REF_ID ,B.REF_ITM_DAT_TP </stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetMaxRows"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedRefObject" enabled="true">
+          <stringProp name="dataSource">kaiswebdb</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">SELECT * FROM KAIS60_STGY_SET_MAIN 
+WHERE STGY_SET_ID NOT IN 
+(
+ SELECT STGY_SET_ID FROM KAIS62_DCS_FUNC_DTL
+ UNION ALL 
+ SELECT STGY_SET_ID FROM KAIS62_DCS_OBJ_DTL
+ UNION ALL 
+ SELECT STGY_SET_ID FROM KAIS62_DCS_SCRT_DTL
+ UNION ALL 
+ SELECT STGY_SET_ID FROM KAIS62_FORK_OBJ_DTL
+ UNION ALL 
+ SELECT STGY_SET_ID FROM KAIS62_MAIN_OBJ_DTL
+ UNION ALL 
+ SELECT STGY_SET_ID FROM KAIS65_ENTRY_ACT_ITM_DTL
+ UNION ALL 
+ SELECT STGY_SET_ID FROM KAIS65_ENTRY_MAIN
+ UNION ALL 
+ SELECT SCOR_CRD_ID FROM KAIS50_SCOR_CRD_MAIN
+ UNION ALL 
+ SELECT SCOR_CRD_ID FROM KAIS51_SCOR_CRD_SEG
+ UNION ALL 
+ SELECT SCOR_CRD_ID FROM KAIS53_SCOR_CRD_SEG_SPRT_CND
+ UNION ALL 
+ SELECT SCOR_CRD_ID FROM KAIS53_SCOR_CRD_SEG_US_ITM
+ UNION ALL 
+ SELECT SCOR_CRD_ID FROM KAIS54_SCOR_CRD_BINN_DTL
+ UNION ALL 
+ SELECT SCOR_CRD_ID FROM KAIS54_SCOR_CRD_DYNAMIC_ITEM
+ UNION ALL 
+ SELECT SCOR_CRD_ID FROM KAIS55_SCOR_CRD_GD_RULE
+ UNION ALL 
+ SELECT SCOR_CRD_ID FROM KAIS55_SCOR_CRD_GD_RULE_DTL
+ UNION ALL 
+ SELECT SCOR_CRD_ID FROM KAIS57_SCOR_CRD_RSN
+ )
+</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetMaxRows"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedDecisionFunction" enabled="true">
+          <stringProp name="dataSource">kaiswebdb</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">SELECT A.STGY_SET_ID , A.OBJ_TP , A.OBJ_ID ,B.STGY_SET_ID , B.OBJ_TP , B.OBJ_ID  
+FROM KAIS61_STGY_SET_OBJ A LEFT OUTER JOIN KAIS62_DCS_FUNC_DTL B 
+	 ON A.STGY_SET_ID  = B.STGY_SET_ID 
+	 AND A.OBJ_TP = B.OBJ_TP 
+	 AND A.OBJ_ID = B.OBJ_ID 
+WHERE A.OBJ_TP  IN (&apos;DF&apos;)
+AND   B.OBJ_ID IS NULL</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetMaxRows"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedDM_DT_TR" enabled="true">
+          <stringProp name="dataSource">kaiswebdb</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">SELECT A.STGY_SET_ID , A.OBJ_TP , A.OBJ_ID ,B.STGY_SET_ID , B.OBJ_TP , B.OBJ_ID  
+FROM KAIS61_STGY_SET_OBJ A LEFT OUTER JOIN KAIS62_DCS_OBJ_DTL B 
+	 ON A.STGY_SET_ID  = B.STGY_SET_ID 
+	 AND A.OBJ_TP = B.OBJ_TP 
+	 AND A.OBJ_ID = B.OBJ_ID 
+WHERE A.OBJ_TP IN (&apos;DM&apos;,&apos;TR&apos;,&apos;DT&apos;)
+AND   B.OBJ_ID IS NULL </stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetMaxRows"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedFork" enabled="true">
+          <stringProp name="dataSource">kaiswebdb</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">SELECT A.STGY_SET_ID , A.OBJ_TP , A.OBJ_ID ,B.STGY_SET_ID , B.OBJ_TP , B.OBJ_ID  
+FROM KAIS61_STGY_SET_OBJ A LEFT OUTER JOIN KAIS62_FORK_OBJ_DTL B 
+	 ON A.STGY_SET_ID  = B.STGY_SET_ID 
+	 AND A.OBJ_TP = B.OBJ_TP 
+	 AND A.OBJ_ID = B.OBJ_ID 
+WHERE A.OBJ_TP IN (&apos;FK&apos;)
+AND   B.OBJ_ID IS NULL </stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetMaxRows"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedDS" enabled="true">
+          <stringProp name="dataSource">kaiswebdb</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">SELECT A.STGY_SET_ID , A.OBJ_TP , A.OBJ_ID ,B.STGY_SET_ID , B.OBJ_TP , B.OBJ_ID  
+FROM KAIS61_STGY_SET_OBJ A LEFT OUTER JOIN KAIS62_DCS_SCRT_DTL B 
+	 ON A.STGY_SET_ID  = B.STGY_SET_ID 
+	 AND A.OBJ_TP = B.OBJ_TP 
+	 AND A.OBJ_ID = B.OBJ_ID 
+WHERE A.OBJ_TP IN (&apos;DS&apos;)
+AND   B.OBJ_ID IS NULL </stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetMaxRows"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedScoreCardStrategySet" enabled="true">
+          <stringProp name="dataSource">kaiswebdb</stringProp>
+          <stringProp name="queryType">Select Statement</stringProp>
+          <stringProp name="query">SELECT A.STGY_SET_ID , A.OBJ_TP , A.OBJ_ID ,B.STGY_SET_ID , B.OBJ_TP , B.OBJ_ID  
+FROM KAIS61_STGY_SET_OBJ A LEFT OUTER JOIN KAIS62_MAIN_OBJ_DTL B 
+	 ON A.STGY_SET_ID  = B.STGY_SET_ID 
+	 AND A.OBJ_TP = B.OBJ_TP 
+	 AND A.OBJ_ID = B.OBJ_ID 
+WHERE A.OBJ_TP IN (&apos;SS&apos;,&apos;SC&apos;)
+AND   B.OBJ_ID IS NULL </stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="resultSetMaxRows"></stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+        </JDBCSampler>
         <hashTree/>
       </hashTree>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -5115,6 +5312,80 @@ where id = 12
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
       <ProxyControl guiclass="ProxyControlGui" testclass="ProxyControl" testname="HTTP(S) Test Script Recorder" enabled="true">
         <stringProp name="ProxyControlGui.port">8888</stringProp>
         <collectionProp name="ProxyControlGui.exclude_list">
@@ -5142,6 +5413,25 @@ where id = 12
         <stringProp name="ProxyControlGui.content_type_exclude"></stringProp>
         <stringProp name="ProxyControlGui.domains">192.168.57.243</stringProp>
       </ProxyControl>
+      <hashTree/>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="KAI-S Web DB Connection" enabled="true">
+        <boolProp name="autocommit">true</boolProp>
+        <stringProp name="checkQuery"></stringProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="connectionProperties"></stringProp>
+        <stringProp name="dataSource">kaiswebdb</stringProp>
+        <stringProp name="dbUrl">jdbc:h2:tcp://192.168.57.224:9092/KAIS-WEB;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</stringProp>
+        <stringProp name="driver">org.h2.Driver</stringProp>
+        <stringProp name="initQuery"></stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="password">1234!</stringProp>
+        <stringProp name="poolMax">5</stringProp>
+        <boolProp name="preinit">false</boolProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <stringProp name="username">sa</stringProp>
+      </JDBCDataSource>
       <hashTree/>
     </hashTree>
   </hashTree>
