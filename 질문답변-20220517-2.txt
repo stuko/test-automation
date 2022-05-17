@@ -1,0 +1,13 @@
+SELECT REF_ITM_ID  AS id
+     , CASE WHEN REF_ITM_DAT_TP = 'STR' THEN 'key'
+       		ELSE 'number'
+       END 
+       AS TYPE
+     , CASE WHEN REF_ITM_DAT_TP = 'STR' THEN to_char(REF_ITM_DAT_LEN)
+       		ELSE '0~1000000000'
+       END 
+       AS VALUE 
+     , 10 AS COUNT
+     , REF_ITM_DAT_LEN AS LENGTH
+     , 'N' AS ENCODE
+FROM KAIS52_REF_ITM
