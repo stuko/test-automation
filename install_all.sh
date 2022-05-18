@@ -9,8 +9,8 @@ export MY_LOCAL_IP=`hostname -I | cut -d' ' -f1`
 
 sudo pkill -9 -ef jmeter
 cd ./apache-jmeter-5.4.1/bin
-chmod a+x *.sh jmeter*
-./run-jmeter-test-server.sh
+sudo chmod a+x *.sh jmeter*
+sudo ./run-jmeter-test-server.sh
 cd ../../
 
 sudo docker container stop mongo-test-automation
@@ -22,9 +22,9 @@ sudo docker run -d --name mongo-test-automation -e "TZ=Asia/Seoul" -p 27017:2701
 # ./init.sh
 # cd ../..
 cd ./test-controller/
-chmod a+x *.sh
-./docker-build.sh
-./docker-run.sh
+sudo chmod a+x *.sh
+sudo ./docker-build.sh
+sudo ./docker-run.sh
 cd ../
 
 
