@@ -7,9 +7,7 @@ cd ../
 sudo docker rm -f test-controller-python
 export MY_LOCAL_IP=`hostname -I | cut -d' ' -f1`
 
-sudo pkill -9 -ef jmeter
 cd ./apache-jmeter-5.4.1/bin
-sudo chmod a+x *.sh jmeter*
 sudo ./run-jmeter-test-server.sh
 cd ../../
 
