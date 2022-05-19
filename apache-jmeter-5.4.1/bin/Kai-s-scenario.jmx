@@ -5454,6 +5454,13 @@ AND   B.OBJ_ID IS NULL </stringProp>
         <stringProp name="username">sa</stringProp>
       </JDBCDataSource>
       <hashTree/>
+      <BeanShellListener guiclass="TestBeanGUI" testclass="BeanShellListener" testname="Test Result to DataBase" enabled="true">
+        <stringProp name="filename"></stringProp>
+        <stringProp name="parameters"></stringProp>
+        <boolProp name="resetInterpreter">false</boolProp>
+        <stringProp name="script"></stringProp>
+      </BeanShellListener>
+      <hashTree/>
     </hashTree>
   </hashTree>
 </jmeterTestPlan>
