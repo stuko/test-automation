@@ -53,7 +53,8 @@ class JmeterManager:
                                                   ,'jenkins_server_url': params['jenkins_server_url']
                                                   ,'jenkins_project_name': params['jenkins_project_name']
                                                   ,'jenkins_token': params['jenkins_token']
-                                                  ,'mattermost_webhook_id': params['mattermost_webhook_id']}})
+                                                  ,'mattermost_webhook_id': params['mattermost_webhook_id']
+                                                  ,'test_exec_shell': params['test_exec_shell']}})
         return result
     
     def get_project_detail(self, project_id):
@@ -77,8 +78,10 @@ class JmeterManager:
         find = self.collection.find_one({'project_id' : project_id})
         if find == None :
             return None
-        return find['jmx_file_name']
-    
+        return find
+    #################################################
+    # JMeter self.path는 ShellServer에서 실행 하기 위한 Path 이므로 ./ 로 설정 됨.
+    #################################################
     def get_shell_command(self, jmx_file_name , result_file_name ):
         # REMOTE
         cmd = self.path + 'jmeter -DTEST_AUTO=true -Djava.rmi.server.hostname='+ self.jmeter_ip +' -n -t ' + jmx_file_name + ' -r -l ' + result_file_name

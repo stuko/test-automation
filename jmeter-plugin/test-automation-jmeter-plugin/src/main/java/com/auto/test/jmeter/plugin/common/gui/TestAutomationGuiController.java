@@ -146,7 +146,14 @@ public class TestAutomationGuiController {
         }
     }
     
-    public static boolean show_project_detail(JList list,JTextField project_name,JTextField jenkins_url,JTextField jenkins_project_name,JTextField jenkins_token,JTextField mattermost_webhook_id,JTextArea project_desc){
+    public static boolean show_project_detail(JList list
+            ,JTextField project_name
+            ,JTextField jenkins_url
+            ,JTextField jenkins_project_name
+            ,JTextField jenkins_token
+            ,JTextField mattermost_webhook_id
+            ,JTextField test_exec_shell
+            ,JTextArea project_desc){
         try{
             if(list != null){
                 Map<String,String> param = new HashMap<>();
@@ -166,6 +173,7 @@ public class TestAutomationGuiController {
                        jenkins_project_name.setText(project_detail.get("jenkins_project_name"));
                        jenkins_token.setText(project_detail.get("jenkins_token"));
                        mattermost_webhook_id.setText(project_detail.get("mattermost_webhook_id"));
+                       test_exec_shell.setText(project_detail.get("test_exec_shell"));
                    }
                 });
                 
@@ -209,6 +217,7 @@ public class TestAutomationGuiController {
                     mainGui.setJenkinsProjectName((String)m.get("jenkins_project_name"));
                     mainGui.setJenkinsToken((String)m.get("jenkins_token"));
                     mainGui.setMattermostWebHookId((String)m.get("mattermost_webhook_id"));
+                    mainGui.setTestExecShell((String)m.get("test_exec_shell"));
                     List factors = (List)m.get("factors");
                     testDataConfigPanel.loadTestData(factors);
                     Map<String,Object> runConfig = (Map<String,Object>)m.get("run");
@@ -251,7 +260,13 @@ public class TestAutomationGuiController {
       }
   }
     
-    public static boolean save_project_connection_info(javax.swing.JList list , String jmx_file_name, String jenkins_server_url, String jenkins_project_name, String jenkins_token, String mattermost_webhook_id){
+    public static boolean save_project_connection_info(javax.swing.JList list
+            , String jmx_file_name
+            , String jenkins_server_url
+            , String jenkins_project_name
+            , String jenkins_token
+            , String mattermost_webhook_id
+            , String test_exec_shell){
          try{
             if(list != null){
                 Map<String,String> param = new HashMap<>();
@@ -279,6 +294,8 @@ public class TestAutomationGuiController {
                 param.put("jenkins_project_name", jenkins_project_name);
                 param.put("jenkins_token", jenkins_token);
                 param.put("mattermost_webhook_id", mattermost_webhook_id);
+                param.put("test_exec_shell", test_exec_shell);
+
                 HttpUtil.call(TEST_URL+"save_project_info",gson.toJson(param),(body)->{
                     logger.info("jmx_file_name is {}", TestAutomationGuiController.get_jmx_file_name());
                    logger.info(body);

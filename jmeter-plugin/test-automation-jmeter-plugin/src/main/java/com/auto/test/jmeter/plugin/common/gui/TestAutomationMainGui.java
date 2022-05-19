@@ -4,9 +4,6 @@
  */
 package com.auto.test.jmeter.plugin.common.gui;
 
-import com.auto.test.jmeter.plugin.common.gui.TestAutomationGuiController;
-import com.auto.test.jmeter.plugin.common.gui.TestDataConfigPanel;
-import com.auto.test.jmeter.plugin.common.gui.TestRunConfigPanel;
 import com.auto.test.jmeter.plugin.common.sampler.TestPluginSampler;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,9 +13,7 @@ import javax.swing.JOptionPane;
 import java.awt.Insets;
 import javax.swing.JTextField;
 
-import javax.swing.BorderFactory;
 import javax.swing.border.AbstractBorder;
-import javax.swing.border.EmptyBorder;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -27,7 +22,6 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.geom.Area;
 import java.awt.Shape;
 
-import javax.swing.JPanel;
 import org.apache.jmeter.samplers.gui.AbstractSamplerGui;
 import org.apache.jmeter.testelement.TestElement;
 import org.slf4j.Logger;
@@ -50,18 +44,18 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
         initComponents();
         testDataConfigPanel = new TestDataConfigPanel("테스트 데이터 설정");
         testRunConfigPanel = new TestRunConfigPanel(testDataConfigPanel,null);
-        jPanel2.add(testDataConfigPanel,BorderLayout.NORTH);
-        jPanel2.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jPanel2.setAlignmentY(Component.TOP_ALIGNMENT);
-        jPanel3.add(testRunConfigPanel,BorderLayout.NORTH);
-        jPanel3.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jPanel3.setAlignmentY(Component.TOP_ALIGNMENT);
+        panel_test_data.add(testDataConfigPanel,BorderLayout.NORTH);
+        panel_test_data.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel_test_data.setAlignmentY(Component.TOP_ALIGNMENT);
+        panel_test_exec.add(testRunConfigPanel,BorderLayout.NORTH);
+        panel_test_exec.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel_test_exec.setAlignmentY(Component.TOP_ALIGNMENT);
         this.setBackground(Color.WHITE);
         this.setPreferredSize(new Dimension(800,800));
-        jPanel2.setPreferredSize(new Dimension(800,800));
-        jPanel3.setPreferredSize(new Dimension(800,800));
-        jTabbedPane1.setPreferredSize(new Dimension(800,800));
-        add(jTabbedPane1, BorderLayout.PAGE_START);
+        panel_test_data.setPreferredSize(new Dimension(800,800));
+        panel_test_exec.setPreferredSize(new Dimension(800,800));
+        panel_main.setPreferredSize(new Dimension(800,800));
+        add(panel_main, BorderLayout.PAGE_START);
         
         //jTextField1 = (RoundedJTextField)jTextField1;
         //jTextField2 = (RoundedJTextField)jTextField2;
@@ -91,270 +85,283 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        panel_main = new javax.swing.JTabbedPane();
+        panel_project_link = new javax.swing.JPanel();
+        lb_project_link_title = new javax.swing.JLabel();
+        scrollpanel_project_list = new javax.swing.JScrollPane();
+        project_list = new javax.swing.JList<>();
+        lb_project_list = new javax.swing.JLabel();
+        project_name = new javax.swing.JTextField();
+        scrollpanel_project_desc = new javax.swing.JScrollPane();
+        project_desc = new javax.swing.JTextArea();
+        lb_project_name = new javax.swing.JLabel();
+        lb_project_desc = new javax.swing.JLabel();
+        btn_save_project_link = new javax.swing.JButton();
+        btn_fetch_project_info = new javax.swing.JButton();
+        lb_jenkins_project_name = new javax.swing.JLabel();
+        jenkins_project_name = new javax.swing.JTextField();
+        lb_mattermost_webhook_id = new javax.swing.JLabel();
+        mattermost_webhook_id = new javax.swing.JTextField();
+        lb_jenkins_url = new javax.swing.JLabel();
+        jenkins_url = new javax.swing.JTextField();
+        lb_jenkins_token = new javax.swing.JLabel();
+        jenkins_token = new javax.swing.JTextField();
+        btn_save_scenario = new javax.swing.JButton();
+        panel_test_data = new javax.swing.JPanel();
+        panel_test_exec = new javax.swing.JPanel();
+
+        lb_test_exec_shell = new javax.swing.JLabel();
+        test_exec_shell = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(477, 500));
         setLayout(new java.awt.BorderLayout());
 
-        jTabbedPane1.setMinimumSize(new java.awt.Dimension(440, 900));
-        jTabbedPane1.setName(""); // NOI18N
-        jTabbedPane1.addFocusListener(new java.awt.event.FocusAdapter() {
+        panel_main.setMinimumSize(new java.awt.Dimension(440, 900));
+        panel_main.setName(""); // NOI18N
+        panel_main.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTabbedPane1FocusGained(evt);
             }
         });
-        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_main.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTabbedPane1MouseClicked(evt);
             }
         });
-        jTabbedPane1.addComponentListener(new java.awt.event.ComponentAdapter() {
+        panel_main.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jTabbedPane1ComponentShown(evt);
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(435, 800));
-        jPanel1.addHierarchyListener(new java.awt.event.HierarchyListener() {
+        panel_project_link.setBackground(new java.awt.Color(255, 255, 255));
+        panel_project_link.setPreferredSize(new java.awt.Dimension(435, 800));
+        panel_project_link.addHierarchyListener(new java.awt.event.HierarchyListener() {
             public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
                 jPanel1HierarchyChanged(evt);
             }
         });
-        jPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+        panel_project_link.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jPanel1ComponentShown(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
-        jLabel1.setText("프로젝트 연결 설정");
+        lb_project_link_title.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        lb_project_link_title.setText("프로젝트 연결 설정");
 
-        jList1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jList1.addContainerListener(new java.awt.event.ContainerAdapter() {
+        project_list.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        project_list.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 jList1ComponentAdded(evt);
             }
         });
-        jList1.addComponentListener(new java.awt.event.ComponentAdapter() {
+        project_list.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jList1ComponentShown(evt);
             }
         });
-        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        project_list.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 jList1ValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(jList1);
+        scrollpanel_project_list.setViewportView(project_list);
 
-        jLabel2.setText("프로젝트 목록");
+        lb_project_list.setText("프로젝트 목록");
 
-        jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        project_name.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jScrollPane2.setViewportView(jTextArea1);
+        project_desc.setColumns(20);
+        project_desc.setRows(5);
+        project_desc.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        scrollpanel_project_desc.setViewportView(project_desc);
 
-        jLabel3.setText("프로젝트 이름");
+        lb_project_name.setText("프로젝트 이름");
 
-        jLabel4.setText("프로젝트 내용");
+        lb_project_desc.setText("프로젝트 내용");
 
-        jButton2.setBackground(new java.awt.Color(0, 133, 252));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("테스트 자동화 연결 저장");
-        jButton2.setBorderPainted(false);
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_save_project_link.setBackground(new java.awt.Color(0, 133, 252));
+        btn_save_project_link.setForeground(new java.awt.Color(255, 255, 255));
+        btn_save_project_link.setText("테스트 자동화 연결 저장");
+        btn_save_project_link.setBorderPainted(false);
+        btn_save_project_link.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_save_project_link.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 133, 252));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("프로젝트 정보 가져오기");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_fetch_project_info.setBackground(new java.awt.Color(0, 133, 252));
+        btn_fetch_project_info.setForeground(new java.awt.Color(255, 255, 255));
+        btn_fetch_project_info.setText("프로젝트 정보 가져오기");
+        btn_fetch_project_info.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("젠킨스 프로젝트 명");
+        lb_jenkins_project_name.setText("젠킨스 프로젝트 명");
 
-        jTextField2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jenkins_project_name.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel6.setText("메타모스트 웹 후킹 키");
+        lb_mattermost_webhook_id.setText("메타모스트 웹 후킹 키");
 
-        jTextField3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        mattermost_webhook_id.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mattermost_webhook_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
             }
         });
 
-        jLabel7.setText("젠킨스 서버 URL");
+        lb_jenkins_url.setText("젠킨스 서버 URL");
 
-        jTextField4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        jenkins_url.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jenkins_url.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
             }
         });
 
-        jLabel8.setText("젠킨스 토큰");
+        lb_jenkins_token.setText("젠킨스 토큰");
 
-        jTextField5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        jenkins_token.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jenkins_token.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(0, 133, 252));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("테스트 시나리오 저장");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        lb_test_exec_shell.setText("테스트 시작 실행 명령");
+
+        btn_save_scenario.setBackground(new java.awt.Color(0, 133, 252));
+        btn_save_scenario.setForeground(new java.awt.Color(255, 255, 255));
+        btn_save_scenario.setText("테스트 시나리오 저장");
+        btn_save_scenario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout layout_project_link = new javax.swing.GroupLayout(panel_project_link);
+        panel_project_link.setLayout(layout_project_link);
+        layout_project_link.setHorizontalGroup(
+            layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout_project_link.createSequentialGroup()
+                .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout_project_link.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(jLabel2)
+                        .addComponent(lb_project_list)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(scrollpanel_project_list, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout_project_link.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel7)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lb_project_link_title))
+                    .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lb_jenkins_url)
+                        .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout_project_link.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_save_scenario, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1)
+                                .addComponent(btn_fetch_project_info)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(btn_save_project_link, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout_project_link.createSequentialGroup()
+                                .addComponent(lb_project_desc)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
+                                .addComponent(scrollpanel_project_desc, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout_project_link.createSequentialGroup()
+                                .addComponent(lb_jenkins_token)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                                .addComponent(jenkins_token, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout_project_link.createSequentialGroup()
+                                .addComponent(lb_jenkins_project_name)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(jenkins_project_name, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout_project_link.createSequentialGroup()
+                                .addComponent(lb_mattermost_webhook_id)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(mattermost_webhook_id, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout_project_link.createSequentialGroup()
+                                .addComponent(lb_test_exec_shell)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(test_exec_shell, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout_project_link.createSequentialGroup()
                                 .addGap(190, 190, 190)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jenkins_url, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout_project_link.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(jLabel3)
+                        .addComponent(lb_project_name)
                         .addGap(114, 114, 114)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(project_name, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(222, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        layout_project_link.setVerticalGroup(
+            layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout_project_link.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lb_project_link_title)
                 .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_project_list)
+                    .addComponent(scrollpanel_project_list, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(project_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_project_name))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_jenkins_url)
+                    .addComponent(jenkins_url, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout_project_link.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addComponent(jLabel5)
+                        .addComponent(lb_jenkins_project_name)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lb_jenkins_token)
+                            .addComponent(jenkins_token, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
+                        .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mattermost_webhook_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lb_mattermost_webhook_id))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(test_exec_shell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lb_test_exec_shell))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(scrollpanel_project_desc, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lb_project_desc)))
+                    .addComponent(jenkins_project_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
+                .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_save_project_link)
+                    .addComponent(btn_fetch_project_info)
+                    .addComponent(btn_save_scenario))
                 .addContainerGap(372, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("프로젝트 연결 설정", jPanel1);
+        panel_main.addTab("프로젝트 연결 설정", panel_project_link);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setPreferredSize(new java.awt.Dimension(435, 800));
-        jPanel2.setLayout(new java.awt.BorderLayout());
-        jTabbedPane1.addTab("테스트 데이터 설정", jPanel2);
+        panel_test_data.setBackground(new java.awt.Color(255, 255, 255));
+        panel_test_data.setPreferredSize(new java.awt.Dimension(435, 800));
+        panel_test_data.setLayout(new java.awt.BorderLayout());
+        panel_main.addTab("테스트 데이터 설정", panel_test_data);
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setPreferredSize(new java.awt.Dimension(435, 800));
-        jPanel3.setLayout(new java.awt.BorderLayout());
-        jTabbedPane1.addTab("테스트 실행 설정", jPanel3);
+        panel_test_exec.setBackground(new java.awt.Color(255, 255, 255));
+        panel_test_exec.setPreferredSize(new java.awt.Dimension(435, 800));
+        panel_test_exec.setLayout(new java.awt.BorderLayout());
+        panel_main.addTab("테스트 실행 설정", panel_test_exec);
 
-        add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+        add(panel_main, java.awt.BorderLayout.CENTER);
     }// </editor-fold>                        
 
     private void jList1ComponentShown(java.awt.event.ComponentEvent evt) {                                      
@@ -363,13 +370,21 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {                                    
         // TODO add your handling code here:
-        jTextArea1.setText("");
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField5.setText("");
-        TestAutomationGuiController.show_project_detail(jList1,jTextField1,jTextField4,jTextField2,jTextField5,jTextField3,jTextArea1);
+        project_desc.setText("");
+        project_name.setText("");
+        jenkins_project_name.setText("");
+        mattermost_webhook_id.setText("");
+        jenkins_url.setText("");
+        jenkins_token.setText("");
+        test_exec_shell.setText("");
+        TestAutomationGuiController.show_project_detail(project_list
+                , project_name
+                , jenkins_url
+                , jenkins_project_name
+                , jenkins_token
+                , mattermost_webhook_id
+                , test_exec_shell
+                , project_desc);
     }                                   
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {                                          
@@ -391,7 +406,14 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         
-       if(TestAutomationGuiController.save_project_connection_info(jList1, TestAutomationGuiController.get_jmx_file_name(),jTextField4.getText(), jTextField2.getText(), jTextField5.getText(), jTextField3.getText())){
+       if(TestAutomationGuiController.save_project_connection_info(project_list
+               , TestAutomationGuiController.get_jmx_file_name()
+               , jenkins_url.getText()
+               , jenkins_project_name.getText()
+               , jenkins_token.getText()
+               , mattermost_webhook_id.getText()
+               , test_exec_shell.getText()
+       )){
             JOptionPane.showMessageDialog(null, "프로젝트 연결 정보를 저장 하였습니다.");
        }else{
             JOptionPane.showMessageDialog(null, "프로젝트 연결 정보를 저장할 수 없습니다. 젠킨스 연결 정보와 프로젝트 연결정보를 확인해 주세요");
@@ -400,7 +422,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        TestAutomationGuiController.show_project_list(jList1, this, testDataConfigPanel, testRunConfigPanel);
+        TestAutomationGuiController.show_project_list(project_list, this, testDataConfigPanel, testRunConfigPanel);
         JOptionPane.showMessageDialog(null, "프로젝트 정보를 다시 갱신하였습니다.");
     }                                        
 
@@ -410,7 +432,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
 
     private void jPanel1ComponentShown(java.awt.event.ComponentEvent evt) {                                       
         // TODO add your handling code here:
-        TestAutomationGuiController.show_project_list(jList1, this, testDataConfigPanel, testRunConfigPanel);
+        TestAutomationGuiController.show_project_list(project_list, this, testDataConfigPanel, testRunConfigPanel);
     }                                      
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -472,19 +494,19 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
     }
     
     public void setProjectName(String project_name){
-        this.jTextField1.setText(project_name);
+        this.project_name.setText(project_name);
     }
 
     public void setProjectDetail(String project_detail){
-        this.jTextArea1.setText(project_detail);
+        this.project_desc.setText(project_detail);
     }
 
     public void selectProject(String project_id){
-        for (int i = 0; i < jList1.getModel().getSize(); i++) {
-             String item = String.valueOf(jList1.getModel().getElementAt(i));
+        for (int i = 0; i < project_list.getModel().getSize(); i++) {
+             String item = String.valueOf(project_list.getModel().getElementAt(i));
              String id = item.split(",")[0];
              if(id.equals(project_id)){
-                 jList1.setSelectedIndex(i);
+                 project_list.setSelectedIndex(i);
                  break;
              }       
         }
@@ -492,16 +514,19 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
     }
 
     public void setJenkinsProjectName(String jenkins_project_name){
-        this.jTextField2.setText(jenkins_project_name);
+        this.jenkins_project_name.setText(jenkins_project_name);
     }
     public void setMattermostWebHookId(String matterermost_webhook_id){
-        this.jTextField3.setText(matterermost_webhook_id);
+        this.mattermost_webhook_id.setText(matterermost_webhook_id);
     }
     public void setJenkinsServerUrl(String jenkins_server_url){
-        this.jTextField4.setText(jenkins_server_url);
+        this.jenkins_url.setText(jenkins_server_url);
     }
     public void setJenkinsToken(String jenkins_token){
-        this.jTextField5.setText(jenkins_token);
+        this.jenkins_token.setText(jenkins_token);
+    }
+    public void setTestExecShell(String test_exec_shell){
+        this.test_exec_shell.setText(test_exec_shell);
     }
     
     /**
@@ -540,30 +565,32 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JButton btn_fetch_project_info;
+    private javax.swing.JButton btn_save_project_link;
+    private javax.swing.JButton btn_save_scenario;
+    private javax.swing.JLabel lb_project_link_title;
+    private javax.swing.JLabel lb_project_list;
+    private javax.swing.JLabel lb_project_name;
+    private javax.swing.JLabel lb_project_desc;
+    private javax.swing.JLabel lb_jenkins_project_name;
+    private javax.swing.JLabel lb_mattermost_webhook_id;
+    private javax.swing.JLabel lb_jenkins_url;
+    private javax.swing.JLabel lb_jenkins_token;
+    private javax.swing.JLabel lb_test_exec_shell;
+    private javax.swing.JList<String> project_list;
+    private javax.swing.JPanel panel_project_link;
+    private javax.swing.JPanel panel_test_data;
+    private javax.swing.JPanel panel_test_exec;
+    private javax.swing.JScrollPane scrollpanel_project_list;
+    private javax.swing.JScrollPane scrollpanel_project_desc;
+    private javax.swing.JTabbedPane panel_main;
+    private javax.swing.JTextArea project_desc;
+    private javax.swing.JTextField project_name;
+    private javax.swing.JTextField jenkins_project_name;
+    private javax.swing.JTextField mattermost_webhook_id;
+    private javax.swing.JTextField jenkins_url;
+    private javax.swing.JTextField jenkins_token;
+    private javax.swing.JTextField test_exec_shell;
     // End of variables declaration                   
 }
 

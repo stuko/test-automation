@@ -135,7 +135,15 @@ def controller():
             # 젠킨스 빌드 실패시 메타 모스트로 메시지 보내기
             #------------------------------------------
             mm.send_execute_jenkins_build_complete(project_id,project_name, task_title,description)  
-            jmx_file_name = jm.get_jmx_file_name(project_id)
+            find_map = jm.get_jmx_file_name(project_id)
+            jmx_file_name = find_map['jmx_file_name']
+            test_exec_shell = find_map['test_exec_shell'] 
+            
+            if test_exec_shell != None:
+                print("test exec shell : " + test_exec_shell)
+                jm.execute_shell_command(test_exec_shell)
+            else:
+                print("not exist test exec shell")
 
             #------------------------------------------
             # JMeter 실행 할 파일이 없는 경우 에러 메시지 보내기
@@ -161,7 +169,6 @@ def controller():
             #  (4) 테스트 결과 정보를 DB에 저장 해야 함.
             #  (5) 테스트 결과 중 결함이 발견되면, 결함을 -> 요구사항으로 등록 해야 함.
             #------------------------------------------
-            jm.execute_shell_command('cd /home/k218001/workspace/TestAutomation_KAI_S_WEB/kai-s-web-package && ./shutdown.sh && sleep 2 && ./startup.sh')
             jm.execute_shell_command(jm.get_shell_command(upload_folder + jmx_file_name , result_file_name))
             # result_string = open("/app/server/volume/result/" + result_name, 'r').read()
 
