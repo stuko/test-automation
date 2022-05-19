@@ -8,6 +8,7 @@ sudo docker rm -f test-controller-python
 export MY_LOCAL_IP=`hostname -I | cut -d' ' -f1`
 
 cd ./apache-jmeter-5.4.1/bin
+sudo chmod a+x *.sh
 sudo ./run-jmeter-test-server.sh
 cd ../../
 
@@ -20,7 +21,7 @@ sudo docker run -d --name mongo-test-automation -e "TZ=Asia/Seoul" -p 27017:2701
 # ./init.sh
 # cd ../..
 cd ./test-controller/
-sudo chmod a+x *.sh
+sudo chmod -R a+x *.sh
 sudo ./docker-build.sh
 sudo ./docker-run.sh
 cd ../
