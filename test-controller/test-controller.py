@@ -161,7 +161,7 @@ def controller():
             #  (4) 테스트 결과 정보를 DB에 저장 해야 함.
             #  (5) 테스트 결과 중 결함이 발견되면, 결함을 -> 요구사항으로 등록 해야 함.
             #------------------------------------------
-            jm.execute('cd /home/k218001/workspace/TestAutomation_KAI_S_WEB/kai-s-web-package && ./shutdown.sh && sleep 2 && ./startup.sh')
+            jm.execute_shell_command('cd /home/k218001/workspace/TestAutomation_KAI_S_WEB/kai-s-web-package && ./shutdown.sh && sleep 2 && ./startup.sh')
             jm.execute_shell_command(jm.get_shell_command(upload_folder + jmx_file_name , result_file_name))
             # result_string = open("/app/server/volume/result/" + result_name, 'r').read()
 
