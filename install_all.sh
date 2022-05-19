@@ -11,6 +11,9 @@ cd ./apache-jmeter-5.4.1/bin
 sudo chmod a+x *.sh
 sudo ./run-jmeter-test-server.sh
 cd ../../
+sudo pkill -9 -ef com.auto.test.jmeter.plugin.common.server.ShellServer
+sleep 1
+sudo nohup java -cp .:./apache-jmeter-5.4.1/lib/ext/test-automation-jmeter-plugin.jar com.auto.test.jmeter.plugin.common.server.ShellServer &
 
 sudo docker container stop mongo-test-automation
 sudo docker container rm mongo-test-automation
