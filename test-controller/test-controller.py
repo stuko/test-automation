@@ -35,12 +35,17 @@ def controller():
     # km.make_project_to_scrum(params)
     
     # print(params)
-    
+    ##############################################
+    # 프로젝트 정보 가져오기
+    ##############################################
     km.check_project_is_scrum(params["event_data"]["task"]["project_id"])
     
     if(params["event_name"] == "task.create"):
         print('Check Project Creation')
     
+    ##############################################
+    # Kanboard 이벤트 중 Move 이벤트 추출 하기
+    ##############################################
     if(params["event_name"] == "task.move.column"):
         task_id = params["event_data"]["task_id"]
         task = params["event_data"]["task"]
@@ -72,18 +77,31 @@ def controller():
         if(column_title.find(km.get_column(2)) >= 0):            
             print("you moved to {}", km.get_column(2))
             mm.send_start_dev(project_id,project_name, task_title,description)      
+            
+        ##############################################
+        # 테스트 자동화 단계로 이동한 경우 처리 하기
+        ##############################################
         if(column_title.find(km.get_column(3)) >= 0):            
             print(f"let's start test of {km.get_column(3)}")
+            #------------------------------------------
+            # 메타 모스트로 테스트 자동화 시작 메시지 전송하기
+            #------------------------------------------
             mm.send_execute_test_automation(project_id,project_name, task_title,description)      
             forward = km.get_next_position(project_id, task_id , 1)
             backward = km.get_next_position(project_id, task_id , -1)
-            
+
+            #------------------------------------------
+            # 젠킨스 빌드하기
+            #------------------------------------------
             if jkm.build(project_id) != 1:
                 mm.send_execute_jenkins_build_fail(project_id,project_name, task_title,description)  
                 return 'error'
             
             complete = -1
             alerady_send = False
+            #------------------------------------------
+            # 젠킨스 빌드 완료 시점까지 대기 하기
+            #------------------------------------------
             while True:
                 time.sleep(3)
                 complete = jkm.check(project_id)
@@ -99,31 +117,61 @@ def controller():
                     if alerady_send != True:
                         mm.send_execute_jenkins_build_ing(project_id,project_name, task_title,description)      
                         alerady_send = True
-            
+            #------------------------------------------
+            # 젠킨스 빌드 완료 됨 
+            #------------------------------------------
             jkm.complete(project_id)
             
+            #------------------------------------------
+            # 젠킨스 빌드 실패 한 경우 처리하기
+            #------------------------------------------
             if complete != 1:
                 contents = ""
                 mm.send_execute_jenkins_build_error(project_id,project_name, task_title,contents)  
                 km.move(project_id, task_id, swimlane_id, backward , position)
                 return 'error of building'    
-                
+
+            #------------------------------------------
+            # 젠킨스 빌드 실패시 메타 모스트로 메시지 보내기
+            #------------------------------------------
             mm.send_execute_jenkins_build_complete(project_id,project_name, task_title,description)  
             jmx_file_name = jm.get_jmx_file_name(project_id)
 
+            #------------------------------------------
+            # JMeter 실행 할 파일이 없는 경우 에러 메시지 보내기
+            # Kanboard 이전 단계로 이동 시키키
+            #------------------------------------------
             if jmx_file_name == None:
                 mm.send_jmeter_jenkins_relation_error(project_id,project_name, task_title,description)  
                 km.move(project_id, task_id, swimlane_id, backward, position)
                 return "error"
-            
+            #------------------------------------------
+            # JMeter 실행 하기 위해, 결과 파일 미리 생성하기
+            #------------------------------------------
             nowDatetime = datetime.datetime.now()
             os.makedirs(result_folder, exist_ok=True)
             result_name = "result-" + project_id + "-" + nowDatetime.strftime("%Y%m%d%H%M%S")
             result_file_name = result_folder + result_name
+
+            #------------------------------------------
+            # JMeter를 Non GUI 모드로 실행 하기
+            #  (1) 테스트 대상 서버가 실행 중이어 야 함.
+            #  (2) 테스트 대상 서버의 테스트 데이터(환경)가 준비 되어야 함.
+            #  (3) 테스트 결과 정보를 메타 모스트 메시지로 전송해야 함.
+            #  (4) 테스트 결과 정보를 DB에 저장 해야 함.
+            #  (5) 테스트 결과 중 결함이 발견되면, 결함을 -> 요구사항으로 등록 해야 함.
+            #------------------------------------------
+            jm.execute('cd /home/k218001/workspace/TestAutomation_KAI_S_WEB/kai-s-web-package && ./shutdown.sh && sleep 2 && ./startup.sh')
             jm.execute_shell_command(jm.get_shell_command(upload_folder + jmx_file_name , result_file_name))
             # result_string = open("/app/server/volume/result/" + result_name, 'r').read()
 
+            #------------------------------------------
+            # 테스트 자동화 완료 메시지 보내기
+            #------------------------------------------
             mm.send_test_automation_complete(project_id,project_name, task_title,result_file_name)              
+            #------------------------------------------
+            # Kanboard를 다음 단계로 이동 시키키
+            #------------------------------------------
             km.move(project_id, task_id, swimlane_id, forward, position)
 
         if(column_title.find(km.get_column(4)) >= 0):            
