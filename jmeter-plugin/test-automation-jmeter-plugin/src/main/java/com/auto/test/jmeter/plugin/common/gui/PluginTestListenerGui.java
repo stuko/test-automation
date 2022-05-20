@@ -1,5 +1,6 @@
 package com.auto.test.jmeter.plugin.common.gui;
 
+import com.auto.test.jmeter.plugin.common.listener.PluginTestListener;
 import com.auto.test.jmeter.plugin.common.summerizer.TestPluginSummerizer;
 import org.apache.jmeter.testelement.TestElement;
 import org.apache.jmeter.visualizers.gui.AbstractListenerGui;
@@ -26,15 +27,14 @@ public class PluginTestListenerGui extends AbstractListenerGui {
 
     @Override
     public TestElement createTestElement() {
-        TestPluginSummerizer summerizer = new TestPluginSummerizer();
-        modifyTestElement(summerizer);
-        return summerizer;
+        PluginTestListener listener = new PluginTestListener();
+        modifyTestElement(listener);
+        return listener;
     }
 
     @Override
     public void modifyTestElement(TestElement element) {
         super.configureTestElement(element);
-
     }
 
     @Override
