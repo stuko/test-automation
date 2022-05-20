@@ -74,12 +74,6 @@
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <SizeAssertion guiclass="SizeAssertionGui" testclass="SizeAssertion" testname="Size Assertion" enabled="true">
-              <stringProp name="Assertion.test_field">SizeAssertion.response_network_size</stringProp>
-              <stringProp name="SizeAssertion.size">7997</stringProp>
-              <intProp name="SizeAssertion.operator">1</intProp>
-            </SizeAssertion>
-            <hashTree/>
           </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Login Management-1" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -5271,6 +5265,18 @@ AND   B.OBJ_ID IS NULL </stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
         </JDBCSampler>
         <hashTree/>
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="KaiS-Script-Count-Loop" enabled="true">
+          <stringProp name="WhileController.condition"></stringProp>
+        </WhileController>
+        <hashTree>
+          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="KaiS-Script-Validation-Test" enabled="true">
+            <stringProp name="BeanShellSampler.query"></stringProp>
+            <stringProp name="BeanShellSampler.filename"></stringProp>
+            <stringProp name="BeanShellSampler.parameters"></stringProp>
+            <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+          </BeanShellSampler>
+          <hashTree/>
+        </hashTree>
       </hashTree>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments"/>
@@ -5460,6 +5466,8 @@ AND   B.OBJ_ID IS NULL </stringProp>
         <boolProp name="resetInterpreter">false</boolProp>
         <stringProp name="script"></stringProp>
       </BeanShellListener>
+      <hashTree/>
+      <com.auto.test.jmeter.plugin.common.listener.PluginTestListener guiclass="com.auto.test.jmeter.plugin.common.gui.PluginTestListenerGui" testclass="com.auto.test.jmeter.plugin.common.listener.PluginTestListener" testname="[res_key=Test Automation Result Listener :)]" enabled="true"/>
       <hashTree/>
     </hashTree>
   </hashTree>
