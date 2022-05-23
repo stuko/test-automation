@@ -35,7 +35,7 @@ sudo docker run -d --name=test-controller-influxdb -p 8086:8086 -v influxdb:$(pw
 
 sudo docker container stop test-controller-grafana
 sudo docker container rm test-controller-grafana
-sudo docker run -d --name=test-controller-grafana -p 3000:3000 grafana/grafana
+sudo docker run -d --name=test-controller-grafana -p 3000:3000 -v data-grafana:$(pwd)./volume/grafana/ grafana/grafana
 
 
 
