@@ -13,5 +13,9 @@ cd ../
 sudo docker container stop test-controller-influxdb
 sudo docker container rm test-controller-influxdb
 
+sudo docker container stop test-controller-grafana
+sudo docker container rm test-controller-grafana
+
+
 
 
