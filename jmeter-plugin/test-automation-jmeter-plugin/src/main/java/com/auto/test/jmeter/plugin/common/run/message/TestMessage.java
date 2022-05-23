@@ -22,7 +22,7 @@ public class TestMessage extends TestPluginMessageBuilder {
     int progress = 0;
     long total = 1;
 
-    AtomicBoolean stop = new AtomicBoolean(false);
+    AtomicBoolean stop = new AtomicBoolean(true);
 
     public boolean isStop() {
         return stop.get();

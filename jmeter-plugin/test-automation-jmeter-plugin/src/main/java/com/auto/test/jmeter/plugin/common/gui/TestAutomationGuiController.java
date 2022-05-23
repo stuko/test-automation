@@ -73,10 +73,13 @@ public class TestAutomationGuiController {
             }else{
                 logger.info("Executor's type is DEFAULT");
                 AbstractPluginExecutor default_executor = ExecutorMap.getInstance().getExecutor(ExecutorMap.ExecutorType.DEFAULT);
+                logger.info("Executor is created");
+                logger.info("Initial Executor's stop mode is {}",default_executor.is_stop());
                 default_executor.setConfigMap(gson.fromJson(getDefaultText(), Map.class));
-
+                logger.info("Executor's config map is prepared");
                 // TEST
                 default_executor.setTestData(get_test_data("DEFAULT", null));
+                logger.info("Executor's test data is setted");
                 get_test_data_by_jmx(list -> {
                     String[][] test_data_factors = new String[list.size()][];
                     for (int i = 0; i < list.size(); i++) {
@@ -102,6 +105,8 @@ public class TestAutomationGuiController {
                         });
                     }
                 });
+                logger.info("Executor's stop mode is {}",default_executor.is_stop());
+                logger.info("Executor is completed");
                 return default_executor;
             }
         }catch(Exception e){
