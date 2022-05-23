@@ -21,39 +21,14 @@ public class HttpExecutor extends AbstractPluginExecutor  {
 
     Logger logger = LoggerFactory.getLogger(HttpExecutor.class);
 
-    TestMessageByCombination message = new TestMessageByCombination();
-    ExecutorService executors = Executors.newFixedThreadPool(2);
-    TestPluginTestData testData;
     String url;
-    @Override
-    public void stop(){
-        message.setStop(true);
-    }
-
-    @Override
-    public void start(){
-        message.setStop(false);
-    }
 
     @Override
     public void init(TestPluginTestData data , TestPluginCallBack callBack) {
         try {
-            message = new TestMessageByCombination();
-            message.setStop(false);
-            this.testData = data;
+            super.init(data,callBack);
             if(this.getConfigMap() != null) {
                url = this.getConfigMap().get("url") + "";
-            }
-
-            message.build(testData.getData());
-            try {
-                executors.submit(new Thread(){
-                    public void run(){
-                        message.getFileMessage(callBack);
-                    }
-                });
-            }catch(Exception e){
-                callBack.call("Exception : " + e.toString(), 0);
             }
         }catch(Exception e){
             logger.error(e.toString(),e);
@@ -108,13 +83,4 @@ public class HttpExecutor extends AbstractPluginExecutor  {
         return response;
     }
 
-    @Override
-    public TestPluginTestData getTestData() {
-        return testData;
-    }
-
-    @Override
-    public void setTestData(TestPluginTestData testData) {
-        this.testData = testData;
-    }
 }

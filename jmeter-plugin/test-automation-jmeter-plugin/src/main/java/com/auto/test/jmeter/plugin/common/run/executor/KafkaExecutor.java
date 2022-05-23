@@ -26,26 +26,11 @@ public class KafkaExecutor extends AbstractPluginExecutor {
 
     KafkaProducer<String, String> producer;
     String topicName;
-    TestMessageByCombination message = new TestMessageByCombination();
-    ExecutorService executors = Executors.newFixedThreadPool(10);
-    TestPluginTestData testData;
-
-    @Override
-    public void stop(){
-        message.setStop(true);
-    }
-
-    @Override
-    public void start(){
-        message.setStop(false);
-    }
 
     @Override
     public void init(TestPluginTestData data , TestPluginCallBack callBack) {
         try {
-            message = new TestMessageByCombination();
-            message.setStop(false);
-            this.testData = data;
+            super.init(data,callBack);
             if(this.getConfigMap() != null) {
                 Properties properties = new Properties();
                 properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, this.getConfigMap().get("server") + "");
@@ -53,17 +38,6 @@ public class KafkaExecutor extends AbstractPluginExecutor {
                 properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
                 producer = new KafkaProducer<>(properties);
                 topicName = this.getConfigMap().get("topic") + "";
-            }
-
-            message.build(testData.getData());
-            try {
-                executors.submit(new Thread(){
-                    public void run(){
-                        message.getFileMessage(callBack);
-                    }
-                });
-            }catch(Exception e){
-                callBack.call("Exception : " + e.toString(), 0);
             }
         }catch(Exception e){
             logger.error(e.toString(),e);
@@ -109,15 +83,5 @@ public class KafkaExecutor extends AbstractPluginExecutor {
             producer.flush();
         }
         return response;
-    }
-
-    @Override
-    public TestPluginTestData getTestData() {
-        return testData;
-    }
-
-    @Override
-    public void setTestData(TestPluginTestData testData) {
-        this.testData = testData;
     }
 }
