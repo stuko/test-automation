@@ -36,4 +36,4 @@ out/
 test-automation-jmeter-plugin/data/target.txt
 test-automation-jmeter-plugin/data/source.txt
 
-./apache-jmeter-5.4.1/bin/test/data/
+/apache-jmeter-5.4.1/bin/test/data/
