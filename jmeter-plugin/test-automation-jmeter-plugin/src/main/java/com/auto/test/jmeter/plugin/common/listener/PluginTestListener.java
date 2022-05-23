@@ -41,7 +41,6 @@ public class PluginTestListener extends AbstractTestElement implements Serializa
 
     @Override
     public void sampleOccurred(SampleEvent e) {
-
         logger.error("Sample Occurred " + e.toString());
         System.out.println("Sample Occurred " + e.toString());
     }

@@ -10,6 +10,8 @@ cd ./test-controller/
 sudo docker container stop test-controller-python
 sudo docker container rm test-controller-python
 cd ../
+sudo docker container stop test-controller-influxdb
+sudo docker container rm test-controller-influxdb
 
 
 
