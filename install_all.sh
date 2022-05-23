@@ -31,8 +31,11 @@ cd ../
 
 sudo docker container stop test-controller-influxdb
 sudo docker container rm test-controller-influxdb
-sudo docker run --name=test-controller-influxdb -p 8086:8086 -v influxdb:$(pwd)./volume/influxdb/ influxdb:1.8
+sudo docker run -d --name=test-controller-influxdb -p 8086:8086 -v influxdb:$(pwd)./volume/influxdb/ influxdb:1.8
 
+sudo docker container stop test-controller-grafana
+sudo docker container rm test-controller-grafana
+sudo docker run -d --name=test-controller-grafana -p 3000:3000 grafana/grafana
 
 
 
