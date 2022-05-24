@@ -37,5 +37,6 @@ sudo docker container stop test-controller-grafana
 sudo docker container rm test-controller-grafana
 sudo docker run -d --name=test-controller-grafana -p 3000:3000 -v $(pwd)/volume/grafana:/var/lib/grafana grafana/grafana
 
-
+# KAI-S 재시작 
+# cd ~/workspace/TestAutomation_KAI_S_WEB/kai-s-web-package && ./shutdown.sh && sleep 2 && ./startup.sh
 

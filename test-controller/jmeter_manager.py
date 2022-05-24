@@ -84,7 +84,7 @@ class JmeterManager:
     #################################################
     def get_shell_command(self, jmx_file_name , result_file_name ):
         # REMOTE
-        cmd = 'sudo ' + self.path + 'jmeter -Ljmeter.engine=DEBUG -DTEST_AUTO=true -Djava.rmi.server.hostname='+ self.jmeter_ip +' -n -t ' + jmx_file_name + ' -r -l ' + result_file_name
+        cmd = self.path + 'jmeter -Ljmeter.engine=DEBUG -DTEST_AUTO=true -Djava.rmi.server.hostname='+ self.jmeter_ip +' -n -t ' + jmx_file_name + ' -r -l ' + result_file_name
         # LOCAL
         # cmd = self.path + 'jmeter -DTEST_AUTO=true -Djava.rmi.server.hostname='+ self.jmeter_ip +' -n -t ' + jmx_file_name 
         return cmd
@@ -93,7 +93,9 @@ class JmeterManager:
         self.execute_shell_command(self, self.path + 'shutdown.sh')
         self.execute_shell_command(self, self.path + 'stoptest.sh')
 
-    def execute_shell_command(self, shell):
+    def execute_shell_command(self, shell , is_root=True):
+        if is_root : 
+            shell = 'sudo ' + shell
         print(f'execute jemter shell : {shell}')
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect((self.jmeter_ip, self.jmeter_port))
