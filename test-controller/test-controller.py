@@ -95,7 +95,10 @@ def controller():
             #------------------------------------------
             find_map = jm.get_jmx_file_name(project_id)
             jmx_file_name = find_map['jmx_file_name']
-            before_test_exec_shell = find_map['before_test_exec_shell'] 
+            before_test_exec_shell = ''
+            if 'before_test_exec_shell' in find_map.keys():
+                before_test_exec_shell = find_map['before_test_exec_shell'] 
+            
             test_exec_shell = find_map['test_exec_shell'] 
             
             if before_test_exec_shell != None:
