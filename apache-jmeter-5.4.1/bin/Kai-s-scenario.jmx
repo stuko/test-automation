@@ -16,7 +16,7 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <intProp name="LoopController.loops">-1</intProp>
+          <stringProp name="LoopController.loops">100</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
@@ -526,22 +526,6 @@ try{
             <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
               <stringProp name="DurationAssertion.duration">3000</stringProp>
             </DurationAssertion>
-            <hashTree/>
-            <JDBCPreProcessor guiclass="TestBeanGUI" testclass="JDBCPreProcessor" testname="JDBC PreProcessor" enabled="true">
-              <stringProp name="dataSource">kanboard-mysql</stringProp>
-              <stringProp name="query">select title
-from tasks
-where id = 12 
-</stringProp>
-              <stringProp name="queryArguments"></stringProp>
-              <stringProp name="queryArgumentsTypes"></stringProp>
-              <stringProp name="queryTimeout"></stringProp>
-              <stringProp name="queryType">Prepared Select Statement</stringProp>
-              <stringProp name="resultSetHandler">Store as String</stringProp>
-              <stringProp name="resultSetMaxRows"></stringProp>
-              <stringProp name="resultVariable"></stringProp>
-              <stringProp name="variableNames">test_jdbc_result</stringProp>
-            </JDBCPreProcessor>
             <hashTree/>
             <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="Debug PostProcessor" enabled="true">
               <boolProp name="displayJMeterProperties">false</boolProp>
@@ -2673,18 +2657,21 @@ where id = 12
                   <stringProp name="Argument.name">since</stringProp>
                   <stringProp name="Argument.value">#19</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="fullStages" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">fullStages</stringProp>
                   <stringProp name="Argument.value">true</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="_" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">_</stringProp>
                   <stringProp name="Argument.value">1652317016446</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -2765,18 +2752,21 @@ where id = 12
                   <stringProp name="Argument.name">since</stringProp>
                   <stringProp name="Argument.value">#19</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="fullStages" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">fullStages</stringProp>
                   <stringProp name="Argument.value">true</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="_" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">_</stringProp>
                   <stringProp name="Argument.value">1652317016447</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -2865,6 +2855,7 @@ where id = 12
                   <stringProp name="Argument.name">REF_ID</stringProp>
                   <stringProp name="Argument.value">SC00000114</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -2967,18 +2958,21 @@ where id = 12
                   <stringProp name="Argument.name">SCOR_CRD_ID</stringProp>
                   <stringProp name="Argument.value">SC00000114</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="rowStart" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">rowStart</stringProp>
                   <stringProp name="Argument.value">1</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="rowEnd" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">rowEnd</stringProp>
                   <stringProp name="Argument.value">10</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -3019,6 +3013,7 @@ where id = 12
                   <stringProp name="Argument.name">REF_ID</stringProp>
                   <stringProp name="Argument.value">SC00000114</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -3059,18 +3054,21 @@ where id = 12
                   <stringProp name="Argument.name">since</stringProp>
                   <stringProp name="Argument.value">#19</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="fullStages" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">fullStages</stringProp>
                   <stringProp name="Argument.value">true</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="_" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">_</stringProp>
                   <stringProp name="Argument.value">1652317016448</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -3111,18 +3109,21 @@ where id = 12
                   <stringProp name="Argument.name">since</stringProp>
                   <stringProp name="Argument.value">#19</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="fullStages" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">fullStages</stringProp>
                   <stringProp name="Argument.value">true</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="_" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">_</stringProp>
                   <stringProp name="Argument.value">1652317016449</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -3163,24 +3164,28 @@ where id = 12
                   <stringProp name="Argument.name">SCOR_CRD_ID</stringProp>
                   <stringProp name="Argument.value">SC00000114</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="TREE_ID" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">TREE_ID</stringProp>
                   <stringProp name="Argument.value">SC00000114</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="TREE_DS" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">TREE_DS</stringProp>
                   <stringProp name="Argument.value">SC</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="TREE_TP" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">TREE_TP</stringProp>
                   <stringProp name="Argument.value">SCORECARD</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -3254,12 +3259,14 @@ where id = 12
                   <stringProp name="Argument.name">TREE_DS</stringProp>
                   <stringProp name="Argument.value">SC</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="TREE_STS" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">TREE_STS</stringProp>
                   <stringProp name="Argument.value">1</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -3300,18 +3307,21 @@ where id = 12
                   <stringProp name="Argument.name">TREE_DS</stringProp>
                   <stringProp name="Argument.value">SC</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="TREE_STS" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">TREE_STS</stringProp>
                   <stringProp name="Argument.value">C</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="TREE_ID" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">TREE_ID</stringProp>
                   <stringProp name="Argument.value">ROOT</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
@@ -3981,13 +3991,6 @@ AND   B.OBJ_ID IS NULL </stringProp>
         <stringProp name="trimInterval">60000</stringProp>
         <stringProp name="username">sa</stringProp>
       </JDBCDataSource>
-      <hashTree/>
-      <BeanShellListener guiclass="TestBeanGUI" testclass="BeanShellListener" testname="Test Result to DataBase" enabled="true">
-        <stringProp name="filename"></stringProp>
-        <stringProp name="parameters"></stringProp>
-        <boolProp name="resetInterpreter">false</boolProp>
-        <stringProp name="script"></stringProp>
-      </BeanShellListener>
       <hashTree/>
       <com.auto.test.jmeter.plugin.common.listener.PluginTestListener guiclass="com.auto.test.jmeter.plugin.common.gui.PluginTestListenerGui" testclass="com.auto.test.jmeter.plugin.common.listener.PluginTestListener" testname="[res_key=Test Automation Result Listener :)]" enabled="true"/>
       <hashTree/>

@@ -141,7 +141,7 @@ def controller():
             
             if test_exec_shell != None:
                 print("test exec shell : " + test_exec_shell)
-                jm.execute_shell_command(test_exec_shell)
+                jm.execute_shell_command(test_exec_shell , False)
             else:
                 print("not exist test exec shell")
 
@@ -169,7 +169,7 @@ def controller():
             #  (4) 테스트 결과 정보를 DB에 저장 해야 함. / 테스트가 종료 되면 테스트 데이터 수집 프로세스도 중지 되어야 함.
             #  (5) 테스트 결과 중 결함이 발견되면, 결함을 -> 요구사항으로 등록 해야 함.
             #------------------------------------------
-            jm.execute_shell_command(jm.get_shell_command(upload_folder + jmx_file_name , result_file_name))
+            jm.execute_shell_command(jm.get_shell_command(upload_folder + jmx_file_name , result_file_name), False)
             # result_string = open("/app/server/volume/result/" + result_name, 'r').read()
 
             #------------------------------------------
