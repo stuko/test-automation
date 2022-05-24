@@ -54,6 +54,7 @@ class JmeterManager:
                                                   ,'jenkins_project_name': params['jenkins_project_name']
                                                   ,'jenkins_token': params['jenkins_token']
                                                   ,'mattermost_webhook_id': params['mattermost_webhook_id']
+                                                  ,'before_test_exec_shell': params['before_test_exec_shell']
                                                   ,'test_exec_shell': params['test_exec_shell']}})
         return result
     

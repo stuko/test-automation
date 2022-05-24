@@ -29,6 +29,8 @@ sudo ./docker-build.sh
 sudo ./docker-run.sh
 cd ../
 
+sudo chmod -R 777 volume
+
 sudo docker container stop test-controller-influxdb
 sudo docker container rm test-controller-influxdb
 sudo docker run -d --name=test-controller-influxdb -p 8086:8086 -v $(pwd)/volume/influxdb:/var/lib/influxdb influxdb:1.8
