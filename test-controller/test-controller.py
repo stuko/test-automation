@@ -91,6 +91,20 @@ def controller():
             backward = km.get_next_position(project_id, task_id , -1)
 
             #------------------------------------------
+            # JMeter 정보 가져오기
+            #------------------------------------------
+            find_map = jm.get_jmx_file_name(project_id)
+            jmx_file_name = find_map['jmx_file_name']
+            before_test_exec_shell = find_map['before_test_exec_shell'] 
+            test_exec_shell = find_map['test_exec_shell'] 
+            
+            if before_test_exec_shell != None:
+                print("before test exec shell : " + before_test_exec_shell)
+                jm.execute_shell_command(before_test_exec_shell , False)
+            else:
+                print("not exist before test exec shell")
+
+            #------------------------------------------
             # 젠킨스 빌드하기
             #------------------------------------------
             if jkm.build(project_id) != 1:
@@ -135,9 +149,6 @@ def controller():
             # 젠킨스 빌드 실패시 메타 모스트로 메시지 보내기
             #------------------------------------------
             mm.send_execute_jenkins_build_complete(project_id,project_name, task_title,description)  
-            find_map = jm.get_jmx_file_name(project_id)
-            jmx_file_name = find_map['jmx_file_name']
-            test_exec_shell = find_map['test_exec_shell'] 
             
             if test_exec_shell != None:
                 print("test exec shell : " + test_exec_shell)

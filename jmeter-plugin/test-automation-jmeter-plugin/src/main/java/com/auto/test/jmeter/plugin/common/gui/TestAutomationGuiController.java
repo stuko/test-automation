@@ -157,6 +157,7 @@ public class TestAutomationGuiController {
             ,JTextField jenkins_project_name
             ,JTextField jenkins_token
             ,JTextField mattermost_webhook_id
+            ,JTextField before_test_exec_shell
             ,JTextField test_exec_shell
             ,JTextArea project_desc){
         try{
@@ -178,6 +179,7 @@ public class TestAutomationGuiController {
                        jenkins_project_name.setText(project_detail.get("jenkins_project_name"));
                        jenkins_token.setText(project_detail.get("jenkins_token"));
                        mattermost_webhook_id.setText(project_detail.get("mattermost_webhook_id"));
+                       before_test_exec_shell.setText(project_detail.get("before_test_exec_shell"));
                        test_exec_shell.setText(project_detail.get("test_exec_shell"));
                    }
                 });
@@ -222,6 +224,7 @@ public class TestAutomationGuiController {
                     mainGui.setJenkinsProjectName((String)m.get("jenkins_project_name"));
                     mainGui.setJenkinsToken((String)m.get("jenkins_token"));
                     mainGui.setMattermostWebHookId((String)m.get("mattermost_webhook_id"));
+                    mainGui.setBeforeTestExecShell((String)m.get("before_test_exec_shell"));
                     mainGui.setTestExecShell((String)m.get("test_exec_shell"));
                     List factors = (List)m.get("factors");
                     testDataConfigPanel.loadTestData(factors);
@@ -271,6 +274,7 @@ public class TestAutomationGuiController {
             , String jenkins_project_name
             , String jenkins_token
             , String mattermost_webhook_id
+            , String before_test_exec_shell
             , String test_exec_shell){
          try{
             if(list != null){
@@ -299,6 +303,7 @@ public class TestAutomationGuiController {
                 param.put("jenkins_project_name", jenkins_project_name);
                 param.put("jenkins_token", jenkins_token);
                 param.put("mattermost_webhook_id", mattermost_webhook_id);
+                param.put("before_test_exec_shell", before_test_exec_shell);
                 param.put("test_exec_shell", test_exec_shell);
 
                 HttpUtil.call(TEST_URL+"save_project_info",gson.toJson(param),(body)->{

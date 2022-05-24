@@ -113,6 +113,10 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
         lb_test_exec_shell = new javax.swing.JLabel();
         test_exec_shell = new javax.swing.JTextField();
 
+        lb_before_test_exec_shell = new javax.swing.JLabel();
+        before_test_exec_shell = new javax.swing.JTextField();
+
+
         setPreferredSize(new java.awt.Dimension(477, 500));
         setLayout(new java.awt.BorderLayout());
 
@@ -236,6 +240,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
             }
         });
 
+        lb_before_test_exec_shell.setText("작업 전 실행 명령");
         lb_test_exec_shell.setText("테스트 시작 실행 명령");
 
         btn_save_scenario.setBackground(new java.awt.Color(0, 133, 252));
@@ -289,6 +294,10 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(mattermost_webhook_id, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout_project_link.createSequentialGroup()
+                                    .addComponent(lb_before_test_exec_shell)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(before_test_exec_shell, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout_project_link.createSequentialGroup()
                                 .addComponent(lb_test_exec_shell)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(test_exec_shell, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -334,6 +343,9 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
                             .addComponent(lb_mattermost_webhook_id))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(before_test_exec_shell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lb_before_test_exec_shell))
+                        .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(test_exec_shell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lb_test_exec_shell))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -376,6 +388,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
         mattermost_webhook_id.setText("");
         jenkins_url.setText("");
         jenkins_token.setText("");
+        before_test_exec_shell.setText("");
         test_exec_shell.setText("");
         TestAutomationGuiController.show_project_detail(project_list
                 , project_name
@@ -383,6 +396,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
                 , jenkins_project_name
                 , jenkins_token
                 , mattermost_webhook_id
+                , before_test_exec_shell
                 , test_exec_shell
                 , project_desc);
     }                                   
@@ -412,6 +426,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
                , jenkins_project_name.getText()
                , jenkins_token.getText()
                , mattermost_webhook_id.getText()
+               , before_test_exec_shell.getText()
                , test_exec_shell.getText()
        )){
             JOptionPane.showMessageDialog(null, "프로젝트 연결 정보를 저장 하였습니다.");
@@ -525,6 +540,9 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
     public void setJenkinsToken(String jenkins_token){
         this.jenkins_token.setText(jenkins_token);
     }
+    public void setBeforeTestExecShell(String test_exec_shell){
+        this.before_test_exec_shell.setText(test_exec_shell);
+    }
     public void setTestExecShell(String test_exec_shell){
         this.test_exec_shell.setText(test_exec_shell);
     }
@@ -577,6 +595,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
     private javax.swing.JLabel lb_jenkins_url;
     private javax.swing.JLabel lb_jenkins_token;
     private javax.swing.JLabel lb_test_exec_shell;
+    private javax.swing.JLabel lb_before_test_exec_shell;
     private javax.swing.JList<String> project_list;
     private javax.swing.JPanel panel_project_link;
     private javax.swing.JPanel panel_test_data;
@@ -591,6 +610,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
     private javax.swing.JTextField jenkins_url;
     private javax.swing.JTextField jenkins_token;
     private javax.swing.JTextField test_exec_shell;
+    private javax.swing.JTextField before_test_exec_shell;
     // End of variables declaration                   
 }
 
