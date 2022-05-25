@@ -99,10 +99,6 @@ public class TestAutomationGuiController {
 
                     if("true".equals(TEST_AUTO)) {
                         default_executor.start();
-                        default_executor.init(default_executor.getTestData(), (d, cnt) -> {
-                            FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).write(d);
-                            return null;
-                        });
                     }
                 });
                 logger.info("Executor's stop mode is {}",default_executor.is_stop());

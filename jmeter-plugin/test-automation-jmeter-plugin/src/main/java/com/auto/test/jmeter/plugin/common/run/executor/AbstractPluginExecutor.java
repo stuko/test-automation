@@ -135,6 +135,19 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
 
     @Override
     public void start(){
+        this.init(this.getTestData(), (d, cnt) -> {
+            FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).write(d);
+            return null;
+        });
+        this.getTestMessage().setStop(false);
+    }
+    @Override
+    public void start(TestPluginCallBack callback){
+        this.init(this.getTestData(), (d, cnt) -> {
+            FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).write(d);
+            callback.call(d,cnt);
+            return null;
+        });
         this.getTestMessage().setStop(false);
     }
 
