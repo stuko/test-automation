@@ -18,6 +18,7 @@ public interface TestPluginExecutor {
     void setTestData(TestPluginTestData testData);
     void stop();
     void start();
+    void start(TestPluginCallBack callback);
     boolean is_start();
     boolean is_stop();
     Map<String,Object> writeRequestToJMeterContext(String json);

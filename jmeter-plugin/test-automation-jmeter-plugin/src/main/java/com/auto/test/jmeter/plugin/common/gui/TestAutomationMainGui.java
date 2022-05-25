@@ -345,6 +345,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
                         .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(before_test_exec_shell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lb_before_test_exec_shell))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout_project_link.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(test_exec_shell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lb_test_exec_shell))

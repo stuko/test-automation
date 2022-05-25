@@ -165,20 +165,12 @@ public class TestDataConfigPanel extends PluginGridPanel {
         ok.addActionListener(event->{
             if(!is_start.get()) {
                 com.auto.test.jmeter.plugin.common.data.FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).removeAll();
-                this.getSampler().getExecutor().start();
                 is_start.set(true);
                 this.getSampler().getExecutor().getTestData().setData(this.getPluginData());
-                if(callback == null){
-                    this.getSampler().getExecutor().init(this.getSampler().getExecutor().getTestData(), (d,cnt)->{
-                        // logger.info(d);
-                        FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).write(d);
-                        setTestCount(cnt);
-                        return null;
-                    });
-                }else{
-                    this.getSampler().getExecutor().init(this.getSampler().getExecutor().getTestData(), callback);
-                }
-                
+                this.getSampler().getExecutor().start((d,cnt)->{
+                    setTestCount(cnt);
+                    return d;
+                });
                 ok.setText(NO);
             }else{
                 this.getSampler().getExecutor().stop();

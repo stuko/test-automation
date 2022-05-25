@@ -54,7 +54,9 @@ public abstract class AbstractTestPluginSampler extends AbstractSampler {
         TestPluginResponse response = null;
         try {
             logger.info("Sampler is Same ? {}" , this.hashCode());
+            getExecutor().start();
             response = getExecutor().execute();
+            getExecutor().stop();
             if(response == null) logger.info("Execute result is null");
             else  logger.info("Execute result is Not null");
             try {
@@ -120,12 +122,7 @@ public abstract class AbstractTestPluginSampler extends AbstractSampler {
                     getExecutor().getTestData().setData(test_data_factors);
                 });
             }
-            this.getExecutor().start();
-            this.getExecutor().init(this.getExecutor().getTestData(), (d, cnt) -> {
-                FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).write(d);
-                return null;
-            });
-
+            // this.getExecutor().start();
         }else logger.info("executor's mode is start");
     }
 }

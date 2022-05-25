@@ -34,7 +34,7 @@ class MatterMostManager:
         
     def notify(self, project_id, project_name, task_title, message, detail) :
         project = self.jm.get_project_detail(project_id)
-        print(f'project id is {project_id} and project info is {project}')
+        # print(f'project id is {project_id} and project info is {project}')
         if(project != None) :
             mattermost_webhook_id = project['mattermost_webhook_id']
             print(f'mattermost_webhook_id is {mattermost_webhook_id}')
