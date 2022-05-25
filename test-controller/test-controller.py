@@ -103,7 +103,7 @@ def controller():
             
             if before_test_exec_shell != None:
                 print("before test exec shell : " + before_test_exec_shell)
-                jm.execute_shell_command(before_test_exec_shell , False)
+                jm.execute_shell_command(before_test_exec_shell)
             else:
                 print("not exist before test exec shell")
 
@@ -155,7 +155,7 @@ def controller():
             
             if test_exec_shell != None:
                 print("test exec shell : " + test_exec_shell)
-                jm.execute_shell_command(test_exec_shell , False)
+                jm.execute_shell_command(test_exec_shell)
             else:
                 print("not exist test exec shell")
 
