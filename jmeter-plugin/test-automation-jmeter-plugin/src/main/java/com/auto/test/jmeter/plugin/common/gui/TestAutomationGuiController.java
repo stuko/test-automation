@@ -96,7 +96,7 @@ public class TestAutomationGuiController {
                     }
                     default_executor.getTestData().setData(test_data_factors);
                     logger.info("Executor's mode is AUTO : {}", TEST_AUTO);
-
+                    default_executor.getTestData().setTestDatas(FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path));
                     if("true".equals(TEST_AUTO)) {
                         default_executor.start();
                     }
@@ -245,7 +245,7 @@ public class TestAutomationGuiController {
           project.put("jmx_file_name", jmx_file_name);
           logger.info("parameter is  {}",gson.toJson(project));
           HttpUtil.call(TEST_URL+"get_project_detail_by_jmx",gson.toJson(project),(body)->{
-              logger.info(body);
+              // logger.info(body);
               List list = gson.fromJson(body, List.class);
               if(list != null && list.size() > 0) {
                   Map<String,Object> m = (Map<String,Object>)list.get(0);

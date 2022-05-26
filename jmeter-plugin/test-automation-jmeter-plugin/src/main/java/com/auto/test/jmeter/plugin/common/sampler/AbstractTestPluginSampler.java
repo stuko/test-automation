@@ -55,8 +55,18 @@ public abstract class AbstractTestPluginSampler extends AbstractSampler {
         try {
             logger.info("Sampler is Same ? {}" , this.hashCode());
             getExecutor().start();
+            logger.info("before execute, Current Test Data Queue size is {}", getExecutor().getTestData().getTestDatas().size());
             response = getExecutor().execute();
-            getExecutor().stop();
+            //#####################################################
+            // 아래 처럼 테스트가 종료 되면, 테스트 데이터 생성 데몬을 종료시켜야 함.
+            //#####################################################
+            // getExecutor().stop();
+
+            if(getExecutor().getTestData() == null || getExecutor().getTestData().getTestDatas() == null )
+                logger.info("after execute, Current Test Data Queue(NULL) size is 0");
+            else
+                logger.info("after execute, Current Test Data Queue size is {}", getExecutor().getTestData().getTestDatas().size());
+
             if(response == null) logger.info("Execute result is null");
             else  logger.info("Execute result is Not null");
             try {
@@ -102,7 +112,6 @@ public abstract class AbstractTestPluginSampler extends AbstractSampler {
     public void prepare_test_data(){
         if(this.getExecutor().is_stop()) {
             logger.info("executor's mode is stop");
-            com.auto.test.jmeter.plugin.common.data.FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).removeAll();
             if(this.getExecutor().getTestData().getData() == null){
                 logger.info("executor's test data is null");
                 TestAutomationGuiController.get_test_data_by_jmx(list -> {

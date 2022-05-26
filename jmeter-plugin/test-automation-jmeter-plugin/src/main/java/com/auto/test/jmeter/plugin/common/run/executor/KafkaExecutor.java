@@ -46,7 +46,8 @@ public class KafkaExecutor extends AbstractPluginExecutor {
 
     @Override
     public TestPluginResponse execute() {
-        String data = FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).next();
+        // String data = FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).next();
+        String data = this.getTestData().next();
         logger.info("KAFKA #################");
         logger.info("Message : {} " , data);
         logger.info("KAFKA #################");

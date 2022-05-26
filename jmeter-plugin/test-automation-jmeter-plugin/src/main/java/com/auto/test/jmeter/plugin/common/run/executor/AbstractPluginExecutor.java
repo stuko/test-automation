@@ -14,8 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
 
@@ -25,6 +25,7 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
 
     TestMessage message = new TestMessageByCombination();
     ExecutorService executors = Executors.newFixedThreadPool(10);
+    ThreadPoolExecutor threadPool;
     TestPluginTestData testData;
 
     public Map<String, Object> getConfigMap() {
@@ -37,19 +38,32 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
     @Override
     public void init(TestPluginTestData data , TestPluginCallBack callBack) {
         try {
-            this.setTestMessage(new TestMessageByCombination());
-            this.getTestMessage().setStop(false);
-            this.setTestData(data);
-            this.getTestMessage().build(this.getTestData().getData());
-            try {
-                this.getExecutorService().submit(new Thread(){
-                    public void run(){
-                        getTestMessage().getFileMessage(callBack);
-                    }
-                });
-            }catch(Exception e){
-                callBack.call("Exception : " + e.toString(), 0);
+            ThreadPoolExecutor threadPool = new ThreadPoolExecutor(1, 10, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+            threadPool.setThreadFactory(new OpJobThreadFactory(Thread.NORM_PRIORITY-2));
+            if(this.getTestMessage() == null) {
+                this.setTestMessage(new TestMessageByCombination());
             }
+            if(data != null) {
+                this.setTestData(data);
+                this.getTestMessage().build(this.getTestData().getData());
+            }
+            if(this.getTestData().getTestDatas() == null) {
+                // FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).removeAll();
+                this.getTestData().setTestDatas(FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path));
+            }
+
+            if(this.is_stop()){
+                try {
+                    this.getExecutorService().submit(new Thread(){
+                        public void run(){
+                            getTestMessage().getFileMessage(callBack);
+                        }
+                    });
+                }catch(Exception e){
+                    callBack.call("Exception : " + e.toString(), 0);
+                }
+            }
+            // this.getTestMessage().setStop(false);
         }catch(Exception e){
             logger.error(e.toString(),e);
         }
@@ -57,7 +71,8 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
 
     @Override
     public TestPluginResponse execute() {
-        String data = FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).next();
+        String data = this.getTestData().next();
+        // String data = FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).next();
         logger.info("Default #################");
         logger.info("Message : {} " , data);
         logger.info("Default #################");
@@ -131,24 +146,37 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
     @Override
     public void stop(){
         this.getTestMessage().setStop(true);
+        try {
+            if (this.getExecutorService() != null) this.getExecutorService().shutdownNow();
+            this.getTestData().setData( null );
+            this.getTestData().setTestDatas( null );
+        }catch(Exception e){
+            logger.error(e.toString(),e);
+        }
     }
 
     @Override
     public void start(){
-        this.init(this.getTestData(), (d, cnt) -> {
-            FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).write(d);
-            return null;
-        });
-        this.getTestMessage().setStop(false);
+        if(this.getTestData().getTestDatas() == null || this.getTestData().getTestDatas().size() == 0) {
+            this.init(this.getTestData(), (d, cnt) -> {
+                // logger.info("Test Data is writed...{}", d);
+                getTestData().getTestDatas().write(d);
+                return null;
+            });
+            this.getTestMessage().setStop(false);
+        }
     }
     @Override
     public void start(TestPluginCallBack callback){
-        this.init(this.getTestData(), (d, cnt) -> {
-            FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).write(d);
-            callback.call(d,cnt);
-            return null;
-        });
-        this.getTestMessage().setStop(false);
+        if(this.getTestData().getTestDatas() == null || this.getTestData().getTestDatas().size() == 0) {
+            this.init(this.getTestData(), (d, cnt) -> {
+                // logger.info("Test Data is writed...{}", d);
+                getTestData().getTestDatas().write(d);
+                callback.call(d, cnt);
+                return null;
+            });
+            this.getTestMessage().setStop(false);
+        }
     }
 
     @Override
@@ -160,3 +188,4 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
         this.executors = svc;
     }
 }
+
