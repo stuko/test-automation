@@ -185,11 +185,16 @@ def controller():
             #------------------------------------------
             jm.execute_shell_command(jm.get_shell_command(upload_folder + jmx_file_name , result_file_name), False)
             # result_string = open("/app/server/volume/result/" + result_name, 'r').read()
-
             #------------------------------------------
             # 테스트 자동화 완료 메시지 보내기
             #------------------------------------------
             mm.send_test_automation_complete(project_id,project_name, task_title,result_file_name)              
+            
+            #------------------------------------------
+            # 테스트 요청 프로세스 삭제
+            #------------------------------------------
+            jm.stop_test()
+            
             #------------------------------------------
             # Kanboard를 다음 단계로 이동 시키키
             #------------------------------------------

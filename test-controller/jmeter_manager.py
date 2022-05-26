@@ -93,6 +93,7 @@ class JmeterManager:
     def stop_test(self):
         self.execute_shell_command(self, self.path + 'shutdown.sh')
         self.execute_shell_command(self, self.path + 'stoptest.sh')
+        self.execute_shell_command(self, 'pkill -9 -ef EXEC_JMETER_TEST')
 
     def execute_shell_command(self, shell , is_root=True):
         if is_root : 
