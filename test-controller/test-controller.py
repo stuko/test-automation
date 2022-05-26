@@ -19,9 +19,9 @@ result_folder = "./volume/result/"
 
 @app.route('/controller', methods=['POST','GET']) 
 def controller():
-    print('------ start parameter !!! ---------')
-    print(request.data) 
-    print('------ end parameter !!! -----')
+    # print('------ start parameter !!! ---------')
+    # print(request.data) 
+    # print('------ end parameter !!! -----')
     params = request.get_json()
     
     # ----------------------------------------------
