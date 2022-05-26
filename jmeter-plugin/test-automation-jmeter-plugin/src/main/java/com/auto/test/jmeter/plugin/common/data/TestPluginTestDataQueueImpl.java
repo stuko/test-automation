@@ -14,7 +14,8 @@ public class TestPluginTestDataQueueImpl extends TestPluginTestDataImpl{
     public String next() {
         String data = "{\"error\": -1}";
         try {
-            data = FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).next();
+            // data = FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).next();
+            data = super.next();
         }catch(Exception e){
             logger.error(e.toString(),e);
         }

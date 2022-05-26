@@ -108,7 +108,7 @@ public class FileJsonArrayListQueue extends FileJsonArrayListPlus{
                 current_queue = this.getReadable_queue().peek();
             }else{
             	int tryCnt = 0;
-                while(((current_queue = this.getReadable_queue().poll()) == null) && tryCnt++ < 10){
+                while(((current_queue = this.getReadable_queue().poll()) == null) && tryCnt++ < 1000){
                     try{logger.info("poll wait....");Thread.sleep(200);}catch(Exception e){logger.error(e.toString());}
                 }
                 if(current_queue == null) return null;

@@ -38,7 +38,8 @@ public class HttpExecutor extends AbstractPluginExecutor  {
     @Override
     public TestPluginResponse execute() {
         TestPluginResponseImpl response = new TestPluginResponseImpl();
-        String data = FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).next();
+        // String data = FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).next();
+        String data = this.getTestData().next();
         logger.info("HTTP #################");
         logger.info("Message : {} " , data);
         logger.info("HTTP #################");
