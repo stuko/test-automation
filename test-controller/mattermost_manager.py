@@ -17,7 +17,7 @@ class MatterMostManager:
     
     def send(self, mattermost_webhook_id, subject, detail):
         print(f'send url is {self.url + mattermost_webhook_id}')
-        self.message['text'] = '' + subject  + '\n' + '> ' + detail
+        self.message['text'] = '' + subject  + '\n' + '' + detail
         r = requests.post(
             self.url + mattermost_webhook_id ,
             data=json.dumps(self.message)
