@@ -33,12 +33,12 @@ sudo chmod -R 777 volume
 
 sudo docker container stop test-controller-influxdb
 sudo docker container rm test-controller-influxdb
-sudo docker run -d --name=test-controller-influxdb -p 8086:8086 -v $(pwd)/volume/influxdb:/var/lib/influxdb influxdb:1.8
+sudo docker run -d --name=test-controller-influxdb -p 8083:8083 -p 8086:8086 -v $PWD/volume/influxdb-config/influxdb.conf:/etc/influxdb/influxdb.conf -v $(pwd)/volume/influxdb:/var/lib/influxdb influxdb:1.8
 
 sudo docker container stop test-controller-grafana
 sudo docker container rm test-controller-grafana
 sudo docker run -d --name=test-controller-grafana -p 3000:3000 -v $(pwd)/volume/grafana:/var/lib/grafana grafana/grafana
-
+ 
 # KAI-S 재시작 
 # cd ~/workspace/TestAutomation_KAI_S_WEB/kai-s-web-package && ./shutdown.sh && sleep 2 && ./startup.sh
 

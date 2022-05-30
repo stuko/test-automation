@@ -26,18 +26,6 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="광주은행 비대면 스코어 확인용 데이터" enabled="true">
-          <stringProp name="delimiter">,</stringProp>
-          <stringProp name="fileEncoding">UTF-8</stringProp>
-          <stringProp name="filename">./test/kais-data/GJ_SCR_CHK_20210907.txt</stringProp>
-          <boolProp name="ignoreFirstLine">false</boolProp>
-          <boolProp name="quotedData">false</boolProp>
-          <boolProp name="recycle">true</boolProp>
-          <stringProp name="shareMode">shareMode.group</stringProp>
-          <boolProp name="stopThread">false</boolProp>
-          <stringProp name="variableNames">ID,STDAY,TOTAL_SCR,NEAR_PRIME,PRIME,BDM_SOHO_SCR,TOTAL_GRD,NEAR_PRIME_GRD,PRIME_GRD,L20231O00,C1Z001405,C1L120250,AL012G020,C20172001,L2Z001291,AL012G018,L9023C200,C1L120161,L10173000,U81102010,L2Z001075,D10132D0N,D10175D0T,L101AHW06,L2Z001014,L1Z000961,U81201010,L9Z000271,L2M000026,C23282000,L2Z001212,D10310608,AS136G006,AL012G017,L2X000026,L2Z000207,L2Z001222,D1013AD0T,L2Z001221,C1Z001117,C1L120331,D10132D0T,L1Z000929,C1P000011,C1Z001364,L2Z000208,C1N235W1P,L2Z001268,L2Z000199,L1Z000803,L1Z000381,D1013AD0N,D1017500K,L10217000,C1Z001340,L10210000,L1Z000962,L2Z000198,C1Z001190,AH40D0004,AH1020015,AH40C0008,AL0C00004,AS01DG001,AL012G005,C1N228000,AS1DD0002,C18133006,L2Z000177,AL0C00001,AH40D0002,LA1000071,AH1020017,AS120G001,C1N128006,C1Z200001,D10175006,C20220006,L2X000031,AH40C0014,L2Z000223,D10110000,L2M000112,C1N239000,C1M2B3W0C,C1N2A3W06,C1N2B6W0C,D1017500N,C1813300C,D10175000,C1N2B5W06,L2M000021,C1N2B5W0C,C1M237W3P,D10110003,L2Z001247,C1N238000,C1M2B3W06,L2Z001246,C1N2A3W03,L2Z001245,C1N2B6W06,L2Z001244,DA0D00001,C1Z000816,L2Z000247,C1M237W1P,L2Z000996,L2Z000998,DD0140X16,C1Z000946,C1Z000753,C1Z001038,C1L120301,SI00000Z0,SD00000Z0,S8R2000Z0,U93070000,AH4060008,D1017500T,DD0140X1C,DDC006003,L2Z001088,C1N2A6W03,L2M000011,L2Z000957,L2M000013,L2M000014,L2M000127,LA0000077,LA0000098,LA0000094,KCB_SOHO_YN,U5DD01006,SC0000000,SC0001000,S92000000,S92101000,SUL000000,SUL001000,U43002030,U42006030,JOB,CBMIX0001,CBMIX0025,CBMIX0027,CBMIX0032,CBMIX0042,CBMIX0044,CBMIX0047,CBMIX0050,CBMIX0051,CBMIX0056,CBMIX0058,CBMIX0059,CBMIX0071,CBMIX0077,CBMIX0079,CBMIX0096,CBMIX0098,CBMIX0105,CBMIX0119,CBMIX0123</stringProp>
-        </CSVDataSet>
-        <hashTree/>
         <com.auto.test.jmeter.plugin.common.sampler.TestPluginSampler guiclass="com.auto.test.jmeter.plugin.common.gui.TestAutomationMainGui" testclass="com.auto.test.jmeter.plugin.common.sampler.TestPluginSampler" testname="[res_key=Test Automation Plugin :) - Main]" enabled="false"/>
         <hashTree/>
         <RecordingController guiclass="RecordController" testclass="RecordingController" testname="Login Management" enabled="true"/>
@@ -618,7 +606,7 @@ try{
         </hashTree>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedMetaItem" enabled="true">
           <stringProp name="dataSource">kaiswebdb</stringProp>
-          <stringProp name="query">SELECT COUNT(REF_ID) AS Not_Used_Meta_Item_Count  
+          <stringProp name="query">SELECT COUNT(REF_ID) AS NotUsedMetaItemCount  
 FROM KAIS52_REF_ITM
 WHERE REF_ITM_ID  NOT IN (SELECT MET_DAT_SET_ITM_ID FROM KAIS21_MET_DAT_SET_ITM_DTL)
 </stringProp>
@@ -628,14 +616,14 @@ WHERE REF_ITM_ID  NOT IN (SELECT MET_DAT_SET_ITM_ID FROM KAIS21_MET_DAT_SET_ITM_
           <stringProp name="queryType">Select Statement</stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
           <stringProp name="resultSetMaxRows"></stringProp>
-          <stringProp name="resultVariable">Not_Used_Meta_Item_Count  </stringProp>
+          <stringProp name="resultVariable">Not_Used_MetaItem_Count</stringProp>
           <stringProp name="variableNames"></stringProp>
         </JDBCSampler>
         <hashTree/>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SameItemNameButTypeIsNot" enabled="true">
           <stringProp name="dataSource">kaiswebdb</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT COUNT(A.REF_ID)  AS Same_Item_Name_But_Type_Is_Not_Count
+          <stringProp name="query">SELECT COUNT(A.REF_ID)  AS SameItemNameButTypeIsNotCount
 FROM (SELECT REF_ID , REF_ITM_ID , ref_itm_dat_tp FROM KAIS52_REF_ITM) A,
 	 (SELECT REF_ID , REF_ITM_ID , ref_itm_dat_tp FROM KAIS52_REF_ITM) B 
 WHERE A.REF_ITM_ID = B.REF_ITM_ID
@@ -657,7 +645,7 @@ AND (
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames"></stringProp>
-          <stringProp name="resultVariable">Same_Item_Name_But_Type_Is_Not_Count</stringProp>
+          <stringProp name="resultVariable">SameItemNameButTypeIsNotCount</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetMaxRows"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -666,7 +654,7 @@ AND (
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedRefObject" enabled="true">
           <stringProp name="dataSource">kaiswebdb</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT COUNT(STGY_SET_ID) AS Not_Used_Ref_Object_Count 
+          <stringProp name="query">SELECT COUNT(STGY_SET_ID) AS NotUsedRefObjectCount 
 FROM KAIS60_STGY_SET_MAIN 
 WHERE STGY_SET_ID NOT IN 
 (
@@ -706,7 +694,7 @@ WHERE STGY_SET_ID NOT IN
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames"></stringProp>
-          <stringProp name="resultVariable">Not_Used_Ref_Object_Count</stringProp>
+          <stringProp name="resultVariable">NotUsedRefObjectCount</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetMaxRows"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -715,7 +703,7 @@ WHERE STGY_SET_ID NOT IN
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedDecisionFunction" enabled="true">
           <stringProp name="dataSource">kaiswebdb</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS Not_Used_Decision_Function_Count
+          <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS NotUsedDecisionFunctionCount
 FROM KAIS61_STGY_SET_OBJ A LEFT OUTER JOIN KAIS62_DCS_FUNC_DTL B 
 	 ON A.STGY_SET_ID  = B.STGY_SET_ID 
 	 AND A.OBJ_TP = B.OBJ_TP 
@@ -725,7 +713,7 @@ AND   B.OBJ_ID IS NULL</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames"></stringProp>
-          <stringProp name="resultVariable">Not_Used_Decision_Function_Count</stringProp>
+          <stringProp name="resultVariable">NotUsedDecisionFunctionCount</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetMaxRows"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -734,7 +722,7 @@ AND   B.OBJ_ID IS NULL</stringProp>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedDM_DT_TR" enabled="true">
           <stringProp name="dataSource">kaiswebdb</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS Not_Used_DM_DT_TR_Count
+          <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS NotUsedDM_DT_TR_Count
 FROM KAIS61_STGY_SET_OBJ A LEFT OUTER JOIN KAIS62_DCS_OBJ_DTL B 
 	 ON A.STGY_SET_ID  = B.STGY_SET_ID 
 	 AND A.OBJ_TP = B.OBJ_TP 
@@ -744,7 +732,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames"></stringProp>
-          <stringProp name="resultVariable">Not_Used_DM_DT_TR_Count</stringProp>
+          <stringProp name="resultVariable">NotUsedDM_DT_TR_Count</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetMaxRows"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -753,7 +741,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedFork" enabled="true">
           <stringProp name="dataSource">kaiswebdb</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS Not_Used_Fork_Count
+          <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS NotUsedForkCount
 FROM KAIS61_STGY_SET_OBJ A LEFT OUTER JOIN KAIS62_FORK_OBJ_DTL B 
 	 ON A.STGY_SET_ID  = B.STGY_SET_ID 
 	 AND A.OBJ_TP = B.OBJ_TP 
@@ -763,7 +751,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames"></stringProp>
-          <stringProp name="resultVariable">Not_Used_Fork_Count</stringProp>
+          <stringProp name="resultVariable">NotUsedForkCount</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetMaxRows"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -772,7 +760,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedDS" enabled="true">
           <stringProp name="dataSource">kaiswebdb</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS Not_Used_DS_Count
+          <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS NotUsedDSCount
 FROM KAIS61_STGY_SET_OBJ A LEFT OUTER JOIN KAIS62_DCS_SCRT_DTL B 
 	 ON A.STGY_SET_ID  = B.STGY_SET_ID 
 	 AND A.OBJ_TP = B.OBJ_TP 
@@ -782,7 +770,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames"></stringProp>
-          <stringProp name="resultVariable">Not_Used_DS_Count</stringProp>
+          <stringProp name="resultVariable">NotUsedDSCount</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetMaxRows"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -791,7 +779,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedScoreCardStrategySet" enabled="true">
           <stringProp name="dataSource">kaiswebdb</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS  Not_Used_Score_Card_Strategy_Set_Count
+          <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS  NotUsedScoreCardStrategySetCount
 FROM KAIS61_STGY_SET_OBJ A LEFT OUTER JOIN KAIS62_MAIN_OBJ_DTL B 
 	 ON A.STGY_SET_ID  = B.STGY_SET_ID 
 	 AND A.OBJ_TP = B.OBJ_TP 
@@ -801,7 +789,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames"></stringProp>
-          <stringProp name="resultVariable">Not_Used_Score_Card_Strategy_Set_Count</stringProp>
+          <stringProp name="resultVariable">NotUsedScoreCardStrategySetCount</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="resultSetMaxRows"></stringProp>
           <stringProp name="resultSetHandler">Store as String</stringProp>
@@ -1044,6 +1032,18 @@ AND   B.OBJ_ID IS NULL </stringProp>
         </elementProp>
         <stringProp name="classname">org.apache.jmeter.visualizers.backend.influxdb.InfluxdbBackendListenerClient</stringProp>
       </BackendListener>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="광주은행 비대면 스코어 확인용 데이터" enabled="true">
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding">UTF-8</stringProp>
+        <stringProp name="filename">./test/kais-data/GJ_SCR_CHK_20210907.txt</stringProp>
+        <boolProp name="ignoreFirstLine">false</boolProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">ID,STDAY,TOTAL_SCR,NEAR_PRIME,PRIME,BDM_SOHO_SCR,TOTAL_GRD,NEAR_PRIME_GRD,PRIME_GRD,L20231O00,C1Z001405,C1L120250,AL012G020,C20172001,L2Z001291,AL012G018,L9023C200,C1L120161,L10173000,U81102010,L2Z001075,D10132D0N,D10175D0T,L101AHW06,L2Z001014,L1Z000961,U81201010,L9Z000271,L2M000026,C23282000,L2Z001212,D10310608,AS136G006,AL012G017,L2X000026,L2Z000207,L2Z001222,D1013AD0T,L2Z001221,C1Z001117,C1L120331,D10132D0T,L1Z000929,C1P000011,C1Z001364,L2Z000208,C1N235W1P,L2Z001268,L2Z000199,L1Z000803,L1Z000381,D1013AD0N,D1017500K,L10217000,C1Z001340,L10210000,L1Z000962,L2Z000198,C1Z001190,AH40D0004,AH1020015,AH40C0008,AL0C00004,AS01DG001,AL012G005,C1N228000,AS1DD0002,C18133006,L2Z000177,AL0C00001,AH40D0002,LA1000071,AH1020017,AS120G001,C1N128006,C1Z200001,D10175006,C20220006,L2X000031,AH40C0014,L2Z000223,D10110000,L2M000112,C1N239000,C1M2B3W0C,C1N2A3W06,C1N2B6W0C,D1017500N,C1813300C,D10175000,C1N2B5W06,L2M000021,C1N2B5W0C,C1M237W3P,D10110003,L2Z001247,C1N238000,C1M2B3W06,L2Z001246,C1N2A3W03,L2Z001245,C1N2B6W06,L2Z001244,DA0D00001,C1Z000816,L2Z000247,C1M237W1P,L2Z000996,L2Z000998,DD0140X16,C1Z000946,C1Z000753,C1Z001038,C1L120301,SI00000Z0,SD00000Z0,S8R2000Z0,U93070000,AH4060008,D1017500T,DD0140X1C,DDC006003,L2Z001088,C1N2A6W03,L2M000011,L2Z000957,L2M000013,L2M000014,L2M000127,LA0000077,LA0000098,LA0000094,KCB_SOHO_YN,U5DD01006,SC0000000,SC0001000,S92000000,S92101000,SUL000000,SUL001000,U43002030,U42006030,JOB,CBMIX0001,CBMIX0025,CBMIX0027,CBMIX0032,CBMIX0042,CBMIX0044,CBMIX0047,CBMIX0050,CBMIX0051,CBMIX0056,CBMIX0058,CBMIX0059,CBMIX0071,CBMIX0077,CBMIX0079,CBMIX0096,CBMIX0098,CBMIX0105,CBMIX0119,CBMIX0123</stringProp>
+      </CSVDataSet>
       <hashTree/>
     </hashTree>
   </hashTree>
