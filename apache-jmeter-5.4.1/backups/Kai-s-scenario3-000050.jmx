@@ -16,7 +16,7 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">10</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
@@ -37,6 +37,10 @@
           <boolProp name="stopThread">false</boolProp>
           <stringProp name="variableNames">ID,STDAY,TOTAL_SCR,NP_SCR,P_SCR,SOHO_SCR,TOTAL_GRD,NP_GRD,P_GRD,L20231O00,C1Z001405,C1L120250,AL012G020,C20172001,L2Z001291,AL012G018,L9023C200,C1L120161,L10173000,U81102010,L2Z001075,D10132D0N,D10175D0T,L101AHW06,L2Z001014,L1Z000961,U81201010,L9Z000271,L2M000026,C23282000,L2Z001212,D10310608,AS136G006,AL012G017,L2X000026,L2Z000207,L2Z001222,D1013AD0T,L2Z001221,C1Z001117,C1L120331,D10132D0T,L1Z000929,C1P000011,C1Z001364,L2Z000208,C1N235W1P,L2Z001268,L2Z000199,L1Z000803,L1Z000381,D1013AD0N,D1017500K,L10217000,C1Z001340,L10210000,L1Z000962,L2Z000198,C1Z001190,AH40D0004,AH1020015,AH40C0008,AL0C00004,AS01DG001,AL012G005,C1N228000,AS1DD0002,C18133006,L2Z000177,AL0C00001,AH40D0002,LA1000071,AH1020017,AS120G001,C1N128006,C1Z200001,D10175006,C20220006,L2X000031,AH40C0014,L2Z000223,D10110000,L2M000112,C1N239000,C1M2B3W0C,C1N2A3W06,C1N2B6W0C,D1017500N,C1813300C,D10175000,C1N2B5W06,L2M000021,C1N2B5W0C,C1M237W3P,D10110003,L2Z001247,C1N238000,C1M2B3W06,L2Z001246,C1N2A3W03,L2Z001245,C1N2B6W06,L2Z001244,DA0D00001,C1Z000816,L2Z000247,C1M237W1P,L2Z000996,L2Z000998,DD0140X16,C1Z000946,C1Z000753,C1Z001038,C1L120301,SI00000Z0,SD00000Z0,S8R2000Z0,U93070000,AH4060008,D1017500T,DD0140X1C,DDC006003,L2Z001088,C1N2A6W03,L2M000011,L2Z000957,L2M000013,L2M000014,L2M000127,LA0000077,LA0000098,LA0000094,KCB_SOHO_YN,U5DD01006,SC0000000,SC0001000,S92000000,S92101000,SUL000000,SUL001000,U43002030,U42006030,JOB,CBMIX0001,CBMIX0025,CBMIX0027,CBMIX0032,CBMIX0042,CBMIX0044,CBMIX0047,CBMIX0050,CBMIX0051,CBMIX0056,CBMIX0058,CBMIX0059,CBMIX0071,CBMIX0077,CBMIX0079,CBMIX0096,CBMIX0098,CBMIX0105,CBMIX0119,CBMIX0123</stringProp>
         </CSVDataSet>
+        <hashTree/>
+        <com.auto.test.jmeter.plugin.common.config.TestAutomationConfigTestElement guiclass="TestBeanGUI" testclass="com.auto.test.jmeter.plugin.common.config.TestAutomationConfigTestElement" testname="Test Automation Config" enabled="true">
+          <stringProp name="filename">./test/data/</stringProp>
+        </com.auto.test.jmeter.plugin.common.config.TestAutomationConfigTestElement>
         <hashTree/>
         <com.auto.test.jmeter.plugin.common.sampler.TestPluginSampler guiclass="com.auto.test.jmeter.plugin.common.gui.TestAutomationMainGui" testclass="com.auto.test.jmeter.plugin.common.sampler.TestPluginSampler" testname="[res_key=Test Automation Plugin :) - Main]" enabled="false"/>
         <hashTree/>
@@ -616,26 +620,32 @@ try{
             <hashTree/>
           </hashTree>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedMetaItem" enabled="true">
-          <stringProp name="dataSource">kaiswebdb</stringProp>
-          <stringProp name="query">SELECT COUNT(REF_ID) AS Not_Used_Meta_Item_Count  
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Rule Flow 정합성 검사" enabled="false">
+          <stringProp name="IfController.condition">1 == 2</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedMetaItem" enabled="true">
+            <stringProp name="dataSource">kaiswebdb</stringProp>
+            <stringProp name="query">SELECT COUNT(REF_ID) AS Not_Used_Meta_Item_Count  
 FROM KAIS52_REF_ITM
 WHERE REF_ITM_ID  NOT IN (SELECT MET_DAT_SET_ITM_ID FROM KAIS21_MET_DAT_SET_ITM_DTL)
 </stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-          <stringProp name="resultSetMaxRows"></stringProp>
-          <stringProp name="resultVariable">Not_Used_Meta_Item_Count  </stringProp>
-          <stringProp name="variableNames"></stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SameItemNameButTypeIsNot" enabled="true">
-          <stringProp name="dataSource">kaiswebdb</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT COUNT(A.REF_ID)  AS Same_Item_Name_But_Type_Is_Not_Count
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="queryType">Select Statement</stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+            <stringProp name="resultSetMaxRows"></stringProp>
+            <stringProp name="resultVariable">Not_Used_Meta_Item_Count  </stringProp>
+            <stringProp name="variableNames"></stringProp>
+          </JDBCSampler>
+          <hashTree/>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="SameItemNameButTypeIsNot" enabled="true">
+            <stringProp name="dataSource">kaiswebdb</stringProp>
+            <stringProp name="queryType">Select Statement</stringProp>
+            <stringProp name="query">SELECT COUNT(A.REF_ID)  AS Same_Item_Name_But_Type_Is_Not_Count
 FROM (SELECT REF_ID , REF_ITM_ID , ref_itm_dat_tp FROM KAIS52_REF_ITM) A,
 	 (SELECT REF_ID , REF_ITM_ID , ref_itm_dat_tp FROM KAIS52_REF_ITM) B 
 WHERE A.REF_ITM_ID = B.REF_ITM_ID
@@ -654,19 +664,19 @@ AND (
 		)    
 	)
 </stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames"></stringProp>
-          <stringProp name="resultVariable">Same_Item_Name_But_Type_Is_Not_Count</stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetMaxRows"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedRefObject" enabled="true">
-          <stringProp name="dataSource">kaiswebdb</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT COUNT(STGY_SET_ID) AS Not_Used_Ref_Object_Count 
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable">Same_Item_Name_But_Type_Is_Not_Count</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="resultSetMaxRows"></stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedRefObject" enabled="true">
+            <stringProp name="dataSource">kaiswebdb</stringProp>
+            <stringProp name="queryType">Select Statement</stringProp>
+            <stringProp name="query">SELECT COUNT(STGY_SET_ID) AS Not_Used_Ref_Object_Count 
 FROM KAIS60_STGY_SET_MAIN 
 WHERE STGY_SET_ID NOT IN 
 (
@@ -703,113 +713,114 @@ WHERE STGY_SET_ID NOT IN
  SELECT SCOR_CRD_ID FROM KAIS57_SCOR_CRD_RSN
  )
 </stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames"></stringProp>
-          <stringProp name="resultVariable">Not_Used_Ref_Object_Count</stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetMaxRows"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedDecisionFunction" enabled="true">
-          <stringProp name="dataSource">kaiswebdb</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS Not_Used_Decision_Function_Count
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable">Not_Used_Ref_Object_Count</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="resultSetMaxRows"></stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedDecisionFunction" enabled="true">
+            <stringProp name="dataSource">kaiswebdb</stringProp>
+            <stringProp name="queryType">Select Statement</stringProp>
+            <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS Not_Used_Decision_Function_Count
 FROM KAIS61_STGY_SET_OBJ A LEFT OUTER JOIN KAIS62_DCS_FUNC_DTL B 
 	 ON A.STGY_SET_ID  = B.STGY_SET_ID 
 	 AND A.OBJ_TP = B.OBJ_TP 
 	 AND A.OBJ_ID = B.OBJ_ID 
 WHERE A.OBJ_TP  IN (&apos;DF&apos;)
 AND   B.OBJ_ID IS NULL</stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames"></stringProp>
-          <stringProp name="resultVariable">Not_Used_Decision_Function_Count</stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetMaxRows"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedDM_DT_TR" enabled="true">
-          <stringProp name="dataSource">kaiswebdb</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS Not_Used_DM_DT_TR_Count
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable">Not_Used_Decision_Function_Count</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="resultSetMaxRows"></stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedDM_DT_TR" enabled="true">
+            <stringProp name="dataSource">kaiswebdb</stringProp>
+            <stringProp name="queryType">Select Statement</stringProp>
+            <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS Not_Used_DM_DT_TR_Count
 FROM KAIS61_STGY_SET_OBJ A LEFT OUTER JOIN KAIS62_DCS_OBJ_DTL B 
 	 ON A.STGY_SET_ID  = B.STGY_SET_ID 
 	 AND A.OBJ_TP = B.OBJ_TP 
 	 AND A.OBJ_ID = B.OBJ_ID 
 WHERE A.OBJ_TP IN (&apos;DM&apos;,&apos;TR&apos;,&apos;DT&apos;)
 AND   B.OBJ_ID IS NULL </stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames"></stringProp>
-          <stringProp name="resultVariable">Not_Used_DM_DT_TR_Count</stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetMaxRows"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedFork" enabled="true">
-          <stringProp name="dataSource">kaiswebdb</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS Not_Used_Fork_Count
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable">Not_Used_DM_DT_TR_Count</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="resultSetMaxRows"></stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedFork" enabled="true">
+            <stringProp name="dataSource">kaiswebdb</stringProp>
+            <stringProp name="queryType">Select Statement</stringProp>
+            <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS Not_Used_Fork_Count
 FROM KAIS61_STGY_SET_OBJ A LEFT OUTER JOIN KAIS62_FORK_OBJ_DTL B 
 	 ON A.STGY_SET_ID  = B.STGY_SET_ID 
 	 AND A.OBJ_TP = B.OBJ_TP 
 	 AND A.OBJ_ID = B.OBJ_ID 
 WHERE A.OBJ_TP IN (&apos;FK&apos;)
 AND   B.OBJ_ID IS NULL </stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames"></stringProp>
-          <stringProp name="resultVariable">Not_Used_Fork_Count</stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetMaxRows"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedDS" enabled="true">
-          <stringProp name="dataSource">kaiswebdb</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS Not_Used_DS_Count
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable">Not_Used_Fork_Count</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="resultSetMaxRows"></stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedDS" enabled="true">
+            <stringProp name="dataSource">kaiswebdb</stringProp>
+            <stringProp name="queryType">Select Statement</stringProp>
+            <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS Not_Used_DS_Count
 FROM KAIS61_STGY_SET_OBJ A LEFT OUTER JOIN KAIS62_DCS_SCRT_DTL B 
 	 ON A.STGY_SET_ID  = B.STGY_SET_ID 
 	 AND A.OBJ_TP = B.OBJ_TP 
 	 AND A.OBJ_ID = B.OBJ_ID 
 WHERE A.OBJ_TP IN (&apos;DS&apos;)
 AND   B.OBJ_ID IS NULL </stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames"></stringProp>
-          <stringProp name="resultVariable">Not_Used_DS_Count</stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetMaxRows"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedScoreCardStrategySet" enabled="true">
-          <stringProp name="dataSource">kaiswebdb</stringProp>
-          <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS  Not_Used_Score_Card_Strategy_Set_Count
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable">Not_Used_DS_Count</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="resultSetMaxRows"></stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+          <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="NotUsedScoreCardStrategySet" enabled="true">
+            <stringProp name="dataSource">kaiswebdb</stringProp>
+            <stringProp name="queryType">Select Statement</stringProp>
+            <stringProp name="query">SELECT COUNT(A.STGY_SET_ID) AS  Not_Used_Score_Card_Strategy_Set_Count
 FROM KAIS61_STGY_SET_OBJ A LEFT OUTER JOIN KAIS62_MAIN_OBJ_DTL B 
 	 ON A.STGY_SET_ID  = B.STGY_SET_ID 
 	 AND A.OBJ_TP = B.OBJ_TP 
 	 AND A.OBJ_ID = B.OBJ_ID 
 WHERE A.OBJ_TP IN (&apos;SS&apos;,&apos;SC&apos;)
 AND   B.OBJ_ID IS NULL </stringProp>
-          <stringProp name="queryArguments"></stringProp>
-          <stringProp name="queryArgumentsTypes"></stringProp>
-          <stringProp name="variableNames"></stringProp>
-          <stringProp name="resultVariable">Not_Used_Score_Card_Strategy_Set_Count</stringProp>
-          <stringProp name="queryTimeout"></stringProp>
-          <stringProp name="resultSetMaxRows"></stringProp>
-          <stringProp name="resultSetHandler">Store as String</stringProp>
-        </JDBCSampler>
-        <hashTree/>
+            <stringProp name="queryArguments"></stringProp>
+            <stringProp name="queryArgumentsTypes"></stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable">Not_Used_Score_Card_Strategy_Set_Count</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="resultSetMaxRows"></stringProp>
+            <stringProp name="resultSetHandler">Store as String</stringProp>
+          </JDBCSampler>
+          <hashTree/>
+        </hashTree>
         <RecordingController guiclass="RecordController" testclass="RecordingController" testname="전략 셋 건별 테스트" enabled="true"/>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readComRuleAuthMgrGrt.do-1" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readComRuleAuthMgrGrt.do-1" enabled="false">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="REF_ID" elementType="HTTPArgument">
@@ -874,7 +885,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readStrgMngmBascInfo.do-2" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readStrgMngmBascInfo.do-2" enabled="false">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="stgySetId" elementType="HTTPArgument">
@@ -931,7 +942,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readStrgMngmRuleFlow.do-3" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readStrgMngmRuleFlow.do-3" enabled="false">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="stgySetId" elementType="HTTPArgument">
@@ -988,7 +999,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readComRuleAuthMgrGrt.do-5" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readComRuleAuthMgrGrt.do-5" enabled="false">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="REF_ID" elementType="HTTPArgument">
@@ -1053,7 +1064,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readComBackup.do-4" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readComBackup.do-4" enabled="false">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="REF_ID" elementType="HTTPArgument">
@@ -1139,7 +1150,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readComRuleAuthMgr.do-6" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readComRuleAuthMgr.do-6" enabled="false">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="REF_ID" elementType="HTTPArgument">
@@ -1204,7 +1215,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readCaseTestList.do-7" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readCaseTestList.do-7" enabled="false">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="stgySetId" elementType="HTTPArgument">
@@ -1269,7 +1280,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readComRuleAuthMgrGrt.do-8" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readComRuleAuthMgrGrt.do-8" enabled="false">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="REF_ID" elementType="HTTPArgument">
@@ -1334,7 +1345,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readStrgMngmRuleFlow.do-9" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readStrgMngmRuleFlow.do-9" enabled="false">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="stgySetId" elementType="HTTPArgument">
@@ -1391,7 +1402,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readRefIdChk.do-10" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readRefIdChk.do-10" enabled="false">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="stgySetId" elementType="HTTPArgument">
@@ -1463,7 +1474,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readRefIdChk.do-11" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readRefIdChk.do-11" enabled="false">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="stgySetId" elementType="HTTPArgument">
@@ -1535,7 +1546,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readCaseTestResult.do-12" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/kais/ruleManagement/readCaseTestResult.do-12" enabled="false">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="stgySetId" elementType="HTTPArgument">
@@ -1984,7 +1995,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
             </elementProp>
             <elementProp name="application" elementType="Argument">
               <stringProp name="Argument.name">application</stringProp>
-              <stringProp name="Argument.value">application name</stringProp>
+              <stringProp name="Argument.value">Kai-S 테스트</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="measurement" elementType="Argument">
@@ -2009,7 +2020,7 @@ AND   B.OBJ_ID IS NULL </stringProp>
             </elementProp>
             <elementProp name="testTitle" elementType="Argument">
               <stringProp name="Argument.name">testTitle</stringProp>
-              <stringProp name="Argument.value">Test name</stringProp>
+              <stringProp name="Argument.value">광주은행 비대면 스코어</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="eventTags" elementType="Argument">

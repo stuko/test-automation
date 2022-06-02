@@ -14,6 +14,7 @@ public class FileJsonArrayListQueue extends FileJsonArrayListPlus{
     int MAX = 1000;
     FileJsonArrayListPlus current_queue;
     static FileJsonArrayListQueue queueManager;
+    String lastLine = null;
 
     private FileJsonArrayListQueue(String folder){
         super(folder);
@@ -107,11 +108,10 @@ public class FileJsonArrayListQueue extends FileJsonArrayListPlus{
             if(peek){
                 current_queue = this.getReadable_queue().peek();
             }else{
-            	int tryCnt = 0;
-                while(((current_queue = this.getReadable_queue().poll()) == null) && tryCnt++ < 1000){
-                    try{logger.info("poll wait....");Thread.sleep(200);}catch(Exception e){logger.error(e.toString());}
+            	int tryCnt = 3;
+                if(!check_queue(tryCnt)){
+                    return lastLine;
                 }
-                if(current_queue == null) return null;
             }
         }
         current = current_queue.next();
@@ -119,16 +119,25 @@ public class FileJsonArrayListQueue extends FileJsonArrayListPlus{
             if(peek){
                 current_queue = this.getReadable_queue().peek();
             }else{
-            	int tryCnt = 0;
-            	while(((current_queue = this.getReadable_queue().poll()) == null) && tryCnt++ < 10){
-                    try{logger.info("poll re-wait....");Thread.sleep(200);}catch(Exception e){logger.error(e.toString());}
+            	int tryCnt = 3;
+                if(!check_queue(tryCnt)){
+                    return lastLine;
                 }
-            	if(current_queue == null) return null;
             }
             current = current_queue.next();
             // System.out.println("["+this.getTestDataFilePath().getAbsolutePath()+"]current: " + current);
         }
+        lastLine = current;
         return current;
+    }
+
+    private boolean check_queue(int maxCnt) {
+        int tryCnt = 0;
+        while(((current_queue = this.getReadable_queue().poll()) == null) && tryCnt++ < maxCnt){
+            try{logger.info("poll wait....");Thread.sleep(200);}catch(Exception e){logger.error(e.toString());}
+        }
+        if(current_queue == null) return false;
+        return true;
     }
 
     public void writeLast(){
