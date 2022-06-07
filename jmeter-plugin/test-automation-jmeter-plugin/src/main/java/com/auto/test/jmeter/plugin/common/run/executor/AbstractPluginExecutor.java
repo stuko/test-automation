@@ -25,7 +25,6 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
 
     TestMessage message = new TestMessageByCombination();
     ExecutorService executors = Executors.newFixedThreadPool(10);
-    ThreadPoolExecutor threadPool;
     TestPluginTestData testData;
 
     public Map<String, Object> getConfigMap() {
@@ -38,8 +37,6 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
     @Override
     public void init(TestPluginTestData data , TestPluginCallBack callBack) {
         try {
-            ThreadPoolExecutor threadPool = new ThreadPoolExecutor(1, 10, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
-            threadPool.setThreadFactory(new OpJobThreadFactory(Thread.NORM_PRIORITY-2));
             if(this.getTestMessage() == null) {
                 this.setTestMessage(new TestMessageByCombination());
             }
@@ -147,7 +144,12 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
     public void stop(){
         this.getTestMessage().setStop(true);
         try {
-            if (this.getExecutorService() != null) this.getExecutorService().shutdownNow();
+            if (this.getExecutorService() != null){
+                this.getExecutorService().shutdownNow();
+                // 재생성 해줌.
+                // 그냥 재사용시 RejectedExecutionException 발생
+                executors = Executors.newFixedThreadPool(10);
+            }
             this.getTestData().setData( null );
             this.getTestData().setTestDatas( null );
         }catch(Exception e){
@@ -159,7 +161,7 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
     public void start(){
         if(this.getTestData().getTestDatas() == null || this.getTestData().getTestDatas().size() == 0) {
             this.init(this.getTestData(), (d, cnt) -> {
-                // logger.info("Test Data is writed...{}", d);
+                logger.info("Test Data is writed...{}", d);
                 getTestData().getTestDatas().write(d);
                 return null;
             });
@@ -170,7 +172,7 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
     public void start(TestPluginCallBack callback){
         if(this.getTestData().getTestDatas() == null || this.getTestData().getTestDatas().size() == 0) {
             this.init(this.getTestData(), (d, cnt) -> {
-                // logger.info("Test Data is writed...{}", d);
+                logger.info("Test Data with Callback is writed...{}", d);
                 getTestData().getTestDatas().write(d);
                 callback.call(d, cnt);
                 return null;

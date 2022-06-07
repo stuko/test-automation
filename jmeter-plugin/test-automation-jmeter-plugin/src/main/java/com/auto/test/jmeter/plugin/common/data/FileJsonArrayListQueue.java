@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import java.util.LinkedList;
 import java.util.Map;
 
+
+
 public class FileJsonArrayListQueue extends FileJsonArrayListPlus{
     static Logger logger = LoggerFactory.getLogger(FileJsonArrayListQueue.class);
     static Map<String,FileJsonArrayListQueue> queueMap = new HashMap<>();
@@ -108,7 +110,7 @@ public class FileJsonArrayListQueue extends FileJsonArrayListPlus{
             if(peek){
                 current_queue = this.getReadable_queue().peek();
             }else{
-            	int tryCnt = 3;
+            	int tryCnt = 1;
                 if(!check_queue(tryCnt)){
                     return lastLine;
                 }
@@ -119,7 +121,7 @@ public class FileJsonArrayListQueue extends FileJsonArrayListPlus{
             if(peek){
                 current_queue = this.getReadable_queue().peek();
             }else{
-            	int tryCnt = 3;
+            	int tryCnt = 1;
                 if(!check_queue(tryCnt)){
                     return lastLine;
                 }
