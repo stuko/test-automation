@@ -67,12 +67,7 @@ def controller():
             mm.send_create_requirement(project_id,project_name, task_title,description)
         if(column_title.find(km.get_column(1)) >= 0): 
             print("you moved to {}", km.get_column(1))           
-            contents = f" \
-# 스프린트 백로그에 요구사항이 등록 되었습니다. \
-> {task_title} \
-> {description} \
-                "
-            mm.send_create_sprint_backlog(project_id,project_name, task_title,contents)      
+            mm.send_create_sprint_backlog(project_id,project_name, task_title,description)      
             
         if(column_title.find(km.get_column(2)) >= 0):            
             print("you moved to {}", km.get_column(2))
