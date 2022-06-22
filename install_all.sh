@@ -39,7 +39,7 @@ sudo docker run -d --name=test-controller-influxdb -p 8083:8083 -p 8086:8086  --
 
 sudo docker container stop test-controller-chronograf
 sudo docker container rm test-controller-chronograf
-sudo docker run -p 8888:8888 --add-host=influxdb:192.168.57.224 --name=test-controller-chronograf --net=influxdb chronograf --influxdb-url=http://influxdb:8086
+sudo docker run -d -p 8888:8888 --add-host=influxdb:192.168.57.224 --name=test-controller-chronograf --net=influxdb chronograf --influxdb-url=http://influxdb:8086
 
 sudo docker container stop test-controller-grafana
 sudo docker container rm test-controller-grafana
