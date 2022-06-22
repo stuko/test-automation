@@ -18,3 +18,6 @@
     - File --> JSON
     - 소스에 박아 넣음
 
+pip install에서 SSLError SSLCertVerificationError
+
+  --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --trusted-host pypi.org

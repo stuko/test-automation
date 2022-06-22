@@ -31,9 +31,15 @@ cd ../
 
 sudo chmod -R 777 volume
 
+sudo docker network create influxdb
+
 sudo docker container stop test-controller-influxdb
 sudo docker container rm test-controller-influxdb
-sudo docker run -d --name=test-controller-influxdb -p 8083:8083 -p 8086:8086 -v $PWD/volume/influxdb-config/influxdb.conf:/etc/influxdb/influxdb.conf -v $(pwd)/volume/influxdb:/var/lib/influxdb influxdb:1.8
+sudo docker run -d --name=test-controller-influxdb -p 8083:8083 -p 8086:8086  --net=influxdb -v $PWD/volume/influxdb-config/influxdb.conf:/etc/influxdb/influxdb.conf -v $(pwd)/volume/influxdb:/var/lib/influxdb influxdb:1.8
+
+sudo docker container stop test-controller-chronograf
+sudo docker container rm test-controller-chronograf
+sudo docker run -p 8888:8888 --add-host=influxdb:192.168.57.224 --name=test-controller-chronograf --net=influxdb chronograf --influxdb-url=http://influxdb:8086
 
 sudo docker container stop test-controller-grafana
 sudo docker container rm test-controller-grafana
