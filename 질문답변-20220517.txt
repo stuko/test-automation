@@ -21,3 +21,5 @@
 pip install에서 SSLError SSLCertVerificationError
 
   --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --trusted-host pypi.org
+
+pip freeze > requirements.txt
