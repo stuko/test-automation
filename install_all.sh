@@ -48,8 +48,15 @@ sudo docker run -d --name=test-controller-grafana -p 3000:3000 -v $(pwd)/volume/
 # KAI-S 재시작 
 # cd ~/workspace/TestAutomation_KAI_S_WEB/kai-s-web-package && ./shutdown.sh && sleep 2 && ./startup.sh
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 170660250b6d815d226d5dac7a2822b14e6f113f
 cd ./wiki.js/
 sudo docker-compose -f docker-compose.yml down
 sudo docker-compose -f docker-compose.yml up -d
 cd ../
+<<<<<<< HEAD
+=======
+
+>>>>>>> 170660250b6d815d226d5dac7a2822b14e6f113f

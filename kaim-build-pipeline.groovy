@@ -74,6 +74,18 @@ pipeline {
                                                         userRemoteConfigs: [[credentialsId: 'admin', 
                                                                             url: 'http://admin@192.168.57.237:19000/KAI-MS/kai-web']]
                                                         ])}}
+                stage('git-pull-6') {steps {checkout([$class: 'GitSCM', 
+                                                        branches: [[name: "master"]], 
+                                                        doGenerateSubmoduleConfigurations: false, 
+                                                        extensions: [[$class: 'RelativeTargetDirectory', 
+                                                                            relativeTargetDir: 'kai-download'],
+                                                                     [$class: 'CloneOption', 
+                                                                            timeout: 600]], 
+                                                        submoduleCfg: [], 
+                                                        userRemoteConfigs: [[credentialsId: 'admin', 
+                                                                            url: 'http://admin@192.168.57.237:19000/admin/kai-download']]
+                                                        ])}}                                                        
+
             }
         }
         stage('build'){
@@ -134,6 +146,15 @@ pipeline {
                                                                         remote: 'http://192.168.57.237:19000/svn/KAI-M/deployment/kaisc-package']], 
                                                         quietOperation: true, 
                                                         workspaceUpdater: [$class: 'UpdateUpdater']])}}
+                stage('git-pull-1') {steps {checkout([$class: 'GitSCM', 
+                                                        branches: [[name: params.kai_m_sc_python_build_target]], 
+                                                        doGenerateSubmoduleConfigurations: false, 
+                                                        extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'kai-package']], 
+                                                        submoduleCfg: [], 
+                                                        userRemoteConfigs: [[credentialsId: 'admin', 
+                                                                            url: 'http://admin@192.168.57.237:19000/admin/kai-download']]
+                                                        ])}}
+                
             }
         }
         stage('shell-workspace'){
