@@ -23,3 +23,10 @@ pip install에서 SSLError SSLCertVerificationError
   --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --trusted-host pypi.org
 
 pip freeze > requirements.txt
+
+
+java -jar .\bfg-1.14.0.jar  --strip-blobs-bigger-than 100M
+
+git repack
+
+git gc
