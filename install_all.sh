@@ -7,13 +7,14 @@ cd ../
 sudo docker rm -f test-controller-python
 export MY_LOCAL_IP=`hostname -I | cut -d' ' -f1`
 
+sudo chmod -R a+w ./apache-jmeter-5.4.1
 cd ./apache-jmeter-5.4.1/bin
 sudo chmod a+x *.sh
-sudo ./run-jmeter-test-server.sh
+./run-jmeter-test-server.sh
 cd ../../
 sudo pkill -9 -ef com.auto.test.jmeter.plugin.common.server.ShellServer
 sleep 1
-sudo nohup java -cp .:./apache-jmeter-5.4.1/lib/ext/test-automation-jmeter-plugin.jar com.auto.test.jmeter.plugin.common.server.ShellServer &
+nohup java -cp .:./apache-jmeter-5.4.1/lib/ext/test-automation-jmeter-plugin.jar com.auto.test.jmeter.plugin.common.server.ShellServer &
 
 sudo docker container stop mongo-test-automation
 sudo docker container rm mongo-test-automation
@@ -48,15 +49,7 @@ sudo docker run -d --name=test-controller-grafana -p 3000:3000 -v $(pwd)/volume/
 # KAI-S 재시작 
 # cd ~/workspace/TestAutomation_KAI_S_WEB/kai-s-web-package && ./shutdown.sh && sleep 2 && ./startup.sh
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 170660250b6d815d226d5dac7a2822b14e6f113f
 cd ./wiki.js/
 sudo docker-compose -f docker-compose.yml down
 sudo docker-compose -f docker-compose.yml up -d
 cd ../
-<<<<<<< HEAD
-=======
-
->>>>>>> 170660250b6d815d226d5dac7a2822b14e6f113f
