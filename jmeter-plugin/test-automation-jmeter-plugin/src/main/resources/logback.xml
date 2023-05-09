@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level
+				%logger{36} - %msg%n</Pattern>
+		</layout>
+	</appender>
+
+	<!-- TRACE > DEBUG > INFO > WARN > ERROR, 대소문자 구분 안함 -->
+	<!-- profile 을 읽어서 appender 을 설정할수 있다.(phase별 파일을 안만들어도 되는 좋은 기능) -->
+
+	<root level="DEBUG">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>

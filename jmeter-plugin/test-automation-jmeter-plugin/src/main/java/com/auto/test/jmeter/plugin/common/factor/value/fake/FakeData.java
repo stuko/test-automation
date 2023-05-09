@@ -22,6 +22,7 @@ public class FakeData {
 	public void value(String val) {
 		// {XXXX(1~2)YYYY|XXXX(1~2)YYYY|XXXX(1~2)YYYY|XXXX(1~2)YYYY}
 		// {(20200101~20200330)}
+		
 		if(val.indexOf("|") >= 0) {
 			String[] vs = val.split("[|]");
 			Random r = new Random();
@@ -84,6 +85,7 @@ public class FakeData {
 					logger.debug("Postfix : " + postfix[i]);
 					logger.debug("from: " + from[i]);
 					logger.debug("to: " + to[i]);
+					logger.debug("isDate: " + isDate[i]);
 					logger.debug("---------------------");
 					i++;
 				}
@@ -102,10 +104,10 @@ public class FakeData {
 	
 	public String value() {
 		Random r = new Random();
-		logger.debug("From : " + from.length);
-		logger.debug("Prefix : " + prefix.length);
-		logger.debug("Postfix : " + postfix.length);
-		logger.debug("DateFormat : " + dateFormat.length);
+		logger.info("From : " + from.length);
+		logger.info("Prefix : " + prefix.length);
+		logger.info("Postfix : " + postfix.length);
+		logger.info("DateFormat : " + dateFormat.length);
 		StringBuilder sb = new StringBuilder();
 		if(from[0] > 0 && to[0] > 0) {
 			for(int i = 0; i < from.length ; i++) {
@@ -125,8 +127,45 @@ public class FakeData {
 						logger.error(e.toString(),e);
 					}
 				}else {
-					int x = (int)((to[i] - from[i]) + 1);
-					middle = (r.nextInt(x) + from[i]) + "";
+					long x = (long)((to[i] - from[i]) + 1);
+					middle = (r.nextLong(x) + from[i]) + "";
+				}
+				sb.append((prefix[i]==null ? "" : prefix[i])+middle+(postfix[i]==null ? "" : postfix[i]));
+			}
+		}else {
+			return prefix[0];
+		}
+		return sb.toString();
+	}
+	
+	
+	public String value(long pos) {
+		logger.info("From : " + from.length);
+		logger.info("Prefix : " + prefix.length);
+		logger.info("Postfix : " + postfix.length);
+		logger.info("DateFormat : " + dateFormat.length);
+		StringBuilder sb = new StringBuilder();
+		if(from[0] > 0 && to[0] > 0) {
+			for(int i = 0; i < from.length ; i++) {
+				String middle = "";
+				if(isDate[i]) {
+					try {
+						SimpleDateFormat dt = new SimpleDateFormat(dateFormat[i]); 
+						Date d1 = dt.parse(to[i]+"");
+						Date d2 = dt.parse(from[i]+"");
+						long calDate = d1.getTime() - d2.getTime();
+						if(pos > calDate) pos = calDate;
+						Calendar c1 = Calendar.getInstance();
+						c1.setTime(d2);
+						c1.add(Calendar.MILLISECOND, (int)pos);
+						middle = dt.format(c1.getTime());
+					}catch(Exception e) {
+						logger.error(e.toString(),e);
+					}
+				}else {
+					long x = (long)((to[i] - from[i]) + 1);
+					if(pos > x) pos = x;
+					middle = (pos + from[i]) + "";
 				}
 				sb.append((prefix[i]==null ? "" : prefix[i])+middle+(postfix[i]==null ? "" : postfix[i]));
 			}

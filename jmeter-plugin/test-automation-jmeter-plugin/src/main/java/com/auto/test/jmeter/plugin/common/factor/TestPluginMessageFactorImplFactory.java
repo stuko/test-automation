@@ -24,28 +24,35 @@ public class TestPluginMessageFactorImplFactory extends SubstringMessageFactorIm
         if(this.getType() == null){
             return this.getNA(range);
         }else if(this.getType().trim().equalsIgnoreCase("string")){
+        	logger.info(this.getName() + " is string");
             range = this.getCharacterRange(range);
             return range;
         }else if(this.getType().trim().equalsIgnoreCase("number")){
+        	logger.info(this.getName() + " is number");
             range = this.getNumberRange(range);
             return range;
         }else if(this.getType().trim().equalsIgnoreCase("datetime")){
+        	logger.info(this.getName() + " is datetime");
             range = this.getDateTimeRange(range);
             return range;
         }else if(this.getType().trim().equalsIgnoreCase("key")) {
+        	logger.info(this.getName() + " is key");
             range = this.getKeyRange(range);
             return range;
         }else if(this.getType().trim().equalsIgnoreCase("reference")) {
+        	logger.info(this.getName() + " is reference");
             range = this.getReferenceRange(range);
             return range;
         }else if(this.getType().trim().equalsIgnoreCase("file")) {
+        	logger.info(this.getName() + " is file");
             TestPluginMessageFactorFileValue file = new TestPluginMessageFactorFileValue(this);
             String source = file.toString();
-            TestPluginMessageFactorCharacterValue f = new TestPluginMessageFactorCharacterValue(source);
+            TestPluginMessageFactorCharacterValue f = new TestPluginMessageFactorCharacterValue(this.getCount(),source);
             f.setTaPluginMessageFactor(this);
             range.getRanges().put(this.getName(), f);
             return range;
         }else{
+        	logger.info(this.getName() + " is just string");
             range = this.getCharacterRange(range);
             return range;
         }
@@ -65,9 +72,13 @@ public class TestPluginMessageFactorImplFactory extends SubstringMessageFactorIm
                 String unit = fdata[1].trim();   // second,minute,hour,day,month,year
                 String format = fdata[2].trim(); // yyyyMMdd, yyyyMMddHH, yyyyMMddHHmm, yyyyMMddHHmmss
                 String[] pds = period.split("~");
+                logger.info("unit : " + unit);
+                logger.info("format : " + format);
+                logger.info("period : " + period);
                 TestPluginMessageFactorDatetimeValue f = new TestPluginMessageFactorDatetimeValue(pds[0],pds[1],this.getUnit(unit),this.getCount(),this.getFormat(format));
                 f.setTaPluginMessageFactor(this);
                 range.getRanges().put(this.getName()+"-"+i,f);
+                logger.info("name : " + this.getName());
             }else{
                 String unit = fdata[1].trim();   // second,minute,hour,day,month,year
                 String format = fdata[2].trim(); // yyyyMMdd, yyyyMMddHH, yyyyMMddHHmm, yyyyMMddHHmmss
@@ -156,7 +167,7 @@ public class TestPluginMessageFactorImplFactory extends SubstringMessageFactorIm
     }
 
     private TestPluginMessageFactorRangeCollection getNA(TestPluginMessageFactorRangeCollection range){
-        TestPluginMessageFactorCharacterValue f = new TestPluginMessageFactorCharacterValue("N/A");
+        TestPluginMessageFactorCharacterValue f = new TestPluginMessageFactorCharacterValue(this.getCount(),"N/A");
         f.setTaPluginMessageFactor(this);
         range.getRanges().put(this.getName(),f);
         return range;
@@ -170,7 +181,9 @@ public class TestPluginMessageFactorImplFactory extends SubstringMessageFactorIm
                 try {
                     int len = Integer.parseInt(this.getLength());
                     String fdata = getRandomCharacter(len).toString();
-                    TestPluginMessageFactorCharacterValue f = new TestPluginMessageFactorCharacterValue(fdata);
+                    logger.debug("length : {}", len);
+                    logger.debug("fdata : {}", fdata);
+                    TestPluginMessageFactorCharacterValue f = new TestPluginMessageFactorCharacterValue(this.getCount(),fdata);
                     f.setTaPluginMessageFactor(this);
                     range.getRanges().put(this.getName(), f);
                 }catch(Exception e){
@@ -184,10 +197,11 @@ public class TestPluginMessageFactorImplFactory extends SubstringMessageFactorIm
             String[] data = this.getValue().trim().split("[|]");
             int i = 0;
             for (String d : data) {
-                // logger.info("Character range[{}] : {}",i,d);
+                logger.info("Character range[{}] : {}",i,d);
                 i++;
                 String[] fdata = d.split(",");
-                TestPluginMessageFactorCharacterValue f = new TestPluginMessageFactorCharacterValue(fdata);
+                
+                TestPluginMessageFactorCharacterValue f = new TestPluginMessageFactorCharacterValue(this.getCount(),fdata);
                 f.setTaPluginMessageFactor(this);
                 range.getRanges().put(this.getName() + "-" + i, f);
             }

@@ -34,6 +34,7 @@ public class FileJsonArrayList {
                     retry = false;
                 }catch(Exception e){
                     Thread.sleep(100);
+                    logger.error(e.toString());
                 }
             }
         }catch(Exception e){

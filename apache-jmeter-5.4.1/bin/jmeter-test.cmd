@@ -1,1 +1,1 @@
-jmeter -DTEST_URL=http://192.168.57.224:5000/
+jmeter -DTEST_URL=http://10.8.60.183:5000/

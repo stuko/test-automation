@@ -1,16 +1,15 @@
 package com.auto.test.jmeter.plugin.common.factor.value;
 
-import com.auto.test.jmeter.plugin.common.util.SecurityUtil;
-import jodd.log.Logger;
-import jodd.log.LoggerFactory;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import com.auto.test.jmeter.plugin.common.factor.define.TestPluginMessageFactor;
-import com.auto.test.jmeter.plugin.common.factor.define.TestPluginMessageSubstringFactor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.auto.test.jmeter.plugin.common.util.SecurityUtil;
 
 public class TestPluginMessageFactorDatetimeValue  extends AbstractTestPluginMessageFactorValueImpl{
     static Logger logger = LoggerFactory.getLogger(TestPluginMessageFactorDatetimeValue.class);
@@ -32,6 +31,10 @@ public class TestPluginMessageFactorDatetimeValue  extends AbstractTestPluginMes
         this.unit = unit;
         this.count = count;
         this.format = format;
+        logger.info("------------ Datetime format----------------");
+        logger.info("format :" + format);
+        logger.info("------------ Datetime format----------------");
+
     }
     public TestPluginMessageFactorDatetimeValue(String from, String to, int count, Format format){
         this.rangeType = RangeType.FromTo;
@@ -39,8 +42,19 @@ public class TestPluginMessageFactorDatetimeValue  extends AbstractTestPluginMes
         this.setTo(to);
         this.count = count;
         this.setFormat(format);
+        logger.info("------------ Datetime format----------------");
+        logger.info("from :" + from);
+        logger.info("to :" + to);
+        logger.info("format :" + format);
+        logger.info("------------ Datetime format----------------");
+        
     }
     public TestPluginMessageFactorDatetimeValue(String from, String to, Unit unit, int count, Format format){
+        logger.info("------------ Datetime format----------------");
+        logger.info("from :" + from);
+        logger.info("to :" + to);
+        logger.info("format :" + format);
+        logger.info("------------ Datetime format----------------");
         this.rangeType = RangeType.FromTo;
         this.setFrom(from);
         this.setTo(to);
@@ -89,6 +103,10 @@ public class TestPluginMessageFactorDatetimeValue  extends AbstractTestPluginMes
 
     @Override
     public List<String> getValues() {
+    	
+    	logger.info("----- Datetime format -----------");
+    	logger.info("Format is "+this.getFormat().toString()+", From is "+this.getFrom()+" , To is " + this.getTo()+" , Type is " + this.getRangeType());
+    	logger.info("----- Datetime format -----------");
         List<String> result = new ArrayList<>();
         if(this.getRangeType().equals(RangeType.Gap)){
             //for(int i = 0; i < count; i++)
@@ -103,9 +121,12 @@ public class TestPluginMessageFactorDatetimeValue  extends AbstractTestPluginMes
                         Calendar cal = Calendar.getInstance();
                         cal.setTimeInMillis(System.currentTimeMillis());
                         String from_date = this.getDateTime(cal,Integer.parseInt(this.getFrom()),unit,this.format());
+                        cal.setTimeInMillis(System.currentTimeMillis());
                         String to_date = this.getDateTime(cal,Integer.parseInt(this.getTo()),unit,this.format());
                         this.setFrom(from_date);
                         this.setTo(to_date);
+                        logger.info("from date is " + from_date);
+                        logger.info("to date is " + to_date);
                     }
                 }catch(Exception ee){
                     logger.error(ee.toString());
@@ -147,6 +168,7 @@ public class TestPluginMessageFactorDatetimeValue  extends AbstractTestPluginMes
                         Calendar cal = Calendar.getInstance();
                         cal.setTimeInMillis(System.currentTimeMillis());
                         String from_date = this.getDateTime(cal, Integer.parseInt(this.getFrom()), unit, this.format());
+                        cal.setTimeInMillis(System.currentTimeMillis());
                         String to_date = this.getDateTime(cal, Integer.parseInt(this.getTo()), unit, this.format());
                         this.setFrom(from_date);
                         this.setTo(to_date);

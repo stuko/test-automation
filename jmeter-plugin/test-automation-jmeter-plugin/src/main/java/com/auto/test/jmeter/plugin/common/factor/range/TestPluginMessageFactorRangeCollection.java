@@ -39,6 +39,7 @@ public class TestPluginMessageFactorRangeCollection {
             for (String rangeName : this.getRanges().keySet()) {
                 TestPluginMessageFactorValue rangeValue = this.getRanges().get(rangeName);
                 result.addAll(rangeValue.getValues());
+                logger.debug("result added ... count is {}", result.size());
             }
         }
         return result;

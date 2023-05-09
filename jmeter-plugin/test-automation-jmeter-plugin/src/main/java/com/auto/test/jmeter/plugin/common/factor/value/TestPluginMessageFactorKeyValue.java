@@ -6,7 +6,7 @@ import com.auto.test.jmeter.plugin.common.util.TestPluginConstants;
 import java.util.Arrays;
 import java.util.List;
 
-public class TestPluginMessageFactorKeyValue extends TestPluginMessageFactorCharacterValue {
+public class TestPluginMessageFactorKeyValue extends AbstractTestPluginMessageFactorValueImpl {
     int size;
     String prefix="";
     String postfix="";

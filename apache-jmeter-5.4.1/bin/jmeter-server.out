@@ -1,0 +1,5 @@
+WARNING: package sun.awt.X11 not in java.desktop
+Created remote object: UnicastServerRef2 [liveRef: [endpoint:[10.8.60.183:57257](local),objID:[-689dcf8:187b62314c7:-7fff, -5000355921047674414]]]
+Problem creating registry: java.rmi.server.ExportException: Port already in use: 1099; nested exception is: 
+	java.net.BindException: Address already in use: NET_Bind
+Continuing...

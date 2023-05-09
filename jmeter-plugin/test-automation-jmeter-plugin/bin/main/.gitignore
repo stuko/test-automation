@@ -1,1 +1,7 @@
 /com/
+<<<<<<< Updated upstream
+=======
+/logback.xml
+/log4j.properties
+/log4j2.xml
+>>>>>>> Stashed changes

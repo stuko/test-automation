@@ -34,7 +34,7 @@ def controller():
     # km.check_project_is_scrum(params)
     # km.make_project_to_scrum(params)
     
-    # print(params)
+    print(params)
     ##############################################
     # 프로젝트 정보 가져오기
     ##############################################

@@ -1,87 +1,231 @@
-2022-08-29 08:55:33,632 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
-2022-08-29 08:55:33,702 INFO o.a.j.JMeter: Loading user properties from: user.properties
-2022-08-29 08:55:33,715 INFO o.a.j.JMeter: Loading system properties from: system.properties
-2022-08-29 08:55:33,715 INFO o.a.j.JMeter: Setting System property: TEST_URL=http://192.168.57.224:5000/
-2022-08-29 08:55:33,719 INFO o.a.j.JMeter: Copyright (c) 1998-2021 The Apache Software Foundation
-2022-08-29 08:55:33,719 INFO o.a.j.JMeter: Version 5.4.1
-2022-08-29 08:55:33,719 INFO o.a.j.JMeter: java.version=15.0.2
-2022-08-29 08:55:33,719 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
-2022-08-29 08:55:33,720 INFO o.a.j.JMeter: os.name=Windows 10
-2022-08-29 08:55:33,720 INFO o.a.j.JMeter: os.arch=amd64
-2022-08-29 08:55:33,720 INFO o.a.j.JMeter: os.version=10.0
-2022-08-29 08:55:33,720 INFO o.a.j.JMeter: file.encoding=MS949
-2022-08-29 08:55:33,720 INFO o.a.j.JMeter: java.awt.headless=null
-2022-08-29 08:55:33,720 INFO o.a.j.JMeter: Max memory     =8589934592
-2022-08-29 08:55:33,720 INFO o.a.j.JMeter: Available Processors =8
-2022-08-29 08:55:33,727 INFO o.a.j.JMeter: Default Locale=English (EN)
-2022-08-29 08:55:33,727 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
-2022-08-29 08:55:33,727 INFO o.a.j.JMeter: JMeterHome=D:\workspace\test-automation\apache-jmeter-5.4.1
-2022-08-29 08:55:33,727 INFO o.a.j.JMeter: user.dir  =D:\workspace\test-automation\apache-jmeter-5.4.1\bin
-2022-08-29 08:55:33,728 INFO o.a.j.JMeter: PWD       =D:\workspace\test-automation\apache-jmeter-5.4.1\bin
-2022-08-29 08:55:33,729 INFO o.a.j.JMeter: IP: 192.168.57.243 Name: DESKTOP-0Q4LOBV FullName: host.docker.internal
-2022-08-29 08:55:34,086 INFO o.a.j.JMeter: Setting LAF to: laf:javax.swing.plaf.metal.MetalLookAndFeel
-2022-08-29 08:55:34,264 INFO o.a.j.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties
-2022-08-29 08:55:37,168 INFO c.a.t.j.p.c.u.TestPluginUtil: Detected encoding = EUC-KR
-2022-08-29 08:55:37,187 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-08-29 08:55:37,187 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
+2023-04-27 14:54:53,121 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2023-04-27 14:54:53,143 INFO o.a.j.JMeter: Loading user properties from: user.properties
+2023-04-27 14:54:53,145 INFO o.a.j.JMeter: Loading system properties from: system.properties
+2023-04-27 14:54:53,145 INFO o.a.j.JMeter: Setting System property: TEST_URL=http://10.8.60.183:5000/
+2023-04-27 14:54:53,153 INFO o.a.j.JMeter: Copyright (c) 1998-2021 The Apache Software Foundation
+2023-04-27 14:54:53,153 INFO o.a.j.JMeter: Version 5.4.1
+2023-04-27 14:54:53,153 INFO o.a.j.JMeter: java.version=11.0.15
+2023-04-27 14:54:53,153 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2023-04-27 14:54:53,153 INFO o.a.j.JMeter: os.name=Windows 10
+2023-04-27 14:54:53,153 INFO o.a.j.JMeter: os.arch=amd64
+2023-04-27 14:54:53,153 INFO o.a.j.JMeter: os.version=10.0
+2023-04-27 14:54:53,153 INFO o.a.j.JMeter: file.encoding=MS949
+2023-04-27 14:54:53,153 INFO o.a.j.JMeter: java.awt.headless=null
+2023-04-27 14:54:53,153 INFO o.a.j.JMeter: Max memory     =8589934592
+2023-04-27 14:54:53,153 INFO o.a.j.JMeter: Available Processors =12
+2023-04-27 14:54:53,165 INFO o.a.j.JMeter: Default Locale=English (EN)
+2023-04-27 14:54:53,165 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2023-04-27 14:54:53,165 INFO o.a.j.JMeter: JMeterHome=C:\workspace\work\test-automation\apache-jmeter-5.4.1
+2023-04-27 14:54:53,165 INFO o.a.j.JMeter: user.dir  =C:\workspace\work\test-automation\apache-jmeter-5.4.1\bin
+2023-04-27 14:54:53,165 INFO o.a.j.JMeter: PWD       =C:\workspace\work\test-automation\apache-jmeter-5.4.1\bin
+2023-04-27 14:54:53,167 INFO o.a.j.JMeter: IP: 10.8.60.183 Name: DESKTOP-8OU24PB FullName: host.docker.internal
+2023-04-27 14:54:53,350 INFO o.a.j.JMeter: Setting LAF to: laf:javax.swing.plaf.metal.MetalLookAndFeel
+2023-04-27 14:54:53,488 INFO o.a.j.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties
+2023-04-27 14:54:55,335 INFO c.a.t.j.p.c.u.TestPluginUtil: Detected encoding = EUC-KR
+2023-04-27 14:54:55,363 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
+2023-04-27 14:54:55,363 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
 "server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
 ,"topic":"fds-bank.t"
 }
-2022-08-29 08:55:37,187 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : null
-2022-08-29 08:55:37,187 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
-2022-08-29 08:55:37,188 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is created
-2022-08-29 08:55:37,188 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Initial Executor's stop mode is true
-2022-08-29 08:55:37,190 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map is prepared
-2022-08-29 08:55:37,192 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's test data is setted
-2022-08-29 08:55:37,193 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's stop mode is true
-2022-08-29 08:55:37,193 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is completed
-2022-08-29 08:55:48,930 INFO o.a.j.s.FileServer: Default base='D:\workspace\test-automation\apache-jmeter-5.4.1\bin'
-2022-08-29 08:55:48,932 INFO o.a.j.g.a.Load: Loading file: D:\workspace\test-automation\apache-jmeter-5.4.1\bin\kai-m-all-test-plan-v3.jmx
-2022-08-29 08:55:48,932 INFO o.a.j.s.FileServer: Set new base='D:\workspace\test-automation\apache-jmeter-5.4.1\bin'
-2022-08-29 08:55:49,062 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
-2022-08-29 08:55:49,082 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
-2022-08-29 08:55:49,084 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
-2022-08-29 08:55:49,085 INFO o.a.j.s.SaveService: Loading file: D:\workspace\test-automation\apache-jmeter-5.4.1\bin\kai-m-all-test-plan-v3.jmx
-2022-08-29 08:55:49,182 INFO o.a.j.p.h.c.CookieManager: Settings: Delete null: true Check: true Allow variable: true Save: false Prefix: COOKIE_
-2022-08-29 08:55:49,188 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2022-08-29 08:55:49,188 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2022-08-29 08:55:49,188 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2022-08-29 08:55:49,188 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2022-08-29 08:55:49,188 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
-2022-08-29 08:55:49,188 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
-2022-08-29 08:55:51,072 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
-2022-08-29 08:55:51,072 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to UTF-8
-2022-08-29 08:55:51,072 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
-2022-08-29 08:55:51,072 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
-2022-08-29 08:55:51,360 INFO o.a.j.e.KeyToolUtils: keytool found at 'keytool'
-2022-08-29 08:55:51,361 INFO o.a.j.p.h.p.ProxyControl: HTTP(S) Test Script Recorder SSL Proxy will use keys that support embedded 3rd party resources in file D:\workspace\test-automation\apache-jmeter-5.4.1\bin\proxyserver.jks
-2022-08-29 08:55:51,643 INFO c.a.t.j.p.c.u.TestPluginUtil: Detected encoding = EUC-KR
-2022-08-29 08:55:51,647 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-08-29 08:55:51,647 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
+2023-04-27 14:54:55,363 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : null
+2023-04-27 14:54:55,363 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
+2023-04-27 14:54:55,364 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is created
+2023-04-27 14:54:55,364 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Initial Executor's stop mode is true
+2023-04-27 14:54:55,367 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map is prepared
+2023-04-27 14:54:55,369 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's test data is setted
+2023-04-27 14:54:55,369 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's stop mode is true
+2023-04-27 14:54:55,369 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is completed
+2023-04-27 14:54:56,910 INFO c.a.t.j.p.c.g.TestAutomationGuiController: 3.0,테스트 MSA 프로젝트
+2023-04-27 14:54:56,910 INFO c.a.t.j.p.c.g.TestAutomationGuiController: 2.0,테스트 프로젝트
+2023-04-27 14:54:56,910 INFO c.a.t.j.p.c.g.TestAutomationGuiController: 1.0,통신CB 구축 프로젝트
+2023-04-27 14:55:13,818 INFO o.a.j.s.FileServer: Default base='C:\workspace\work\test-automation\apache-jmeter-5.4.1\bin'
+2023-04-27 14:55:13,820 INFO o.a.j.g.a.Load: Loading file: C:\workspace\work\test-automation\apache-jmeter-5.4.1\bin\[res_key=테스트 자동화 플러그인].jmx
+2023-04-27 14:55:13,820 INFO o.a.j.s.FileServer: Set new base='C:\workspace\work\test-automation\apache-jmeter-5.4.1\bin'
+2023-04-27 14:55:13,974 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2023-04-27 14:55:13,984 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2023-04-27 14:55:13,987 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2023-04-27 14:55:13,988 INFO o.a.j.s.SaveService: Loading file: C:\workspace\work\test-automation\apache-jmeter-5.4.1\bin\[res_key=테스트 자동화 플러그인].jmx
+2023-04-27 14:55:14,035 INFO c.a.t.j.p.c.u.TestPluginUtil: Detected encoding = EUC-KR
+2023-04-27 14:55:14,041 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
+2023-04-27 14:55:14,041 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
 "server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
 ,"topic":"fds-bank.t"
 }
-2022-08-29 08:55:51,647 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : null
-2022-08-29 08:55:51,647 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
-2022-08-29 08:55:51,647 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is created
-2022-08-29 08:55:51,647 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Initial Executor's stop mode is true
-2022-08-29 08:55:51,647 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map is prepared
-2022-08-29 08:55:51,647 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's test data is setted
-2022-08-29 08:55:51,647 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's stop mode is true
-2022-08-29 08:55:51,647 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is completed
-2022-08-29 08:55:51,648 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
-2022-08-29 08:55:51,648 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
-2022-08-29 08:55:51,648 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
+2023-04-27 14:55:14,041 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : null
+2023-04-27 14:55:14,041 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
+2023-04-27 14:55:14,041 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is created
+2023-04-27 14:55:14,041 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Initial Executor's stop mode is true
+2023-04-27 14:55:14,041 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map is prepared
+2023-04-27 14:55:14,041 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's test data is setted
+2023-04-27 14:55:14,042 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's stop mode is true
+2023-04-27 14:55:14,042 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is completed
+2023-04-27 14:55:14,042 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
+2023-04-27 14:55:14,042 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
+2023-04-27 14:55:14,042 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
 "server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
 ,"topic":"fds-bank.t"
 }
-2022-08-29 08:55:51,648 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : null
-2022-08-29 08:55:51,648 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
-2022-08-29 08:55:51,648 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is created
-2022-08-29 08:55:51,648 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Initial Executor's stop mode is true
-2022-08-29 08:55:51,648 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map is prepared
-2022-08-29 08:55:51,648 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's test data is setted
-2022-08-29 08:55:51,648 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's stop mode is true
-2022-08-29 08:55:51,648 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is completed
-2022-08-29 08:55:54,745 INFO o.a.j.v.ViewResultsFullVisualizer: Add JavaFX to your Java installation if you want to use renderer: org.apache.jmeter.visualizers.RenderInBrowser
-2022-08-29 08:55:55,046 INFO o.a.j.s.FileServer: Set new base='D:\workspace\test-automation\apache-jmeter-5.4.1\bin'
+2023-04-27 14:55:14,042 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : null
+2023-04-27 14:55:14,043 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
+2023-04-27 14:55:14,043 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is created
+2023-04-27 14:55:14,043 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Initial Executor's stop mode is true
+2023-04-27 14:55:14,043 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map is prepared
+2023-04-27 14:55:14,043 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's test data is setted
+2023-04-27 14:55:14,043 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's stop mode is true
+2023-04-27 14:55:14,043 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is completed
+2023-04-27 14:55:14,051 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2023-04-27 14:55:14,051 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to UTF-8
+2023-04-27 14:55:14,051 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2023-04-27 14:55:14,051 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2023-04-27 14:55:14,148 INFO o.a.j.v.ViewResultsFullVisualizer: Add JavaFX to your Java installation if you want to use renderer: org.apache.jmeter.visualizers.RenderInBrowser
+2023-04-27 14:55:14,249 INFO o.a.j.s.FileServer: Set new base='C:\workspace\work\test-automation\apache-jmeter-5.4.1\bin'
+2023-04-27 14:55:14,418 INFO c.a.t.j.p.c.g.TestAutomationGuiController: 3.0,테스트 MSA 프로젝트
+2023-04-27 14:55:14,418 INFO c.a.t.j.p.c.g.TestAutomationGuiController: 2.0,테스트 프로젝트
+2023-04-27 14:55:14,418 INFO c.a.t.j.p.c.g.TestAutomationGuiController: 1.0,통신CB 구축 프로젝트
+2023-04-27 14:55:16,818 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
+2023-04-27 14:55:16,818 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
+2023-04-27 14:55:16,818 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
+"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
+,"topic":"fds-bank.t"
+}
+2023-04-27 14:55:16,818 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : [res_key=테스트 자동화 플러그인].jmx
+2023-04-27 14:55:16,818 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
+2023-04-27 14:55:16,818 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is created
+2023-04-27 14:55:16,818 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Initial Executor's stop mode is true
+2023-04-27 14:55:16,818 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map is prepared
+2023-04-27 14:55:16,818 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's test data is setted
+2023-04-27 14:55:16,820 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"[res_key\u003d테스트 자동화 플러그인].jmx"}
+2023-04-27 14:55:16,829 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's stop mode is true
+2023-04-27 14:55:16,829 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is completed
+2023-04-27 14:55:16,830 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"[res_key\u003d테스트 자동화 플러그인].jmx"}
+2023-04-27 14:55:16,850 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
+2023-04-27 14:55:16,851 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"[res_key\u003d테스트 자동화 플러그인].jmx"}
+2023-04-27 14:55:16,858 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
+2023-04-27 14:55:16,862 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
+2023-04-27 14:55:16,862 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
+2023-04-27 14:55:16,862 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
+"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
+,"topic":"fds-bank.t"
+}
+2023-04-27 14:55:16,862 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : [res_key=테스트 자동화 플러그인].jmx
+2023-04-27 14:55:16,862 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
+2023-04-27 14:55:16,862 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is created
+2023-04-27 14:55:16,862 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Initial Executor's stop mode is true
+2023-04-27 14:55:16,862 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map is prepared
+2023-04-27 14:55:16,863 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's test data is setted
+2023-04-27 14:55:16,863 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"[res_key\u003d테스트 자동화 플러그인].jmx"}
+2023-04-27 14:55:16,869 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's stop mode is true
+2023-04-27 14:55:16,869 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is completed
+2023-04-27 14:55:19,230 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"[res_key\u003d테스트 자동화 플러그인].jmx"}
+2023-04-27 14:55:19,242 INFO c.a.t.j.p.c.g.TestAutomationGuiController: []
+2023-04-27 14:55:47,300 INFO c.a.t.j.p.c.u.TestPluginUtil: Detected encoding = EUC-KR
+2023-04-27 14:55:52,675 INFO c.a.t.j.p.c.g.TestDataConfigPanel: read plugin data
+2023-04-27 14:55:52,675 INFO c.a.t.j.p.c.g.TestDataConfigPanel: create plugin data
+2023-04-27 14:55:52,677 ERROR c.a.t.j.p.c.r.e.AbstractPluginExecutor: java.lang.NumberFormatException: For input string: "null"
+java.lang.NumberFormatException: For input string: "null"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65) ~[?:?]
+	at java.lang.Integer.parseInt(Integer.java:652) ~[?:?]
+	at java.lang.Integer.parseInt(Integer.java:770) ~[?:?]
+	at com.auto.test.jmeter.plugin.common.run.message.TestPluginMessageBuilder.build(TestPluginMessageBuilder.java:23) ~[test-automation-jmeter-plugin.jar:?]
+	at com.auto.test.jmeter.plugin.common.run.executor.AbstractPluginExecutor.init(AbstractPluginExecutor.java:45) ~[test-automation-jmeter-plugin.jar:?]
+	at com.auto.test.jmeter.plugin.common.run.executor.AbstractPluginExecutor.start(AbstractPluginExecutor.java:174) ~[test-automation-jmeter-plugin.jar:?]
+	at com.auto.test.jmeter.plugin.common.gui.TestDataConfigPanel.lambda$display$6(TestDataConfigPanel.java:170) ~[test-automation-jmeter-plugin.jar:?]
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1967) [?:?]
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2308) [?:?]
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:405) [?:?]
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:262) [?:?]
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:279) [?:?]
+	at java.awt.Component.processMouseEvent(Component.java:6635) [?:?]
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3342) [?:?]
+	at java.awt.Component.processEvent(Component.java:6400) [?:?]
+	at java.awt.Container.processEvent(Container.java:2263) [?:?]
+	at java.awt.Component.dispatchEventImpl(Component.java:5011) [?:?]
+	at java.awt.Container.dispatchEventImpl(Container.java:2321) [?:?]
+	at java.awt.Component.dispatchEvent(Component.java:4843) [?:?]
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4918) [?:?]
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4547) [?:?]
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4488) [?:?]
+	at java.awt.Container.dispatchEventImpl(Container.java:2307) [?:?]
+	at java.awt.Window.dispatchEventImpl(Window.java:2772) [?:?]
+	at java.awt.Component.dispatchEvent(Component.java:4843) [?:?]
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:772) [?:?]
+	at java.awt.EventQueue$4.run(EventQueue.java:721) [?:?]
+	at java.awt.EventQueue$4.run(EventQueue.java:715) [?:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:?]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85) [?:?]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:95) [?:?]
+	at java.awt.EventQueue$5.run(EventQueue.java:745) [?:?]
+	at java.awt.EventQueue$5.run(EventQueue.java:743) [?:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:?]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85) [?:?]
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:742) [?:?]
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203) [?:?]
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124) [?:?]
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113) [?:?]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109) [?:?]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101) [?:?]
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:90) [?:?]
+2023-04-27 14:55:56,042 INFO c.a.t.j.p.c.g.TestAutomationMainGui: ##### modifyTestElement #####
+2023-04-27 14:55:56,042 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is : DEFAULT
+2023-04-27 14:55:56,042 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map string : {
+"server":"192.168.57.252:9092,192.168.57.253:9092,192.168.57.254:9092"
+,"topic":"fds-bank.t"
+}
+2023-04-27 14:55:56,042 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's current jmx file name is : [res_key=테스트 자동화 플러그인].jmx
+2023-04-27 14:55:56,042 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's type is DEFAULT
+2023-04-27 14:55:56,042 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is created
+2023-04-27 14:55:56,042 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Initial Executor's stop mode is false
+2023-04-27 14:55:56,042 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's config map is prepared
+2023-04-27 14:55:56,042 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's test data is setted
+2023-04-27 14:55:56,042 INFO c.a.t.j.p.c.g.TestAutomationGuiController: parameter is  {"jmx_file_name":"[res_key\u003d테스트 자동화 플러그인].jmx"}
+2023-04-27 14:55:56,056 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor's stop mode is false
+2023-04-27 14:55:56,056 INFO c.a.t.j.p.c.g.TestAutomationGuiController: Executor is completed
+2023-04-27 14:56:21,299 INFO c.a.t.j.p.c.g.TestDataConfigPanel: read plugin data
+2023-04-27 14:56:21,300 INFO c.a.t.j.p.c.g.TestDataConfigPanel: create plugin data
+2023-04-27 14:56:21,350 INFO c.a.t.j.p.c.g.TestAutomationGuiController: {"success": "factors are updated"}
+2023-04-27 14:56:23,531 INFO c.a.t.j.p.c.g.TestDataConfigPanel: read plugin data
+2023-04-27 14:56:23,531 INFO c.a.t.j.p.c.g.TestDataConfigPanel: create plugin data
+2023-04-27 14:56:23,532 ERROR c.a.t.j.p.c.r.e.AbstractPluginExecutor: java.lang.NumberFormatException: For input string: "null"
+java.lang.NumberFormatException: For input string: "null"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65) ~[?:?]
+	at java.lang.Integer.parseInt(Integer.java:652) ~[?:?]
+	at java.lang.Integer.parseInt(Integer.java:770) ~[?:?]
+	at com.auto.test.jmeter.plugin.common.run.message.TestPluginMessageBuilder.build(TestPluginMessageBuilder.java:23) ~[test-automation-jmeter-plugin.jar:?]
+	at com.auto.test.jmeter.plugin.common.run.executor.AbstractPluginExecutor.init(AbstractPluginExecutor.java:45) ~[test-automation-jmeter-plugin.jar:?]
+	at com.auto.test.jmeter.plugin.common.run.executor.AbstractPluginExecutor.start(AbstractPluginExecutor.java:174) ~[test-automation-jmeter-plugin.jar:?]
+	at com.auto.test.jmeter.plugin.common.gui.TestDataConfigPanel.lambda$display$6(TestDataConfigPanel.java:170) ~[test-automation-jmeter-plugin.jar:?]
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1967) [?:?]
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2308) [?:?]
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:405) [?:?]
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:262) [?:?]
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:279) [?:?]
+	at java.awt.Component.processMouseEvent(Component.java:6635) [?:?]
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3342) [?:?]
+	at java.awt.Component.processEvent(Component.java:6400) [?:?]
+	at java.awt.Container.processEvent(Container.java:2263) [?:?]
+	at java.awt.Component.dispatchEventImpl(Component.java:5011) [?:?]
+	at java.awt.Container.dispatchEventImpl(Container.java:2321) [?:?]
+	at java.awt.Component.dispatchEvent(Component.java:4843) [?:?]
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4918) [?:?]
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4547) [?:?]
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4488) [?:?]
+	at java.awt.Container.dispatchEventImpl(Container.java:2307) [?:?]
+	at java.awt.Window.dispatchEventImpl(Window.java:2772) [?:?]
+	at java.awt.Component.dispatchEvent(Component.java:4843) [?:?]
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:772) [?:?]
+	at java.awt.EventQueue$4.run(EventQueue.java:721) [?:?]
+	at java.awt.EventQueue$4.run(EventQueue.java:715) [?:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:?]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85) [?:?]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:95) [?:?]
+	at java.awt.EventQueue$5.run(EventQueue.java:745) [?:?]
+	at java.awt.EventQueue$5.run(EventQueue.java:743) [?:?]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:?]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85) [?:?]
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:742) [?:?]
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203) [?:?]
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124) [?:?]
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113) [?:?]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109) [?:?]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101) [?:?]
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:90) [?:?]

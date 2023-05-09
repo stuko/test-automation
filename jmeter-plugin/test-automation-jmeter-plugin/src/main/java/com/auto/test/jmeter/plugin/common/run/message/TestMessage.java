@@ -6,6 +6,8 @@ import com.auto.test.jmeter.plugin.common.data.FileJsonArrayListPlus;
 import com.auto.test.jmeter.plugin.common.factor.TestPluginMessageFactorImplFactory;
 import com.auto.test.jmeter.plugin.common.gui.PluginProgressBar;
 import com.auto.test.jmeter.plugin.common.util.TestPluginConstants;
+import com.auto.test.jmeter.plugin.common.util.TestPluginUtil;
+
 import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +23,10 @@ public class TestMessage extends TestPluginMessageBuilder {
     Logger logger = LoggerFactory.getLogger(TestMessage.class);
     int progress = 0;
     long total = 1;
-
+    boolean showProgress = true;
+    final PluginProgressBar probressBar = new PluginProgressBar(100,1 , 1000, ()->{
+        return getProgress();
+    });
     AtomicBoolean stop = new AtomicBoolean(true);
 
     public boolean isStop() {
@@ -62,17 +67,39 @@ public class TestMessage extends TestPluginMessageBuilder {
 
             int start = 0;
 
+            Map<String,String> ref = new HashMap<>();
             for(; start < tmp.size(); ) {
                 for (int rIdx = 0; rIdx < rangeValueList.size() ; rIdx++) {
-                    tmp.get(start).put(factor.getName(), rangeValueList.get(rIdx));
+                	logger.debug("rangeValueList's [{}] is {}",rIdx, rangeValueList.get(rIdx));
+                    // tmp.get(start).put(factor.getName(), rangeValueList.get(rIdx));
+                    if(TestPluginConstants.ta_random_key_data.equals(rangeValueList.get(rIdx))) {
+                    	tmp.get(start).put(factor.getName(), TestPluginMessageFactorImplFactory.getRandomCharacter(Integer.parseInt(factor.getLength())).toString());
+                    }else if(rangeValueList.get(rIdx).startsWith(TestPluginConstants.ta_ref_data)) {
+                    	String ref_key = TestPluginUtil.getSubstringData(rangeValueList.get(rIdx));
+                    	ref.put(factor.getName(),ref_key);
+                    }else{
+                    	tmp.get(start).put(factor.getName(), rangeValueList.get(rIdx));
+                    }
+//                    
+//                    if(TestPluginConstants.ta_random_key_data.equals(factors_source.get(i).get(l.get(i)[a[i]]))) {
+//                        m.put(this.message.getBodys().get(i).getName(), TestPluginMessageFactorImplFactory.getRandomCharacter(TestPluginConstants.ta_random_char_length).toString()+"_"+System.nanoTime());
+//                        // System.out.println("RAND : " + factors_source.get(i).get(l.get(i)[a[i]]));
+//                    }else if(factors_source.get(i).get(l.get(i)[a[i]]).startsWith(TestPluginConstants.ta_ref_data)) {
+//                        String ref_key = TestPluginUtil.getSubstringData(factors_source.get(i).get(l.get(i)[a[i]]));
+//                        ref.put(this.message.getBodys().get(i).getName(),ref_key);
+//                        // System.out.println("RAND : " + factors_source.get(i).get(l.get(i)[a[i]]));
+//                    }else{
+//                        m.put(this.message.getBodys().get(i).getName(), factors_source.get(i).get(l.get(i)[a[i]]));
+//                        // System.out.println("NOT RAND : " + factors_source.get(i).get(l.get(i)[a[i]]));
+//                    }
+                    logger.info("current record : " + tmp.get(start));
                     start++;
                 }
             }
-
-            result = new ArrayList<>();
             result.addAll(tmp);
-            progress += result.size();
+            progress = result.size();
             callBack.call(progress+"" , progress);
+            varIdx++;
         }
         logger.info("Current message count is {}",result.size());
         for(int i = 0; i < result.size() && i < 10 ; i++){
@@ -93,17 +120,17 @@ public class TestMessage extends TestPluginMessageBuilder {
 
     @Override
     public FileJsonArrayList getFileMessage(TestPluginCallBack callBack) {
+    	
         FileJsonArrayListPlus result = new FileJsonArrayListPlus(TestPluginConstants.ta_data_path);
         System.out.println("GetFileMessage ..............");
         logger.info("start getFileMessage......");
         Gson gson = new Gson();
 
-        PluginProgressBar probressBar = new PluginProgressBar(100,1 , 1000, ()->{
-            return getProgress();
-        });
-        new Thread(()->{
-          probressBar.start();
-        }).start();
+        if(this.showProgress) {
+	        new Thread(()->{
+	          probressBar.start();
+	        }).start();
+        }
 
         total = 1;
         for(TestPluginMessageFactorImplFactory factor: this.message.getBodys()){
@@ -131,14 +158,15 @@ public class TestMessage extends TestPluginMessageBuilder {
                         tmp.write(m);
                     });
                 }
-            }
+            } 
             //int start = 1;
             FileJsonArrayListPlus tmp2 = new FileJsonArrayListPlus(TestPluginConstants.ta_data_path);
             tmp.forEach(s->{
                 for (int rIdx = 0; rIdx < rangeValueList.size() ; rIdx++) {
                     Map<String,String> m = gson.fromJson(s,Map.class);
                     if(TestPluginConstants.ta_random_key_data.equals(rangeValueList.get(rIdx))) {
-                        m.put(factor.getName(), TestPluginMessageFactorImplFactory.getRandomCharacter(rangeValueList.get(rIdx).length()).toString());
+                        // m.put(factor.getName(), TestPluginMessageFactorImplFactory.getRandomCharacter(rangeValueList.get(rIdx).length()).toString());
+                        m.put(factor.getName(), TestPluginMessageFactorImplFactory.getRandomCharacter(Integer.parseInt(factor.getLength())).toString());
                     }else{
                         m.put(factor.getName(), rangeValueList.get(rIdx));
                     }
@@ -162,9 +190,14 @@ public class TestMessage extends TestPluginMessageBuilder {
         for(int i = result.size() ; i > 0 && i > (result.size()-10) ; i--){
             logger.info("Backward Sample["+i+"] message is {}",result.get(i));
         }
-        probressBar.dispose();
+        if(this.showProgress) probressBar.dispose();
         callBack.call(varIdx+"/"+total + " , completed.", varIdx);
         return result;
     }
 
+    public FileJsonArrayList getFileMessage(TestPluginCallBack callBack , boolean show) {
+    	this.showProgress = show;
+    	return getFileMessage(callBack);
+    }
+    
 }

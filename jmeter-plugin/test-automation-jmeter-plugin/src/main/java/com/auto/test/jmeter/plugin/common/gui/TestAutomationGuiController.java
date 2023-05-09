@@ -4,17 +4,18 @@
  */
 package com.auto.test.jmeter.plugin.common.gui;
 
+import static org.apache.jmeter.services.FileServer.getFileServer;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.auto.test.jmeter.plugin.common.server.ShellServer;
-import org.apache.jmeter.services.FileServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,8 +28,6 @@ import com.auto.test.jmeter.plugin.common.run.executor.TestPluginExecutor;
 import com.auto.test.jmeter.plugin.common.util.HttpUtil;
 import com.auto.test.jmeter.plugin.common.util.TestPluginConstants;
 import com.google.gson.Gson;
-
-import static org.apache.jmeter.services.FileServer.*;
 
 /**
  *
@@ -137,7 +136,8 @@ public class TestAutomationGuiController {
                    String[] list_data = new String[project_list.size()];
                    int i = 0;
                    for(Map project : project_list){
-                       list_data[i++] = (String)project.get("id") + "," + (String)project.get("name");
+                       logger.info(project.get("id").toString() + "," + project.get("name").toString());
+                       list_data[i++] = project.get("id").toString() + "," + project.get("name").toString();
                    }
                    list.setListData(list_data);
                 });
@@ -164,21 +164,25 @@ public class TestAutomationGuiController {
                 }
                 String selected_data = (String)list.getSelectedValue();
                 String data = selected_data.split(",")[0];
-                Map<String,String> project = project_list.stream().filter(x-> data.equals(x.get("id"))).findAny().get();
-                project_name.setText(project.get("name"));
-                project_desc.setText(project.get("description"));
-                param.put("project_id", data);
-                HttpUtil.call(TEST_URL+"get_project_detail",gson.toJson(param),(body)->{
-                   Map<String,String> project_detail = gson.fromJson(body, Map.class);
-                   if (project_detail != null) {
-                       jenkins_url.setText(project_detail.get("jenkins_server_url"));
-                       jenkins_project_name.setText(project_detail.get("jenkins_project_name"));
-                       jenkins_token.setText(project_detail.get("jenkins_token"));
-                       mattermost_webhook_id.setText(project_detail.get("mattermost_webhook_id"));
-                       before_test_exec_shell.setText(project_detail.get("before_test_exec_shell"));
-                       test_exec_shell.setText(project_detail.get("test_exec_shell"));
-                   }
-                });
+                Optional<Map> opt = project_list.stream().filter(x-> data.equals(x.get("id").toString())).findAny();
+                if(opt.isPresent()) {
+                	Map<String,String> project = opt.get();
+                    project_name.setText(project.get("name"));
+                    project_desc.setText(project.get("description"));
+                    param.put("project_id", data);
+                    HttpUtil.call(TEST_URL+"get_project_detail",gson.toJson(param),(body)->{
+                       Map<String,String> project_detail = gson.fromJson(body, Map.class);
+                       if (project_detail != null) {
+                           jenkins_url.setText(project_detail.get("jenkins_server_url"));
+                           jenkins_project_name.setText(project_detail.get("jenkins_project_name"));
+                           jenkins_token.setText(project_detail.get("jenkins_token"));
+                           mattermost_webhook_id.setText(project_detail.get("mattermost_webhook_id"));
+                           before_test_exec_shell.setText(project_detail.get("before_test_exec_shell"));
+                           test_exec_shell.setText(project_detail.get("test_exec_shell"));
+                       }
+                    });	
+                }
+                
                 
             }
             return true;
@@ -210,10 +214,13 @@ public class TestAutomationGuiController {
                     Map<String,Object> m = (Map<String,Object>)list.get(0);
                     String project_id = (String)m.get("project_id");
                     if(project_list != null && project_list.size() > 0){
-                       Map<String,String> pm = project_list.stream().filter(x-> project_id.equals(x.get("id"))).findAny().get();
-                       mainGui.selectProject(project_id);
-                       mainGui.setProjectName(pm.get("name"));
-                       mainGui.setProjectDetail(pm.get("description"));
+                       Optional<Map> opt = project_list.stream().filter(x-> project_id.equals(x.get("id").toString())).findAny();
+                       if(opt.isPresent()) {
+                    	   Map<String,String> pm = opt.get();
+                           mainGui.selectProject(project_id);
+                           mainGui.setProjectName(pm.get("name"));
+                           mainGui.setProjectDetail(pm.get("description"));   
+                       }
                     }
                     // String jmx_file_name = (String)m.get("jmx_file_name");
                     mainGui.setJenkinsServerUrl((String)m.get("jenkins_server_url"));
@@ -251,7 +258,10 @@ public class TestAutomationGuiController {
                   Map<String,Object> m = (Map<String,Object>)list.get(0);
                   String project_id = (String)m.get("project_id");
                   if(project_list != null && project_list.size() > 0){
-                     Map<String,String> pm = project_list.stream().filter(x-> project_id.equals(x.get("id"))).findAny().get();
+                	 Optional<Map> opt =  project_list.stream().filter(x-> project_id.equals(x.get("id").toString())).findAny();
+                	 if(opt.isPresent()) {
+                		 Map<String,String> pm = opt.get();
+                	 }
                   }
                   List factors = (List)m.get("factors");
                   if(factors != null && factors.size() > 0) receiver.receive_factor(factors);
