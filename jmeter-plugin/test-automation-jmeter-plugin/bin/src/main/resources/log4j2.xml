@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <!-- Define custom levels before using them for filtering below. -->
+
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n"/>
+    </Console>
+  </Appenders>
+  <Loggers>
+    <Root level="DEBUG">
+      <!-- Only events at DIAG level or more specific are sent to the console. -->
+      <AppenderRef ref="Console"/>
+    </Root>
+  </Loggers>
+</Configuration>

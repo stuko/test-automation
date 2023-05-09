@@ -1,0 +1,53 @@
+msgLen	string	1519	10	4   N
+msgTpId	string	UMBFIN0001	10	16  N
+msgGuid	key	8	10	50  N
+sndSysCd	string	TEST	10	4   N
+sndDtm	datetime	0,day,yyyymmddhhmmss	10	14  N
+rcvSysCd	string	TEST	10	4   N
+rcvDtm	datetime	0,day,yyyymmddhhmmss	10	14  N
+hdrFilr	string	 	10	100 N
+svcCd	string	2001,2010,3001,3002,3003,3004,3007,3008,0001,0002,0005,1005,1002,0006	10	16  N
+chlGbCd	string	WTS,HTS,MTS,ATM	10	4   N
+clntEntyId	key	10	10	10  N
+acntId	key	11	10	11  N
+htsId	key	20	10	20  N
+idRsvCtnt	string	 	10	100 N
+svcDtm	datetime	0,day,yyyymmddhhmmss	10	14  N
+svcAmt	string	10000,1000000,5000000,300000,10000,100000,900000,30000000,50000,3000000,2000000,	10	14  N
+tgtAcntId	key	11	10	11  N
+tgtBankCode	string	240,340,241,242	10	4   N
+tgtBankAcntNm	string	국민은행,신한은행,하나은행,홍길동,심청이	10	64  N
+acntAlisTpCd	string	CNST,TEMP	10	4   N
+bankSvcTpCd	string	79,SS,80,81	10	2   N
+bankSvcObjCfCd	string	1,2,3,4	10	2   N
+svcRsvCtnt	string	 	10	100 N
+acntNoCryp	string	12,12,12,12	10	64  N
+rbnoCryp	key	24	10	64  N
+cnecPhonNoCryp	key	24	10	64  N
+tlcmSectCode	string	5,6,7,1,2,3,4	10	1   N
+acMoblPhonCntyNoCryp	string	1080000001,1070000001,1060000001	10	32  N
+acMoblPhonIdnfNoCryp	string	2220000001,2210000001,2200000001	10	32  N
+acMoblPhonEcnoCryp	string	010,011,018	10	32  N
+acMoblPhonNoCryp	string	01011111111,01111111111,01811111111	10	64  N
+cnecPhonNoCryp	string	01011111111,01111111111,01811111111	10	64  N
+clntName	string	홍길동,심청이	10	90  N
+acntName	string	현대카카오선물하기,현대유한회사팀에스엠스,정유한회사팀에스엠스	10	90  N
+newClntYn	string	0,1	10	1   N
+entyRsvCtnt	string	 	10	20  N
+acntOpngDateTime	datetime	0,day,yyyymmddhhmmss|-1,day,yyyymmddhhmmss|-5,day,yyyymmddhhmmss|-7,day,yyyymmddhhmmss|-6,month,yyyymmddhhmmss	10	14  N
+nonFaceAcntOpngDateTime	datetime	0,day,yyyymmddhhmmss|-1,day,yyyymmddhhmmss|-5,day,yyyymmddhhmmss|-7,day,yyyymmddhhmmss|-6,month,yyyymmddhhmmss	10	14  N
+onlnOpngTypeCode	string	01,02,03	10	2   N
+acntTypeCode	string	01,02,03	10	4   N
+chkCardReIssueDtm	datetime	0,day,yyyymmddhhmmss|-1,day,yyyymmddhhmmss|-5,day,yyyymmddhhmmss|-7,day,yyyymmddhhmmss|-6,month,yyyymmddhhmmss	10	14  N
+opnRsvCtnt	string	 	10	20  N
+selfCfdt	datetime	0,day,yyyymmddhhmmss|-1,day,yyyymmddhhmmss|-5,day,yyyymmddhhmmss|-7,day,yyyymmddhhmmss|-6,month,yyyymmddhhmmss	10	8   N
+athnMoblPhonNoCryp	string	01011111111,01111111111,01811111111,01011111112,01111111112,01811111112	10	64  N
+selfRsvCtnt	string	 	10	20  N
+nfaceSelfCnfmMthdCode	string	1,2,3	10	1   N
+nonFaceWtdwBankCode	string	240,340,241,242	10	20  N
+nonFaceRlnmCnfm_1Code	string	1,2,3	10	1   N
+nonFaceRlnmCnfm_1Date	datetime	0,day,yyyymmddhhmmss|-1,day,yyyymmddhhmmss|-5,day,yyyymmddhhmmss|-7,day,yyyymmddhhmmss|-6,month,yyyymmddhhmmss	10	8   N
+nonFaceRlnmCnfm_2Code	string	1,2,3	10	1   N
+nonFaceRlnmCnfm_2Date	datetime	0,day,yyyymmddhhmmss|-1,day,yyyymmddhhmmss|-5,day,yyyymmddhhmmss|-7,day,yyyymmddhhmmss|-6,month,yyyymmddhhmmss	10	8   N
+nfaceRsvCtnt	string	 	10	20  N
+tailFilr	string	 	10	100 N
