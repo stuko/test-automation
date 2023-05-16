@@ -4,7 +4,10 @@
  */
 package com.auto.test.jmeter.plugin.common.gui;
 
+import com.auto.test.jmeter.async.AsyncExecutorManager;
 import com.auto.test.jmeter.plugin.common.sampler.TestPluginSampler;
+import com.netflix.jmeter.utils.SystemUtils;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -391,15 +394,34 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
         jenkins_token.setText("");
         before_test_exec_shell.setText("");
         test_exec_shell.setText("");
-        TestAutomationGuiController.show_project_detail(project_list
-                , project_name
-                , jenkins_url
-                , jenkins_project_name
-                , jenkins_token
-                , mattermost_webhook_id
-                , before_test_exec_shell
-                , test_exec_shell
-                , project_desc);
+    	try {
+			AsyncExecutorManager.getINSTANCE().executeThread(()->{
+				boolean stop = false;
+				while(!stop) {
+					try {
+						TestAutomationGuiController.show_project_detail(project_list
+				                , project_name
+				                , jenkins_url
+				                , jenkins_project_name
+				                , jenkins_token
+				                , mattermost_webhook_id
+				                , before_test_exec_shell
+				                , test_exec_shell
+				                , project_desc);
+						stop = true;
+					}catch(Exception e) {
+						logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.show_project_detail].. So, wait 30 seconds and Retry...." + e.toString());
+						try {
+							Thread.sleep(30000);
+						} catch (InterruptedException e1) {
+							logger.error(e1.toString());
+						}
+					}			
+				}
+			});
+		} catch (Exception e) {
+			logger.debug(SystemUtils.getStackTrace(e));
+		}
     }                                   
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {                                          
@@ -420,26 +442,49 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        
-       if(TestAutomationGuiController.save_project_connection_info(project_list
-               , TestAutomationGuiController.get_jmx_file_name()
-               , jenkins_url.getText()
-               , jenkins_project_name.getText()
-               , jenkins_token.getText()
-               , mattermost_webhook_id.getText()
-               , before_test_exec_shell.getText()
-               , test_exec_shell.getText()
-       )){
-            JOptionPane.showMessageDialog(null, "프로젝트 연결 정보를 저장 하였습니다.");
-       }else{
-            JOptionPane.showMessageDialog(null, "프로젝트 연결 정보를 저장할 수 없습니다. 젠킨스 연결 정보와 프로젝트 연결정보를 확인해 주세요");
+       try { 
+	       if(TestAutomationGuiController.save_project_connection_info(project_list
+	               , TestAutomationGuiController.get_jmx_file_name()
+	               , jenkins_url.getText()
+	               , jenkins_project_name.getText()
+	               , jenkins_token.getText()
+	               , mattermost_webhook_id.getText()
+	               , before_test_exec_shell.getText()
+	               , test_exec_shell.getText()
+	       )){
+	            JOptionPane.showMessageDialog(null, "프로젝트 연결 정보를 저장 하였습니다.");
+	       }else{
+	            JOptionPane.showMessageDialog(null, "프로젝트 연결 정보를 저장할 수 없습니다. 젠킨스 연결 정보와 프로젝트 연결정보를 확인해 주세요");
+	       }
+       }catch(Exception e) {
+    	   logger.error(e.toString(),e);
        }
     }                                        
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        TestAutomationGuiController.show_project_list(project_list, this, testDataConfigPanel, testRunConfigPanel);
-        JOptionPane.showMessageDialog(null, "프로젝트 정보를 다시 갱신하였습니다.");
+    	try {
+			AsyncExecutorManager.getINSTANCE().executeThread(()->{
+				boolean stop = false;
+				while(!stop) {
+					try {
+						TestAutomationGuiController.show_project_list(project_list, this, testDataConfigPanel, testRunConfigPanel);
+				        JOptionPane.showMessageDialog(null, "프로젝트 정보를 다시 갱신하였습니다.");
+						stop = true;
+					}catch(Exception e) {
+						logger.info("Can not connect to Test Automation Server.. So, wait 30 seconds and Retry...." + e.toString());
+						try {
+							Thread.sleep(30000);
+						} catch (InterruptedException e1) {
+							logger.error(e1.toString());
+						}
+					}			
+				}
+			});
+		} catch (Exception e) {
+			logger.debug(SystemUtils.getStackTrace(e));
+		}
+        
     }                                        
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -448,7 +493,27 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
 
     private void jPanel1ComponentShown(java.awt.event.ComponentEvent evt) {                                       
         // TODO add your handling code here:
-        TestAutomationGuiController.show_project_list(project_list, this, testDataConfigPanel, testRunConfigPanel);
+    	try {
+			AsyncExecutorManager.getINSTANCE().executeThread(()->{
+				boolean stop = false;
+				while(!stop) {
+					try {
+						TestAutomationGuiController.show_project_list(project_list, this, testDataConfigPanel, testRunConfigPanel);
+						stop = true;
+					}catch(Exception e) {
+						logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.show_project_list].. So, wait 30 seconds and Retry...." + e.toString());
+						try {
+							Thread.sleep(30000);
+						} catch (InterruptedException e1) {
+							logger.error(e1.toString());
+						}
+					}			
+				}
+			});
+		} catch (Exception e) {
+			logger.debug(SystemUtils.getStackTrace(e));
+		}
+        
     }                                      
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -461,7 +526,26 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        TestAutomationGuiController.save_test_scenario();
+    	try {
+			AsyncExecutorManager.getINSTANCE().executeThread(()->{
+				boolean stop = false;
+				while(!stop) {
+					try {
+						TestAutomationGuiController.save_test_scenario();
+						stop = true;
+					}catch(Exception e) {
+						logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.save_test_scenario].. So, wait 30 seconds and Retry...." + e.toString());
+						try {
+							Thread.sleep(30000);
+						} catch (InterruptedException e1) {
+							logger.error(e1.toString());
+						}
+					}			
+				}
+			});
+		} catch (Exception e) {
+			logger.debug(SystemUtils.getStackTrace(e));
+		}
          JOptionPane.showMessageDialog(null, "테스트 시나리오 파일(jmeter jmx file)을 원격 테스트 서버에 저장 하였습니다.");
     }                                        
 
@@ -472,7 +556,27 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
 
     private void jPanel1HierarchyChanged(java.awt.event.HierarchyEvent evt) {                                         
         // TODO add your handling code here:
-        TestAutomationGuiController.show_project_detail_by_jmx(this, testDataConfigPanel, testRunConfigPanel);
+    	try {
+			AsyncExecutorManager.getINSTANCE().executeThread(()->{
+				boolean stop = false;
+				while(!stop) {
+					try {
+						TestAutomationGuiController.show_project_detail_by_jmx(this, testDataConfigPanel, testRunConfigPanel);
+						stop = true;
+					}catch(Exception e) {
+						logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.show_project_detail_by_jmx].. So, wait 30 seconds and Retry...." + e.toString());
+						try {
+							Thread.sleep(30000);
+						} catch (InterruptedException e1) {
+							logger.error(e1.toString());
+						}
+					}			
+				}
+			});
+		} catch (Exception e) {
+			logger.debug(SystemUtils.getStackTrace(e));
+		}
+        
     }                                        
 
     

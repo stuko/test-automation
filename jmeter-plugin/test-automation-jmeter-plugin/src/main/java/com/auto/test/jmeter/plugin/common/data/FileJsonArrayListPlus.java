@@ -152,6 +152,7 @@ public class FileJsonArrayListPlus extends FileJsonArrayList{
     public void clear(){
         super.clear();
         this.current = 0;
+
     }
 
     public FileJsonArrayListPlus copy(){

@@ -15,6 +15,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.auto.test.jmeter.async.AsyncExecutorManager;
 import com.auto.test.jmeter.plugin.database.cassandra.CassandraSampler;
 import com.netflix.jmeter.utils.SystemUtils;
 
@@ -78,7 +79,22 @@ public class PostgresSampler extends CassandraSampler {
 		}
 		logger.debug("Input data loading is OK...");
 		try {
-			this.connect(this.getClusterUrl(), this.getClusterId(), this.getClusterPw());
+			AsyncExecutorManager.getINSTANCE().executeThread(()->{
+				boolean stop = false;
+				while(!stop) {
+					try {
+						this.connect(this.getClusterUrl(), this.getClusterId(), this.getClusterPw());
+						stop = true;
+					}catch(Exception e) {
+						logger.debug("Can not connect to DataBase.. So, wait 30 seconds and Retry....");
+						try {
+							Thread.sleep(30000);
+						} catch (InterruptedException e1) {
+							logger.error(e1.toString());
+						}
+					}			
+				}
+			});
 		} catch (Exception e) {
 			logger.debug(SystemUtils.getStackTrace(e));
 		}

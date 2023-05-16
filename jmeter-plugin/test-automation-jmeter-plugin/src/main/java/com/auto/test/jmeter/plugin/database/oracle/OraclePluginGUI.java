@@ -68,10 +68,20 @@ public class OraclePluginGUI extends AbstractGUI {
 	}
 
 	@Override
-	public String getLable() {
+	public String getLabelResource() {
 		return "오라클 테스트 플러그인";
 	}
 
+	@Override
+	public String getStaticLabel() {
+		return "오라클 테스트 플러그인";
+	}
+	
+	@Override
+	public String getLable() {
+		return "오라클 테스트 플러그인";
+	}
+	
 	@Override
 	public void initFields() {
 		logger.debug("init Field");

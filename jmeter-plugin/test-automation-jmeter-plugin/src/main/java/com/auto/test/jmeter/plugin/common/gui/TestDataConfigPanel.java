@@ -1,6 +1,8 @@
 package com.auto.test.jmeter.plugin.common.gui;
 
 import com.google.gson.Gson;
+import com.netflix.jmeter.utils.SystemUtils;
+import com.auto.test.jmeter.async.AsyncExecutorManager;
 import com.auto.test.jmeter.plugin.common.data.FileJsonArrayListQueue;
 import com.auto.test.jmeter.plugin.common.sampler.TestPluginSampler;
 import com.auto.test.jmeter.plugin.common.util.TestPluginConstants;
@@ -41,7 +43,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
     private TestPluginSampler sampler = null;
     String OK = "테스트 데이터 생성 하기";
     String NO = "테스트 데이터 생성 중지";
-    AtomicBoolean is_start = new AtomicBoolean(false);
+    boolean is_start = false;
     JButton ok;
     JLabel status = new JLabel();
     Gson gson = new Gson();
@@ -125,10 +127,27 @@ public class TestDataConfigPanel extends PluginGridPanel {
             Map<String,Object> params = new HashMap<>();
             params.put("factors",test_data_list_map);
             params.put("jmx_file_name",TestAutomationGuiController.get_jmx_file_name());
-            
-            TestAutomationGuiController.save_factors(params);
-            
-            JOptionPane.showMessageDialog(null, "테스트 데이터 설정 정보가 정상적으로 저장 되었습니다.");
+            try {
+    			AsyncExecutorManager.getINSTANCE().executeThread(()->{
+    				boolean stop = false;
+    				while(!stop) {
+    					try {
+    						TestAutomationGuiController.save_factors(params);
+    			            JOptionPane.showMessageDialog(null, "테스트 데이터 설정 정보가 정상적으로 저장 되었습니다.");
+    						stop = true;
+    					}catch(Exception e) {
+    						logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.save_factors].. So, wait 5 seconds and Retry....");
+    						try {
+    							Thread.sleep(5000);
+    						} catch (InterruptedException e1) {
+    							logger.error(e1.toString());
+    						}
+    					}			
+    				}
+    			});
+    		} catch (Exception e) {
+    			logger.debug(SystemUtils.getStackTrace(e));
+    		}
         });
         save.setBackground(new Color(0,133,252));
         save.setForeground(Color.WHITE);
@@ -163,9 +182,14 @@ public class TestDataConfigPanel extends PluginGridPanel {
         ok.setForeground(Color.WHITE);
         ok.setBorderPainted(false);
         ok.addActionListener(event->{
-            if(!is_start.get()) {
+            logger.info("Executor's start status is {}", this.getSampler().getExecutor().is_start());
+            logger.info("UI's start status is {}", is_start);
+            is_start = this.getSampler().getExecutor().is_start();
+            if(!is_start) {
+                logger.info("After start, Executor's start status is {}", this.getSampler().getExecutor().is_start());
+                logger.info("After start, UI's start status is {}", is_start);
                 com.auto.test.jmeter.plugin.common.data.FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).removeAll();
-                is_start.set(true);
+                is_start = true;
                 this.getSampler().getExecutor().getTestData().setData(this.getPluginData());
                 this.getSampler().getExecutor().start((d,cnt)->{
                     setTestCount(cnt);
@@ -174,8 +198,10 @@ public class TestDataConfigPanel extends PluginGridPanel {
                 ok.setText(NO);
             }else{
                 this.getSampler().getExecutor().stop();
-                is_start.set(false);
+                is_start = false;
                 ok.setText(OK);
+                logger.info("After stop, Executor's start status is {}", this.getSampler().getExecutor().is_start());
+                logger.info("After stop, UI's start status is {}", is_start);
             }
         }); 
         
@@ -224,6 +250,21 @@ public class TestDataConfigPanel extends PluginGridPanel {
 
     private void open(){
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
+            @Override
+            public String getDescription() {
+                return null;
+            }
+           @Override
+            public boolean accept(File f) {
+                String fileName = f.getName();
+                if(fileName.indexOf(".txt") != -1 || f.isDirectory()) return true;
+                return false;
+            }
+        });
+
+        fileChooser.setCurrentDirectory(new File("."));
+
         int option = fileChooser.showOpenDialog(this);
         if(option == JFileChooser.APPROVE_OPTION){
             File file = fileChooser.getSelectedFile();

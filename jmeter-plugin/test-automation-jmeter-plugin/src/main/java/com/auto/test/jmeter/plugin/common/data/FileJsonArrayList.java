@@ -234,7 +234,12 @@ public class FileJsonArrayList {
     }
 
     public void clear(){
-        getTestDataFilePath().delete();
+        // getTestDataFilePath().delete();
+        File[] deleteFolderList = getTestDataFolder().listFiles();
+        logger.info("Test Folder is {}" , this.getTestDataFolder().getAbsolutePath());
+        for (int j = 0; j < deleteFolderList.length; j++  ) {
+            deleteFolderList[j].delete();
+        }
         this.size = 0;
     }
 

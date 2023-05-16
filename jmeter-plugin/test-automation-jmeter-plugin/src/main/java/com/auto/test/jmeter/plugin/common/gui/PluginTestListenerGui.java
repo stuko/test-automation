@@ -20,11 +20,16 @@ public class PluginTestListenerGui extends AbstractListenerGui {
         init();
     }
 
-    @Override
-    public String getLabelResource() {
-        return "Test Automation Result Listener :)";
-    }
+   @Override
+	public String getLabelResource() {
+		return "Test Automation Result Listener :)";
+	}
 
+	@Override
+	public String getStaticLabel() {
+		return "Test Automation Result Listener :)";
+	}
+	
     @Override
     public TestElement createTestElement() {
         PluginTestListener listener = new PluginTestListener();

@@ -1,6 +1,8 @@
 package com.auto.test.jmeter.plugin.common.data;
 
 import java.util.HashMap;
+
+import com.auto.test.jmeter.plugin.common.util.TestPluginConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -152,6 +154,7 @@ public class FileJsonArrayListQueue extends FileJsonArrayListPlus{
         current_queue = null;
         queueManager = null;
         this.init();
+        this.clear();
     }
 
 }

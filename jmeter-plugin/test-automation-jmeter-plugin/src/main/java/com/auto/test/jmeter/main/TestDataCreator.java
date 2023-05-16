@@ -12,7 +12,7 @@ public class TestDataCreator {
 	// {AAAA(1111111111111~9999999999999)}
 	public static void main(String[] args) {
 		String[][] meta = {
-				{"cid","string","{AAAA(1111111111111~9999999999999)}","13","5","N"},
+				{"cid","string","{(40~99)(10~31)(1~4)(111111~999999)}","1","20","N"},
 				{"request_date","datetime","-100~0,day,yyyymmdd","20","N","N"}
 		};
 		TestMessageByCombination comb = new TestMessageByCombination();

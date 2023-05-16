@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,8 +23,10 @@ import javax.swing.JTextArea;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.auto.test.jmeter.async.AsyncExecutorManager;
 import com.auto.test.jmeter.plugin.common.function.TestPluginCallBack;
 import com.google.gson.Gson;
+import com.netflix.jmeter.utils.SystemUtils;
 
 /**
 *
@@ -73,6 +77,24 @@ public class TestRunConfigPanel extends PluginGridPanel{
        this.add(this,0,0,1,1, GridBagConstraints.WEST,GridBagConstraints.NONE, editConstraints, header);
        
        combo = new JComboBox<String>(method);
+       combo.addItemListener(e -> {
+           if(e.getID() == ItemEvent.ITEM_STATE_CHANGED){
+               if(e.getStateChange() == ItemEvent.SELECTED){
+                   JComboBox<String> cb = (JComboBox<String>) e.getSource();
+                   String newSelection = (String) cb.getSelectedItem();
+                   logger.info("Selected item is {}", newSelection);
+                   if(newSelection.equals("KAFKA")){
+                       textArea.setText(TestAutomationGuiController.getKafkaText());
+                   }else if(newSelection.equals("REST")){
+                       textArea.setText(TestAutomationGuiController.getRestText());
+                   }else if(newSelection.equals("TCP")){
+                       textArea.setText(TestAutomationGuiController.getTcpText());
+                   }else{
+                       textArea.setText(TestAutomationGuiController.getDefaultText());
+                   }
+               }
+           }
+       });
        this.add(this,0,1,1,1, GridBagConstraints.WEST,GridBagConstraints.NONE, editConstraints, combo);
        
        textArea = new JTextArea();  //JTextArea 생성
@@ -102,9 +124,29 @@ public class TestRunConfigPanel extends PluginGridPanel{
            Map<String,Object> params = new HashMap<>();
            params.put("run",m);
            params.put("jmx_file_name",TestAutomationGuiController.get_jmx_file_name());
-           TestAutomationGuiController.save_run_config(params);
            
-           JOptionPane.showMessageDialog(null, "테스트 데이터 실행 설정 정보가 정상적으로 저장 되었습니다.");
+           try {
+	   			AsyncExecutorManager.getINSTANCE().executeThread(()->{
+	   				boolean stop = false;
+	   				while(!stop) {
+	   					try {
+	   						TestAutomationGuiController.save_run_config(params);
+	   						JOptionPane.showMessageDialog(null, "테스트 데이터 실행 설정 정보가 정상적으로 저장 되었습니다.");
+	   						stop = true;
+	   					}catch(Exception e) {
+	   						logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.save_run_config(params)].. So, wait 30 seconds and Retry...." + e.toString());
+	   						try {
+	   							Thread.sleep(30000);
+	   						} catch (InterruptedException e1) {
+	   							logger.error(e1.toString());
+	   						}
+	   					}			
+	   				}
+	   			});
+	   		} catch (Exception e) {
+	   			logger.debug(SystemUtils.getStackTrace(e));
+	   		}
+           
        });
        save.setBackground(new Color(0,133,252));
        save.setForeground(Color.WHITE);

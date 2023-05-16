@@ -77,8 +77,8 @@ dependencies {
     
     // testCompile group: 'junit', name: 'junit', version: '4.12'
     // testimplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    // testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    // testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
 } 
 
@@ -86,11 +86,14 @@ application {
     // Define the main class for the application.
     mainClass = 'com.auto.test.plugin.test.result.App'
 }
-
+/*
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+*/
+
+tasks.register("prepareKotlinBuildScriptModel"){}
 
 tasks.jar {
     archiveFileName.set("test-automation-jmeter-plugin.jar")
@@ -123,6 +126,10 @@ task copyAndChangeFile(type: Copy) {
 task copyToLib(type: Copy) {
     into "build/output/libs"
     from configurations.runtimeClasspath
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '7.0'
 }
 
 build.dependsOn(copyToLib)

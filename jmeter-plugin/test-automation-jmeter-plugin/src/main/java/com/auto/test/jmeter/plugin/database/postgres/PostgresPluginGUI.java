@@ -68,6 +68,16 @@ public class PostgresPluginGUI extends AbstractGUI {
 	}
 
 	@Override
+	public String getLabelResource() {
+		return "Postgres 테스트 플러그인";
+	}
+
+	@Override
+	public String getStaticLabel() {
+		return "Postgres 테스트 플러그인";
+	}
+	
+	@Override
 	public String getLable() {
 		return "Postgres 테스트 플러그인";
 	}

@@ -128,7 +128,7 @@ public class FakeData {
 					}
 				}else {
 					long x = (long)((to[i] - from[i]) + 1);
-					middle = (r.nextLong(x) + from[i]) + "";
+					middle = (r.nextLong()%x+ from[i]) + "";
 				}
 				sb.append((prefix[i]==null ? "" : prefix[i])+middle+(postfix[i]==null ? "" : postfix[i]));
 			}

@@ -1,16 +1,15 @@
 package com.auto.test.jmeter.plugin.common.sampler;
 
-import com.auto.test.jmeter.plugin.common.data.FileJsonArrayListQueue;
-import com.auto.test.jmeter.plugin.common.gui.TestAutomationGuiController;
-import com.auto.test.jmeter.plugin.common.run.executor.TestPluginExecutor;
-import com.auto.test.jmeter.plugin.common.util.TestPluginConstants;
+import java.util.Map;
+
 import org.apache.jmeter.samplers.AbstractSampler;
 import org.apache.jmeter.samplers.Entry;
 import org.apache.jmeter.samplers.SampleResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Map;
+import com.auto.test.jmeter.plugin.common.gui.TestAutomationGuiController;
+import com.auto.test.jmeter.plugin.common.run.executor.TestPluginExecutor;
 
 public abstract class AbstractTestPluginSampler extends AbstractSampler {
 
@@ -20,7 +19,12 @@ public abstract class AbstractTestPluginSampler extends AbstractSampler {
     @Override
     public SampleResult sample(Entry e) {
         if(e != null) logger.warn("Entry is {}", e.toString());
-        prepare_sampler();
+        try {
+        	prepare_sampler();
+        }catch(Exception ex) {
+        	logger.error(ex.toString(),ex);
+        	return null;
+        }
         return runSample(invoke_sample_result());
     }
 
@@ -94,7 +98,7 @@ public abstract class AbstractTestPluginSampler extends AbstractSampler {
         return sr;
     }
 
-    public void prepare_sampler(){
+    public void prepare_sampler() throws Exception{
         if(this.getExecutor() == null) {
             logger.info("##### TEST EXECUTOR IS NULL, so Refer Default Executor");
             this.setExecutor(TestAutomationGuiController.get_test_executor("DEFAULT", null));
@@ -109,11 +113,12 @@ public abstract class AbstractTestPluginSampler extends AbstractSampler {
         }
     }
 
-    public void prepare_test_data(){
+    public void prepare_test_data() throws Exception{
         if(this.getExecutor().is_stop()) {
             logger.info("executor's mode is stop");
             if(this.getExecutor().getTestData().getData() == null){
                 logger.info("executor's test data is null");
+                
                 TestAutomationGuiController.get_test_data_by_jmx(list -> {
                     String[][] test_data_factors = new String[list.size()][];
                     for (int i = 0; i < list.size(); i++) {
@@ -130,6 +135,8 @@ public abstract class AbstractTestPluginSampler extends AbstractSampler {
                     }
                     getExecutor().getTestData().setData(test_data_factors);
                 });
+                
+                
             }
             // this.getExecutor().start();
         }else logger.info("executor's mode is start");

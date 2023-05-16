@@ -15,12 +15,13 @@ public abstract class TestPluginMessageBuilder {
         this.message.clear();
         if(datas != null && datas[0] != null) {
             for (String[] rows : datas) {
+                int cnt = rows[3].trim().length() == 0 ? 1 : Integer.parseInt(rows[3]);
                 if (rows.length == 5) {
                     // logger.info("name={}, type={}, value={}, length={} , encode={}", rows[0], rows[1], rows[2], rows[3], rows[4]);
                     this.message.addBody(rows[0], rows[1], rows[2], "Y".equals(rows[4]) ? true:false ).setLength(rows[3]);
                 } else if (rows.length == 6) {
                     // logger.info("name={}, type={}, value={}, count={}, length={} , encode={}", rows[0], rows[1], rows[2], rows[3], rows[4], rows[5]);
-                    this.message.addBody(rows[0], rows[1], rows[2], Integer.parseInt(rows[3]),  "Y".equals(rows[5]) ? true:false).setLength(rows[4]);
+                    this.message.addBody(rows[0], rows[1], rows[2], cnt,  "Y".equals(rows[5]) ? true:false).setLength(rows[4]);
                 } else {
                     logger.info("data error................");
                 }
