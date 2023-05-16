@@ -1,0 +1,115 @@
+version: '3.3'
+services:
+  test-controller:
+    build: ./test-controller
+    environment:
+      - PYTHONUNBUFFERED=1
+      - 'MONGO_IP=10.8.56.132'
+      - 'MONGO_PORT=27017'
+      - TZ: Asia/Seoul
+    ports:
+      - '5000:5000'
+    environment:
+      - TZ=Asia/Seoul
+    volumes:
+      - ./volume/config/config.json:/config/config.json
+      - ./volume/upload/:/upload/
+      - ./volume/result/:/result/
+    container_name: test-controller-python
+  kanboard:
+    image: kanboard/kanboard:latest
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./kanboard/app/data:/var/www/app/data
+      - ./kanboard/app/plugins:/var/www/app/plugins
+      - ./kanboard/nginx/ssl:/etc/nginx/ssl
+    environment:
+      DATABASE_URL: mysql://kanboard:kanboard-secret@db/kanboard
+      TZ: Asia/Seoul
+  db:
+    image: mariadb:latest
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: kanboard
+      MYSQL_USER: kanboard
+      MYSQL_PASSWORD: kanboard-secret
+      TZ: Asia/Seoul
+    ports:
+      - "3306:3306"  
+    volumes:
+      - db:/var/lib/mysql
+  mongo:
+    container_name: mongo-test-automation
+    environment:
+        - TZ=Asia/Seoul
+    ports:
+        - '27017:27017'
+    restart: always
+    image: 'mongo:4.4.10'
+  influxdb:
+    container_name: test-controller-influxdb
+    ports:
+        - '8083:8083'
+        - '8086:8086'
+    network_mode: influxdb
+    volumes:
+        - './volume/influxdb-config/influxdb.conf:/etc/influxdb/influxdb.conf'
+        - './volume/influxdb:/var/lib/influxdb'
+    image: 'influxdb:1.8'
+  chronograf:
+    ports:
+        - '8888:8888'
+    extra_hosts:
+        - 'influxdb:10.8.56.132'
+    container_name: test-controller-chronograf
+    network_mode: influxdb
+    image: chronograf
+  grafana:
+    container_name: test-controller-grafana
+    ports:
+        - '3000:3000'
+    volumes:
+        - './volume/grafana:/var/lib/grafana'
+    image: grafana/grafana
+  wikidb:
+    image: postgres:14.1-alpine
+    environment:
+      POSTGRES_DB: wiki
+      POSTGRES_PASSWORD: wikijsrocks
+      POSTGRES_USER: wikijs
+    logging:
+      driver: "none"
+    restart: unless-stopped
+    expose:
+      - "15432"
+    ports:
+      - "15432:5432"
+    volumes:
+      - ./volume/wiki.js/data:/var/lib/postgresql/data
+  wiki:
+    image: requarks/wiki:2.5
+    depends_on:
+      - wikidb
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: wikidb
+      DB_PORT: 15432
+      DB_USER: wikijs
+      DB_PASS: wikijsrocks
+      DB_NAME: wiki
+    restart: unless-stopped
+    ports:
+      - "7777:3000"
+    extra_hosts:
+      - "wikidb:10.8.56.132"    
+volumes:
+  kanboard_data:
+  kanboard_plugins:
+  kanboard_ssl:
+  db:
+networks:
+  influxdb:
+    driver: bridge

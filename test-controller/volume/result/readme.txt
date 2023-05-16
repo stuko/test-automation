@@ -1,1 +1,0 @@
-There must be result file

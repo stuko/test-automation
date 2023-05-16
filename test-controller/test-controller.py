@@ -13,9 +13,9 @@ from pymongo import MongoClient
 from pymongo.cursor import CursorType
 
 app = Flask(__name__) 
-config_file = "./volume/config/config.json"
-upload_folder = "./volume/upload/"
-result_folder = "./volume/result/"
+config_file = "/config/config.json"
+upload_folder = "/upload/"
+result_folder = "/result/"
 
 @app.route('/controller', methods=['POST','GET']) 
 def controller():
@@ -277,17 +277,19 @@ def upload():
     
 if __name__ == '__main__': 
     
-    mongo_ip = socket.gethostbyname(socket.gethostname())
-    mongo_port = 27017
-    
+    print('config path is ' + config_file)
     file_exists = exists(config_file)
     
+    mongo_ip = '127.0.0.1'
+    mongo_port = '27017'
+    
     if file_exists : 
-        
+        print(config_file + ' is exist ')
         f = open(config_file,'r')
         config_json = json.load(f)
-        
-        if config_json['mongo_ip'] != None and config_json['mongo_port'] != None :
+        print(config_json)
+
+        if config_json['mongo']['ip'] != None and config_json['mongo']['port'] != None :
             # 몽고 DB에 접속한다.
             # 입력받은 IP와 PORT로 접속한다.
             # Config 정보를 읽어 온다.
@@ -305,12 +307,12 @@ if __name__ == '__main__':
             # kanboard (ip, port, token , id, pw, db)
             # mattermost (url)
             # JMeter (Mongo ip, Mongo port, jmeter_path)
-            mongo_ip = config_json['mongo_ip']
-            mongo_port = config_json['mongo_port']
+            mongo_ip = config_json['mongo']['ip']
+            mongo_port = config_json['mongo']['port']
         
     print(f'Mongo ip is {mongo_ip} , port is {str(mongo_port)}')
         
-    mongo = MongoClient(mongo_ip, mongo_port)
+    mongo = MongoClient(mongo_ip, int(mongo_port))
     db = mongo['auto']
     if db == None:
         print("##### Mongo DB does not have auto DataBase")
@@ -322,31 +324,30 @@ if __name__ == '__main__':
         exit() 
 
     config_collection = config.find()
-    l = list(config_collection)
-    
-    if l == None or len(l) == 0:
-        print("##### You have to insert config collection")
-        config.insert_one(
-            {
-                'flask' : { 'port' : config_json['flask_port']},
-                'kanboard' : { 'ip' : config_json['kanboard_ip'] , 
-                              'port' : config_json['kanboard_port'], 
-                              'token' : config_json['kanboard_token'] , 
-                              'id' : config_json['kanboard_id'], 
-                              'pw' : config_json['kanboard_pw'], 
-                              'db' : config_json['kanboard_db']},
-                'mattermost' : { 'url' : config_json['mattermost_url'] },
-                'jmeter' : { 
-                    'jmeter_ip' : config_json['jmeter_ip'],
-                    'jmeter_port' : config_json['jmeter_port'],
-                    'path' : config_json['jmeter_path']}
-            }
-        )
-    collection = config.find()[0]
-    print(collection)
-    
-    if collection != None :
+    collection = {}
+    try:
+        l = list(config_collection)
+        if l == None or len(l) == 0:
+            print("##### You have to insert config collection")
+            config.insert_one(config_json)
+        collection = config.find()[0]
+        print(collection)
+    except:
+        print('MongoDB is not ready')
         
+    flask_port = '5000'
+    kanboard_ip = '127.0.0.1'
+    kanboard_port = '8080'
+    kanboard_token = ''
+    kanboard_id = 'kanboard'
+    kanboard_pw = 'kanboard-secret'
+    kanboard_db = 'kanboard'
+    mattermost_url = 'http://127.0.0.1:8065/hooks/'
+    jmeter_ip = '127.0.0.1'
+    jmeter_port = '9999'
+    jmeter_path = './apache-jmeter-5.4.1/bin/'
+        
+    if collection :
         flask_port = collection['flask']['port']
         kanboard_ip = collection['kanboard']['ip']
         kanboard_port = collection['kanboard']['port']
@@ -355,16 +356,26 @@ if __name__ == '__main__':
         kanboard_pw = collection['kanboard']['pw']
         kanboard_db = collection['kanboard']['db']
         mattermost_url = collection['mattermost']['url']
-        jmeter_ip = collection['jmeter']['jmeter_ip']
-        jmeter_port = collection['jmeter']['jmeter_port']
+        jmeter_ip = collection['jmeter']['ip']
+        jmeter_port = collection['jmeter']['port']
         jmeter_path = collection['jmeter']['path']
-        
-        global km , mm, jm, jkm
-        km = KanboardManager(kanboard_ip,str(kanboard_port),kanboard_token,kanboard_id,kanboard_pw,kanboard_db)
-        jm = JmeterManager(mongo_ip,mongo_port,jmeter_ip,jmeter_port,jmeter_path)
-        mm = MatterMostManager(mattermost_url, jm)
-        jkm = JenkinsManager(jm)
-    
-        app.run(host="0.0.0.0",debug=True, port=flask_port)
-    else :
-        print("Please input config info to MongoDB")
+    else:
+        flask_port = config_json['flask']['port']
+        kanboard_ip = config_json['kanboard']['ip']
+        kanboard_port = config_json['kanboard']['port']
+        kanboard_token = config_json['kanboard']['token']
+        kanboard_id = config_json['kanboard']['id']
+        kanboard_pw = config_json['kanboard']['pw']
+        kanboard_db = config_json['kanboard']['db']
+        mattermost_url = config_json['mattermost']['url']
+        jmeter_ip = config_json['jmeter']['ip']
+        jmeter_port = config_json['jmeter']['port']
+        jmeter_path = config_json['jmeter']['path']
+            
+    global km , mm, jm, jkm
+    km = KanboardManager(kanboard_ip,kanboard_port,kanboard_token,kanboard_id,kanboard_pw,kanboard_db)
+    jm = JmeterManager(mongo_ip,int(mongo_port),jmeter_ip,int(jmeter_port),jmeter_path)
+    mm = MatterMostManager(mattermost_url, jm)
+    jkm = JenkinsManager(jm)
+
+    app.run(host="0.0.0.0",debug=True, port=flask_port)
