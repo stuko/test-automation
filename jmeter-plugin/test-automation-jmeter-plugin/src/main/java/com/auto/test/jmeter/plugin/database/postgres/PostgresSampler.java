@@ -86,7 +86,7 @@ public class PostgresSampler extends CassandraSampler {
 						this.connect(this.getClusterUrl(), this.getClusterId(), this.getClusterPw());
 						stop = true;
 					}catch(Exception e) {
-						logger.debug("Can not connect to DataBase.. So, wait 30 seconds and Retry....");
+						// logger.debug("Can not connect to DataBase.. So, wait 30 seconds and Retry....");
 						try {
 							Thread.sleep(30000);
 						} catch (InterruptedException e1) {
@@ -172,25 +172,31 @@ public class PostgresSampler extends CassandraSampler {
 			}
 			logger.debug("Query result : " + result);
 		} catch (Exception e) {
-			e.printStackTrace();
 			logger.error(e.toString(), e);
 			result.add(new HashMap<>());
 			result.get(result.size() - 1).put("ERROR", e.toString());
+			throw e;
 		} finally {
 			try {
 				if (rs != null)
 					rs.close();
 			} catch (Exception ee) {
+				result.add(new HashMap<>());
+				result.get(result.size() - 1).put("ERROR", ee.toString());
 			}
 			try {
 				if (st != null)
 					st.close();
 			} catch (Exception ee) {
+				result.add(new HashMap<>());
+				result.get(result.size() - 1).put("ERROR", ee.toString());
 			}
 			try {
 				if (connection != null)
 					connection.close();
 			} catch (Exception ee) {
+				result.add(new HashMap<>());
+				result.get(result.size() - 1).put("ERROR", ee.toString());
 			}
 			
 			long end = System.currentTimeMillis();

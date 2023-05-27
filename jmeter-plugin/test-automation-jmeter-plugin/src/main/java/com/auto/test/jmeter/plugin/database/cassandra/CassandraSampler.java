@@ -491,26 +491,42 @@ public class CassandraSampler extends org.apache.jmeter.samplers.AbstractSampler
 		Response response = null;
 		try {
 			response = execute();
-			logger.debug("===== Query Time =====");
-			logger.debug("Query count : " + response.getQueryTime().size());
-			response.getQueryTime().forEach((k,v)->{
-				logger.debug("Query Result : ["+k+"] ["+v+"]");
-			});
-			logger.debug("===== Query Time =====");
-			
-			sr.setBytes(response.size);
-			message = "------------ Request --------------\n" +response.request + "\n" + "------------ Request --------------\n" + "------------ Response Body --------------\n" + response.getMessage() + "\n------------ Response Body --------------\n";
-			sr.setResponseData(response.getRequest().getBytes());
-			sr.setSuccessful(true);
-			sr.setResponseCodeOK();
-			sr.setResponseHeaders(response.request);
-			sr.setResponseMessage(new Gson().toJson(response.getQueryTime()));
+			if(response.getSize() <= 0) {
+				logger.error(response.getMessage());
+				sr.setSuccessful(false);
+				sr.setBytes(response.size);
+				message = "------------ Request --------------\n" + response.request + "\n" + "------------ Request --------------\n\n\n" + "------------ Response Body --------------\n" + response.getMessage() + "\n------------ Response Body --------------\n";
+				sr.setResponseHeaders(response.request);
+			}else {
+				logger.debug("===== Query Time =====");
+				logger.debug("Query count : " + response.getQueryTime().size());
+				response.getQueryTime().forEach((k, v) -> {
+					logger.debug("Query Result : [" + k + "] [" + v + "]");
+				});
+				logger.debug("===== Query Time =====");
+
+				sr.setBytes(response.size);
+				message = "------------ Request --------------\n" + response.request + "\n" + "------------ Request --------------\n\n\n" + "------------ Response Body --------------\n" + response.getMessage() + "\n------------ Response Body --------------\n";
+				try {
+					sr.setResponseData(response.getRequest().getBytes("UTF-8"));
+				} catch (Exception e) {
+					sr.setResponseData(response.getRequest().getBytes());
+				}
+				sr.setSuccessful(true);
+				sr.setResponseCodeOK();
+				sr.setResponseHeaders(response.request);
+				sr.setResponseMessage(new Gson().toJson(response.getQueryTime()));
+			}
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			logger.error(ex.toString(),ex);
 			message = SystemUtils.getStackTrace(ex);
 			sr.setSuccessful(false);
 		} finally {
-			sr.setResponseData(message.getBytes());
+			try {
+				sr.setResponseData(message.getBytes("UTF-8"));
+			}catch(Exception e){
+				sr.setResponseData(message.getBytes());
+			}
 			long latency = System.currentTimeMillis() - start;
 			sr.sampleEnd();
 			sr.setLatency(latency);
@@ -536,6 +552,7 @@ public class CassandraSampler extends org.apache.jmeter.samplers.AbstractSampler
 		Response res = new Response();
 		Map<String,String> queryResponse = new HashMap<>();
 		StringBuilder sb = new StringBuilder();
+		boolean is_fail = false;
 		
 		if (this.getDatas() != null && this.getDatas().size() > 0 && this.getStatements() != null) {
 			List<Future<List<Map<String, Object>>>> futureList = new ArrayList<>();
@@ -574,24 +591,30 @@ public class CassandraSampler extends org.apache.jmeter.samplers.AbstractSampler
 							}
 						});
 					}catch(Exception e) {
-						logger.debug("Exception of Execute Query : " + e.toString());
+						logger.info("Exception of Execute Query : " + e.toString());
 						result.add(new HashMap<>());
 						result.get(result.size()-1).put("ERROR",e.toString());
+						res.setMessage( "----------- SQL ---------- \n"+sql+" \n----------- SQL ---------- \n\n ----------- SQL Result Start ----------- \n" + e.toString() + "\n---------- SQL Result End ---------\n");
+						res.setRequest(data+"");
+						is_fail = true;
 					}
 				}else { 
 					try {
 						logger.debug("Sync. Execute .....");					
 						result = this.executeQuery(data, sql.trim(),queryResponse);
 					}catch(Exception e) {
-						logger.debug("Exception of Execute Query : " + e.toString());
+						logger.info("Exception of Execute Query : " + e.toString());
 						result.add(new HashMap<>());
 						result.get(result.size()-1).put("ERROR",e.toString());
+						res.setMessage( "----------- SQL ---------- \n"+sql+" \n----------- SQL ---------- \n\n ----------- SQL Result Start ----------- \n" + e.toString() + "\n---------- SQL Result End ---------\n");
+						res.setRequest(data+"");
+						is_fail = true;
 					}
 				}
 			
 				logger.debug("Result is " + result);
-				res.setMessage((res.getMessage()==null ? "" : res.getMessage()) + "\nSQL["+sql+"] Result Start \n" + result + "\n---------- SQL Result End ---------\n");
-				res.setRequest((res.getRequest()==null ? "" : res.getRequest()) + "\n" + data + "");
+				res.setMessage((res.getMessage()==null ? "" : res.getMessage()) + "\n\n ----------- SQL ---------- \n"+sql+" \n----------- SQL ---------- \n\n ----------- SQL Result Start ----------- \n" + result + "\n---------- SQL Result End ---------\n");
+				res.setRequest((res.getRequest()==null ? "" : res.getRequest()) + data + "");
 			}
 			
 			if(!CassandraInstantPluginMap.getInstance().isFakeData()) {
@@ -606,11 +629,14 @@ public class CassandraSampler extends org.apache.jmeter.samplers.AbstractSampler
 			}
 		}
 		
-		if (res.getMessage() != null)
+		if (res.getMessage() != null && is_fail == false) {
 			res.setSize(res.getMessage().length());
-		else
+		}else{
 			res.setSize(0);
+		}
+
 		res.setQueryTime(queryResponse);
+		logger.info("####### Execution result is " + !is_fail);
 		return res;
 	}
 

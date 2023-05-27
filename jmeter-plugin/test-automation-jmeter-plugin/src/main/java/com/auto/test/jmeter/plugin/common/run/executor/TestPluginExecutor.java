@@ -10,6 +10,8 @@ import com.auto.test.jmeter.plugin.common.run.message.TestMessage;
 import com.auto.test.jmeter.plugin.common.sampler.TestPluginResponse;
 
 public interface TestPluginExecutor {
+    void setName(String name);
+    String getName();
     void init(TestPluginTestData data , TestPluginCallBack callBack);
     TestPluginResponse execute();
     TestPluginTestData getTestData();
@@ -27,4 +29,9 @@ public interface TestPluginExecutor {
     void setTestMessage(TestMessage msg);
     ExecutorService getExecutorService();
     void setExecutorService(ExecutorService svc);
+
+    ExecutorMap.ExecutorType getTYPE();
+    void setTYPE(ExecutorMap.ExecutorType type);
+
+
 }

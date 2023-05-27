@@ -89,17 +89,19 @@ def controller():
             # JMeter 정보 가져오기
             #------------------------------------------
             find_map = jm.get_jmx_file_name(project_id)
-            jmx_file_name = find_map['jmx_file_name']
-            before_test_exec_shell = ''
-            if 'before_test_exec_shell' in find_map.keys():
+            
+            if find_map :
+              jmx_file_name = find_map['jmx_file_name']
+              before_test_exec_shell = ''
+              if 'before_test_exec_shell' in find_map.keys():
                 before_test_exec_shell = find_map['before_test_exec_shell'] 
             
-            test_exec_shell = find_map['test_exec_shell'] 
+              test_exec_shell = find_map['test_exec_shell'] 
             
-            if before_test_exec_shell != None:
+              if before_test_exec_shell != None:
                 print("before test exec shell : " + before_test_exec_shell)
                 jm.execute_shell_command(before_test_exec_shell , False)
-            else:
+              else:
                 print("not exist before test exec shell")
 
             #------------------------------------------

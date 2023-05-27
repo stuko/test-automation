@@ -1,11 +1,11 @@
 {
     "mongo": {
-        "ip":"10.8.56.132",
+        "ip":"10.8.61.150",
         "port":"27017"
     },
     "flask": {"port" : "5000"},
     "kanboard": {
-        "ip":"10.8.56.132",
+        "ip":"10.8.61.150",
         "port":"8080",
         "token":"601a679f2618c6dbddc2f3670757cbb7ab0378b85b284c6d150fe4e81a01",
         "id":"kanboard",
@@ -13,10 +13,10 @@
         "db":"kanboard"
     },
     "mattermost": {
-        "url":"http://10.8.56.132:8065/hooks/"
+        "url":"http://10.8.61.150:8065/hooks/"
     },
     "jmeter": {
-        "ip":"10.8.56.132",
+        "ip":"10.8.61.150",
         "port":"9999",
         "path":"./apache-jmeter-5.4.1/bin/"
     }

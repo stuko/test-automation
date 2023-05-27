@@ -17,4 +17,16 @@ import com.auto.test.jmeter.plugin.common.util.TestPluginConstants;
 public class DefaultExecutor  extends AbstractPluginExecutor {
     Logger logger = LoggerFactory.getLogger(DefaultExecutor.class);
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    String name = "DefaultExecutor";
+
 }

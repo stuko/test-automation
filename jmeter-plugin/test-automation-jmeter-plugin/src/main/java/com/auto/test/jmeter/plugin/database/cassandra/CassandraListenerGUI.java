@@ -15,6 +15,8 @@ import org.apache.jmeter.testelement.TestElement;
 import org.apache.jmeter.visualizers.gui.AbstractListenerGui;
 
 import com.auto.test.jmeter.plugin.database.AbstractSummerizer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CassandraListenerGUI extends AbstractListenerGui implements CassandraQueryTimeListener {
 
@@ -22,9 +24,12 @@ public class CassandraListenerGUI extends AbstractListenerGui implements Cassand
 	JTable jTable;
 	JScrollPane jScrollPane;
 
+	Logger logger = LoggerFactory.getLogger(CassandraListenerGUI.class);
+
 	public CassandraListenerGUI() {
 		super();
 		init();
+		logger.info("########## Constructed ...");
 	}
 
 	@Override
@@ -40,26 +45,37 @@ public class CassandraListenerGUI extends AbstractListenerGui implements Cassand
 	@Override
 	public void configure(TestElement el) {
 		super.configure(el);
+		this.defaultTableModel.fireTableDataChanged();
+		logger.info("########## Configured ...");
 	}
 
 	@Override
 	public TestElement createTestElement() {
 		AbstractSummerizer summerizer = new CassandraSummary();
 		modifyTestElement(summerizer);
+		logger.info("########## Created ...");
 		return summerizer;
 	}
 
 	@Override
 	public void modifyTestElement(TestElement element) {
-		super.configureTestElement(element);
+		configure(element);
+		this.defaultTableModel.fireTableDataChanged();
+		logger.info("########## Modified ...");
 	}
 
 	@Override
 	public void clearGui() {
 		super.clearGui();
-		this.defaultTableModel.getDataVector().removeAllElements();
+		// this.defaultTableModel.getDataVector().removeAllElements();
 		this.defaultTableModel.fireTableDataChanged();
 		repaint();
+		if (this.defaultTableModel.getRowCount() <= 6) {
+			for (int i = 0; i < 6 - this.defaultTableModel.getRowCount() ; i++) {
+				this.defaultTableModel.addRow(new String[5]);
+			}
+		}
+		logger.info("########## Cleard ...");
 	}
 	
 	
@@ -77,7 +93,7 @@ public class CassandraListenerGUI extends AbstractListenerGui implements Cassand
 		editConstraints.weightx = 1.0;
 		editConstraints.fill = GridBagConstraints.HORIZONTAL;
 
-		defaultTableModel = new DefaultTableModel(new String[] { "Query", "Max", "Min", "Avg", "Count" }, 0) {
+		defaultTableModel = new DefaultTableModel(new String[] { "Query", "Max", "Min", "Avg", "Count" }, 6) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -86,7 +102,7 @@ public class CassandraListenerGUI extends AbstractListenerGui implements Cassand
 
 		CassandraInstantPluginMap.getInstance().setListener(this);
 
-		defaultTableModel.addRow(CassandraInstantPluginMap.getInstance().getQueryTime());
+		// defaultTableModel.addRow(CassandraInstantPluginMap.getInstance().getQueryTime());
 		jTable = new JTable(defaultTableModel);
 		jScrollPane = new JScrollPane(jTable);
 
@@ -111,12 +127,17 @@ public class CassandraListenerGUI extends AbstractListenerGui implements Cassand
 
 	@Override
 	public void applyQueryTime(String[][] data) {
+
+		logger.info("1. applyQueryTime' table length is {} , data length is {}", this.defaultTableModel.getRowCount(), data.length);
+
 		if (this.defaultTableModel.getRowCount() <= data.length) {
 			String[] row = new String[data[0].length];
-			for (int i = 0; i < data.length; i++) {
+			for (int i = 0; i < data.length - this.defaultTableModel.getRowCount() ; i++) {
 				this.defaultTableModel.addRow(row);
 			}
 		}
+
+		logger.info("2. applyQueryTime' table length is {} , data length is {}", this.defaultTableModel.getRowCount(), data.length);
 
 		for (int i = 0; i < data.length; i++) {
 			for (int j = 0; j < data[i].length; j++) {
@@ -124,5 +145,8 @@ public class CassandraListenerGUI extends AbstractListenerGui implements Cassand
 			}
 		}
 
+		logger.info("3. applyQueryTime' table length is {} , data length is {}", this.defaultTableModel.getRowCount(), data.length);
+
+		this.defaultTableModel.fireTableDataChanged();
 	}
 }

@@ -124,7 +124,10 @@ public class PostgresPluginGUI extends AbstractGUI {
 		addToPanel(mainPanel, editConstraints, 1, 10, OC_TEST_FILE_COLUMN = new JTextField(10));
 		addToPanel(mainPanel, labelConstraints, 0, 11, new JLabel("테스트 데이터 종류: ", JLabel.RIGHT));
 		addToPanel(mainPanel, labelConstraints, 0, 12, new JLabel("병렬처리여부: ", JLabel.RIGHT));
-		addToPanel(mainPanel, editConstraints, 1, 12, OC_PARALLEL = new JCheckBox("병렬처리함"));
+		OC_PARALLEL = new JCheckBox("병렬처리함");
+		OC_PARALLEL.setEnabled(false);
+
+		addToPanel(mainPanel, editConstraints, 1, 12, OC_PARALLEL);
 		addToPanel(mainPanel, labelConstraints, 0, 13, new JLabel("SQL: ", JLabel.RIGHT));
 		OC_SQLS = new JTextArea(7,10);
 		OC_SQLS.setWrapStyleWord(true);
@@ -137,15 +140,15 @@ public class PostgresPluginGUI extends AbstractGUI {
 		addToPanel(mainPanel, editConstraints, 1, 14,OC_DATAS);
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("select  CRDID, TX_DTM, TX_NTV_NO, MCTNO, AP_AMT, VAR_ID_01, VAR_ID_02, VAR_ID_03, VAR_ID_04, VAR_ID_05, VAR_NUM_01, VAR_NUM_02, VAR_NUM_03, VAR_NUM_04, VAR_NUM_05, VAR_CTG_01, VAR_CTG_02, VAR_CTG_03, VAR_CTG_04, VAR_CTG_05, VAR_CTG_06, VAR_CTG_07, VAR_CTG_08, VAR_CTG_09, VAR_CTG_10, VAR_CTG_11, VAR_CTG_12, VAR_CTG_13, VAR_CTG_14, VAR_CTG_15, VAR_CTG_16, VAR_CTG_17, VAR_CTG_18, VAR_CTG_19, VAR_CTG_20, VAR_CTG_21, VAR_CTG_22, VAR_CTG_23, VAR_CTG_24, VAR_CTG_25, VAR_CTG_26, VAR_CTG_27, VAR_CTG_28, VAR_CTG_29, VAR_CTG_30 from sf_tx_crd_tx_bs  where CRDID = #{CRDID}  and TX_DTM <= #{TX_DTM};\n");
+		sb.append("select #{CRDID} , #{TX_DTM};\n");
 				
-		this.OC_URL.setText("jdbc:postgresql://10.8.61.183:5432/postgres");
+		this.OC_URL.setText("jdbc:postgresql://1.1.1.1:5432/postgres");
 		this.OC_DRIVER.setText("org.postgresql.Driver");
 		this.OC_TEST_FILE_PATH.setText("Enter full path of file");
 		this.OC_TEST_FILE_COLUMN.setText("Enter info like column1,column2,column3.....");
 		this.OC_NAME.setText("Postgres Plugin Test Connection");
 		this.OC_ID.setText("postgres");
-		this.OC_PW.setText("asdfasdf11");
+		this.OC_PW.setText("postgres");
 		this.OC_SQLS.setText(sb.toString());
 		this.OC_TEST_FILE_COLUMN.setText("CRDID, TX_DTM, TX_NTV_NO, MCTNO, AP_AMT, VAR_ID_01, VAR_ID_02, VAR_ID_03, VAR_ID_04, VAR_ID_05, VAR_NUM_01, VAR_NUM_02, VAR_NUM_03, VAR_NUM_04, VAR_NUM_05, VAR_CTG_01, VAR_CTG_02, VAR_CTG_03, VAR_CTG_04, VAR_CTG_05, VAR_CTG_06, VAR_CTG_07, VAR_CTG_08, VAR_CTG_09, VAR_CTG_10, VAR_CTG_11, VAR_CTG_12, VAR_CTG_13, VAR_CTG_14, VAR_CTG_15, VAR_CTG_16, VAR_CTG_17, VAR_CTG_18, VAR_CTG_19, VAR_CTG_20, VAR_CTG_21, VAR_CTG_22, VAR_CTG_23, VAR_CTG_24, VAR_CTG_25, VAR_CTG_26, VAR_CTG_27, VAR_CTG_28, VAR_CTG_29, VAR_CTG_30");
 		this.OC_DATAS.setText("{920077770(1000000~9999999)},{20200501(10~23)(10~59)(10~59)},{(10000000~99999999)}");

@@ -85,19 +85,33 @@ public class FileJsonArrayList {
     public String next(){
          if(scanner == null) {
              try {
-                 scanner = new Scanner(new BufferedReader(new InputStreamReader(new FileInputStream(this.getTestDataFilePath()), TestPluginConstants.file_encoding)));
+                 if(this.getTestDataFilePath().exists()) {
+                     scanner = new Scanner(new BufferedReader(new InputStreamReader(new FileInputStream(this.getTestDataFilePath()), TestPluginConstants.file_encoding)));
+                 }else{
+                     logger.warn("######### Can not fetch next test data {} does not exist", this.getTestDataFilePath().getAbsolutePath());
+                 }
              } catch (FileNotFoundException | UnsupportedEncodingException e) {
                  logger.error(e.toString(),e);
              }
          }
 
-         if(scanner.hasNext()){
-             // logger.info("scanner has next()");
-             return scanner.nextLine();
+         if(scanner != null) {
+             logger.info("------ scanner info. --------");
+             logger.info("queue size is {}", this.size());
+             logger.info("queue name is {}", this.getName());
+             logger.info("scanner radix is {}", scanner.radix());
+             logger.info("------ scanner info. --------");
+             if (scanner.hasNext()) {
+                 logger.info("scanner has next()");
+                 return scanner.nextLine();
+             } else {
+                 if (scanner == null) scanner.close();
+                 logger.info("scanner not has next() , {} , {}" , this.getTestDataFilePath().getAbsolutePath(), this.getTestDataFilePath().length());
+                 scanner = null;
+                 return null;
+             }
          }else{
-             if(scanner == null) scanner.close();
-             // logger.info("scanner not has next() , {} , {}" , this.getTestDataFilePath().getAbsolutePath(), this.getTestDataFilePath().length());
-             scanner = null;
+             logger.warn("######## scanner is null");
              return null;
          }
     }

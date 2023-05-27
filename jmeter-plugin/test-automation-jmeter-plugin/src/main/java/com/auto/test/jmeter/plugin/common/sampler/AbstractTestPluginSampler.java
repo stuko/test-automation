@@ -35,17 +35,22 @@ public abstract class AbstractTestPluginSampler extends AbstractSampler {
     }
 
     public void setExecutor(TestPluginExecutor executor) {
+        logger.info("############ Sampler set executor ");
         this.executor = executor;
     }
 
     @Override
     public Object clone(){
+        logger.info("############ Sampler make clone ");
         TestPluginSampler sampler = (TestPluginSampler)super.clone();
         sampler.setExecutor(this.getExecutor());
         return sampler;
     }
 
     public SampleResult invoke_sample_result(){
+
+        // logger.info("########## Sample invoke from testdata : {}", this.getExecutor().getTestData().getTestDatas().size());
+
         SampleResult sr = new SampleResult();
         sr.setSampleLabel(this.getExecutor().getTestData().getName());
         sr.sampleStart();
@@ -56,15 +61,26 @@ public abstract class AbstractTestPluginSampler extends AbstractSampler {
     private SampleResult record_execute_response(SampleResult sr){
         long start = sr.currentTimeInMillis();
         TestPluginResponse response = null;
+        String error_message = "";
         try {
             logger.info("Sampler is Same ? {}" , this.hashCode());
-            getExecutor().start();
-            logger.info("before execute, Current Test Data Queue size is {}", getExecutor().getTestData().getTestDatas().size());
+            // getExecutor().start();
+            // if(getExecutor().getTestData() != null) logger.info("before execute, Current Test Data Queue size is {}", getExecutor().getTestData().getTestDatas().size());
             response = getExecutor().execute();
             //#####################################################
             // 아래 처럼 테스트가 종료 되면, 테스트 데이터 생성 데몬을 종료시켜야 함.
             //#####################################################
             // getExecutor().stop();
+
+            if(response.isError()) {
+                logger.info("Response Result is Error");
+                sr.setSuccessful(false);
+                sr.setResponseCode("Execute Error");
+            }else{
+                logger.info("Response Result is Success");
+                sr.setSuccessful(true);
+                sr.setResponseCodeOK();
+            }
 
             if(getExecutor().getTestData() == null || getExecutor().getTestData().getTestDatas() == null )
                 logger.info("after execute, Current Test Data Queue(NULL) size is 0");
@@ -81,16 +97,16 @@ public abstract class AbstractTestPluginSampler extends AbstractSampler {
             sr.setSamplerData(response.getRequest());
             sr.setBytes(response.getSize());
             sr.setResponseData(response.getRequest().getBytes());
-            sr.setSuccessful(true);
-            sr.setResponseCodeOK();
             sr.setResponseHeaders(response.getRequest());
             sr.setResponseMessage(response.getExecuteTime()+"");
         } catch (Exception ex) {
-            logger.error(ex.toString(),ex);
+            // logger.error(ex.toString(),ex);
             sr.setSuccessful(false);
+            error_message = ex.toString();
+            sr.setResponseCode(error_message);
         } finally {
-            if(response.getResponse() != null) sr.setResponseData(response.getResponse().getBytes());
-            else sr.setResponseData("No Response".getBytes());
+            if(response != null && response.getResponse() != null && !response.isError()) sr.setResponseData(response.getResponse().getBytes());
+            else sr.setResponseData(("No Response and Error : " + error_message).getBytes());
             long latency = System.currentTimeMillis() - start;
             sr.sampleEnd();
             sr.setLatency(latency);
@@ -101,7 +117,7 @@ public abstract class AbstractTestPluginSampler extends AbstractSampler {
     public void prepare_sampler() throws Exception{
         if(this.getExecutor() == null) {
             logger.info("##### TEST EXECUTOR IS NULL, so Refer Default Executor");
-            this.setExecutor(TestAutomationGuiController.get_test_executor("DEFAULT", null));
+            this.setExecutor(TestAutomationGuiController.get_test_executor("DEFAULT", null, null));
         }else {
             logger.info("$$$$$ TEST EXECUTOR IS NOT NULL");
         }
@@ -115,10 +131,9 @@ public abstract class AbstractTestPluginSampler extends AbstractSampler {
 
     public void prepare_test_data() throws Exception{
         if(this.getExecutor().is_stop()) {
-            logger.info("executor's mode is stop");
+            logger.info("############# executor's mode is stop");
             if(this.getExecutor().getTestData().getData() == null){
-                logger.info("executor's test data is null");
-                
+                logger.info("############# executor's test data is null");
                 TestAutomationGuiController.get_test_data_by_jmx(list -> {
                     String[][] test_data_factors = new String[list.size()][];
                     for (int i = 0; i < list.size(); i++) {
@@ -135,10 +150,11 @@ public abstract class AbstractTestPluginSampler extends AbstractSampler {
                     }
                     getExecutor().getTestData().setData(test_data_factors);
                 });
-                
-                
             }
             // this.getExecutor().start();
-        }else logger.info("executor's mode is start");
+            // this.getExecutor().getTestMessage().setStop(false);
+        }else{
+            logger.info("executor's mode is start");
+        }
     }
 }

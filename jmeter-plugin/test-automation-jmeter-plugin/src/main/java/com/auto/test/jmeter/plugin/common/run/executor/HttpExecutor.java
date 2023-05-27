@@ -22,7 +22,17 @@ public class HttpExecutor extends AbstractPluginExecutor  {
     Logger logger = LoggerFactory.getLogger(HttpExecutor.class);
 
     String url;
+    @Override
+    public String getName() {
+        return name;
+    }
 
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    String name = "HttpExecutor";
     @Override
     public void init(TestPluginTestData data , TestPluginCallBack callBack) {
         try {
@@ -41,7 +51,7 @@ public class HttpExecutor extends AbstractPluginExecutor  {
         // String data = FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).next();
         String data = this.getTestData().next();
         logger.info("HTTP #################");
-        logger.info("Message : {} " , data);
+        logger.info("Message : {} by {}" , data , this.getName());
         logger.info("HTTP #################");
         if(this.url == null || data == null){
             logger.info("No more teat data !!!!!!!!!!!!!!! : url = {} , data = {}" , this.url, data);
@@ -50,8 +60,9 @@ public class HttpExecutor extends AbstractPluginExecutor  {
                 response.setSize("No more data".getBytes().length);
                 response.setResponse("Success");
             } catch (Exception e) {
-                logger.error(e.toString(), e);
+                // logger.error(e.toString(), e);
                 response.setResponse("Fail : " + e.toString());
+                response.setError(true);
             }
             return response;
         }
@@ -78,8 +89,9 @@ public class HttpExecutor extends AbstractPluginExecutor  {
 
         } catch (Exception e) {
             // exception
-            logger.error(e.toString(), e);
+            // logger.error(e.toString(), e);
             response.setResponse("Fail : " + e.toString());
+            response.setError(true);
         } 
         return response;
     }

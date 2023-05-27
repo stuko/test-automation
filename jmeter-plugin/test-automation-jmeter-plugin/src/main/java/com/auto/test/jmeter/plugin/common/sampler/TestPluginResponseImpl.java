@@ -5,7 +5,7 @@ public class TestPluginResponseImpl implements TestPluginResponse {
     private long size = 0;
     private String response = "";
     private String request = "";
-
+    private boolean error = false;
     @Override
     public long getSize() {
         return size;
@@ -24,6 +24,16 @@ public class TestPluginResponseImpl implements TestPluginResponse {
     @Override
     public long getExecuteTime() {
         return 0;
+    }
+
+    @Override
+    public void setError(boolean error) {
+        this.error = error;
+    }
+
+    @Override
+    public boolean isError() {
+        return error;
     }
 
     public void setSize(long size) {

@@ -22,6 +22,7 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
     Logger logger = LoggerFactory.getLogger(AbstractPluginExecutor.class);
     Map<String,Object> configMap;
     Gson gson = new Gson();
+    ExecutorMap.ExecutorType type = ExecutorMap.ExecutorType.DEFAULT;
 
     TestMessage message = new TestMessageByCombination();
     ExecutorService executors = Executors.newFixedThreadPool(10);
@@ -37,11 +38,14 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
     @Override
     public void init(TestPluginTestData data , TestPluginCallBack callBack) {
         try {
+            logger.info("########### Executor init : MessageCombination");
             if(this.getTestMessage() == null) {
                 this.setTestMessage(new TestMessageByCombination());
             }
+            logger.info("########### Executor init : TestPlugin 객체를 할당 받음");
             if(data != null) {
                 this.setTestData(data);
+                // 테스트 메타 정보를 가지고 테스트 데이터를 생성해 주는 객체 TestMessage
                 this.getTestMessage().build(this.getTestData().getData());
             }
             if(this.getTestData().getTestDatas() == null) {
@@ -51,6 +55,7 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
 
             if(this.is_stop()){
                 try {
+                    // TestMessage 에서 생성한 테스트 데이터들을 CallBack 을 통해 사용하도록 함.
                     this.getExecutorService().submit(new Thread(){
                         public void run(){
                             getTestMessage().getFileMessage(callBack);
@@ -71,7 +76,7 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
         String data = this.getTestData().next();
         // String data = FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).next();
         logger.info("Default #################");
-        logger.info("Message : {} " , data);
+        logger.info("Message : {} by {}" , data , this.getName());
         logger.info("Default #################");
         if(data == null){
             logger.info("No more teat data !!!!!!!!!!!!!!!");
@@ -83,6 +88,7 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
             } catch (Exception e) {
                 logger.error(e.toString(), e);
                 response.setResponse("Fail : " + e.toString());
+                response.setError(true);
             }
             return response;
         }
@@ -96,6 +102,7 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
             // exception
             logger.error(e.toString(), e);
             response.setResponse("Fail : " + e.toString());
+            response.setError(true);
         }
         return response;
     }
@@ -134,7 +141,8 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
     public TestPluginTestData getTestData() {
         return testData;
     }
-
+    
+    // 테스트 데이터 메타(testdata) 와  물리적 테스트 데이터(testdatas) 를 가지고 있는 객체
     @Override
     public void setTestData(TestPluginTestData testData) {
         this.testData = testData;
@@ -188,6 +196,14 @@ public abstract class AbstractPluginExecutor implements  TestPluginExecutor{
     @Override
     public void setExecutorService(ExecutorService svc){
         this.executors = svc;
+    }
+
+    public ExecutorMap.ExecutorType getTYPE(){
+       return type;
+    }
+
+    public void setTYPE(ExecutorMap.ExecutorType type){
+        this.type = type;
     }
 }
 

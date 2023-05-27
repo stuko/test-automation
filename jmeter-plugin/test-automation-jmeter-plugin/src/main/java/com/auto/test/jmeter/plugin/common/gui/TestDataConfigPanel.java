@@ -41,10 +41,11 @@ public class TestDataConfigPanel extends PluginGridPanel {
     JLabel jlabel;
     private int currentRow = 1;
     private TestPluginSampler sampler = null;
-    String OK = "테스트 데이터 생성 하기";
-    String NO = "테스트 데이터 생성 중지";
+    String OK = "생성 하기";
+    String NO = "생성 중지";
     boolean is_start = false;
     JButton ok;
+    JButton no;
     JLabel status = new JLabel();
     Gson gson = new Gson();
     
@@ -88,7 +89,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
 
         jScrollPane = new JScrollPane(jTable);
         jScrollPane.setMinimumSize(new Dimension(400,300));
-        JButton open = new JButton("테스트 데이터 정보 불러오기");
+        JButton open = new JButton("불러오기");
         open.addActionListener((event)->{
             open();
         });
@@ -102,7 +103,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
         add.setBackground(new Color(0,133,252));
         add.setForeground(Color.WHITE);
         add.setBorderPainted(false);
-        JButton save = new JButton("테스트 데이터 설정 저장");
+        JButton save = new JButton("저장");
         save.addActionListener((event)->{
             
             if(TestAutomationGuiController.get_jmx_file_name() == null || "".equals(TestAutomationGuiController.get_jmx_file_name())){
@@ -136,7 +137,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
     			            JOptionPane.showMessageDialog(null, "테스트 데이터 설정 정보가 정상적으로 저장 되었습니다.");
     						stop = true;
     					}catch(Exception e) {
-    						logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.save_factors].. So, wait 5 seconds and Retry....");
+    						// logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.save_factors].. So, wait 5 seconds and Retry....");
     						try {
     							Thread.sleep(5000);
     						} catch (InterruptedException e1) {
@@ -166,7 +167,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
                 JOptionPane.showMessageDialog(null, "선택하신 라인의 데이터가 삭제 되었습니다.");
             }
         });
-        remove.setBackground(new Color(0,133,252));
+        remove.setBackground(new Color(255,0,0));
         remove.setForeground(Color.WHITE);
         remove.setBorderPainted(false);
         JButton report = new JButton("REPORT");
@@ -182,30 +183,41 @@ public class TestDataConfigPanel extends PluginGridPanel {
         ok.setForeground(Color.WHITE);
         ok.setBorderPainted(false);
         ok.addActionListener(event->{
+
             logger.info("Executor's start status is {}", this.getSampler().getExecutor().is_start());
             logger.info("UI's start status is {}", is_start);
-            is_start = this.getSampler().getExecutor().is_start();
-            if(!is_start) {
-                logger.info("After start, Executor's start status is {}", this.getSampler().getExecutor().is_start());
-                logger.info("After start, UI's start status is {}", is_start);
-                com.auto.test.jmeter.plugin.common.data.FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).removeAll();
-                is_start = true;
-                this.getSampler().getExecutor().getTestData().setData(this.getPluginData());
-                this.getSampler().getExecutor().start((d,cnt)->{
-                    setTestCount(cnt);
-                    return d;
-                });
-                ok.setText(NO);
-            }else{
-                this.getSampler().getExecutor().stop();
-                is_start = false;
-                ok.setText(OK);
-                logger.info("After stop, Executor's start status is {}", this.getSampler().getExecutor().is_start());
-                logger.info("After stop, UI's start status is {}", is_start);
+
+            String[][] data =  this.getPluginData();
+
+            if(data == null){
+                logger.info("######### Can not execute test ########");
+                logger.info("Plugin Data is NULL");
+                logger.info("######### Can not execute test ########");
+                return;
             }
-        }); 
-        
-        
+
+            com.auto.test.jmeter.plugin.common.data.FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).removeAll();
+            is_start = true;
+            this.getSampler().getExecutor().getTestData().setData(data);
+            this.getSampler().getExecutor().start((d,cnt)->{
+                setTestCount(cnt);
+                return d;
+            });
+
+        });
+
+        no = new JButton(NO);
+        no.setBackground(new Color(255,0,100));
+        no.setForeground(Color.WHITE);
+        no.setBorderPainted(false);
+        no.addActionListener(event->{
+            logger.info("Executor's start status is {}", this.getSampler().getExecutor().is_start());
+            this.getSampler().getExecutor().stop();
+            logger.info("After stop, Executor's start status is {}", this.getSampler().getExecutor().is_start());
+            logger.info("After stop, UI's start status is {}", is_start);
+        });
+
+
        JPanel b_panel = new JPanel();
        b_panel.setLayout(new GridBagLayout());
        b_panel.setBackground(Color.WHITE);
@@ -238,10 +250,11 @@ public class TestDataConfigPanel extends PluginGridPanel {
         */
         
         this.add(this,0,3,1,1, GridBagConstraints.EAST, GridBagConstraints.NONE, editConstraints, ok);
-        this.add(this,1,3,1,1, GridBagConstraints.EAST, GridBagConstraints.NONE, editConstraints, open);
-        this.add(this,2,3,1,1, GridBagConstraints.EAST, GridBagConstraints.NONE, editConstraints, save);
+        this.add(this,1,3,1,1, GridBagConstraints.EAST, GridBagConstraints.NONE, editConstraints, no);
+        this.add(this,2,3,1,1, GridBagConstraints.EAST, GridBagConstraints.NONE, editConstraints, open);
+        this.add(this,3,3,1,1, GridBagConstraints.EAST, GridBagConstraints.NONE, editConstraints, save);
         
-        addTestData(new File(new File(TestPluginConstants.ta_test_define_path),TestPluginConstants.ta_test_define_file));
+        // addTestData(new File(new File(TestPluginConstants.ta_test_define_path),TestPluginConstants.ta_test_define_file));
 
         // this.setPreferredSize(new Dimension(750,800));
         // jScrollPane.setPreferredSize(new Dimension(750, 400));
@@ -381,6 +394,11 @@ public class TestDataConfigPanel extends PluginGridPanel {
         // this.defaultTableModel.getDataVector().toArray(data);
         logger.info("create plugin data");
         data = getTableData(this.jTable);
+        if(data != null) {
+            logger.info("Table data 's row count is {} , column count is {}", data.length, data[0].length);
+        }else{
+            logger.info("Table data 's row and column is null");
+        }
         return data;
     }
 

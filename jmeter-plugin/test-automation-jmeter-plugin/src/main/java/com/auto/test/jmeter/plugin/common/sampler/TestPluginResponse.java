@@ -5,4 +5,7 @@ public interface TestPluginResponse {
     String getRequest();
     String getResponse();
     long getExecuteTime();
+
+    void setError(boolean error);
+    boolean isError();
 }

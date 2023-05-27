@@ -4,7 +4,7 @@ services:
     build: ./test-controller
     environment:
       - PYTHONUNBUFFERED=1
-      - 'MONGO_IP=10.8.56.132'
+      - 'MONGO_IP=10.8.61.150'
       - 'MONGO_PORT=27017'
       - TZ: Asia/Seoul
     ports:

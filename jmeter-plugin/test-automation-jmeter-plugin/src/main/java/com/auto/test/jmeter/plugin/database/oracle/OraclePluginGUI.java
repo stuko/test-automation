@@ -124,7 +124,9 @@ public class OraclePluginGUI extends AbstractGUI {
 		addToPanel(mainPanel, editConstraints, 1, 10, OC_TEST_FILE_COLUMN = new JTextField(10));
 		addToPanel(mainPanel, labelConstraints, 0, 11, new JLabel("테스트 데이터 종류: ", JLabel.RIGHT));
 		addToPanel(mainPanel, labelConstraints, 0, 12, new JLabel("병렬처리여부: ", JLabel.RIGHT));
-		addToPanel(mainPanel, editConstraints, 1, 12, OC_PARALLEL = new JCheckBox("병렬처리함"));
+		OC_PARALLEL = new JCheckBox("병렬처리함");
+		OC_PARALLEL.setEnabled(false);
+		addToPanel(mainPanel, editConstraints, 1, 12, OC_PARALLEL);
 		addToPanel(mainPanel, labelConstraints, 0, 13, new JLabel("SQL: ", JLabel.RIGHT));
 		OC_SQLS = new JTextArea(7,10);
 		OC_SQLS.setWrapStyleWord(true);

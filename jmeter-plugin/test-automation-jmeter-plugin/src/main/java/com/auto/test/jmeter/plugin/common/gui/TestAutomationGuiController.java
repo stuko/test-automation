@@ -65,7 +65,7 @@ public class TestAutomationGuiController {
         return testData;
     }
     
-    public static TestPluginExecutor get_test_executor(String type, String json) {
+    public static TestPluginExecutor get_test_executor(String type, String json, String[][] factors) {
     	try {
     		logger.info("Executor's type is : {}", type);
     		logger.info("Executor's config map string : {}", json);
@@ -90,27 +90,33 @@ public class TestAutomationGuiController {
                 // TEST
                 default_executor.setTestData(get_test_data("DEFAULT", null));
                 logger.info("Executor's test data is setted");
-                get_test_data_by_jmx(list -> {
-                    String[][] test_data_factors = new String[list.size()][];
-                    for (int i = 0; i < list.size(); i++) {
-                        Map<String, Object> factor = (Map<String, Object>) list.get(i);
-                        String[] row = new String[factor.size()];
+                if(factors == null) {
+                    try {
+                        get_test_data_by_jmx(list -> {
+                            String[][] test_data_factors = new String[list.size()][];
+                            for (int i = 0; i < list.size(); i++) {
+                                Map<String, Object> factor = (Map<String, Object>) list.get(i);
+                                String[] row = new String[factor.size()];
 
-                        row[0] = (String) factor.get("name");
-                        row[1] = (String) factor.get("type");
-                        row[2] = (String) factor.get("value");
-                        row[3] = (String) factor.get("count");
-                        row[4] = (String) factor.get("length");
-                        row[5] = (String) factor.get("encode");
-                        test_data_factors[i] = row;
+                                row[0] = (String) factor.get("name");
+                                row[1] = (String) factor.get("type");
+                                row[2] = (String) factor.get("value");
+                                row[3] = (String) factor.get("count");
+                                row[4] = (String) factor.get("length");
+                                row[5] = (String) factor.get("encode");
+                                test_data_factors[i] = row;
+                            }
+                            default_executor.getTestData().setData(test_data_factors);
+                            logger.info("Executor's mode is AUTO : {}", TEST_AUTO);
+                            default_executor.getTestData().setTestDatas(FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path));
+                            if ("true".equals(TEST_AUTO)) {
+                                default_executor.start();
+                            }
+                        });
+                    }catch(Exception e){
+                        logger.error(e.toString());
                     }
-                    default_executor.getTestData().setData(test_data_factors);
-                    logger.info("Executor's mode is AUTO : {}", TEST_AUTO);
-                    default_executor.getTestData().setTestDatas(FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path));
-                    if("true".equals(TEST_AUTO)) {
-                        default_executor.start();
-                    }
-                });
+                }
                 logger.info("Executor's stop mode is {}",default_executor.is_stop());
                 logger.info("Executor is completed");
                 return default_executor;
@@ -204,7 +210,7 @@ public class TestAutomationGuiController {
         if(jmx_file_name == null || "".equals(jmx_file_name)) return false;
         
         project.put("jmx_file_name", jmx_file_name);
-        logger.info("parameter is  {}",gson.toJson(project));
+        // logger.info("parameter is  {}",gson.toJson(project));
         HttpUtil.call(TEST_URL+"get_project_detail_by_jmx",gson.toJson(project),(body)->{
             logger.info(body);
             List list = gson.fromJson(body, List.class);
@@ -244,7 +250,7 @@ public class TestAutomationGuiController {
       if(jmx_file_name == null || "".equals(jmx_file_name)) return false;
       
       project.put("jmx_file_name", jmx_file_name);
-      logger.info("parameter is  {}",gson.toJson(project));
+      //logger.info("parameter is  {}",gson.toJson(project));
       HttpUtil.call(TEST_URL+"get_project_detail_by_jmx",gson.toJson(project),(body)->{
           // logger.info(body);
           List list = gson.fromJson(body, List.class);

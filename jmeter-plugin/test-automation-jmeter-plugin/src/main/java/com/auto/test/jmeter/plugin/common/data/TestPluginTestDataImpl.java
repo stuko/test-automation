@@ -9,7 +9,9 @@ public class TestPluginTestDataImpl implements TestPluginTestData{
 
     private String name;
     private String connectionInfo;
+    // 테스트 데이터 메타 정보
     private String[][] data;
+    // 테스트 데이터 실제 물리적 파일 큐 정보
     private FileJsonArrayList testDatas;
 
     public TestPluginTestDataImpl(String name){
@@ -38,6 +40,10 @@ public class TestPluginTestDataImpl implements TestPluginTestData{
     }
 
     public void setData(String[][] data) {
+        if(data == null){
+            logger.warn("############ Plugin Data is NULL ###############");
+            return;
+        }
         this.data = data;
     }
 

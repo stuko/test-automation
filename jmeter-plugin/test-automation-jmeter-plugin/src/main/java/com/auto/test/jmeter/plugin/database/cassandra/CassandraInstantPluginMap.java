@@ -5,7 +5,9 @@ import java.util.Map;
 
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Session;
- 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class CassandraInstantPluginMap {
 	public static CassandraInstantPluginMap instance;
 	public static Map<String,Object> map;
@@ -15,7 +17,9 @@ public class CassandraInstantPluginMap {
 	private boolean isFakeData = false;
 	private boolean isParallel = false;
 	private CassandraQueryTimeListener listener;
-	
+
+	Logger logger = LoggerFactory.getLogger(CassandraInstantPluginMap.class);
+
 	static {
 		if(instance == null) instance = new CassandraInstantPluginMap(); 
 	}
@@ -44,6 +48,7 @@ public class CassandraInstantPluginMap {
 	}
 
 	public void setQueryTime(String[][] queryTime) {
+		logger.info("########## Set Query Time ...");
 		this.queryTime = queryTime;
 		this.getListener().applyQueryTime(this.queryTime);
 	}

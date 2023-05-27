@@ -156,25 +156,31 @@ public class OracleSampler extends CassandraSampler {
 			}
 			logger.debug("Query result : " + result);
 		} catch (Exception e) {
-			e.printStackTrace();
 			logger.error(e.toString(), e);
 			result.add(new HashMap<>());
 			result.get(result.size() - 1).put("ERROR", e.toString());
+			throw e;
 		} finally {
 			try {
 				if (rs != null)
 					rs.close();
 			} catch (Exception ee) {
+				result.add(new HashMap<>());
+				result.get(result.size() - 1).put("ERROR", ee.toString());
 			}
 			try {
 				if (st != null)
 					st.close();
 			} catch (Exception ee) {
+				result.add(new HashMap<>());
+				result.get(result.size() - 1).put("ERROR", ee.toString());
 			}
 			try {
 				if (connection != null)
 					connection.close();
 			} catch (Exception ee) {
+				result.add(new HashMap<>());
+				result.get(result.size() - 1).put("ERROR", ee.toString());
 			}
 			
 			long end = System.currentTimeMillis();

@@ -31,6 +31,7 @@ class KanboardManager:
                 self.kb.add_column(project_id=project_id,title=self.column_titles[i])
         
         if (columns[0]["title"] != self.column_titles[0] or columns[1]["title"] != self.column_titles[1] or columns[2]["title"] != self.column_titles[2] or columns[3]["title"] != self.column_titles[3] or columns[4]["title"] != self.column_titles[4] or columns[5]["title"] != self.column_titles[5] or columns[6]["title"] != self.column_titles[6]) :
+            print(f'colums length of project is {len(self.column_titles)}')
             for i in range(0,len(self.column_titles)):
                 print(f'project_id is {project_id}, column_id is {columns[i]["id"]}')
                 self.kb.update_column(project_id=project_id,column_id=columns[i]["id"],title=self.column_titles[i])

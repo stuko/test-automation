@@ -410,7 +410,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
 				                , project_desc);
 						stop = true;
 					}catch(Exception e) {
-						logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.show_project_detail].. So, wait 30 seconds and Retry...." + e.toString());
+						// logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.show_project_detail].. So, wait 30 seconds and Retry...." + e.toString());
 						try {
 							Thread.sleep(30000);
 						} catch (InterruptedException e1) {
@@ -472,7 +472,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
 				        JOptionPane.showMessageDialog(null, "프로젝트 정보를 다시 갱신하였습니다.");
 						stop = true;
 					}catch(Exception e) {
-						logger.info("Can not connect to Test Automation Server.. So, wait 30 seconds and Retry...." + e.toString());
+						// logger.info("Can not connect to Test Automation Server.. So, wait 30 seconds and Retry...." + e.toString());
 						try {
 							Thread.sleep(30000);
 						} catch (InterruptedException e1) {
@@ -501,7 +501,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
 						TestAutomationGuiController.show_project_list(project_list, this, testDataConfigPanel, testRunConfigPanel);
 						stop = true;
 					}catch(Exception e) {
-						logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.show_project_list].. So, wait 30 seconds and Retry...." + e.toString());
+						// logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.show_project_list].. So, wait 30 seconds and Retry...." + e.toString());
 						try {
 							Thread.sleep(30000);
 						} catch (InterruptedException e1) {
@@ -534,7 +534,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
 						TestAutomationGuiController.save_test_scenario();
 						stop = true;
 					}catch(Exception e) {
-						logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.save_test_scenario].. So, wait 30 seconds and Retry...." + e.toString());
+						// logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.save_test_scenario].. So, wait 30 seconds and Retry...." + e.toString());
 						try {
 							Thread.sleep(30000);
 						} catch (InterruptedException e1) {
@@ -564,7 +564,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
 						TestAutomationGuiController.show_project_detail_by_jmx(this, testDataConfigPanel, testRunConfigPanel);
 						stop = true;
 					}catch(Exception e) {
-						logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.show_project_detail_by_jmx].. So, wait 30 seconds and Retry...." + e.toString());
+						// logger.info("Can not connect to Test Automation Server[TestAutomationGuiController.show_project_detail_by_jmx].. So, wait 30 seconds and Retry...." + e.toString());
 						try {
 							Thread.sleep(30000);
 						} catch (InterruptedException e1) {
@@ -583,7 +583,11 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
        @Override
     public TestElement createTestElement() {
         logger.info("##### createTestElement #####");
-        testRunConfigPanel.attach();
+        logger.info("----------- create -----------------");
+        if(testDataConfigPanel.getSampler().getExecutor().getTestData() == null) logger.info("Test Data is NULL");
+        else logger.info("Test Data is Not NULL");
+        logger.info("----------- create -----------------");
+        // testRunConfigPanel.attach();
         this.configureTestElement(testDataConfigPanel.getSampler());
         return testDataConfigPanel.getSampler();
     }
@@ -592,25 +596,61 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
     @Override
     public void modifyTestElement(TestElement element) {
         logger.info("##### modifyTestElement #####");
+        logger.info("----------- modify before  -----------------");
+        if(testDataConfigPanel.getSampler().getExecutor().getTestData() == null) logger.info("Test Data is NULL");
+        else logger.info("Test Data is Not NULL");
+        logger.info("----------- modify before -----------------");
+
         super.configureTestElement(element);
         if(element instanceof TestPluginSampler) {
             // Sampler가 복제되어 새로운 객체 테스트 요소를
             // FdsPluginPanel에 전달해 준다.
             // GUI에서 변경된 내용이 Sampler에 영향이 있는 경우
             // FdsPluginPanel은 항상 새로운 최근의 Sampler를 참조하게 된다.
+            logger.info("TestPluginSampler Type");
             testDataConfigPanel.setSampler((TestPluginSampler) element);
             testRunConfigPanel.attach();
+        }else{
+            logger.info("Not TestPluginSampler Type");
         }
+
+        logger.info("----------- modify after  -----------------");
+        if(testDataConfigPanel.getSampler().getExecutor().getTestData() == null) logger.info("Test Data is NULL");
+        else logger.info("Test Data is Not NULL");
+        logger.info("----------- modify after -----------------");
+
     }
 
     @Override
     public void configure(TestElement element) {
+        logger.info("##### configure #####");
+        logger.info("----------- configure after  -----------------");
+        if(testDataConfigPanel.getSampler().getExecutor().getTestData() == null) logger.info("Test Data is NULL");
+        else logger.info("Test Data is Not NULL");
+        logger.info("----------- configure after -----------------");
+
         super.configure(element);
+        logger.info("----------- configure after  -----------------");
+        if(testDataConfigPanel.getSampler().getExecutor().getTestData() == null) logger.info("Test Data is NULL");
+        else logger.info("Test Data is Not NULL");
+        logger.info("----------- configure after -----------------");
+
     }
 
     @Override
     public void clearGui() {
+        logger.info("##### clear gui #####");
+        logger.info("----------- clearGui after  -----------------");
+        if(testDataConfigPanel.getSampler().getExecutor().getTestData() == null) logger.info("Test Data is NULL");
+        else logger.info("Test Data is Not NULL");
+        logger.info("----------- clearGui after -----------------");
+
         super.clearGui();
+        logger.info("----------- clearGui after  -----------------");
+        if(testDataConfigPanel.getSampler().getExecutor().getTestData() == null) logger.info("Test Data is NULL");
+        else logger.info("Test Data is Not NULL");
+        logger.info("----------- clearGui after -----------------");
+
     }
     
     public void setProjectName(String project_name){

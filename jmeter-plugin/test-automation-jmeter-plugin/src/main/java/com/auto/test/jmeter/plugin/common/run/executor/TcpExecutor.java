@@ -24,7 +24,16 @@ public class TcpExecutor  extends AbstractPluginExecutor  {
 
     String ip;
     String port;
+    public String getName() {
+        return name;
+    }
 
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    String name = "TcpExecutor";
     @Override
     public void init(TestPluginTestData data , TestPluginCallBack callBack) {
         try {
@@ -53,8 +62,9 @@ public class TcpExecutor  extends AbstractPluginExecutor  {
                 response.setSize("No more data".getBytes().length);
                 response.setResponse("Success");
             } catch (Exception e) {
-                logger.error(e.toString(), e);
+                // logger.error(e.toString(), e);
                 response.setResponse("Fail : " + e.toString());
+                response.setError(true);
             }
             return response;
         }
@@ -66,8 +76,9 @@ public class TcpExecutor  extends AbstractPluginExecutor  {
             response.setResponse(data);
         } catch (Exception e) {
             // exception
-            logger.error(e.toString(), e);
+            // logger.error(e.toString(), e);
             response.setResponse("Fail : " + e.toString());
+            response.setError(true);
         } finally {
 
         }
