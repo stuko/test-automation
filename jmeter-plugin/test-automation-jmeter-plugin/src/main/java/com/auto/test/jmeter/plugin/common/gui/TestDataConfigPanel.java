@@ -48,9 +48,24 @@ public class TestDataConfigPanel extends PluginGridPanel {
     JButton no;
     JLabel status = new JLabel();
     Gson gson = new Gson();
-    
+
+    public TestRunConfigPanel getTestRunConfigPanel() {
+        return testRunConfigPanel;
+    }
+
+    public void setTestRunConfigPanel(TestRunConfigPanel testRunConfigPanel) {
+        this.testRunConfigPanel = testRunConfigPanel;
+    }
+
+    TestRunConfigPanel testRunConfigPanel;
+
     public TestDataConfigPanel(String title){
         initComponent(title,null);
+    }
+
+    public TestDataConfigPanel(TestRunConfigPanel testRunConfigPanel, String title){
+        initComponent(title,null);
+        this.testRunConfigPanel = testRunConfigPanel;
     }
 
     public void initComponent(String title, TestPluginCallBack callback){
@@ -198,7 +213,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
 
             com.auto.test.jmeter.plugin.common.data.FileJsonArrayListQueue.getInstance(TestPluginConstants.ta_data_path).removeAll();
             is_start = true;
-            this.getSampler().getExecutor().getTestData().setData(data);
+            this.getTestRunConfigPanel().refresh();
             this.getSampler().getExecutor().start((d,cnt)->{
                 setTestCount(cnt);
                 return d;
@@ -211,6 +226,7 @@ public class TestDataConfigPanel extends PluginGridPanel {
         no.setForeground(Color.WHITE);
         no.setBorderPainted(false);
         no.addActionListener(event->{
+            is_start = false;
             logger.info("Executor's start status is {}", this.getSampler().getExecutor().is_start());
             this.getSampler().getExecutor().stop();
             logger.info("After stop, Executor's start status is {}", this.getSampler().getExecutor().is_start());

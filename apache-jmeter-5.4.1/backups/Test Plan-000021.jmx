@@ -16,7 +16,7 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <intProp name="LoopController.loops">-1</intProp>
+          <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
@@ -26,21 +26,21 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <com.auto.test.jmeter.plugin.database.postgres.PostgresSampler guiclass="com.auto.test.jmeter.plugin.database.postgres.PostgresPluginGUI" testclass="com.auto.test.jmeter.plugin.database.postgres.PostgresSampler" testname="Postgres 테스트 플러그인" enabled="false">
+        <com.auto.test.jmeter.plugin.database.postgres.PostgresSampler guiclass="com.auto.test.jmeter.plugin.database.postgres.PostgresPluginGUI" testclass="com.auto.test.jmeter.plugin.database.postgres.PostgresSampler" testname="Postgres 테스트 플러그인" enabled="true">
           <stringProp name="TestPlan.comments">Postgres Plugin Sampler</stringProp>
-          <stringProp name="ClusterId">postgres</stringProp>
+          <stringProp name="ClusterId">pgapp</stringProp>
           <stringProp name="ClusterName">Postgres Plugin Test Connection</stringProp>
-          <stringProp name="ClusterPw">postgres</stringProp>
-          <stringProp name="ClusterUrl">jdbc:postgresql://1.1.1.1:5432/postgres</stringProp>
+          <stringProp name="ClusterPw">asdfasdf11</stringProp>
+          <stringProp name="ClusterUrl">jdbc:postgresql://db.bestmember.net:5432/postgres</stringProp>
           <stringProp name="SourcePath">Enter full path of file</stringProp>
           <stringProp name="ColumnNames">CRDID, TX_DTM, TX_NTV_NO, MCTNO, AP_AMT, VAR_ID_01, VAR_ID_02, VAR_ID_03, VAR_ID_04, VAR_ID_05, VAR_NUM_01, VAR_NUM_02, VAR_NUM_03, VAR_NUM_04, VAR_NUM_05, VAR_CTG_01, VAR_CTG_02, VAR_CTG_03, VAR_CTG_04, VAR_CTG_05, VAR_CTG_06, VAR_CTG_07, VAR_CTG_08, VAR_CTG_09, VAR_CTG_10, VAR_CTG_11, VAR_CTG_12, VAR_CTG_13, VAR_CTG_14, VAR_CTG_15, VAR_CTG_16, VAR_CTG_17, VAR_CTG_18, VAR_CTG_19, VAR_CTG_20, VAR_CTG_21, VAR_CTG_22, VAR_CTG_23, VAR_CTG_24, VAR_CTG_25, VAR_CTG_26, VAR_CTG_27, VAR_CTG_28, VAR_CTG_29, VAR_CTG_30</stringProp>
           <stringProp name="MinPool">70</stringProp>
           <stringProp name="MaxPool">80</stringProp>
-          <stringProp name="Statements">select #{CRDID} , #{TX_DTM};</stringProp>
+          <stringProp name="Statements">select   #{CRDID}  , #{TX_DTM};</stringProp>
           <stringProp name="InputDatas">{920077770(1000000~9999999)},{20200501(10~23)(10~59)(10~59)},{(10000000~99999999)}</stringProp>
         </com.auto.test.jmeter.plugin.database.postgres.PostgresSampler>
         <hashTree/>
-        <com.auto.test.jmeter.plugin.database.cassandra.CassandraSummary guiclass="com.auto.test.jmeter.plugin.database.cassandra.CassandraListenerGUI" testclass="com.auto.test.jmeter.plugin.database.cassandra.CassandraSummary" testname="Query 테스트 상세 리포트" enabled="false"/>
+        <com.auto.test.jmeter.plugin.database.cassandra.CassandraSummary guiclass="com.auto.test.jmeter.plugin.database.cassandra.CassandraListenerGUI" testclass="com.auto.test.jmeter.plugin.database.cassandra.CassandraSummary" testname="Query 테스트 상세 리포트" enabled="true"/>
         <hashTree/>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
@@ -115,8 +115,6 @@
           </objProp>
           <stringProp name="filename"></stringProp>
         </ResultCollector>
-        <hashTree/>
-        <com.auto.test.jmeter.plugin.common.sampler.TestPluginSampler guiclass="com.auto.test.jmeter.plugin.common.gui.TestAutomationMainGui" testclass="com.auto.test.jmeter.plugin.common.sampler.TestPluginSampler" testname="[res_key=테스트 자동화 플러그인]" enabled="true"/>
         <hashTree/>
       </hashTree>
     </hashTree>

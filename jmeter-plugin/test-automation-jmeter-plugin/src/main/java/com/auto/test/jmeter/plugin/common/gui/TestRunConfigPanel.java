@@ -40,16 +40,29 @@ public class TestRunConfigPanel extends PluginGridPanel{
    
    public JTextArea textArea = null;
    Gson gson = new Gson();
-   TestDataConfigPanel testDataConfigPanel;
+
+    TestDataConfigPanel testDataConfigPanel;
    JComboBox<String> combo;
    JButton save;
+   JButton refresh;
    String[] method = {"DEFAULT","KAFKA","REST"};
-   
+
+    public TestRunConfigPanel(TestPluginCallBack callback){
+        this.initComponent(this.testDataConfigPanel);
+    }
+
    public TestRunConfigPanel(TestDataConfigPanel panel, TestPluginCallBack callback){
        this.testDataConfigPanel = panel;
        this.initComponent(this.testDataConfigPanel);
    }
-   
+    public TestDataConfigPanel getTestDataConfigPanel() {
+        return testDataConfigPanel;
+    }
+
+    public void setTestDataConfigPanel(TestDataConfigPanel testDataConfigPanel) {
+        this.testDataConfigPanel = testDataConfigPanel;
+    }
+
    public void loadTestRun(Map<String,Object> run){
        try{
            if(run == null || run.size() == 0) return;
@@ -109,10 +122,10 @@ public class TestRunConfigPanel extends PluginGridPanel{
        scroll.setPreferredSize(new java.awt.Dimension(750,300));
 
        this.setBackground(java.awt.Color.WHITE);
-       this.add(0,2,1,1, editConstraints, scroll);
+       this.add(0,2,2,1, editConstraints, scroll);
        
        
-       save = new JButton("테스트 실행 정보 저장");
+       save = new JButton("Save");
        save.addActionListener((event)->{
            //
            String type = (String)combo.getSelectedItem();
@@ -154,7 +167,17 @@ public class TestRunConfigPanel extends PluginGridPanel{
        save.setForeground(Color.WHITE);
        save.setBorderPainted(false);
        this.add(this,0,3,1,1, GridBagConstraints.EAST,GridBagConstraints.NONE, editConstraints, save);
-       
+
+
+       refresh = new JButton("Refresh");
+       save.addActionListener((event)->{
+          refresh();
+       });
+       refresh.setBackground(new Color(0,133,252));
+       refresh.setForeground(Color.WHITE);
+       refresh.setBorderPainted(false);
+       this.add(this,1,3,1,1, GridBagConstraints.EAST,GridBagConstraints.NONE, editConstraints, refresh);
+
        this.attach();
    }
    
@@ -165,7 +188,7 @@ public class TestRunConfigPanel extends PluginGridPanel{
    public void setConnectionText(String txt){
        this.textArea.setText(txt);
    }
-   
+
    public void attach(){
 
        if(testDataConfigPanel != null){
@@ -189,5 +212,14 @@ public class TestRunConfigPanel extends PluginGridPanel{
            testDataConfigPanel.getSampler().getExecutor().setTestData(testPluginTestData);
            // this.getFdsPluginPanel().getSampler().getExecutor().init(getFdsPluginPanel().getSampler().getExecutor().getTestData(),callback);
        }
-   }    
+   }
+
+    public void refresh(){
+
+        if(testDataConfigPanel != null){
+            TestPluginExecutor testPluginExecutor = null;
+            testPluginExecutor = TestAutomationGuiController.get_test_executor((String)combo.getSelectedItem(), this.getConnectionText(), testDataConfigPanel.getPluginData());
+            testDataConfigPanel.getSampler().setExecutor(testPluginExecutor);
+        }
+    }
 }

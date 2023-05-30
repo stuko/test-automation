@@ -74,10 +74,14 @@ public class TestAutomationGuiController {
                 if (json.contains("\"url\"")) {
                     AbstractPluginExecutor http = ExecutorMap.getInstance().getExecutor(ExecutorMap.ExecutorType.HTTP);
                     http.setConfigMap(gson.fromJson(json, Map.class));
+                    if(http.getTestData() == null) http.setTestData(get_test_data("HTTP", null));
+                    if(factors != null) http.getTestData().setData(factors);
                     return http;
                 }else {
                     AbstractPluginExecutor kafka = ExecutorMap.getInstance().getExecutor(ExecutorMap.ExecutorType.KAFKA);
                     kafka.setConfigMap(gson.fromJson(json, Map.class));
+                    if(kafka.getTestData() == null)kafka.setTestData(get_test_data("KAFKA", null));
+                    if(factors != null) kafka.getTestData().setData(factors);
                     return kafka;
                 }
             }else{

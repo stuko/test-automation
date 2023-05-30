@@ -46,7 +46,10 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
     public TestAutomationMainGui() {
         initComponents();
         testDataConfigPanel = new TestDataConfigPanel("테스트 데이터 설정");
-        testRunConfigPanel = new TestRunConfigPanel(testDataConfigPanel,null);
+        testRunConfigPanel = new TestRunConfigPanel(null);
+        testDataConfigPanel.setTestRunConfigPanel(testRunConfigPanel);
+        testRunConfigPanel.setTestDataConfigPanel(testDataConfigPanel);
+
         panel_test_data.add(testDataConfigPanel,BorderLayout.NORTH);
         panel_test_data.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel_test_data.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -587,7 +590,7 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
         if(testDataConfigPanel.getSampler().getExecutor().getTestData() == null) logger.info("Test Data is NULL");
         else logger.info("Test Data is Not NULL");
         logger.info("----------- create -----------------");
-        // testRunConfigPanel.attach();
+        testRunConfigPanel.attach();
         this.configureTestElement(testDataConfigPanel.getSampler());
         return testDataConfigPanel.getSampler();
     }
@@ -641,14 +644,17 @@ public class TestAutomationMainGui  extends AbstractSamplerGui {
     public void clearGui() {
         logger.info("##### clear gui #####");
         logger.info("----------- clearGui after  -----------------");
-        if(testDataConfigPanel.getSampler().getExecutor().getTestData() == null) logger.info("Test Data is NULL");
-        else logger.info("Test Data is Not NULL");
+        // if(testDataConfigPanel.getSampler().getExecutor().getTestData() == null) logger.info("Test Data is NULL");
+        // else logger.info("Test Data is Not NULL");
         logger.info("----------- clearGui after -----------------");
 
         super.clearGui();
+
+        this.testRunConfigPanel.refresh();
+
         logger.info("----------- clearGui after  -----------------");
-        if(testDataConfigPanel.getSampler().getExecutor().getTestData() == null) logger.info("Test Data is NULL");
-        else logger.info("Test Data is Not NULL");
+        // if(testDataConfigPanel.getSampler().getExecutor().getTestData() == null) logger.info("Test Data is NULL");
+        // else logger.info("Test Data is Not NULL");
         logger.info("----------- clearGui after -----------------");
 
     }
